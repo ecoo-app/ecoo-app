@@ -24,6 +24,22 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - run ``flutter pub get`` to install the dependencies
 - Go to debugger to run the app (hotreload)
 
+### code organisation:
+(angelehnt an clean code)
+- ui: ui/presentation layer
+- business: business/domain layer
+- data: data layer
+
+- components: all custom views and reusable components
+- screens: all app screens
+- services: handles all network and buisness logic
+- (data: for data storage)
+- utils: utils
+
+### Branching Strategy
+This repository uses the GitLab Flow branching strategy.
+All branches should be created from master.
+
 <br/>
 <br/>
 

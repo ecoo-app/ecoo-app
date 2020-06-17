@@ -1,12 +1,29 @@
 import 'dart:convert';
 
-import 'package:e_coupon/views/video_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'ui/screens/wallets/wallet_screen.dart';
+import 'ui/shared/video_cell.dart';
+
 void main() {
-  runApp(ECouponApp());
+  runApp(TestApp());
 }
+
+class TestApp extends StatelessWidget{
+    @override
+  Widget build(BuildContext context) {
+        return new MaterialApp(
+      title: "eCoupon",
+      home: new WalletScreen()
+    );
+  }
+}
+
+
+// ****
+// drafts
+// ****
 
 class ECouponApp extends StatefulWidget {
   @override
@@ -14,6 +31,7 @@ class ECouponApp extends StatefulWidget {
     return new HomeState();
   }
 }
+
 
 class HomeState extends State<ECouponApp> {
   var _isLoading = true;
