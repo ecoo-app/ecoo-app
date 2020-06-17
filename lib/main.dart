@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:e_coupon/ui/localization/localization.dart';
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
@@ -17,25 +17,20 @@ class TestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final i18n = I18n.delegate;
+
     return new MaterialApp(
         localizationsDelegates: [
           // ... app-specific localization delegate[s] here
-          Intl.delegate,
+          i18n,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
         locale: _locale,
-        supportedLocales: Intl.getSupportedLocales(),
-        localeResolutionCallback: (deviceLocale, supportedLocales) {
-          for (var locale in supportedLocales) {
-            if (locale.languageCode == deviceLocale.languageCode &&
-                locale.countryCode == deviceLocale.countryCode) {
-              return deviceLocale;
-            }
-          }
-          return supportedLocales.first;
-        },
+        supportedLocales: i18n.supportedLocales,
+        localeResolutionCallback:
+            i18n.resolution(fallback: new Locale("de", "CH")),
         // ...
         title: "eCoupon",
         home: new WalletScreen());

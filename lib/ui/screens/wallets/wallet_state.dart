@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/localization/localization.dart';
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/screens/wallets/wallet_screen.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class WalletState extends State<WalletScreen> {
       new Center(
           child: new CustomIconButton(
         icon: Icons.face,
-        text: getTranslated(context, 'button.tab_me'),
+        text: I18n.of(context).buttonTabMe,
         onPressed: () {
           print("Tapped Me");
         },

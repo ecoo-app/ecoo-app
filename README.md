@@ -1,6 +1,8 @@
 # e_coupon
 
-## Setup Flutter
+## Setup
+
+### Setup Flutter
 
 - install flutter https://flutter.dev/docs/get-started/install (install android studio for android sdk and xcode for ios)
 
@@ -19,6 +21,10 @@
 
 see section **Run the app** for help: https://flutter.dev/docs/get-started/test-drive?tab=vscode
 
+### Setup More
+
+- install vscode-flutter-i18n-json
+
 ## Development
 
 - run `flutter pub get` to install the dependencies
@@ -31,12 +37,6 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - ui: ui/presentation layer
 - business: business/domain layer
 - data: data layer
-
-- components: all custom views and reusable components
-- screens: all app screens
-- services: handles all network and buisness logic
-- (data: for data storage)
-- utils: utils
 
 ### Branching Strategy
 
