@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:e_coupon/ui/localization/localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 
 import 'ui/screens/wallets/wallet_screen.dart';
@@ -10,16 +12,35 @@ void main() {
   runApp(TestApp());
 }
 
-class TestApp extends StatelessWidget{
-    @override
+class TestApp extends StatelessWidget {
+  final Locale _locale = Locale('de', 'CH');
+
+  @override
   Widget build(BuildContext context) {
-        return new MaterialApp(
-      title: "eCoupon",
-      home: new WalletScreen()
-    );
+    return new MaterialApp(
+        localizationsDelegates: [
+          // ... app-specific localization delegate[s] here
+          Intl.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: _locale,
+        supportedLocales: Intl.getSupportedLocales(),
+        localeResolutionCallback: (deviceLocale, supportedLocales) {
+          for (var locale in supportedLocales) {
+            if (locale.languageCode == deviceLocale.languageCode &&
+                locale.countryCode == deviceLocale.countryCode) {
+              return deviceLocale;
+            }
+          }
+          return supportedLocales.first;
+        },
+        // ...
+        title: "eCoupon",
+        home: new WalletScreen());
   }
 }
-
 
 // ****
 // drafts
@@ -31,7 +52,6 @@ class ECouponApp extends StatefulWidget {
     return new HomeState();
   }
 }
-
 
 class HomeState extends State<ECouponApp> {
   var _isLoading = true;
@@ -80,35 +100,31 @@ class HomeState extends State<ECouponApp> {
                     itemCount: videos != null ? videos.length : 0,
                     itemBuilder: (context, i) {
                       final video = videos[i];
-                      return new FlatButton(child: new VideoCell(video),
-                      onPressed: (){
-                        Navigator.push(context, 
-                        new MaterialPageRoute(builder: (context){
-                          return new DetailPage();
-                        }));
-                      });
+                      return new FlatButton(
+                          child: new VideoCell(video),
+                          onPressed: () {
+                            Navigator.push(context,
+                                new MaterialPageRoute(builder: (context) {
+                              return new DetailPage();
+                            }));
+                          });
                     }),
           )),
     );
   }
 }
 
-
-class DetailPage extends StatelessWidget{
+class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('detail page'),
       ),
-      body: new Center(
-        child: new Text('Detail')
-      ),
+      body: new Center(child: new Text('Detail')),
     );
   }
-  
 }
-
 
 class HomeWidget extends StatelessWidget {
   @override
