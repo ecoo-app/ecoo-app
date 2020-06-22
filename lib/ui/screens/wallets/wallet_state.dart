@@ -1,5 +1,6 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
+import 'package:e_coupon/ui/screens/payment/qr_screen.dart';
 import 'package:e_coupon/ui/screens/wallets/wallet_screen.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
@@ -24,11 +25,12 @@ class WalletState extends State<WalletScreen> {
               },
             )),
             new PrimaryButton(
-              text: 'gradient',
+              text: I18n.of(context).personalWalletPay,
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PaymentScreen()),
+                  //MaterialPageRoute(builder: (context) => PaymentScreen()),
+                  MaterialPageRoute(builder: (context) => QRScreen()),
                 );
               },
             )

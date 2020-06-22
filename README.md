@@ -21,6 +21,8 @@
 
 see section **Run the app** for help: https://flutter.dev/docs/get-started/test-drive?tab=vscode
 
+- install i18n generation https://github.com/esskar/vscode-flutter-i18n-json
+
 ### Setup More
 
 - install vscode-flutter-i18n-json
@@ -29,6 +31,11 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 
 - run `flutter pub get` to install the dependencies
 - Go to debugger to run the app (hotreload)
+
+### add translation:
+
+- add the translation to the translation files (i18n > [lang].json)
+- update the generated translations by opening the VSC command palette and use Flutter I18n Json: Update
 
 ### code organisation:
 

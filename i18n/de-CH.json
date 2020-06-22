@@ -1,4 +1,7 @@
 {
   "greetTo": "Hallo {name}",
-  "buttonTabMe": "Drücke mich"
+  "buttonTabMe": "Drücke mich",
+  "personalWalletPay": "Bezahlen",
+  "sendWalletPay": "Senden",
+  "recieveWalletPay": "Anfordern"
 }

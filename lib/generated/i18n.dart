@@ -36,6 +36,8 @@ class I18n implements WidgetsLocalizations {
   String greetTo(String name) => "Hallo ${name}";
   /// "Drücke mich"
   String get buttonTabMe => "Drücke mich";
+  /// "Bezahlen"
+  String get personalWalletPay => "Bezahlen";
 }
 
 class _I18n_de_CH extends I18n {
