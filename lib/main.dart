@@ -31,15 +31,22 @@ class TestApp extends StatelessWidget {
         supportedLocales: i18n.supportedLocales,
         localeResolutionCallback:
             i18n.resolution(fallback: new Locale("de", "CH")),
-        // ...
+        theme: ThemeData(
+            accentColor: Colors.amber,
+            primaryColor: Colors.cyan,
+            scaffoldBackgroundColor: Colors.white),
         title: "eCoupon",
         home: new WalletScreen());
   }
 }
 
-// ****
-// drafts
-// ****
+/// ****
+///
+///
+/// drafts
+///
+///
+/// ****
 
 class ECouponApp extends StatefulWidget {
   @override
