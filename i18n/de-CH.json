@@ -2,6 +2,7 @@
   "greetTo": "Hallo {name}",
   "buttonTabMe": "Drücke mich",
   "personalWalletPay": "Bezahlen",
-  "sendWalletPay": "Senden",
-  "recieveWalletPay": "Anfordern"
+  "privateWalletSend": "Senden",
+  "privateWalletRecieve": "Anfordern",
+  "showAllTransactions": "alle Bewegungen anzeigen"
 }

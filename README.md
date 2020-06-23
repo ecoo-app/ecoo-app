@@ -45,6 +45,11 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - business: business/domain layer
 - data: data layer
 
+### dart specials
+
+- `new` was made optional beginning with Dart 2.0. We will therfore omit `new`
+- Unlike Java, Dart doesn’t have the keywords `public`, `protected`, and `private`. If an identifier starts with an underscore (\_), it’s private to its library.
+
 ### Branching Strategy
 
 This repository uses the GitLab Flow branching strategy.
@@ -55,7 +60,12 @@ All branches should be created from master.
 
 ## more stuff / interesting stuff
 
+`new` was made optional beginning with Dart 2.0, this is why some examples or tutorial still use `new` and newer or updated ones don't.
+
 automagically i18n https://github.com/esskar/vscode-flutter-i18n-json
+
+mvvm packages https://medium.com/free-code-camp/app-architecture-mvvm-in-flutter-using-dart-streams-26f6bd6ae4b6
+https://pub.dev/packages/fmvvm https://pub.dev/packages/mvvm
 
 # A new Flutter project.
 

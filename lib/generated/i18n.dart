@@ -38,6 +38,12 @@ class I18n implements WidgetsLocalizations {
   String get buttonTabMe => "Drücke mich";
   /// "Bezahlen"
   String get personalWalletPay => "Bezahlen";
+  /// "Senden"
+  String get privateWalletSend => "Senden";
+  /// "Anfordern"
+  String get privateWalletRecieve => "Anfordern";
+  /// "alle Bewegungen anzeigen"
+  String get showAllTransactions => "alle Bewegungen anzeigen";
 }
 
 class _I18n_de_CH extends I18n {
