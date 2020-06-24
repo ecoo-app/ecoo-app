@@ -1,18 +1,25 @@
-import 'dart:collection';
-
-import 'package:e_coupon/business/get_wallets.dart';
+import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:flutter/cupertino.dart';
 
 // add AppStateModel -> holds all wallets and the current selected... ?
 
 class WalletModel extends ChangeNotifier {
-  final walletId = '';
+  String _walletId;
+  Wallet _walletData;
+  List<Transaction> _walletTransactions;
 
   /// Internal, private state of the cart.
   final List<Wallet> _items = [];
 
-  /// An unmodifiable view of the items in the cart.
-  UnmodifiableListView<Wallet> get items => UnmodifiableListView(_items);
+  String get selectedWalletId => _walletId;
+  Wallet get selectedWallet => _walletData;
+  List<Transaction> get selectedWalletTransactions => _walletTransactions;
+
+  void setSelectedWalletId(String walletId) {
+    _walletId = walletId;
+    // TODO
+  }
 
   /// The current total price of all items (assuming all items cost $42).
   int get totalPrice => _items.length * 42;

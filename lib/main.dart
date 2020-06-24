@@ -12,10 +12,8 @@ import 'ui/shared/video_cell.dart';
 
 void main() {
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => WalletModel()),
-      ],
+    ChangeNotifierProvider(
+      create: (context) => WalletModel(),
       child: TestApp(),
     ),
   );

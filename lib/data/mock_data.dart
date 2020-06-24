@@ -1,15 +1,16 @@
-import 'package:e_coupon/business/get_wallets.dart';
+import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 
-class MockTransaction {
+class MockTransactionModel extends Transaction {
   final text;
   final amount;
   final isEncashment;
 
-  MockTransaction({this.text, this.amount, this.isEncashment = false});
+  MockTransactionModel({this.text, this.amount, this.isEncashment = false});
 }
 
-class MockWallet extends Wallet {
-  MockWallet({id, amount, currency, isShop, transactions})
+class MockWalletModel extends Wallet {
+  MockWalletModel({id, amount, currency, isShop, transactions})
       : super(
             id: id,
             amount: amount,
@@ -19,31 +20,31 @@ class MockWallet extends Wallet {
 }
 
 var MockWallets = [
-  MockWallet(
+  MockWalletModel(
       id: 'DR345GH67',
       amount: 105.50,
       currency: 'Wetzikon',
       transactions: [
-        MockTransaction(text: 'Pusteblume GmBH', amount: -12.50),
-        MockTransaction(text: 'Confiserie Sprüngli', amount: -120.50),
-        MockTransaction(
+        MockTransactionModel(text: 'Pusteblume GmBH', amount: -12.50),
+        MockTransactionModel(text: 'Confiserie Sprüngli', amount: -120.50),
+        MockTransactionModel(
             text: 'Wallet-ID DR345GH67',
             amount:
                 20), // braucht transaction noch einen Text, bzw einen Namen (zB Sepp - danke für die Pizza)
-        MockTransaction(text: 'Bäckerei Jung', amount: -12.50),
+        MockTransactionModel(text: 'Bäckerei Jung', amount: -12.50),
       ]),
-  MockWallet(
+  MockWalletModel(
       id: '45FGH62SD',
       amount: 1059.00,
       currency: 'Wetzikon',
       transactions: [
-        MockTransaction(text: 'Wallet-ID ER345GH57', amount: 12.50),
-        MockTransaction(text: 'Wallet-ID FDR335GH67', amount: 120.50),
-        MockTransaction(
+        MockTransactionModel(text: 'Wallet-ID ER345GH57', amount: 12.50),
+        MockTransactionModel(text: 'Wallet-ID FDR335GH67', amount: 120.50),
+        MockTransactionModel(
             text: 'Wallet-ID AR345GF67',
             amount:
                 20), // braucht transaction noch einen Text, bzw einen Namen (zB Sepp - danke für die Pizza)
-        MockTransaction(
+        MockTransactionModel(
             text: 'eingelöst bei Gemeinde', amount: -12.50, isEncashment: true),
       ])
 ];

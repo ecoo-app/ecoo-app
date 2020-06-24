@@ -37,6 +37,18 @@ dependencies:
   path_provider: ^1.6.11
   provider: ^4.1.3
 
+  # suggestions from reso coder clean architecture & ttd tutorials
+  # Service locator
+  get_it: ^2.0.1
+  # Value equality
+  equatable: ^1.1.1
+  # Functional programming thingies
+  dartz: ^0.8.6
+  # Remote API
+  connectivity: ^0.4.3+7
+  # Local cache
+  shared_preferences: ^0.5.3+4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

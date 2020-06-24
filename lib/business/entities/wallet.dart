@@ -1,4 +1,6 @@
-class Wallet {
+import 'package:equatable/equatable.dart';
+
+class Wallet extends Equatable {
   final id;
   final amount;
   final currency;
@@ -11,4 +13,7 @@ class Wallet {
       this.currency,
       this.isShop = false,
       this.transactions});
+
+  @override
+  List<Object> get props => [id, amount, currency, isShop, transactions];
 }
