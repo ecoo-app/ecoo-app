@@ -1,9 +1,8 @@
 import 'package:e_coupon/generated/i18n.dart';
-import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
-import 'package:e_coupon/ui/screens/payment/qrGeneratorTest_screen.dart';
-import 'package:e_coupon/ui/screens/payment/qrTest_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview.dart';
-import 'package:e_coupon/ui/screens/wallets/wallet_screen.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/payment/qrGeneratorTest_screen.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/payment/qrTest_screen.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/transaction_overview/transaction_overview.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/wallets/wallet_screen.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
