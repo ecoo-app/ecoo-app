@@ -1,15 +1,23 @@
+import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/business/get_wallet.dart';
+import 'package:e_coupon/core/failure.dart';
 import 'package:flutter/cupertino.dart';
+
+enum ViewState { Default, Idle, Loading, Success }
 
 // add AppStateModel -> holds all wallets and the current selected... ?
 
-class WalletModel extends ChangeNotifier {
-  String _walletId;
+class WalletViewModel extends ChangeNotifier {
+  String _walletId =
+      'BA8ED1'; // TODO get wallet from shared Preferences (always save last used wallet and use it on app open)
   Wallet _walletData;
   List<Transaction> _walletTransactions;
+  final GetWallet getWallet;
 
-  /// Internal, private state of the cart.
+  WalletViewModel({this.getWallet});
+
   final List<Wallet> _items = [];
 
   String get selectedWalletId => _walletId;
@@ -18,7 +26,14 @@ class WalletModel extends ChangeNotifier {
 
   void setSelectedWalletId(String walletId) {
     _walletId = walletId;
-    // TODO
+    //Future<Either<Failure, Wallet>> wallet = GetWallet();
+    getWallet(Params(id: _walletId)).then((resp) {
+      resp.fold((failure) {
+        print('failure');
+      }, (wallet) {
+        print('yay');
+      });
+    });
   }
 
   /// The current total price of all items (assuming all items cost $42).

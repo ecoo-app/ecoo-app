@@ -40,6 +40,8 @@ dependencies:
   # suggestions from reso coder clean architecture & ttd tutorials
   # Service locator
   get_it: ^2.0.1
+  # Bloc for state management
+  flutter_bloc: ^4.0.1
   # Value equality
   equatable: ^1.1.1
   # Functional programming thingies

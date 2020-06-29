@@ -18,11 +18,12 @@ class WalletState extends State<WalletScreen> {
     // return new PaymentScreen();
     return WalletLayout(
         title: Text('my wallet'),
-        body: Consumer<WalletModel>(builder: (context, wallet, child) {
+        body: Consumer<WalletViewModel>(builder: (context, wallet, child) {
           return Column(
             children: <Widget>[
               Center(
                 child: Text('Wallet ${wallet.selectedWalletId}'),
+                // child: Text('Wallet no id'),
               ),
               Center(
                 child: Text('Steffisburg'),

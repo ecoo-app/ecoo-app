@@ -7,13 +7,15 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+import 'core/injection_container.dart';
 import 'ui/screens/wallet_screens/wallets/wallet_screen.dart';
 import 'ui/shared/video_cell.dart';
 
 void main() {
+  initServiceLocator();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => WalletModel(),
+      create: (_) => serviceLocator<WalletViewModel>(),
       child: TestApp(),
     ),
   );
