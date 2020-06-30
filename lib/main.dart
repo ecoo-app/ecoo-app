@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:e_coupon/generated/i18n.dart';
+import 'package:e_coupon/injection.dart';
+import 'package:e_coupon/ui/core/router.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/wallet_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:flutter/material.dart';
@@ -9,18 +11,19 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import 'core/injection_container.dart';
+import 'injection.iconfig.dart';
 import 'ui/screens/wallet_screens/wallets/wallet_screen.dart';
 import 'ui/shared/video_cell.dart';
 
 void main() {
-  initServiceLocator();
+  configureInjection(Env.prod.name);
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<WalletViewModel>(
-            create: (_) => serviceLocator<WalletViewModel>()),
+            create: (_) => getIt<WalletViewModel>()),
         ChangeNotifierProvider<WalletsViewModel>(
-            create: (_) => serviceLocator<WalletsViewModel>()),
+            create: (_) => getIt<WalletsViewModel>()),
       ],
       child: TestApp(),
     ),
@@ -43,23 +46,25 @@ class TestApp extends StatelessWidget {
     final i18n = I18n.delegate;
 
     return new MaterialApp(
-        localizationsDelegates: [
-          // ... app-specific localization delegate[s] here
-          i18n,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: _locale,
-        supportedLocales: i18n.supportedLocales,
-        localeResolutionCallback:
-            i18n.resolution(fallback: new Locale("de", "CH")),
-        theme: ThemeData(
-            accentColor: Colors.amber,
-            primaryColor: Colors.cyan,
-            scaffoldBackgroundColor: Colors.white),
-        title: "eCoupon",
-        home: new WalletScreen());
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        i18n,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: _locale,
+      supportedLocales: i18n.supportedLocales,
+      localeResolutionCallback:
+          i18n.resolution(fallback: new Locale("de", "CH")),
+      theme: ThemeData(
+          accentColor: Colors.amber,
+          primaryColor: Colors.cyan,
+          scaffoldBackgroundColor: Colors.white),
+      title: "eCoupon",
+      onGenerateRoute: Router.generateRoute,
+      initialRoute: WalletDetailRoute,
+    );
   }
 }
 

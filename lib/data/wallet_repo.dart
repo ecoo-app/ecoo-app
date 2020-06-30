@@ -6,7 +6,9 @@ import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/mock_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/core/failure.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: IWalletRepo)
 class WalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<Transaction>>> getWalletTransactions(id, filter) {

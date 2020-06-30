@@ -1,10 +1,11 @@
 import 'package:e_coupon/ui/core/base_view.dart';
+import 'package:e_coupon/ui/core/router.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:e_coupon/ui/shared/wallet_card.dart';
 import 'package:flutter/material.dart';
 
-class WalletsOverview extends StatelessWidget {
+class WalletsOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,13 @@ class WalletsOverview extends StatelessWidget {
                       itemCount: 2,
                       itemBuilder: (context, i) {
                         final wallet = vmodel.wallets[i];
-                        return WalletCard(wallet: wallet);
+                        return WalletCard(
+                          wallet: wallet,
+                          onPressed: () {
+                            Navigator.pushNamed(context, WalletDetailRoute,
+                                arguments: wallet.id);
+                          },
+                        );
                       },
                     );
             }));

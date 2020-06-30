@@ -4,32 +4,45 @@ import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/get_wallet.dart';
 import 'package:e_coupon/core/failure.dart';
 import 'package:e_coupon/ui/core/base_view_model.dart';
+import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:injectable/injectable.dart';
 
 // add AppStateModel -> holds all wallets and the current selected... ?
 
+@injectable
 class WalletViewModel extends BaseViewModel {
-  String _walletId =
-      'BA8ED1'; // TODO get wallet from shared Preferences (always save last used wallet and use it on app open)
   Wallet _walletData;
   List<Transaction> _walletTransactions;
   final GetWallet getWallet;
 
   WalletViewModel({this.getWallet});
 
-  String get selectedWalletId => _walletId;
-  Wallet get selectedWallet => _walletData;
-  List<Transaction> get selectedWalletTransactions => _walletTransactions;
+  Wallet get walletDetail => _walletData;
+  List<Transaction> get walletDetailTransactions => _walletTransactions;
 
-  void setSelectedWalletId(String walletId) {
-    _walletId = walletId;
-    //Future<Either<Failure, Wallet>> wallet = GetWallet();
-    getWallet(Params(id: _walletId)).then((resp) {
-      resp.fold((failure) {
-        print('failure');
-      }, (wallet) {
-        print('yay');
-      });
+  void loadWalletDetail(String walletId) async {
+    setState(ViewState.Busy);
+
+    // delay to test
+    Future.delayed(const Duration(milliseconds: 500), () async {
+      if (walletId == null) {
+        // TODO create use case to get walletId from shared Preferences (always save last used wallet and use it on app open)
+        // or should it be handled in the same use case? ? ??
+        _walletData = Wallet(id: 'BA8ED1');
+      } else {
+        getWallet(WalletParams(id: walletId)).then((resp) {
+          resp.fold((failure) {
+            print('failure');
+          }, (wallet) {
+            _walletData = wallet;
+            print('yay');
+            print(wallet);
+          });
+        });
+      }
+
+      setState(ViewState.Idle);
     });
   }
 }

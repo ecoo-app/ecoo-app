@@ -1,3 +1,4 @@
+import 'package:e_coupon/ui/core/router.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/material.dart';
 
@@ -15,9 +16,9 @@ class WalletLayout extends StatelessWidget {
             tooltip: 'wallets overview',
             icon: const Icon(Icons.menu),
             onPressed: () {
-              Navigator.push(
+              Navigator.pushNamed(
                 context,
-                MaterialPageRoute(builder: (context) => WalletsOverview()),
+                WalletsOverviewRoute,
               );
             },
           ),
