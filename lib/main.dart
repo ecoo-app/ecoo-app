@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:e_coupon/generated/i18n.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/wallet_model.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/wallet_view_model.dart';
+import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
@@ -14,11 +15,22 @@ import 'ui/shared/video_cell.dart';
 void main() {
   initServiceLocator();
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => serviceLocator<WalletViewModel>(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WalletViewModel>(
+            create: (_) => serviceLocator<WalletViewModel>()),
+        ChangeNotifierProvider<WalletsViewModel>(
+            create: (_) => serviceLocator<WalletsViewModel>()),
+      ],
       child: TestApp(),
     ),
   );
+  // runApp(
+  //   ChangeNotifierProvider<WalletsViewModel>(
+  //     create: (_) => serviceLocator<WalletsViewModel>(),
+  //     child: TestApp(),
+  //   ),
+  // );
   //runApp(TestApp());
 }
 

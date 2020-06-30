@@ -10,6 +10,21 @@ import 'package:e_coupon/core/failure.dart';
 class WalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<Transaction>>> getWalletTransactions(id, filter) {
+    return getMockTransactions(id, filter);
+  }
+
+  @override
+  Future<Either<Failure, List<Wallet>>> getWallets(userIdentifier) {
+    return getMockWallets();
+  }
+
+  @override
+  Future<Either<Failure, Wallet>> getWalletData(id) {
+    return getMockWalletData(id);
+  }
+
+  /// mock code
+  getMockTransactions(id, filter) {
     for (final wallet in MockWallets) {
       if (wallet.id == id) return wallet.transactions;
     }
@@ -17,15 +32,16 @@ class WalletRepo implements IWalletRepo {
     return null;
   }
 
-  @override
-  List<Wallet> getWallets() {
-    return MockWallets;
+  getMockWallets() {
+    var completer = Completer<Either<Failure, List<Wallet>>>();
+    completer.complete(Right(MockWallets));
+    return completer.future;
   }
 
-  @override
-  Future<Either<Failure, Wallet>> getWalletData(id) {
+  getMockWalletData(id) {
     for (final wallet in MockWallets) {
       if (wallet.id == id) {
+        // generate a future
         var completer = Completer<Either<Failure, Wallet>>();
         completer.complete(Right(wallet));
         return completer.future;

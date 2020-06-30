@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/screens/wallet_screens/wallets_overview/wallets_overview.dart';
+import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/material.dart';
 
 class WalletLayout extends StatelessWidget {

@@ -1,9 +1,12 @@
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WalletCard extends StatelessWidget {
-  // TODO finals: walletId, amount, name coins, privateOrShop
-  WalletCard({Key key}) : super(key: key);
+  final Wallet wallet;
+  final onPressed;
+
+  WalletCard({this.wallet, this.onPressed, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +15,12 @@ class WalletCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const ListTile(
+            ListTile(
+              // other clickable widget: InkWell: use as child of card
+              onTap: onPressed,
               leading: Icon(Icons.account_balance_wallet),
-              title: Text('BC25CDE45'),
-              subtitle: Text('Steffisburg'),
+              title: Text(wallet.id),
+              subtitle: Text(wallet.currency),
             ),
           ],
         ),

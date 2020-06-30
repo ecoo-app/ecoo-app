@@ -5,7 +5,7 @@ import 'package:e_coupon/core/failure.dart';
 import 'entities/wallet.dart';
 
 abstract class IWalletRepo {
-  List<Wallet> getWallets();
+  Future<Either<Failure, List<Wallet>>> getWallets(userIdentifier);
   Future<Either<Failure, Wallet>> getWalletData(id);
   Future<Either<Failure, List<Transaction>>> getWalletTransactions(
       id, filter); // and pagination cursor?

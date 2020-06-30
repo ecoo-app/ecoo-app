@@ -1,7 +1,9 @@
 import 'package:e_coupon/business/abstract_wallet_repo.dart';
+import 'package:e_coupon/business/get_all_wallets.dart';
 import 'package:e_coupon/business/get_wallet.dart';
 import 'package:e_coupon/data/wallet_repo.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/wallet_model.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/wallet_view_model.dart';
+import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,12 +15,16 @@ Future<void> initServiceLocator() async {
 
   //! Features
   // VM
-  serviceLocator.registerLazySingleton(
-      () => WalletViewModel(getWallet: serviceLocator()));
+  serviceLocator.registerFactory(
+      () => WalletViewModel(getWallet: serviceLocator<GetWallet>()));
+  serviceLocator.registerFactory(
+      () => WalletsViewModel(getAllWallets: serviceLocator<GetAllWallets>()));
 
   // Use cases
-  serviceLocator
-      .registerLazySingleton(() => GetWallet(repository: serviceLocator()));
+  serviceLocator.registerLazySingleton(
+      () => GetWallet(repository: serviceLocator<IWalletRepo>()));
+  serviceLocator.registerLazySingleton(
+      () => GetAllWallets(repository: serviceLocator<IWalletRepo>()));
 
   // Repository
   serviceLocator.registerLazySingleton<IWalletRepo>(

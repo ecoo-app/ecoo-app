@@ -9,7 +9,7 @@ import 'package:e_coupon/ui/shared/transactions_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../wallet_model.dart';
+import '../wallet_view_model.dart';
 import 'wallet_layout.dart';
 
 class WalletState extends State<WalletScreen> {
