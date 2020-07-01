@@ -24,35 +24,32 @@ class WalletViewModel extends BaseViewModel {
   void loadWalletDetail(String walletId) async {
     setState(ViewState.Busy);
 
-    // delay to test
-    Future.delayed(const Duration(milliseconds: 500), () async {
-      if (walletId == null) {
-        // TODO create use case to get walletId from shared Preferences (always save last used wallet and use it on app open)
-        // or should it be handled in the same use case? ? ??
-        _walletData = Wallet(id: 'BA8ED1');
-      } else {
-        getWallet(WalletParams(id: walletId)).then((resp) {
-          resp.fold((failure) {
-            print('failure');
-          }, (wallet) {
-            _walletData = wallet;
-          });
+    if (walletId == null) {
+      // TODO create use case to get walletId from shared Preferences (always save last used wallet and use it on app open)
+      // or should it be handled in the same use case? ? ??
+      _walletData = Wallet(id: 'BA8ED1');
+    } else {
+      getWallet(WalletParams(id: walletId)).then((resp) {
+        resp.fold((failure) {
+          print('failure');
+        }, (wallet) {
+          _walletData = wallet;
         });
+      });
 
-        // TODO put outside if else
-        getTransactions(TransactionParams(id: walletId)).then((resp) {
-          resp.fold((failure) {
-            print('failure');
-          }, (transactions) {
-            _walletTransactions = transactions
-                .map((transaction) =>
-                    TransactionListEntry(transaction.text, transaction.amount))
-                .toList();
-          });
+      // TODO put outside if else
+      getTransactions(TransactionParams(id: walletId)).then((resp) {
+        resp.fold((failure) {
+          print('failure');
+        }, (transactions) {
+          _walletTransactions = transactions
+              .map((transaction) =>
+                  TransactionListEntry(transaction.text, transaction.amount))
+              .toList();
         });
-      }
+      });
+    }
 
-      setState(ViewState.Idle);
-    });
+    setState(ViewState.Idle);
   }
 }

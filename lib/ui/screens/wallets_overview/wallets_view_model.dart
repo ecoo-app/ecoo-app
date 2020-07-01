@@ -17,14 +17,11 @@ class WalletsViewModel extends BaseViewModel {
   void loadWallets() async {
     setState(ViewState.Busy);
 
-// delay to test
-    Future.delayed(const Duration(milliseconds: 500), () async {
-      var walletsOrFailure =
-          await getAllWallets(AllWalletParams(userIdentifier: 'string'));
-      walletsOrFailure.fold(
-          (failure) => print('FAILURE'), (wallets) => _wallets = wallets);
+    var walletsOrFailure =
+        await getAllWallets(AllWalletParams(userIdentifier: 'string'));
+    walletsOrFailure.fold(
+        (failure) => print('FAILURE'), (wallets) => _wallets = wallets);
 
-      setState(ViewState.Idle);
-    });
+    setState(ViewState.Idle);
   }
 }

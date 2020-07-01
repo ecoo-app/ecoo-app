@@ -1,4 +1,5 @@
 import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/business/entities/transaction_state.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 
 class MockTransactionModel extends Transaction {
@@ -48,3 +49,5 @@ var MockWallets = [
             text: 'eingelöst bei Gemeinde', amount: -12.50, isEncashment: true),
       ])
 ];
+
+TransactionState MockTransactionState = TransactionState();
