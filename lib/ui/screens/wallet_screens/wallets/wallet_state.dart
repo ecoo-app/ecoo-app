@@ -45,6 +45,7 @@ class WalletState extends State<WalletScreen> {
                                 text: I18n.of(context).privateWalletSend,
                                 onPressed: () {
                                   Navigator.push(
+                                    // TODO change to named route
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => GenerateScreen()),
@@ -56,6 +57,7 @@ class WalletState extends State<WalletScreen> {
                                 text: I18n.of(context).privateWalletRecieve,
                                 onPressed: () {
                                   Navigator.push(
+                                    // TODO change to named route
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => GenerateScreen()),
@@ -67,6 +69,7 @@ class WalletState extends State<WalletScreen> {
                           text: I18n.of(context).personalWalletPay,
                           onPressed: () {
                             Navigator.push(
+                              // TODO change to named route
                               context,
                               //MaterialPageRoute(builder: (context) => PaymentScreen()),
                               MaterialPageRoute(
@@ -75,15 +78,13 @@ class WalletState extends State<WalletScreen> {
                           },
                         ),
                         TransactionList(
-                          entries: [
-                            TransactionListEntry('Confiserie', 12.34),
-                            TransactionListEntry('Pusteblume', -10.00)
-                          ],
+                          entries: vmodel.walletDetailTransactions,
                         ),
                         Center(
                             child: FlatButton.icon(
                           onPressed: () {
                             Navigator.push(
+                              // TODO change to named route
                               context,
                               MaterialPageRoute(
                                   builder: (context) => TransactionOverview()),

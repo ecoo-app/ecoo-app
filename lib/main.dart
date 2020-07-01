@@ -25,7 +25,7 @@ void main() {
         ChangeNotifierProvider<WalletsViewModel>(
             create: (_) => getIt<WalletsViewModel>()),
       ],
-      child: TestApp(),
+      child: ECouponApp(),
     ),
   );
   // runApp(
@@ -37,7 +37,7 @@ void main() {
   //runApp(TestApp());
 }
 
-class TestApp extends StatelessWidget {
+class ECouponApp extends StatelessWidget {
   final Locale _locale = Locale('de', 'CH');
 
   @override
@@ -76,14 +76,14 @@ class TestApp extends StatelessWidget {
 ///
 /// ****
 
-class ECouponApp extends StatefulWidget {
+class TestApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return new HomeState();
   }
 }
 
-class HomeState extends State<ECouponApp> {
+class HomeState extends State<TestApp> {
   var _isLoading = true;
   var videos;
 
@@ -133,6 +133,7 @@ class HomeState extends State<ECouponApp> {
                       return new FlatButton(
                           child: new VideoCell(video),
                           onPressed: () {
+                            // TODO change to named route
                             Navigator.push(context,
                                 new MaterialPageRoute(builder: (context) {
                               return new DetailPage();

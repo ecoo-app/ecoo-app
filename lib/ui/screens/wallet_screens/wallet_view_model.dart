@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/business/get_transactions.dart';
 import 'package:e_coupon/business/get_wallet.dart';
 import 'package:e_coupon/core/failure.dart';
 import 'package:e_coupon/ui/core/base_view_model.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
+import 'package:e_coupon/ui/shared/transactions_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,13 +15,15 @@ import 'package:injectable/injectable.dart';
 @injectable
 class WalletViewModel extends BaseViewModel {
   Wallet _walletData;
-  List<Transaction> _walletTransactions;
+  List<TransactionListEntry> _walletTransactions;
   final GetWallet getWallet;
+  final GetTransactions getTransactions;
 
-  WalletViewModel({this.getWallet});
+  WalletViewModel({this.getWallet, this.getTransactions});
 
   Wallet get walletDetail => _walletData;
-  List<Transaction> get walletDetailTransactions => _walletTransactions;
+  List<TransactionListEntry> get walletDetailTransactions =>
+      _walletTransactions;
 
   void loadWalletDetail(String walletId) async {
     setState(ViewState.Busy);
@@ -36,8 +40,18 @@ class WalletViewModel extends BaseViewModel {
             print('failure');
           }, (wallet) {
             _walletData = wallet;
-            print('yay');
-            print(wallet);
+          });
+        });
+
+        // TODO put outside if else
+        getTransactions(TransactionParams(id: walletId)).then((resp) {
+          resp.fold((failure) {
+            print('failure');
+          }, (transactions) {
+            _walletTransactions = transactions
+                .map((transaction) =>
+                    TransactionListEntry(transaction.text, transaction.amount))
+                .toList();
           });
         });
       }

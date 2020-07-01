@@ -1,3 +1,4 @@
+import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/wallets/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 const HomeRoute = '/';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
+const VerificationRoute = 'verification';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,6 +22,8 @@ class Router {
         // var post = settings.arguments as Post;
         // return MaterialPageRoute(builder: (_) => WalletScreen(post: post));
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
+      case VerificationRoute:
+        return MaterialPageRoute(builder: (_) => VerificationScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

@@ -28,7 +28,11 @@ class WalletRepo implements IWalletRepo {
   /// mock code
   getMockTransactions(id, filter) {
     for (final wallet in MockWallets) {
-      if (wallet.id == id) return wallet.transactions;
+      if (wallet.id == id) {
+        var completer = Completer<Either<Failure, List<Transaction>>>();
+        completer.complete(Right(wallet.transactions));
+        return completer.future;
+      }
     }
 
     return null;

@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 class Transaction extends Equatable {
-  final text;
-  final amount;
-  final isEncashment;
+  final String text;
+  final double amount;
+  final bool isEncashment;
 
   Transaction({this.text, this.amount, this.isEncashment = false});
 
