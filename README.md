@@ -21,11 +21,7 @@
 
 see section **Run the app** for help: https://flutter.dev/docs/get-started/test-drive?tab=vscode
 
-- install i18n generation https://github.com/esskar/vscode-flutter-i18n-json
-
-### Setup More
-
-- install vscode-flutter-i18n-json
+- install vscode-flutter-i18n-json: i18n generation https://github.com/esskar/vscode-flutter-i18n-json
 
 ## Development
 
@@ -41,7 +37,14 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 
 ### code organisation:
 
-build after clean code principles
+#### @Tobi
+
+- Tutorial about flutter clean architecture: https://www.youtube.com/watch?v=KjE2IDphA_U&t=1s
+- Change Notifier https://www.youtube.com/watch?v=zKXz3pUkw9A, MVVW pattern https://www.youtube.com/watch?v=kDEflMYTFlk and dependency injection https://www.youtube.com/watch?v=KNcP8z0hWqs&list=PLB6lc7nQ1n4jMy66mxd19YTKUqcAzw3qB&index=17 https://pub.dev/packages/injectable#setup
+- Widgets and Layouts https://flutter.dev/docs/development/ui/widgets/material https://flutter.dev/docs/development/ui/widgets
+- evaluate gradient widgets for gradient buttons: https://pub.dev/packages/gradient_widgets
+
+#### build after clean code principles
 
 watch Reso Coders tutorial: https://www.youtube.com/watch?v=dc3B_mMrZ-Q&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech&index=15 this project similarly is built. Except the Presentation logic is handled with Change Notifier with MVVW pattern instead of BloC similar to this https://www.youtube.com/watch?v=kDEflMYTFlk. And use Injectable on top of get_it https://www.youtube.com/watch?v=KNcP8z0hWqs&list=PLB6lc7nQ1n4jMy66mxd19YTKUqcAzw3qB&index=17 https://pub.dev/packages/injectable#setup
 
