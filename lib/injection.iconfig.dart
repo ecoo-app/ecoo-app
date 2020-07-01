@@ -10,6 +10,7 @@ import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
 import 'package:e_coupon/business/use_cases/handle_transaction.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/payment/transaction_view_model.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/wallet_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:get_it/get_it.dart';
@@ -24,6 +25,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => GetWallet(repository: g<IWalletRepo>()));
   g.registerLazySingleton<HandleTransaction>(
       () => HandleTransaction(repository: g<IWalletRepo>()));
+  g.registerFactory<TransactionViewModel>(
+      () => TransactionViewModel(handleTransaction: g<HandleTransaction>()));
   g.registerFactory<WalletViewModel>(() => WalletViewModel(
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(

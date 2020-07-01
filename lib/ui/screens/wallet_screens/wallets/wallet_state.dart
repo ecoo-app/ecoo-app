@@ -1,5 +1,7 @@
 import 'package:e_coupon/generated/i18n.dart';
+import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view.dart';
+import 'package:e_coupon/ui/core/router.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/payment/qrGeneratorTest_screen.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/payment/qrTest_screen.dart';
@@ -9,7 +11,6 @@ import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../wallet_view_model.dart';
 import 'wallet_layout.dart';
@@ -24,6 +25,8 @@ class WalletState extends State<WalletScreen> {
     return WalletLayout(
         title: Text('my wallet'),
         body: BaseView<WalletViewModel>(
+            model: getIt<
+                WalletViewModel>(), // TODO how to do this with injectable only?
             onModelReady: (vmodel) => vmodel.loadWalletDetail(walletId),
             builder: (context, vmodel, child) {
               return vmodel.state == ViewState.Busy
@@ -68,13 +71,7 @@ class WalletState extends State<WalletScreen> {
                         PrimaryButton(
                           text: I18n.of(context).personalWalletPay,
                           onPressed: () {
-                            Navigator.push(
-                              // TODO change to named route
-                              context,
-                              //MaterialPageRoute(builder: (context) => PaymentScreen()),
-                              MaterialPageRoute(
-                                  builder: (context) => QRScreen()),
-                            );
+                            Navigator.pushNamed(context, ScanQRRoute);
                           },
                         ),
                         TransactionList(

@@ -1,3 +1,4 @@
+import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view.dart';
 import 'package:e_coupon/ui/core/router.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
@@ -14,6 +15,7 @@ class WalletsOverviewScreen extends StatelessWidget {
           backgroundColor: Colors.cyan,
         ),
         body: BaseView<WalletsViewModel>(
+            model: getIt<WalletsViewModel>(),
             onModelReady: (vmodel) => vmodel.loadWallets(),
             builder: (context, vmodel, child) {
               return vmodel.state == ViewState.Busy

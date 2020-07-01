@@ -1,4 +1,5 @@
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/payment/scan_qr_screen.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/wallets/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,11 @@ const HomeRoute = '/';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
 const VerificationRoute = 'verification';
+const ScanQRRoute = 'scanQR';
+// still TODO:
+const PaymentRoute = 'payment';
+const ShowQRRoute = 'showQR';
+const SuccessRoute = 'success';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -24,6 +30,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
       case VerificationRoute:
         return MaterialPageRoute(builder: (_) => VerificationScreen());
+      case ScanQRRoute:
+        return MaterialPageRoute(builder: (_) => ScanQRScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

@@ -2,7 +2,7 @@ import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:flutter/widgets.dart';
 
 class BaseViewModel extends ChangeNotifier {
-  ViewState _state = ViewState.Idle;
+  ViewState _state = ViewState.Busy;
 
   ViewState get state => _state;
 
