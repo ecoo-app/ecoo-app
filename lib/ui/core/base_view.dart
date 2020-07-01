@@ -1,4 +1,4 @@
-import 'package:e_coupon/core/injection_container.dart';
+import 'package:e_coupon/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class BaseView<T extends BaseViewModel> extends StatefulWidget {
 }
 
 class _BaseViewState<T extends BaseViewModel> extends State<BaseView<T>> {
-  T model = serviceLocator<T>();
+  T model = getIt<T>(); // TODO is this testable...?
 
   @override
   void initState() {

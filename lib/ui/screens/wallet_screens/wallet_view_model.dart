@@ -1,13 +1,9 @@
-import 'package:dartz/dartz.dart';
-import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/business/get_transactions.dart';
-import 'package:e_coupon/business/get_wallet.dart';
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/business/use_cases/get_transactions.dart';
+import 'package:e_coupon/business/use_cases/get_wallet.dart';
 import 'package:e_coupon/ui/core/base_view_model.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 // add AppStateModel -> holds all wallets and the current selected... ?

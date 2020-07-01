@@ -46,11 +46,19 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 
 #### build after clean code principles
 
-watch Reso Coders tutorial: https://www.youtube.com/watch?v=dc3B_mMrZ-Q&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech&index=15 this project similarly is built. Except the Presentation logic is handled with Change Notifier with MVVW pattern instead of BloC similar to this https://www.youtube.com/watch?v=kDEflMYTFlk. And use Injectable on top of get_it https://www.youtube.com/watch?v=KNcP8z0hWqs&list=PLB6lc7nQ1n4jMy66mxd19YTKUqcAzw3qB&index=17 https://pub.dev/packages/injectable#setup
-
 - ui: ui/presentation layer
+- - screens: ui screens & view models
+- - shared: shared widgets & layouts
+- - core: shared abstract classes and router
 - business: business/domain layer
+- - entities: business logic entities
+- - use_cases: uses cases (each use case handles one business logic functionality)
+- - repo_definitions: abstract repo classes
+- - core: shared stuff
 - data: data layer
+- core: shared things for all layers: failure and errors (maybe rename?)
+
+watch Reso Coders tutorial: https://www.youtube.com/watch?v=dc3B_mMrZ-Q&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech&index=15 this project similarly is built. Except the Presentation logic is handled with Change Notifier with MVVW pattern instead of BloC similar to this https://www.youtube.com/watch?v=kDEflMYTFlk. And use Injectable on top of get_it https://www.youtube.com/watch?v=KNcP8z0hWqs&list=PLB6lc7nQ1n4jMy66mxd19YTKUqcAzw3qB&index=17 https://pub.dev/packages/injectable#setup
 
 ### dart specials
 

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:e_coupon/business/abstract_wallet_repo.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/data/mock_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/core/failure.dart';
