@@ -1,6 +1,7 @@
 import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 
 class Wallet extends Equatable {
   final String id;
@@ -10,11 +11,11 @@ class Wallet extends Equatable {
   final List<TransactionRecord> transactions;
 
   Wallet(
-      {this.id,
-      this.amount,
-      this.currency,
+      {@required this.id,
+      @required this.amount,
+      @required this.currency,
       this.isShop = false,
-      this.transactions});
+      @required this.transactions});
 
   @override
   List<Object> get props => [id, amount, currency, isShop, transactions];

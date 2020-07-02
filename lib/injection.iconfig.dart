@@ -11,6 +11,7 @@ import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/data/repos/mock_wallet_repo.dart';
 import 'package:e_coupon/business/use_cases/scan_qr.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
+import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
 import 'package:e_coupon/business/use_cases/handle_transaction.dart';
@@ -24,6 +25,8 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerLazySingleton<ScanQR>(() => ScanQR(repository: g<IScannerRepo>()));
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
+  g.registerLazySingleton<GetDefaultWallet>(
+      () => GetDefaultWallet(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetTransactions>(
       () => GetTransactions(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetWallet>(
