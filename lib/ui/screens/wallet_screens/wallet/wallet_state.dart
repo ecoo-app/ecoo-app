@@ -4,9 +4,8 @@ import 'package:e_coupon/ui/core/base_view.dart';
 import 'package:e_coupon/ui/core/router.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/payment/qrGeneratorTest_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/qrTest_screen.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/transaction_overview/transaction_overview.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/wallets/wallet_screen.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
@@ -25,8 +24,8 @@ class WalletState extends State<WalletScreen> {
     return WalletLayout(
         title: Text('my wallet'),
         body: BaseView<WalletViewModel>(
-            model: getIt<
-                WalletViewModel>(), // TODO how to do this with injectable only?
+            // TODO how to do this with injectable only?
+            model: getIt<WalletViewModel>(),
             onModelReady: (vmodel) => vmodel.loadWalletDetail(walletId),
             builder: (context, vmodel, child) {
               return vmodel.state == ViewState.Busy
@@ -38,7 +37,7 @@ class WalletState extends State<WalletScreen> {
                           // child: Text('Wallet no id'),
                         ),
                         Center(
-                          child: Text('Steffisburg'),
+                          child: Text('${vmodel.walletDetail.currency.label}'),
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,

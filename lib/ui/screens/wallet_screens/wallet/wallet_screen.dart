@@ -1,4 +1,3 @@
-import 'package:e_coupon/ui/screens/wallet_screens/wallet_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'wallet_state.dart';
