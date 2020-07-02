@@ -1,20 +1,19 @@
 import 'dart:async';
-import 'dart:math';
 
-import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/business/entities/transaction_state.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/data/mock_data.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/core/failure.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: IWalletRepo)
 class WalletRepo implements IWalletRepo {
   @override
-  Future<Either<Failure, List<Transaction>>> getWalletTransactions(id, filter) {
+  Future<Either<Failure, List<TransactionRecord>>> getWalletTransactions(
+      id, filter) {
     return getMockTransactions(id, filter);
   }
 
@@ -36,12 +35,13 @@ class WalletRepo implements IWalletRepo {
   }
 
   /// mock code
-  Future<Either<Failure, List<Transaction>>> getMockTransactions(id, filter) {
+  Future<Either<Failure, List<TransactionRecord>>> getMockTransactions(
+      id, filter) {
     // mock delay
     return Future.delayed(const Duration(milliseconds: 400), () {
       for (final wallet in MockWallets) {
         if (wallet.id == id) {
-          var completer = Completer<Either<Failure, List<Transaction>>>();
+          var completer = Completer<Either<Failure, List<TransactionRecord>>>();
           completer.complete(Right(wallet.transactions));
           return completer.future;
         }

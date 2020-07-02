@@ -1,12 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class Transaction extends Equatable {
-  final String text;
-  final double amount;
-  final bool isEncashment;
+  String senderId;
+  String recieverId;
+  double amount;
 
-  Transaction({this.text, this.amount, this.isEncashment = false});
+  Transaction(this.senderId, this.recieverId, this.amount);
+
+  set sender(String senderId) => this.senderId = senderId;
+  set reciever(String recieverId) => this.recieverId = recieverId;
+  set transactionAmount(double amount) => this.amount = amount;
 
   @override
-  List<Object> get props => [text, amount, isEncashment];
+  List<Object> get props => [senderId, recieverId, amount];
 }
