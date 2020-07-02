@@ -6,8 +6,9 @@
 
 import 'package:e_coupon/data/local/scanner_repo.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_scanner_repo.dart';
-import 'package:e_coupon/data/wallet_repo.dart';
+import 'package:e_coupon/data/repos/wallet_repo.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
+import 'package:e_coupon/data/repos/mock_wallet_repo.dart';
 import 'package:e_coupon/business/use_cases/scan_qr.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
@@ -20,7 +21,6 @@ import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<IScannerRepo>(() => ScannerRepo());
-  g.registerLazySingleton<IWalletRepo>(() => WalletRepo());
   g.registerLazySingleton<ScanQR>(() => ScanQR(repository: g<IScannerRepo>()));
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
@@ -36,4 +36,14 @@ void $initGetIt(GetIt g, {String environment}) {
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(
       () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));
+
+  //Register dev Dependencies --------
+  if (environment == 'dev') {
+    g.registerLazySingleton<IWalletRepo>(() => WalletRepo());
+  }
+
+  //Register mock Dependencies --------
+  if (environment == 'mock') {
+    g.registerLazySingleton<IWalletRepo>(() => MockWalletRepo());
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// TODO Equatable only works for immutable classes. This doesnt work here.
 class Transaction extends Equatable {
   String senderId;
   String recieverId;

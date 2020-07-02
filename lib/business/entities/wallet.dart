@@ -1,11 +1,13 @@
+import 'package:e_coupon/business/entities/currency.dart';
+import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:equatable/equatable.dart';
 
 class Wallet extends Equatable {
-  final id;
-  final amount;
-  final currency;
-  final isShop;
-  final transactions;
+  final String id;
+  final double amount;
+  final Currency currency;
+  final bool isShop;
+  final List<TransactionRecord> transactions;
 
   Wallet(
       {this.id,

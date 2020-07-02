@@ -30,6 +30,8 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 
 - run `flutter pub run build_runner watch --delete-conflicting-outputs` to generate injectables
 
+- use `@Environment(Env.mock)` to annotate mock classes. Use `@Environment(Env.dev)` to annotate dev classes. Use `@Environment(Env.prod)` to annotate prod classes.
+
 ### add translation:
 
 - add the translation to the translation files (i18n > [lang].json)
@@ -61,7 +63,7 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - - model
 - core: shared things for all layers: failure and errors (maybe rename?)
 
-watch Reso Coders tutorial: https://www.youtube.com/watch?v=dc3B_mMrZ-Q&list=PLB6lc7nQ1n4iYGE_khpXRdJkJEp9WOech&index=15 this project similarly is built. Except the Presentation logic is handled with Change Notifier with MVVW pattern instead of BloC similar to this https://www.youtube.com/watch?v=kDEflMYTFlk. And use Injectable on top of get_it https://www.youtube.com/watch?v=KNcP8z0hWqs&list=PLB6lc7nQ1n4jMy66mxd19YTKUqcAzw3qB&index=17 https://pub.dev/packages/injectable#setup
+watch Reso Coders tutorial: https://resocoder.com/flutter-clean-architecture-tdd/ this project similarly is built. Except the Presentation logic is handled with Change Notifier with MVVW pattern instead of BloC similar to this https://www.youtube.com/watch?v=kDEflMYTFlk. And use Injectable on top of get_it https://www.youtube.com/watch?v=KNcP8z0hWqs&list=PLB6lc7nQ1n4jMy66mxd19YTKUqcAzw3qB&index=17 https://pub.dev/packages/injectable#setup
 
 ### dart specials
 

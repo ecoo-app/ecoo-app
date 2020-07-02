@@ -1,44 +1,59 @@
 enum VerificationState { Open, Pending, Successful }
 
-abstract class Currency {
+abstract class CurrencyAPI {
   String id;
   String label;
+
+  CurrencyAPI({this.id, this.label});
 }
 
-abstract class Wallet {
+abstract class WalletAPI {
   String walletId;
-  Currency currency;
+  CurrencyAPI currency;
   bool isShop;
   double amount;
   VerificationState verificationState;
+
+  WalletAPI(
+      {this.walletId,
+      this.currency,
+      this.isShop,
+      this.amount,
+      this.verificationState});
 }
 
 enum InputType { Text, Number, Date }
 
-abstract class VerificationInput {
+abstract class VerificationInputAPI {
   String id;
   Map<String, String> i18nLabel;
   InputType inputType;
+
+  VerificationInputAPI({this.id, this.i18nLabel, this.inputType});
 }
 
-abstract class TransactionRecord {
+abstract class TransactionRecordAPI {
   String text;
   double amount;
-  List<Tag> tags;
+  List<TagAPI> tags;
+
+  TransactionRecordAPI({this.text, this.amount, this.tags});
 }
 
-abstract class Tag {
+abstract class TagAPI {
   String id;
   // maby also some humanreadable id/label for translation of labels?
   String label;
+
+  TagAPI({this.id, this.label});
 }
 
 abstract class LibAPI {
   // wallet creation
-  Future<Wallet> createWalletForUser(
+  Future<WalletAPI> createWalletForUser(
       String userIdentification, String currencyId, bool isShop);
-  Future<List<Currency>> getCurrencies();
-  Future<List<VerificationInput>> getVerificationInputs(
+  Future<List<CurrencyAPI>> getCurrencies();
+  Future<List<VerificationInputAPI>> getVerificationInputs(
       String currencyId, bool isShop);
 
   // verification
@@ -50,12 +65,12 @@ abstract class LibAPI {
   // TODO what is the return type of initTransaction?
   initTransaction(
       String myWalletId, String recieverWalletId, double transactionAmount);
-  Future<Currency> getGemeindeWalletId(String currencyId);
+  Future<CurrencyAPI> getGemeindeWalletId(String currencyId);
 
   // wallet data
-  Future<List<Wallet>> getAllWalletsForUser(String userIdentification);
+  Future<List<WalletAPI>> getAllWalletsForUser(String userIdentification);
   // TODO pagination cursor format
-  Future<List<TransactionRecord>> getTransactionsForWallet(
+  Future<List<TransactionRecordAPI>> getTransactionsForWallet(
       String walletId, paginationCursor); // filter?
-  Future<Wallet> getWalletData(String walletId);
+  Future<WalletAPI> getWalletData(String walletId);
 }

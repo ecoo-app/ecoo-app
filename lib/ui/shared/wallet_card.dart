@@ -20,7 +20,7 @@ class WalletCard extends StatelessWidget {
               onTap: onPressed,
               leading: Icon(Icons.account_balance_wallet),
               title: Text(wallet.id),
-              subtitle: Text(wallet.currency),
+              subtitle: Text(wallet.currency.label),
             ),
           ],
         ),
