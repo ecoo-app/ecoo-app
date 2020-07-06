@@ -4,12 +4,11 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:e_coupon/data/local/scanner_repo.dart';
-import 'package:e_coupon/business/repo_definitions/abstract_scanner_repo.dart';
+import 'package:e_coupon/device/qr_scanner_mock.dart';
+import 'package:e_coupon/ui/core/abstract_qr_scanner.dart';
 import 'package:e_coupon/data/repos/wallet_repo.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/data/repos/mock_wallet_repo.dart';
-import 'package:e_coupon/business/use_cases/scan_qr.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
@@ -21,8 +20,7 @@ import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
-  g.registerFactory<IScannerRepo>(() => ScannerRepo());
-  g.registerLazySingleton<ScanQR>(() => ScanQR(repository: g<IScannerRepo>()));
+  g.registerFactory<IQRScanner>(() => MockQRScanner());
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetDefaultWallet>(
@@ -33,8 +31,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => GetWallet(repository: g<IWalletRepo>()));
   g.registerLazySingleton<HandleTransaction>(
       () => HandleTransaction(repository: g<IWalletRepo>()));
-  g.registerFactory<TransactionViewModel>(
-      () => TransactionViewModel(handleTransaction: g<HandleTransaction>()));
+  g.registerFactory<TransactionViewModel>(() => TransactionViewModel(
+      handleTransaction: g<HandleTransaction>(), qrScanner: g<IQRScanner>()));
   g.registerFactory<WalletViewModel>(() => WalletViewModel(
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(

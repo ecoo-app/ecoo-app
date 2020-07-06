@@ -40,9 +40,12 @@ class MockWallet extends WalletAPI {
             verificationState: verificationState);
 }
 
+const PrivateWalletID = 'DR345GH67';
+const ShopWalletID = '45FGH62SD';
+
 List<WalletAPI> MockWallets = [
-  MockWallet('DR345GH67', 105.50, MockWetzikonCurrency(), false,
+  MockWallet(PrivateWalletID, 105.50, MockWetzikonCurrency(), false,
       VerificationState.Successful),
-  MockWallet('45FGH62SD', 1059.00, MockWetzikonCurrency(), true,
+  MockWallet(ShopWalletID, 1059.00, MockWetzikonCurrency(), true,
       VerificationState.Successful)
 ];

@@ -1,5 +1,6 @@
 enum ViewStateEnum { Idle, Busy }
 
+// TODO use this
 abstract class ViewState {}
 
 class Initial extends ViewState {}

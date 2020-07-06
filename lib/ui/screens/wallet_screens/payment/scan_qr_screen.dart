@@ -1,73 +1,50 @@
-import 'dart:async';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:e_coupon/ui/core/base_view.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/payment/transaction_view_model.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import '../../../../injection.dart';
 
 class ScanQRScreen extends StatelessWidget {
-  Future barcodeScanning(TransactionViewModel vmodel) async {
-    try {
-      ScanResult barcode = await BarcodeScanner.scan();
-
-      print(barcode.rawContent);
-
-      //setState(() => this.barcode = barcode.rawContent);
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        print('No camera permission!');
-        // setState(() {
-        //   this.barcode = 'No camera permission!';
-        // });
-      } else {
-        print('Unknown error: $e');
-        // setState(() => this.barcode = 'Unknown error: $e');
-      }
-    } on FormatException {
-      print('Nothing captured.');
-      // setState(() => this.barcode = 'Nothing captured.');
-    } catch (e) {
-      print('Unknown error: $e');
-      // setState(() => this.barcode = 'Unknown error: $e');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       title: Text('scan'),
-      body: BaseView<TransactionViewModel>(builder: (context, vmodel, child) {
-        return Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                child: RaisedButton(
-                  onPressed: () => barcodeScanning(vmodel),
-                  child: Text(
-                    "Capture Image",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+      body: BaseView<TransactionViewModel>(
+          // TODO how to do this with injectable only? -> research StateNotifier instead of ChangeNotifier?
+          model: getIt<TransactionViewModel>(),
+          onModelReady: (vmodel) => vmodel.init(),
+          builder: (context, vmodel, child) {
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: RaisedButton(
+                      onPressed: () => vmodel.scanQR(),
+                      child: Text(
+                        "Capture Image",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                      color: Colors.green,
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    margin: EdgeInsets.all(10),
                   ),
-                  color: Colors.green,
-                ),
-                padding: const EdgeInsets.all(10.0),
-                margin: EdgeInsets.all(10),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                  ),
+                  Text(
+                    "Scanned Barcode Number",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    'send ${vmodel.amount} from ${vmodel.senderId} to ${vmodel.recieverId}',
+                    style: TextStyle(fontSize: 25, color: Colors.green),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-              ),
-              Text(
-                "Scanned Barcode Number",
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                'send ${vmodel.amount} from ${vmodel.senderId} to ${vmodel.recieverId}',
-                style: TextStyle(fontSize: 25, color: Colors.green),
-              ),
-            ],
-          ),
-        );
-      }),
+            );
+          }),
     );
   }
 }

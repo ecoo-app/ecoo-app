@@ -1,15 +1,20 @@
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:dartz/dartz.dart';
-import 'package:e_coupon/business/entities/transaction.dart';
-import 'package:e_coupon/business/repo_definitions/abstract_scanner_repo.dart';
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/ui/core/abstract_qr_scanner.dart' as scannerInterface;
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: IScannerRepo)
-class ScannerRepo implements IScannerRepo {
+import '../injection.dart';
+
+// @Environment(Env.dev)
+// @Injectable(as: scannerInterface.IQRScanner)
+class QRScanner implements scannerInterface.IQRScanner {
   @override
-  Future<Either<Failure, Transaction>> scanQR() async {
+  scan() async {
+    // TODO: implement scan
+    throw UnimplementedError();
+  }
+
+  Future barcodeScanning() async {
     try {
       ScanResult barcode = await BarcodeScanner.scan();
 

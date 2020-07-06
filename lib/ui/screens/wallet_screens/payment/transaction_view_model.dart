@@ -1,4 +1,5 @@
 import 'package:e_coupon/business/use_cases/handle_transaction.dart';
+import 'package:e_coupon/ui/core/abstract_qr_scanner.dart';
 import 'package:e_coupon/ui/core/base_view_model.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:injectable/injectable.dart';
@@ -6,9 +7,10 @@ import 'package:injectable/injectable.dart';
 @injectable
 class TransactionViewModel extends BaseViewModel {
   final HandleTransaction handleTransaction;
-  TransactionState transactionData = TransactionState();
+  final IQRScanner qrScanner;
+  TransactionState transactionData;
 
-  TransactionViewModel({this.handleTransaction});
+  TransactionViewModel({this.handleTransaction, this.qrScanner});
 
   String get senderId => transactionData.senderId;
   String get recieverId => transactionData.recieverId;
@@ -26,6 +28,10 @@ class TransactionViewModel extends BaseViewModel {
     transactionData.amount = amount;
   }
 
+  void init() {
+    transactionData = TransactionState();
+  }
+
   void initiateTransaction() async {
     setState(ViewStateEnum.Busy);
 
@@ -36,12 +42,23 @@ class TransactionViewModel extends BaseViewModel {
 
     setState(ViewStateEnum.Idle);
   }
+
+  void scanQR() async {
+    setState(ViewStateEnum.Busy);
+
+    var scanOrFailure = await qrScanner.scan();
+    scanOrFailure.fold(
+        (failure) => print('FAILURE'), (result) => print('scan succesful'));
+
+    setState(ViewStateEnum.Idle);
+  }
 }
 
+// extend from Transaction entity?
 class TransactionState {
-  String senderId;
-  String recieverId;
-  double amount;
+  String senderId = '';
+  String recieverId = '';
+  double amount = 0;
 
   TransactionState();
 }
