@@ -23,7 +23,7 @@ class WalletViewModel extends BaseViewModel {
       _walletTransactions;
 
   void loadWalletDetail(String walletId) async {
-    setState(ViewState.Busy);
+    setState(ViewStateEnum.Busy);
 
     if (walletId == null) {
       // TODO create use case to get walletId from shared Preferences (always save last used wallet and use it on app open)
@@ -46,6 +46,6 @@ class WalletViewModel extends BaseViewModel {
           .toList();
     });
 
-    setState(ViewState.Idle);
+    setState(ViewStateEnum.Idle);
   }
 }

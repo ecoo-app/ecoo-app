@@ -18,7 +18,7 @@ class WalletsOverviewScreen extends StatelessWidget {
             model: getIt<WalletsViewModel>(),
             onModelReady: (vmodel) => vmodel.loadWallets(),
             builder: (context, vmodel, child) {
-              return vmodel.state == ViewState.Busy
+              return vmodel.state == ViewStateEnum.Busy
                   ? Center(child: CircularProgressIndicator())
                   : ListView.builder(
                       padding: const EdgeInsets.all(8),

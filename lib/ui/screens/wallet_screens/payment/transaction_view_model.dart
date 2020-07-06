@@ -27,14 +27,14 @@ class TransactionViewModel extends BaseViewModel {
   }
 
   void initiateTransaction() async {
-    setState(ViewState.Busy);
+    setState(ViewStateEnum.Busy);
 
     var transactionOrFailure = await handleTransaction(TransactionParams(
         senderId: 'sender', recieverId: 'reciever', amount: 10.00));
     transactionOrFailure.fold((failure) => print('FAILURE'),
         (success) => print('transaction succesful'));
 
-    setState(ViewState.Idle);
+    setState(ViewStateEnum.Idle);
   }
 }
 

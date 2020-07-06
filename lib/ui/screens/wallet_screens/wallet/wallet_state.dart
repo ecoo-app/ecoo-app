@@ -28,7 +28,7 @@ class WalletState extends State<WalletScreen> {
             model: getIt<WalletViewModel>(),
             onModelReady: (vmodel) => vmodel.loadWalletDetail(walletId),
             builder: (context, vmodel, child) {
-              return vmodel.state == ViewState.Busy
+              return vmodel.state == ViewStateEnum.Busy
                   ? Center(child: CircularProgressIndicator())
                   : Column(
                       children: <Widget>[

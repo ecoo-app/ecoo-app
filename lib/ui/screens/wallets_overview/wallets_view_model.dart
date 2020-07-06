@@ -15,13 +15,13 @@ class WalletsViewModel extends BaseViewModel {
   List<Wallet> get wallets => _wallets;
 
   void loadWallets() async {
-    setState(ViewState.Busy);
+    setState(ViewStateEnum.Busy);
 
     var walletsOrFailure =
         await getAllWallets(AllWalletParams(userIdentifier: 'string'));
     walletsOrFailure.fold(
         (failure) => print('FAILURE'), (wallets) => _wallets = wallets);
 
-    setState(ViewState.Idle);
+    setState(ViewStateEnum.Idle);
   }
 }
