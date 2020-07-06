@@ -8,8 +8,8 @@ import 'package:e_coupon/ui/shared/transactions_list.dart';
 import 'package:injectable/injectable.dart';
 
 // add AppStateModel -> holds all wallets and the current selected... ?
-
-@injectable
+@named
+@Injectable(as: BaseViewModel)
 class WalletViewModel extends BaseViewModel {
   Wallet _walletData;
   List<TransactionListEntry> _walletTransactions;

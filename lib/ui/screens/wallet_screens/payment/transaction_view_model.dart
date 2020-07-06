@@ -4,7 +4,8 @@ import 'package:e_coupon/ui/core/base_view_model.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@named
+@Injectable(as: BaseViewModel)
 class TransactionViewModel extends BaseViewModel {
   final HandleTransaction handleTransaction;
   final IQRScanner qrScanner;
