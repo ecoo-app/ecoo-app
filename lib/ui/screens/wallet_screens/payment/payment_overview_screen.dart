@@ -1,6 +1,6 @@
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/generated/i18n.dart';
-import 'package:e_coupon/ui/core/router.dart';
+import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:flutter/cupertino.dart';

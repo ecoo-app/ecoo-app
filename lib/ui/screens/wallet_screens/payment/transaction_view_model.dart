@@ -1,7 +1,8 @@
 import 'package:e_coupon/business/use_cases/handle_transaction.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
-import 'package:e_coupon/ui/core/base_view_model.dart';
-import 'package:e_coupon/ui/core/viewstate.dart';
+import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
+import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+
 import 'package:injectable/injectable.dart';
 
 @injectable

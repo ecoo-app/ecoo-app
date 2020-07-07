@@ -1,9 +1,9 @@
-import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
-import 'package:e_coupon/ui/core/base_view_model.dart';
-import 'package:e_coupon/ui/core/viewstate.dart';
+import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
+import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+
 import 'package:e_coupon/ui/shared/transactions_list.dart';
 import 'package:injectable/injectable.dart';
 

@@ -1,8 +1,9 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
-import 'package:e_coupon/ui/core/base_view.dart';
-import 'package:e_coupon/ui/core/router.dart';
-import 'package:e_coupon/ui/core/viewstate.dart';
+import 'package:e_coupon/ui/core/view_state/base_view.dart';
+import 'package:e_coupon/ui/core/router/router.dart';
+import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+
 import 'package:e_coupon/ui/screens/wallet_screens/payment/qrGeneratorTest_screen.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/transaction_overview/transaction_overview.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/wallet/wallet_screen.dart';

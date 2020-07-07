@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/core/viewstate.dart';
+import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:flutter/widgets.dart';
 
 class BaseViewModel extends ChangeNotifier {

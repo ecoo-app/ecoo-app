@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/core/base_view.dart';
+import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/screens/wallet_screens/payment/transaction_view_model.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:flutter/material.dart';
