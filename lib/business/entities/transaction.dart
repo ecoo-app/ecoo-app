@@ -6,7 +6,7 @@ class Transaction extends Equatable {
   String recieverId;
   double amount;
 
-  Transaction(this.senderId, this.recieverId, this.amount);
+  Transaction({this.senderId, this.recieverId, this.amount});
 
   set sender(String senderId) => this.senderId = senderId;
   set reciever(String recieverId) => this.recieverId = recieverId;

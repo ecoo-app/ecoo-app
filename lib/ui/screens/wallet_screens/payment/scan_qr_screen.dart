@@ -13,7 +13,7 @@ class ScanQRScreen extends StatelessWidget {
       body: BaseView<TransactionViewModel>(
           // TODO how to do this with injectable only? -> research StateNotifier instead of ChangeNotifier?
           model: getIt<TransactionViewModel>(),
-          onModelReady: (vmodel) => vmodel.init(),
+          onModelReady: (vmodel) => vmodel.init(TransactionState()),
           builder: (context, vmodel, child) {
             return Center(
               child: Column(

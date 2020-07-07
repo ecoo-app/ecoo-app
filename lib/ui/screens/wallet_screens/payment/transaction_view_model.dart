@@ -1,11 +1,10 @@
 import 'package:e_coupon/business/use_cases/handle_transaction.dart';
-import 'package:e_coupon/ui/core/abstract_qr_scanner.dart';
+import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
 import 'package:e_coupon/ui/core/base_view_model.dart';
 import 'package:e_coupon/ui/core/viewstate.dart';
 import 'package:injectable/injectable.dart';
 
-@named
-@Injectable(as: BaseViewModel)
+@injectable
 class TransactionViewModel extends BaseViewModel {
   final HandleTransaction handleTransaction;
   final IQRScanner qrScanner;
@@ -16,6 +15,8 @@ class TransactionViewModel extends BaseViewModel {
   String get senderId => transactionData.senderId;
   String get recieverId => transactionData.recieverId;
   double get amount => transactionData.amount;
+  bool get receiverIsSet => transactionData.recieverIsSet;
+  bool get amountIsSet => transactionData.amountIsSet;
 
   set senderId(String senderId) {
     transactionData.senderId = senderId;
@@ -29,8 +30,10 @@ class TransactionViewModel extends BaseViewModel {
     transactionData.amount = amount;
   }
 
-  void init() {
-    transactionData = TransactionState();
+  void init(TransactionState transactionData) {
+    print(transactionData.senderId);
+    this.transactionData = transactionData;
+    //scanQR();
   }
 
   void initiateTransaction() async {
@@ -48,8 +51,14 @@ class TransactionViewModel extends BaseViewModel {
     setState(ViewStateEnum.Busy);
 
     var scanOrFailure = await qrScanner.scan();
-    scanOrFailure.fold(
-        (failure) => print('FAILURE'), (result) => print('scan succesful'));
+    scanOrFailure.fold((failure) => print('FAILURE'), (result) {
+      transactionData.recieverId = result.walletID;
+      transactionData.recieverIsSet = true;
+      if (result.amount != null) {
+        transactionData.amount = result.amount;
+        transactionData.amountIsSet = true;
+      }
+    });
 
     setState(ViewStateEnum.Idle);
   }
@@ -59,7 +68,9 @@ class TransactionViewModel extends BaseViewModel {
 class TransactionState {
   String senderId = '';
   String recieverId = '';
+  bool recieverIsSet = false;
   double amount = 0;
+  bool amountIsSet = false;
 
-  TransactionState();
+  TransactionState({this.senderId, this.recieverId, this.amount});
 }

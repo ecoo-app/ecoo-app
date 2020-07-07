@@ -1,9 +1,7 @@
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:e_coupon/ui/core/abstract_qr_scanner.dart' as scannerInterface;
+import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart'
+    as scannerInterface;
 import 'package:flutter/services.dart';
-import 'package:injectable/injectable.dart';
-
-import '../injection.dart';
 
 // @Environment(Env.dev)
 // @Injectable(as: scannerInterface.IQRScanner)

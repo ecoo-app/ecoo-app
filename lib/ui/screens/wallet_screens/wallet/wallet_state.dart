@@ -32,12 +32,18 @@ class WalletState extends State<WalletScreen> {
                   ? Center(child: CircularProgressIndicator())
                   : Column(
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(24.0),
+                        ),
                         Center(
                           child: Text('Wallet ${vmodel.walletDetail.id}'),
                           // child: Text('Wallet no id'),
                         ),
                         Center(
                           child: Text('${vmodel.walletDetail.currency.label}'),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +76,8 @@ class WalletState extends State<WalletScreen> {
                         PrimaryButton(
                           text: I18n.of(context).personalWalletPay,
                           onPressed: () {
-                            Navigator.pushNamed(context, ScanQRRoute);
+                            Navigator.pushNamed(context, PaymentRoute,
+                                arguments: vmodel.walletDetail.id);
                           },
                         ),
                         TransactionList(

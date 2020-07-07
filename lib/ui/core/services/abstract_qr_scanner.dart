@@ -3,13 +3,13 @@ import 'package:e_coupon/core/failure.dart';
 import 'package:meta/meta.dart';
 
 // maybe extend transaction?
-class ScanResult {
+class ScannedResult {
   final String walletID;
   final double amount;
 
-  ScanResult({@required this.walletID, this.amount});
+  ScannedResult({@required this.walletID, this.amount});
 }
 
 abstract class IQRScanner {
-  Future<Either<Failure, ScanResult>> scan();
+  Future<Either<Failure, ScannedResult>> scan();
 }

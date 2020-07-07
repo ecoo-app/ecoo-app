@@ -1,68 +1,69 @@
+import 'package:e_coupon/generated/i18n.dart';
+import 'package:e_coupon/ui/core/base_view.dart';
+import 'package:e_coupon/ui/core/router.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/wallet_screens/payment/transaction_view_model.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
+import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 
-class PaymentScreen extends StatelessWidget {
-  final title;
-  final body;
+import '../../../../injection.dart';
 
-  PaymentScreen({this.title, this.body});
+class PaymentScreen extends StatelessWidget {
+  final senderID;
+
+  PaymentScreen({@required this.senderID});
 
   @override
   Widget build(BuildContext context) {
-    return new MainLayout(title: new Text('payment'), body: new Text('body'));
-  }
-
-  final _aspectTolerance = 0.00;
-
-  final _selectedCamera = -1;
-  final _useAutoFocus = true;
-  final _autoEnableFlash = false;
-  final List<BarcodeFormat> _selectedFormats = [BarcodeFormat.qr];
-
-  Future scan() async {
-    try {
-      var options = ScanOptions(
-        strings: {
-          "cancel": "cancel",
-          "flash_on": "flash off",
-          "flash_off": "flash on",
-        },
-        restrictFormat: _selectedFormats,
-        useCamera: _selectedCamera,
-        autoEnableFlash: _autoEnableFlash,
-        android: AndroidOptions(
-          aspectTolerance: _aspectTolerance,
-          useAutoFocus: _useAutoFocus,
-        ),
-      );
-
-      var result = await BarcodeScanner.scan(options: options);
-
-      //setState(() => scanResult = result);
-      print(result);
-    } on PlatformException catch (e) {
-      var result = ScanResult(
-        type: ResultType.Error,
-        format: BarcodeFormat.unknown,
-      );
-
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        // setState(() {
-        //   result.rawContent = 'The user did not grant the camera permission!';
-        // });
-        result.rawContent = 'The user did not grant the camera permission!';
-        print(result);
-      } else {
-        result.rawContent = 'Unknown error: $e';
-      }
-      // setState(() {
-      //   scanResult = result;
-      // });
-      print(result);
-    }
+    return MainLayout(
+      title: Text('scan'),
+      body: BaseView<TransactionViewModel>(
+          // TODO how to do this with injectable only? -> research StateNotifier instead of ChangeNotifier?
+          model: getIt<TransactionViewModel>(),
+          onModelReady: (vmodel) =>
+              vmodel.init(TransactionState(senderId: this.senderID)),
+          builder: (context, vmodel, child) {
+            return Center(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(hintText: 'Betrag'),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      onEditingComplete: () => print('amount editing complete'),
+                    ),
+                    TextFormField(
+                        decoration: InputDecoration(hintText: 'Empfänger'),
+                        onEditingComplete: () =>
+                            print('empfänger editing complete')),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                    ),
+                    PrimaryButton(
+                      text: I18n.of(context).personalWalletPay,
+                      onPressed: () {
+                        // print('onpressed');
+                        Navigator.pushNamed(context, PaymentOverviewRoute,
+                            arguments: PaymentOverviewArguments(
+                                title: 'Geld senden',
+                                senderId: vmodel.senderId,
+                                recieverId: vmodel.recieverId,
+                                amount: vmodel.amount));
+                      },
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.all(10.0),
+                margin: EdgeInsets.all(10),
+              ),
+            );
+          }),
+    );
   }
 }
