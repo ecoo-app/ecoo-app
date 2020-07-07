@@ -14,8 +14,9 @@ import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
 import 'package:e_coupon/business/use_cases/handle_transaction.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/transaction_view_model.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/wallet_view_model.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_view_model.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_view_model.dart';
+import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:get_it/get_it.dart';
 
@@ -31,6 +32,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => GetWallet(repository: g<IWalletRepo>()));
   g.registerLazySingleton<HandleTransaction>(
       () => HandleTransaction(repository: g<IWalletRepo>()));
+  g.registerFactory<PaymentOverviewViewModel>(
+      () => PaymentOverviewViewModel(g<HandleTransaction>(), g<IQRScanner>()));
   g.registerFactory<TransactionViewModel>(() => TransactionViewModel(
       handleTransaction: g<HandleTransaction>(), qrScanner: g<IQRScanner>()));
   g.registerFactory<WalletViewModel>(() => WalletViewModel(

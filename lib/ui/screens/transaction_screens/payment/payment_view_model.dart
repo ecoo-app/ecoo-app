@@ -34,34 +34,6 @@ class TransactionViewModel extends BaseViewModel {
   void init(TransactionState transactionData) {
     print(transactionData.senderId);
     this.transactionData = transactionData;
-    //scanQR();
-  }
-
-  void initiateTransaction() async {
-    setState(ViewStateEnum.Busy);
-
-    var transactionOrFailure = await handleTransaction(TransactionParams(
-        senderId: 'sender', recieverId: 'reciever', amount: 10.00));
-    transactionOrFailure.fold((failure) => print('FAILURE'),
-        (success) => print('transaction succesful'));
-
-    setState(ViewStateEnum.Idle);
-  }
-
-  void scanQR() async {
-    setState(ViewStateEnum.Busy);
-
-    var scanOrFailure = await qrScanner.scan();
-    scanOrFailure.fold((failure) => print('FAILURE'), (result) {
-      transactionData.recieverId = result.walletID;
-      transactionData.recieverIsSet = true;
-      if (result.amount != null) {
-        transactionData.amount = result.amount;
-        transactionData.amountIsSet = true;
-      }
-    });
-
-    setState(ViewStateEnum.Idle);
   }
 }
 

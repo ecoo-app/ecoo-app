@@ -3,16 +3,17 @@ import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/transaction_overview/transaction_overview.dart';
+import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 
-import 'package:e_coupon/ui/screens/wallet_screens/payment/qrGeneratorTest_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/transaction_overview/transaction_overview.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
+import 'package:e_coupon/ui/spikes/qrGeneratorTest_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../wallet_view_model.dart';
+import './wallet_view_model.dart';
 import 'wallet_layout.dart';
 
 class WalletState extends State<WalletScreen> {
@@ -53,12 +54,8 @@ class WalletState extends State<WalletScreen> {
                                 icon: Icons.send,
                                 text: I18n.of(context).privateWalletSend,
                                 onPressed: () {
-                                  Navigator.push(
-                                    // TODO change to named route
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => GenerateScreen()),
-                                  );
+                                  Navigator.pushNamed(context, PaymentRoute,
+                                      arguments: vmodel.walletDetail.id);
                                 },
                               ),
                               CustomIconButton(
@@ -77,8 +74,10 @@ class WalletState extends State<WalletScreen> {
                         PrimaryButton(
                           text: I18n.of(context).personalWalletPay,
                           onPressed: () {
-                            Navigator.pushNamed(context, PaymentRoute,
-                                arguments: vmodel.walletDetail.id);
+                            Navigator.pushNamed(context, PaymentOverviewRoute,
+                                arguments: PaymentOverviewArguments(
+                                    title: 'Zahlung bestätigen',
+                                    shouldScan: true));
                           },
                         ),
                         TransactionList(

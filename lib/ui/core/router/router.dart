@@ -1,9 +1,7 @@
-import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_screen.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/scan_qr_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/payment_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/wallet/wallet_screen.dart';
+import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

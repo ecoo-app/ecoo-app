@@ -1,14 +1,15 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/wallet_screens/payment/transaction_view_model.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../injection.dart';
+import '../transaction_data.dart';
 
 class PaymentScreen extends StatelessWidget {
   final senderID;
@@ -52,9 +53,10 @@ class PaymentScreen extends StatelessWidget {
                         Navigator.pushNamed(context, PaymentOverviewRoute,
                             arguments: PaymentOverviewArguments(
                                 title: 'Geld senden',
-                                senderId: vmodel.senderId,
-                                recieverId: vmodel.recieverId,
-                                amount: vmodel.amount));
+                                transactionData: TransactionData(
+                                    senderId: vmodel.senderId,
+                                    recieverId: vmodel.recieverId,
+                                    amount: vmodel.amount)));
                       },
                     ),
                   ],
