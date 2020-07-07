@@ -34,30 +34,44 @@ class PaymentScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                     ),
-                    AmountInputField(
-                      controller: vmodel.amountInputController,
-                    ),
-                    TextFormField(
-                        controller: vmodel.recieverInputController,
-                        decoration: InputDecoration(hintText: 'Empfänger'),
-                        onEditingComplete: () =>
-                            print('empfänger editing complete')),
+                    Form(
+                        key: vmodel.formKey,
+                        child: Column(
+                          children: <Widget>[
+                            AmountInputField(
+                              controller: vmodel.amountInputController,
+                            ),
+                            TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Uups, der Empfänger ist vergessen gegangen.';
+                                  }
+                                  return null;
+                                },
+                                controller: vmodel.recieverInputController,
+                                decoration:
+                                    InputDecoration(hintText: 'Empfänger'),
+                                onEditingComplete: () =>
+                                    print('empfänger editing complete')),
+                          ],
+                        )),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                     ),
                     PrimaryButton(
                       text: I18n.of(context).personalWalletPay,
                       onPressed: () {
-                        // print('onpressed');
-                        Navigator.pushNamed(context, PaymentOverviewRoute,
-                            arguments: PaymentOverviewArguments(
-                                title: 'Geld senden',
-                                transactionData: TransactionData(
-                                    senderId: vmodel.senderId,
-                                    recieverId:
-                                        vmodel.recieverInputController.text,
-                                    amount: double.parse(
-                                        vmodel.amountInputController.text))));
+                        if (vmodel.formKey.currentState.validate()) {
+                          Navigator.pushNamed(context, PaymentOverviewRoute,
+                              arguments: PaymentOverviewArguments(
+                                  title: 'Geld senden',
+                                  transactionData: TransactionData(
+                                      senderId: vmodel.senderId,
+                                      recieverId:
+                                          vmodel.recieverInputController.text,
+                                      amount: double.parse(
+                                          vmodel.amountInputController.text))));
+                        }
                       },
                     ),
                   ],

@@ -1,3 +1,5 @@
+import 'package:e_coupon/core/failure.dart';
+
 enum ViewStateEnum { Idle, Busy }
 
 // TODO use this
@@ -13,8 +15,8 @@ class Success<T> extends ViewState {
   Success(this.result);
 }
 
-class Error extends ViewState {
-  final String messageId; // i18n message id
+class Error<T extends Failure> extends ViewState {
+  final T messageId;
 
   Error(this.messageId);
 }

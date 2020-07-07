@@ -7,6 +7,9 @@ import 'package:injectable/injectable.dart';
 class PaymentViewModel extends BaseViewModel {
   // handel sender id in a context visible for all?
   String senderId;
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  final formKey = GlobalKey<FormState>();
   final amountInputController = TextEditingController();
   final recieverInputController = TextEditingController();
 

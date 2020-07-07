@@ -25,18 +25,18 @@ class PaymentOverviewViewModel extends BaseViewModel {
   }
 
   void initiateTransaction() async {
-    setState(ViewStateEnum.Busy);
+    setViewState(Loading());
 
     var transactionOrFailure = await handleTransaction(TransactionParams(
-        senderId: 'sender', recieverId: 'reciever', amount: 10.00));
-    transactionOrFailure.fold((failure) => print('FAILURE'),
-        (success) => print('transaction succesful'));
-
-    setState(ViewStateEnum.Idle);
+        senderId: transactionData.senderId,
+        recieverId: transactionData.recieverId,
+        amount: transactionData.amount));
+    transactionOrFailure.fold((failure) => setViewState(Error(failure)),
+        (success) => setViewState(Success(success)));
   }
 
   void scanQR() async {
-    setState(ViewStateEnum.Busy);
+    setViewState(Loading());
 
     var scanOrFailure = await qrScanner.scan();
     scanOrFailure.fold((failure) => print('FAILURE'), (result) {
@@ -46,6 +46,6 @@ class PaymentOverviewViewModel extends BaseViewModel {
       }
     });
 
-    setState(ViewStateEnum.Idle);
+    setViewState(Initial());
   }
 }
