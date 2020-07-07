@@ -3,6 +3,7 @@ import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_view_model.dart';
+import 'package:e_coupon/ui/shared/amount_input.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +21,11 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MainLayout(
       title: Text('scan'),
-      body: BaseView<TransactionViewModel>(
+      // TODO does it need a view model?
+      body: BaseView<PaymentViewModel>(
           // TODO how to do this with injectable only? -> research StateNotifier instead of ChangeNotifier?
-          model: getIt<TransactionViewModel>(),
-          onModelReady: (vmodel) =>
-              vmodel.init(TransactionState(senderId: this.senderID)),
+          model: getIt<PaymentViewModel>(),
+          onModelReady: (vmodel) => vmodel.init(this.senderID),
           builder: (context, vmodel, child) {
             return Center(
               child: Container(
@@ -33,13 +34,11 @@ class PaymentScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Betrag'),
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      onEditingComplete: () => print('amount editing complete'),
+                    AmountInputField(
+                      controller: vmodel.amountInputController,
                     ),
                     TextFormField(
+                        controller: vmodel.recieverInputController,
                         decoration: InputDecoration(hintText: 'Empfänger'),
                         onEditingComplete: () =>
                             print('empfänger editing complete')),
@@ -55,8 +54,10 @@ class PaymentScreen extends StatelessWidget {
                                 title: 'Geld senden',
                                 transactionData: TransactionData(
                                     senderId: vmodel.senderId,
-                                    recieverId: vmodel.recieverId,
-                                    amount: vmodel.amount)));
+                                    recieverId:
+                                        vmodel.recieverInputController.text,
+                                    amount: double.parse(
+                                        vmodel.amountInputController.text))));
                       },
                     ),
                   ],
