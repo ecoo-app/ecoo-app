@@ -25,7 +25,7 @@ class RequestQRBillScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('sender'),
+              Text('Wallet ${requestData.requesterId}'),
               Text('CHF ${requestData.amount.toString()}'),
               RepaintBoundary(
                 child: QrImage(

@@ -11,6 +11,10 @@ import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class RequestScreen extends StatelessWidget {
+  final String requesterId;
+
+  RequestScreen({@required this.requesterId});
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -43,6 +47,7 @@ class RequestScreen extends StatelessWidget {
                       if (vmodel.formKey.currentState.validate()) {
                         Navigator.pushNamed(context, RequestQRBillRoute,
                             arguments: RequestData(
+                                requesterId: requesterId,
                                 amount: double.parse(
                                     vmodel.amountInputController.text)));
                       }

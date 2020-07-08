@@ -64,7 +64,8 @@ class WalletState extends State<WalletScreen> {
                                 text: I18n.of(context).privateWalletRecieve,
                                 onPressed: () {
                                   Navigator.pushNamed(
-                                      context, RequestPaymentRoute);
+                                      context, RequestPaymentRoute,
+                                      arguments: vmodel.walletDetail.id);
                                   // Navigator.push(
                                   //   // TODO change to named route
                                   //   context,

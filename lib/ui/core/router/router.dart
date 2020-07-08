@@ -54,7 +54,11 @@ class Router {
         return MaterialPageRoute(builder: (_) => SuccessScreen());
       case RequestPaymentRoute:
         // return MaterialPageRoute(builder: (_) => GenerateScreen());
-        return MaterialPageRoute(builder: (_) => RequestScreen());
+        final String requesterId = settings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => RequestScreen(
+                  requesterId: requesterId,
+                ));
       case RequestQRBillRoute:
         final RequestData args = settings.arguments as RequestData;
         return MaterialPageRoute(builder: (_) => RequestQRBillScreen(args));

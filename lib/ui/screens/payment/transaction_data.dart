@@ -7,6 +7,8 @@ class TransactionData extends Transaction {
 }
 
 class RequestData extends Transaction {
-  RequestData({String senderId, double amount})
-      : super(senderId: senderId, amount: amount);
+  RequestData({String requesterId, double amount})
+      : super(senderId: requesterId, amount: amount);
+
+  String get requesterId => super.senderId;
 }
