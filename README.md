@@ -25,7 +25,7 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 
 ## Development
 
-- run `flutter pub get` to install the dependencies
+- (run `flutter pub get` to install the dependencies) is run automagically
 - Go to debugger to run the app (hotreload)
 
 - run `flutter pub run build_runner watch --delete-conflicting-outputs` to generate injectables
