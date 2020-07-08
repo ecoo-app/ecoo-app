@@ -1,9 +1,13 @@
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
+import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
+import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
+import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
+import 'package:e_coupon/ui/spikes/qrGeneratorTest_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +19,8 @@ const VerificationRoute = 'verification';
 const PaymentRoute = 'payment';
 const PaymentOverviewRoute = 'paymentOverview';
 const SuccessRoute = 'success';
+const RequestPaymentRoute = 'requestPayment';
+const RequestQRBillRoute = 'requestQRBill';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -46,6 +52,12 @@ class Router {
                 ));
       case SuccessRoute:
         return MaterialPageRoute(builder: (_) => SuccessScreen());
+      case RequestPaymentRoute:
+        // return MaterialPageRoute(builder: (_) => GenerateScreen());
+        return MaterialPageRoute(builder: (_) => RequestScreen());
+      case RequestQRBillRoute:
+        final RequestData args = settings.arguments as RequestData;
+        return MaterialPageRoute(builder: (_) => RequestQRBillScreen(args));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

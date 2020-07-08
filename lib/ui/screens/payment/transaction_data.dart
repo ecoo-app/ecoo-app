@@ -5,3 +5,8 @@ class TransactionData extends Transaction {
   TransactionData({String senderId, String recieverId, double amount})
       : super(senderId: senderId, recieverId: recieverId, amount: amount);
 }
+
+class RequestData extends Transaction {
+  RequestData({String senderId, double amount})
+      : super(senderId: senderId, amount: amount);
+}

@@ -4,6 +4,7 @@ import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 
@@ -62,12 +63,14 @@ class WalletState extends State<WalletScreen> {
                                 icon: Icons.call_received,
                                 text: I18n.of(context).privateWalletRecieve,
                                 onPressed: () {
-                                  Navigator.push(
-                                    // TODO change to named route
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => GenerateScreen()),
-                                  );
+                                  Navigator.pushNamed(
+                                      context, RequestPaymentRoute);
+                                  // Navigator.push(
+                                  //   // TODO change to named route
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => GenerateScreen()),
+                                  // );
                                 },
                               )
                             ]),
