@@ -9,16 +9,25 @@ class TransactionListEntry {
 
 class TransactionList extends StatelessWidget {
   final List<TransactionListEntry> entries;
+  final BuildContext context;
 
-  TransactionList({this.entries});
+  TransactionList({this.entries, @required this.context});
 
   Widget _buildListItem(entryLabel, entryAmount) {
     return Container(
         height: 50,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(entryLabel),
-            Text(entryAmount.toString()),
+            Text(
+              entryLabel,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            Text(
+              entryAmount.toString(),
+              style: Theme.of(context).textTheme.bodyText1,
+              textAlign: TextAlign.end,
+            ),
             const Divider(
               color: Colors.grey,
               height: 5,

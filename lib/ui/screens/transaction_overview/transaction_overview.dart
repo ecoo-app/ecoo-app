@@ -10,6 +10,7 @@ class TransactionOverview extends StatelessWidget {
       body: Column(children: <Widget>[
         Text('Bewegungen'),
         TransactionList(
+          context: context,
           entries: [
             TransactionListEntry('Confiserie', 12.34),
             TransactionListEntry('Pusteblume', -10.00)

@@ -36,7 +36,10 @@ class WalletScreen extends StatelessWidget {
                           padding: const EdgeInsets.all(24.0),
                         ),
                         Center(
-                          child: Text('Wallet ${vmodel.walletDetail.id}'),
+                          child: Text(
+                            'Wallet ${vmodel.walletDetail.id}',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
                           // child: Text('Wallet no id'),
                         ),
                         Center(
@@ -82,6 +85,7 @@ class WalletScreen extends StatelessWidget {
                           },
                         ),
                         TransactionList(
+                          context: context,
                           entries: vmodel.walletDetailTransactions,
                         ),
                         Center(
