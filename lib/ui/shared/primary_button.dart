@@ -4,8 +4,13 @@ class PrimaryButton extends StatelessWidget {
   final GestureTapCallback onPressed;
   final String text;
   final colorTheme;
+  final bool isLoading;
 
-  PrimaryButton({this.onPressed, @required this.text, this.colorTheme});
+  PrimaryButton(
+      {this.onPressed,
+      @required this.text,
+      this.colorTheme,
+      this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class PrimaryButton extends StatelessWidget {
             height: 50,
             child: RaisedButton(
               onPressed: onPressed,
-              child: Text(text),
+              child: isLoading ? Text('loadinng...') : Text(text),
               elevation: 0,
               textColor: Colors.white,
               color: Colors.cyan,

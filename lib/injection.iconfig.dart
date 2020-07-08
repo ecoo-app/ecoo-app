@@ -10,6 +10,7 @@ import 'package:e_coupon/data/repos/wallet_repo.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/data/repos/mock_wallet_repo.dart';
 import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_view_model.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/success_view_model.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
@@ -23,6 +24,7 @@ import 'package:get_it/get_it.dart';
 void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<IQRScanner>(() => MockQRScanner());
   g.registerFactory<PaymentViewModel>(() => PaymentViewModel());
+  g.registerFactory<SuccessViewModel>(() => SuccessViewModel());
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetDefaultWallet>(

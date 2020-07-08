@@ -1,5 +1,6 @@
 import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_screen.dart';
+import 'package:e_coupon/ui/screens/transaction_screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
@@ -13,7 +14,6 @@ const WalletsOverviewRoute = 'walletsOverview';
 const VerificationRoute = 'verification';
 const PaymentRoute = 'payment';
 const PaymentOverviewRoute = 'paymentOverview';
-// still TODO:
 const SuccessRoute = 'success';
 
 class Router {
@@ -40,9 +40,12 @@ class Router {
         final PaymentOverviewArguments args =
             settings.arguments as PaymentOverviewArguments;
         return MaterialPageRoute(
+            // whats the buildcontext? can it be use to have change notifiers from context of screen before?
             builder: (_) => PaymentOverviewScreen(
                   arguments: args,
                 ));
+      case SuccessRoute:
+        return MaterialPageRoute(builder: (_) => SuccessScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
