@@ -37,6 +37,10 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - add the translation to the translation files (i18n > [lang].json)
 - update the generated translations by opening the VSC command palette and use Flutter I18n Json: Update
 
+### more
+
+- gradient widgets https://github.com/bluemix/gradient-widgets
+
 ### code organisation:
 
 #### @Tobi
