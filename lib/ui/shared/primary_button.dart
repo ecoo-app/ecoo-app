@@ -30,7 +30,9 @@ class PrimaryButton extends StatelessWidget {
                         Text(text)
                       ],
                     )
-                  : Text(text),
+                  : Text(
+                      text,
+                    ),
               elevation: 0,
               textColor: Colors.white,
               color: Colors.cyan,

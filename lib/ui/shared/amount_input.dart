@@ -12,7 +12,8 @@ class AmountInputField extends StatelessWidget {
         children: <Widget>[
           TextFormField(
             controller: controller,
-            style: TextStyle(fontSize: 75),
+            style: Theme.of(context).textTheme.headline1,
+            // style: TextStyle(fontSize: 75),
             textAlign: TextAlign.end,
             decoration:
                 InputDecoration(border: InputBorder.none, hintText: 'Betrag'),
