@@ -3,8 +3,8 @@ import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/transaction_overview/transaction_overview.dart';
+import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 
 import 'package:e_coupon/ui/shared/icon_button.dart';

@@ -2,11 +2,8 @@ import 'package:e_coupon/business/use_cases/handle_transaction.dart';
 import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/transaction_data.dart';
+import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 @injectable
 class PaymentOverviewViewModel extends BaseViewModel {

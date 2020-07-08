@@ -21,7 +21,16 @@ class PrimaryButton extends StatelessWidget {
             height: 50,
             child: RaisedButton(
               onPressed: onPressed,
-              child: isLoading ? Text('loadinng...') : Text(text),
+              child: isLoading
+                  ? Row(
+                      children: <Widget>[
+                        CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                Colors.white)),
+                        Text(text)
+                      ],
+                    )
+                  : Text(text),
               elevation: 0,
               textColor: Colors.white,
               color: Colors.cyan,

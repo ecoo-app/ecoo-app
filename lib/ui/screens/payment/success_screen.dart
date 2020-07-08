@@ -1,10 +1,10 @@
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/payment/success_view_model.dart';
+import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../../../../injection.dart';
+import '../../../injection.dart';
 
 class SuccessScreen extends StatelessWidget {
   @override

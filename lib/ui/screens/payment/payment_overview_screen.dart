@@ -1,11 +1,10 @@
-import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_view_model.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/transaction_data.dart';
+import 'package:e_coupon/ui/screens/payment/payment_overview_view_model.dart';
+import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,6 +1,6 @@
-import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/payment/payment_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_screens/payment/success_screen.dart';
+import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
+import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
