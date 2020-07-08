@@ -17,13 +17,15 @@ class WalletsViewModel extends BaseViewModel {
   get state => null;
 
   void loadWallets() async {
-    setState(ViewStateEnum.Busy);
+    // setState(ViewStateEnum.Busy);
+    setViewState(Loading());
 
     var walletsOrFailure =
         await getAllWallets(AllWalletParams(userIdentifier: 'string'));
     walletsOrFailure.fold(
         (failure) => print('FAILURE'), (wallets) => _wallets = wallets);
 
-    setState(ViewStateEnum.Idle);
+    setViewState(Loaded());
+    // setState(ViewStateEnum.Idle);
   }
 }

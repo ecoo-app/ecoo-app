@@ -5,9 +5,13 @@ enum ViewStateEnum { Idle, Busy }
 // TODO use this
 abstract class ViewState {}
 
+class Empty extends ViewState {}
+
 class Initial extends ViewState {}
 
 class Loading extends ViewState {}
+
+class Loaded extends ViewState {}
 
 class Success<T> extends ViewState {
   final T result;
