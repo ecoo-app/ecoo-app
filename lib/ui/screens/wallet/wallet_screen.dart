@@ -6,6 +6,7 @@ import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
+import 'package:e_coupon/ui/shared/ec_progress_indicator.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
@@ -29,7 +30,7 @@ class WalletScreen extends StatelessWidget {
             onModelReady: (vmodel) => vmodel.loadWalletDetail(walletId),
             builder: (context, vmodel, child) {
               return vmodel.state == ViewStateEnum.Busy
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(child: ECProgressIndicator())
                   : Column(
                       children: <Widget>[
                         Padding(

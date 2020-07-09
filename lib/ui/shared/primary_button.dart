@@ -1,4 +1,6 @@
+import 'package:e_coupon/ui/shared/style/gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 class PrimaryButton extends StatelessWidget {
   final GestureTapCallback onPressed;
@@ -15,28 +17,58 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.all(24),
-        child: SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: RaisedButton(
-              onPressed: onPressed,
-              child: isLoading
-                  ? Row(
-                      children: <Widget>[
-                        CircularProgressIndicator(
-                            valueColor: new AlwaysStoppedAnimation<Color>(
-                                Colors.white)),
-                        Text(text)
-                      ],
-                    )
-                  : Text(
-                      text,
-                    ),
-              elevation: 0,
-              textColor: Colors.white,
-              color: Colors.cyan,
-            )));
+      margin: const EdgeInsets.all(24),
+      child: GradientButton(
+        increaseHeightBy: 15,
+        increaseWidthBy: double.infinity,
+        gradient: Gradients.coldLinear,
+        // gradient: ThemeGradients.defaultGradient,
+        callback: onPressed,
+        shapeRadius: BorderRadius.all(Radius.circular(10)),
+        child: isLoading
+            ? Row(
+                children: <Widget>[
+                  CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.white)),
+                  Text(text)
+                ],
+              )
+            : Text(
+                text,
+              ),
+        elevation: 0,
+        // textColor: Colors.white,
+        // color: Colors.cyan,
+      ),
+      // SizedBox(
+      //     width: double.infinity,
+      //     height: 50,
+      //     child: GradientButton(
+      //       increaseHeightBy: 50,
+      //       increaseWidthBy: double.infinity,
+      //       gradient: Gradients.coldLinear,
+      //       // gradient: ThemeGradients.defaultGradient,
+      //       callback: onPressed,
+      //       shapeRadius: BorderRadius.all(Radius.circular(10)),
+      //       child: isLoading
+      //           ? Row(
+      //               children: <Widget>[
+      //                 CircularProgressIndicator(
+      //                     valueColor:
+      //                         new AlwaysStoppedAnimation<Color>(Colors.white)),
+      //                 Text(text)
+      //               ],
+      //             )
+      //           : Text(
+      //               text,
+      //             ),
+      //       elevation: 0,
+      //       // textColor: Colors.white,
+      //       // color: Colors.cyan,
+      //     ),
+      //     ),
+    );
   }
 
 // https://stackoverflow.com/questions/52243364/flutter-how-to-make-a-raised-button-that-has-a-gradient-background

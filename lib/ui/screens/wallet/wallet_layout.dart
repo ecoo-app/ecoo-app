@@ -11,6 +11,7 @@ class WalletLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          elevation: 0,
           leading: IconButton(
             tooltip: 'wallets overview',
             icon: const Icon(Icons.menu),
