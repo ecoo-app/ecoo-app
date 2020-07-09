@@ -6,6 +6,7 @@ import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
+import 'package:e_coupon/ui/shared/amount_display.dart';
 import 'package:e_coupon/ui/shared/ec_progress_indicator.dart';
 import 'package:e_coupon/ui/shared/icon_button.dart';
 import 'package:e_coupon/ui/shared/primary_button.dart';
@@ -34,7 +35,15 @@ class WalletScreen extends StatelessWidget {
                   : Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.all(24.0),
+                          padding: const EdgeInsets.all(16.0),
+                        ),
+                        AmountDisplay(
+                          isLoading: false,
+                          amount: vmodel.walletDetail.amount,
+                          currency: 'CHF',
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
                         ),
                         Center(
                           child: Text(
