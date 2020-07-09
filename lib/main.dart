@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import 'ui/shared/video_cell.dart';
 
 void main() {
-  configureInjection(Env.mock);
+  configureInjection(Env.dev);
   runApp(
     MultiProvider(
       providers: [
