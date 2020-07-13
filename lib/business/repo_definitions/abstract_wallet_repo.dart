@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/business/entities/transaction_state.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/business/core/failure.dart';
 
 abstract class IWalletRepo {
   // TODO how to make intelligent cache handling?

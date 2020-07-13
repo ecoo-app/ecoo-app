@@ -9,22 +9,24 @@ abstract class ILocalWalletSource {
   Future<List<Wallet>> getWallets(String key);
 }
 
-@injectable
+@LazySingleton(as: ILocalWalletSource)
 class LocalWalletSource implements ILocalWalletSource {
   final LocalStorage _storage;
 
-  LocalWalletSource(String storageKey) : _storage = LocalStorage(storageKey);
+  LocalWalletSource() : _storage = LocalStorage('storageKey');
 
   @override
   Future<void> cacheWallet(String key, Wallet wallet) async {
     await _storage.ready;
-    return _storage.setItem(key, wallet);
+    //
+    return _storage.setItem(key, {});
   }
 
   @override
   Future<void> cacheWallets(String key, List<Wallet> wallets) async {
     await _storage.ready;
-    return _storage.setItem(key, wallets);
+    // TODO
+    return _storage.setItem(key, {});
   }
 
   @override

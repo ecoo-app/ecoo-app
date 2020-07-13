@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:equatable/equatable.dart';
 
 // Parameters have to be put into a container object so that they can be

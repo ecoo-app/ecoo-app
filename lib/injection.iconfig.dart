@@ -4,11 +4,12 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+import 'package:e_coupon/data/local/local_wallet_source.dart';
+import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/device/qr_scanner_mock.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
 import 'package:e_coupon/data/repos/wallet_repo.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
-import 'package:e_coupon/data/repos/mock_wallet_repo.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/request_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
@@ -23,7 +24,12 @@ import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
+  g.registerLazySingleton<ILocalWalletSource>(() => LocalWalletSource());
+  g.registerLazySingleton<INetworkInfo>(() => NetworkInfo());
   g.registerFactory<IQRScanner>(() => MockQRScanner());
+  g.registerLazySingleton<IWalletRepo>(() => WalletRepo(
+      localDataSource: g<ILocalWalletSource>(),
+      networkInfo: g<INetworkInfo>()));
   g.registerFactory<PaymentViewModel>(() => PaymentViewModel());
   g.registerFactory<RequestViewModel>(() => RequestViewModel());
   g.registerFactory<SuccessViewModel>(() => SuccessViewModel());
@@ -43,14 +49,4 @@ void $initGetIt(GetIt g, {String environment}) {
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(
       () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));
-
-  //Register dev Dependencies --------
-  if (environment == 'dev') {
-    g.registerLazySingleton<IWalletRepo>(() => WalletRepo());
-  }
-
-  //Register mock Dependencies --------
-  if (environment == 'mock') {
-    g.registerLazySingleton<IWalletRepo>(() => MockWalletRepo());
-  }
 }

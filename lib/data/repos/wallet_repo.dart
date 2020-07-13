@@ -9,19 +9,17 @@ import 'package:e_coupon/business/entities/transaction_state.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/local/local_wallet_source.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../injection.dart';
 import '../network_info.dart';
 
-@Environment(Env.dev)
 @LazySingleton(as: IWalletRepo)
 class WalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
   // final ILibWalletSource libDataSource;
-  final NetworkInfo networkInfo;
+  final INetworkInfo networkInfo;
 
   WalletRepo({this.localDataSource, this.networkInfo});
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/model/wallet_model.dart';
 
 import 'mock_data.dart';

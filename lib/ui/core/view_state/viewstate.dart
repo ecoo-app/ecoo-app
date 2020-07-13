@@ -1,4 +1,4 @@
-import 'package:e_coupon/core/failure.dart';
+import 'package:e_coupon/business/core/failure.dart';
 
 enum ViewStateEnum { Idle, Busy }
 

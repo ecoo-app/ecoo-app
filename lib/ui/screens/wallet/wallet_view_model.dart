@@ -23,14 +23,15 @@ class WalletViewModel extends BaseViewModel {
       _walletTransactions;
 
   void loadWalletDetail(String walletId) async {
-    setState(ViewStateEnum.Busy);
+    setViewState(Empty());
 
     if (walletId == null) {
-      // TODO create use case to get walletId from shared Preferences (always save last used wallet and use it on app open)
-      // or should it be handled in the same use case? ? ??
-      // BETTER probably: handle in repository: if id == null get other data (from shared prefs) then if id != null
+      // TODO: handle in repository: if id == null get other data (from shared prefs) then if id != null
       walletId = 'DR345GH67';
     }
+    // 2. load wallet from cache or init
+
+    setViewState(Loading());
 
     print('get wallet');
     var walletOrFailure = await getWallet(WalletParams(id: walletId));
@@ -46,6 +47,6 @@ class WalletViewModel extends BaseViewModel {
           .toList();
     });
 
-    setState(ViewStateEnum.Idle);
+    setViewState(Loaded());
   }
 }
