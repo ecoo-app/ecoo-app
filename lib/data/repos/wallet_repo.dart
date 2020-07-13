@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:e_coupon/business/entities/currency.dart';
+import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/data/lib/mock_data.dart';
 import 'package:e_coupon/data/model/currency_model.dart';
 import 'package:e_coupon/data/model/wallet_model.dart';
@@ -26,13 +27,13 @@ class WalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<TransactionRecord>>> getCachedWalletTransactions(
       String id, filter) {
-    return getMockTransactions(id, filter);
+    return _getMockTransactions(id, filter);
   }
 
   @override
   Future<Either<Failure, List<TransactionRecord>>> getWalletTransactions(
       String id, filter) {
-    return getMockTransactions(id, filter);
+    return _getMockTransactions(id, filter);
   }
 
   @override
@@ -51,7 +52,7 @@ class WalletRepo implements IWalletRepo {
 
   @override
   Future<Either<Failure, Wallet>> getCachedWalletData(String id) {
-    return getMockWalletData(id);
+    return _getMockWalletData(id);
   }
 
   @override
@@ -60,7 +61,7 @@ class WalletRepo implements IWalletRepo {
     if (await networkInfo.isConnected) {
       try {
         // TODO use lib
-        final wallets = await getMockWallets();
+        final wallets = await _getMockWallets();
         localDataSource.cacheWallets('wallets', wallets);
         return Right(wallets);
       } on Error {
@@ -80,17 +81,23 @@ class WalletRepo implements IWalletRepo {
 
   @override
   Future<Either<Failure, Wallet>> getWalletData(String id) {
-    return getMockWalletData(id);
+    return _getMockWalletData(id);
   }
 
   @override
   Future<Either<Failure, TransactionState>> handleTransaction(
       String senderId, String recieverId, double amount) {
-    return makeMockTransaction();
+    return _makeMockTransaction();
+  }
+
+  @override
+  Future<Either<Failure, VerificationState>> verifyWallet(
+      String walletId, List<String> verificationInputs) {
+    return _mockVerification();
   }
 
   /// mock code
-  Future<Either<Failure, List<TransactionRecord>>> getMockTransactions(
+  Future<Either<Failure, List<TransactionRecord>>> _getMockTransactions(
       id, filter) {
     // mock delay
     return Future.delayed(const Duration(milliseconds: 400), () {
@@ -105,7 +112,7 @@ class WalletRepo implements IWalletRepo {
     });
   }
 
-  Future<List<Wallet>> getMockWallets() {
+  Future<List<Wallet>> _getMockWallets() {
     return Future.delayed(const Duration(milliseconds: 500), () {
       var completer = Completer<List<Wallet>>();
 
@@ -125,7 +132,7 @@ class WalletRepo implements IWalletRepo {
     });
   }
 
-  Future<Either<Failure, Wallet>> getMockWalletData(id) {
+  Future<Either<Failure, Wallet>> _getMockWalletData(id) {
     return Future.delayed(const Duration(milliseconds: 600), () {
       for (final wallet in MockWallets) {
         if (wallet.walletId == id) {
@@ -146,7 +153,7 @@ class WalletRepo implements IWalletRepo {
     });
   }
 
-  Future<Either<Failure, TransactionState>> makeMockTransaction() {
+  Future<Either<Failure, TransactionState>> _makeMockTransaction() {
     return Future.delayed(const Duration(milliseconds: 400), () {
       var completer = Completer<Either<Failure, TransactionState>>();
       completer.complete(Right(TransactionState())); // TODO
@@ -168,5 +175,13 @@ class WalletRepo implements IWalletRepo {
                 amount: transRecord.amount,
               )).toList();
     }
+  }
+
+  Future<Either<Failure, VerificationState>> _mockVerification() {
+    return Future.delayed(const Duration(milliseconds: 400), () {
+      var completer = Completer<Either<Failure, VerificationState>>();
+      completer.complete(Right(Verified()));
+      return completer.future;
+    });
   }
 }
