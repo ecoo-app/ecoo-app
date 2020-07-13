@@ -4,5 +4,6 @@
   "personalWalletPay": "Bezahlen",
   "privateWalletSend": "Senden",
   "privateWalletRecieve": "Anfordern",
-  "showAllTransactions": "alle Bewegungen anzeigen"
+  "showAllTransactions": "alle Bewegungen anzeigen",
+  "addWallet": "Wallet hinzufügen"
 }

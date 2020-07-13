@@ -2,7 +2,7 @@ import 'package:e_coupon/ui/shared/main_layout.dart';
 import 'package:e_coupon/ui/shared/transactions_list.dart';
 import 'package:flutter/material.dart';
 
-class TransactionOverview extends StatelessWidget {
+class TransactionOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(

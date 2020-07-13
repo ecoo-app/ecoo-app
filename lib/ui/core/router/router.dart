@@ -4,10 +4,10 @@ import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
+import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
-import 'package:e_coupon/ui/spikes/qrGeneratorTest_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 const HomeRoute = '/';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
+const TransactionOverviewRoute = 'transactionOverview';
 const VerificationRoute = 'verification';
 const PaymentRoute = 'payment';
 const PaymentOverviewRoute = 'paymentOverview';
@@ -34,6 +35,8 @@ class Router {
         // var post = settings.arguments as Post;
         // return MaterialPageRoute(builder: (_) => WalletScreen(post: post));
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
+      case TransactionOverviewRoute:
+        return MaterialPageRoute(builder: (_) => TransactionOverviewScreen());
       case VerificationRoute:
         return MaterialPageRoute(builder: (_) => VerificationScreen());
       case PaymentRoute:

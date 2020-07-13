@@ -3,7 +3,7 @@ import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview.dart';
+import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/shared/amount_display.dart';
@@ -102,12 +102,7 @@ class WalletScreen extends StatelessWidget {
                   Center(
                     child: FlatButton.icon(
                       onPressed: () {
-                        Navigator.push(
-                          // TODO change to named route
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => TransactionOverview()),
-                        );
+                        Navigator.pushNamed(context, TransactionOverviewRoute);
                       },
                       icon: Icon(Icons.folder_open),
                       label: Text(I18n.of(context).showAllTransactions),

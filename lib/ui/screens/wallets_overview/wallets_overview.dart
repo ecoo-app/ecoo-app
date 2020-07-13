@@ -1,3 +1,4 @@
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
@@ -24,19 +25,32 @@ class WalletsOverviewScreen extends StatelessWidget {
               if (vmodel.viewState is Initial || vmodel.viewState is Loading)
                 return Center(child: ECProgressIndicator());
               else if (vmodel.viewState is Loaded)
-                return ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: vmodel.wallets.length,
-                  itemBuilder: (context, i) {
-                    final wallet = vmodel.wallets[i];
-                    return WalletCard(
-                      wallet: wallet,
-                      onPressed: () {
-                        Navigator.pushNamed(context, WalletDetailRoute,
-                            arguments: wallet.id);
+                return Column(
+                  children: <Widget>[
+                    ListView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: vmodel.wallets.length,
+                      itemBuilder: (context, i) {
+                        final wallet = vmodel.wallets[i];
+                        return WalletCard(
+                          wallet: wallet,
+                          onPressed: () {
+                            Navigator.pushNamed(context, WalletDetailRoute,
+                                arguments: wallet.id);
+                          },
+                        );
                       },
-                    );
-                  },
+                    ),
+                    FlatButton.icon(
+                      onPressed: () {
+                        // todo create new wallet -> verification needs new wallet id -> put wallet view model as app view model
+                        Navigator.pushNamed(context, VerificationRoute);
+                      },
+                      icon: Icon(Icons.add_circle_outline),
+                      label: Text(I18n.of(context).addWallet),
+                    )
+                  ],
                 );
             }));
   }
