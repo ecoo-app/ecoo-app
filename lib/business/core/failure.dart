@@ -4,10 +4,10 @@ abstract class Failure extends Equatable {
   Failure([List properties = const <dynamic>[]]);
 }
 
-class Excep extends Failure {
+class MessageFailure extends Failure {
   final message;
 
-  Excep(this.message);
+  MessageFailure(this.message);
 
   @override
   List<Object> get props => [message];

@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:e_coupon/business/entities/currency.dart';
+import 'package:e_coupon/business/entities/verification_input.dart';
 import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/data/lib/mock_data.dart';
+import 'package:e_coupon/data/lib/mock_library.dart' as libAPI;
 import 'package:e_coupon/data/model/currency_model.dart';
 import 'package:e_coupon/data/model/wallet_model.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
@@ -19,10 +21,10 @@ import '../network_info.dart';
 @LazySingleton(as: IWalletRepo)
 class WalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
-  // final ILibWalletSource libDataSource;
+  final libAPI.ILibWalletSource libDataSource;
   final INetworkInfo networkInfo;
 
-  WalletRepo({this.localDataSource, this.networkInfo});
+  WalletRepo({this.localDataSource, this.networkInfo, this.libDataSource});
 
   @override
   Future<Either<Failure, List<TransactionRecord>>> getCachedWalletTransactions(
@@ -46,7 +48,7 @@ class WalletRepo implements IWalletRepo {
       //CacheException
       print(error);
       // return Left(CacheFailure());
-      return Left(Excep(error));
+      return Left(MessageFailure(error));
     }
   }
 
@@ -64,7 +66,7 @@ class WalletRepo implements IWalletRepo {
         final wallets = await _getMockWallets();
         localDataSource.cacheWallets('wallets', wallets);
         return Right(wallets);
-      } on Error {
+      } on MessageFailure {
         //ServerException
         return Left(ServerFailure());
       }
@@ -72,7 +74,7 @@ class WalletRepo implements IWalletRepo {
       try {
         final wallets = await localDataSource.getWallets('wallets');
         return Right(wallets);
-      } on Error {
+      } on MessageFailure {
         //CacheException
         return Left(CacheFailure());
       }
@@ -94,6 +96,28 @@ class WalletRepo implements IWalletRepo {
   Future<Either<Failure, VerificationState>> verifyWallet(
       String walletId, List<String> verificationInputs) {
     return _mockVerification();
+  }
+
+  @override
+  Future<Either<Failure, List<VerificationInput>>> getVerificationInputs(
+      String currencyId, bool isShop) async {
+    Either<Failure, List<VerificationInput>> result;
+
+    libDataSource
+        .getVerificationInputs(currencyId, isShop)
+        .then((value) => result = Right(value))
+        .catchError((error) => result = Left(MessageFailure(error)));
+
+    return result;
+    // try {
+    //   var inputs =
+    //       await libDataSource.getVerificationInputs(currencyId, isShop);
+    //   result = Right(inputs);
+    // } catch (error) {
+    //   result = Left(error);
+    // }
+
+    // return result;
   }
 
   /// mock code

@@ -1,14 +1,11 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
-import 'package:e_coupon/business/entities/transaction_record.dart';
-import 'package:e_coupon/business/core/failure.dart';
-import 'package:e_coupon/data/model/wallet_model.dart';
+import 'package:injectable/injectable.dart';
 
-import 'mock_data.dart';
 import 'mock_library.dart';
 
-class LibWalletSource implements LibAPI {
+@LazySingleton(as: ILibWalletSource)
+class LibWalletSource implements ILibWalletSource {
   // wallet creation
   @override
   Future<WalletAPI> createWalletForUser(
@@ -24,10 +21,47 @@ class LibWalletSource implements LibAPI {
   }
 
   @override
-  Future<List<VerificationInputAPI>> getVerificationInputs(
+  Future<List<VerificationInputModel>> getVerificationInputs(
       String currencyId, bool isShop) {
-    // TODO: implement createWalletForUser
-    throw UnimplementedError();
+    List<VerificationInputModel> privateVerifications = List();
+    privateVerifications.addAll([
+      VerificationInputModel(
+          id: 'name',
+          i18nLabel: {'de': 'Vorname'},
+          inputType: InputTypeAPI.Text),
+      VerificationInputModel(
+          id: 'surname',
+          i18nLabel: {'de': 'Name'},
+          inputType: InputTypeAPI.Text),
+      VerificationInputModel(
+          id: 'street',
+          i18nLabel: {'de': 'Strasse'},
+          inputType: InputTypeAPI.Text),
+      VerificationInputModel(
+          id: 'number',
+          i18nLabel: {'de': 'Hausnummer'},
+          inputType: InputTypeAPI.Text),
+      VerificationInputModel(
+          id: 'extra',
+          i18nLabel: {'de': 'Adresszusatz'},
+          inputType: InputTypeAPI.Text,
+          isRequired: false),
+      VerificationInputModel(
+          id: 'postalcode',
+          i18nLabel: {'de': 'PLZ'},
+          inputType: InputTypeAPI.Text),
+      VerificationInputModel(
+          id: 'city', i18nLabel: {'de': 'Ort'}, inputType: InputTypeAPI.Text),
+      VerificationInputModel(
+          id: 'birthdate',
+          i18nLabel: {'de': 'Geburtsdatum'},
+          inputType: InputTypeAPI.Date),
+    ]);
+
+    Completer completer = Completer<List<VerificationInputModel>>();
+    completer.complete(privateVerifications);
+
+    return completer.future;
   }
 
   // verification

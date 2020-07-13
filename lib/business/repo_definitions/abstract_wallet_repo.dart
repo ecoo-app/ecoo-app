@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/business/entities/transaction_state.dart';
+import 'package:e_coupon/business/entities/verification_input.dart';
 import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/core/failure.dart';
@@ -23,6 +24,9 @@ abstract class IWalletRepo {
 
   Future<Either<Failure, TransactionState>> handleTransaction(
       String senderId, String recieverId, double amount);
+
+  Future<Either<Failure, List<VerificationInput>>> getVerificationInputs(
+      String currencyId, bool isShop);
 
   Future<Either<Failure, VerificationState>> verifyWallet(
       String walletId, List<String> verificationInputs);

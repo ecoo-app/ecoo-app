@@ -1,3 +1,7 @@
+import 'package:e_coupon/business/entities/verification_input.dart';
+import 'package:injectable/injectable.dart';
+import 'package:meta/meta.dart';
+
 enum VerificationState { Open, Pending, Successful }
 
 abstract class CurrencyAPI {
@@ -22,14 +26,21 @@ abstract class WalletAPI {
       this.verificationState});
 }
 
-enum InputType { Text, Number, Date }
+enum InputTypeAPI { Text, Number, Date, Bool }
 
-abstract class VerificationInputAPI {
-  String id;
-  Map<String, String> i18nLabel;
-  InputType inputType;
-
-  VerificationInputAPI({this.id, this.i18nLabel, this.inputType});
+class VerificationInputModel extends VerificationInput {
+  VerificationInputModel(
+      {@required id,
+      @required i18nLabel,
+      i18nHint,
+      @required inputType,
+      isRequired = true})
+      : super(
+            id: id,
+            i18nLabel: i18nLabel,
+            i18nHint: i18nHint,
+            inputType: inputType,
+            isRequired: isRequired);
 }
 
 abstract class TransactionRecordAPI {
@@ -48,12 +59,12 @@ abstract class TagAPI {
   TagAPI({this.id, this.label});
 }
 
-abstract class LibAPI {
+abstract class ILibWalletSource {
   // wallet creation
   Future<WalletAPI> createWalletForUser(
       String userIdentification, String currencyId, bool isShop);
   Future<List<CurrencyAPI>> getCurrencies();
-  Future<List<VerificationInputAPI>> getVerificationInputs(
+  Future<List<VerificationInputModel>> getVerificationInputs(
       String currencyId, bool isShop);
 
   // verification
