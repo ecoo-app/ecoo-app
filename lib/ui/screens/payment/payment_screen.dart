@@ -4,9 +4,9 @@ import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
-import 'package:e_coupon/ui/shared/amount_input.dart';
-import 'package:e_coupon/ui/shared/main_layout.dart';
-import 'package:e_coupon/ui/shared/primary_button.dart';
+import 'package:e_coupon/ui/core/widgets/amount_input.dart';
+import 'package:e_coupon/ui/core/widgets/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../injection.dart';

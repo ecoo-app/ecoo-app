@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/shared/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/main_layout.dart';
 import 'package:flutter/cupertino.dart';
 
 class VerificationScreen extends StatelessWidget {

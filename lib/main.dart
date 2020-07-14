@@ -5,13 +5,11 @@ import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
-import 'package:e_coupon/ui/shared/style/theme.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-
-import 'ui/shared/video_cell.dart';
 
 void main() {
   configureInjection(Env.dev);
@@ -71,104 +69,104 @@ class ECouponApp extends StatelessWidget {
 ///
 /// ****
 
-class TestApp extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new HomeState();
-  }
-}
+// class TestApp extends StatefulWidget {
+//   @override
+//   State<StatefulWidget> createState() {
+//     return new HomeState();
+//   }
+// }
 
-class HomeState extends State<TestApp> {
-  var _isLoading = true;
-  var videos;
+// class HomeState extends State<TestApp> {
+//   var _isLoading = true;
+//   var videos;
 
-  _fetchData() async {
-    print("fetch data");
+//   _fetchData() async {
+//     print("fetch data");
 
-    final url = "https://api.letsbuildthatapp.com/youtube/home_feed";
-    final response = await http.get(url);
+//     final url = "https://api.letsbuildthatapp.com/youtube/home_feed";
+//     final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      final map = json.decode(response.body);
-      final videosJson = map["videos"];
-      // videosJson.forEach((video) {
-      //   print(video["name"]);
-      // });
+//     if (response.statusCode == 200) {
+//       final map = json.decode(response.body);
+//       final videosJson = map["videos"];
+//       // videosJson.forEach((video) {
+//       //   print(video["name"]);
+//       // });
 
-      setState(() {
-        _isLoading = false;
-        videos = videosJson;
-      });
-    }
-  }
+//       setState(() {
+//         _isLoading = false;
+//         videos = videosJson;
+//       });
+//     }
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "übersicht",
-      home: new Scaffold(
-          appBar: new AppBar(title: new Text("Übersicht"), actions: <Widget>[
-            new IconButton(
-                icon: new Icon(Icons.refresh),
-                onPressed: () {
-                  print("Reloading...");
-                  setState(() {
-                    _isLoading = true;
-                  });
-                  _fetchData();
-                })
-          ]),
-          body: new Center(
-            child: _isLoading
-                ? new CircularProgressIndicator()
-                : new ListView.builder(
-                    itemCount: videos != null ? videos.length : 0,
-                    itemBuilder: (context, i) {
-                      final video = videos[i];
-                      return new FlatButton(
-                          child: new VideoCell(video),
-                          onPressed: () {
-                            // TODO change to named route
-                            Navigator.push(context,
-                                new MaterialPageRoute(builder: (context) {
-                              return new DetailPage();
-                            }));
-                          });
-                    }),
-          )),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return new MaterialApp(
+//       title: "übersicht",
+//       home: new Scaffold(
+//           appBar: new AppBar(title: new Text("Übersicht"), actions: <Widget>[
+//             new IconButton(
+//                 icon: new Icon(Icons.refresh),
+//                 onPressed: () {
+//                   print("Reloading...");
+//                   setState(() {
+//                     _isLoading = true;
+//                   });
+//                   _fetchData();
+//                 })
+//           ]),
+//           body: new Center(
+//             child: _isLoading
+//                 ? new CircularProgressIndicator()
+//                 : new ListView.builder(
+//                     itemCount: videos != null ? videos.length : 0,
+//                     itemBuilder: (context, i) {
+//                       final video = videos[i];
+//                       return new FlatButton(
+//                           child: new VideoCell(video),
+//                           onPressed: () {
+//                             // TODO change to named route
+//                             Navigator.push(context,
+//                                 new MaterialPageRoute(builder: (context) {
+//                               return new DetailPage();
+//                             }));
+//                           });
+//                     }),
+//           )),
+//     );
+//   }
+// }
 
-class DetailPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('detail page'),
-      ),
-      body: new Center(child: new Text('Detail')),
-    );
-  }
-}
+// class DetailPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Scaffold(
+//       appBar: new AppBar(
+//         title: new Text('detail page'),
+//       ),
+//       body: new Center(child: new Text('Detail')),
+//     );
+//   }
+// }
 
-class HomeWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new ListView.builder(
-      itemBuilder: (context, rowNumber) {
-        return new WalletListItem(); //new Text("row $rowNumber");
-      },
-      itemCount: 20,
-    );
-  }
-}
+// class HomeWidget extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new ListView.builder(
+//       itemBuilder: (context, rowNumber) {
+//         return new WalletListItem(); //new Text("row $rowNumber");
+//       },
+//       itemCount: 20,
+//     );
+//   }
+// }
 
-class WalletListItem extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[new Text("row"), new Divider(color: Colors.amber)],
-    );
-  }
-}
+// class WalletListItem extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Column(
+//       children: <Widget>[new Text("row"), new Divider(color: Colors.amber)],
+//     );
+//   }
+// }

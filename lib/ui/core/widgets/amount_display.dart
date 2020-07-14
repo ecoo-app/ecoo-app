@@ -1,5 +1,6 @@
-import 'package:e_coupon/ui/shared/ec_progress_indicator.dart';
 import 'package:flutter/material.dart';
+
+import 'ec_progress_indicator.dart';
 
 class AmountDisplay extends StatelessWidget {
   final bool isLoading;

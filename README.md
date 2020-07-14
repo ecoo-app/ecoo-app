@@ -53,7 +53,7 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 #### build after clean code principles
 
 - device: device specific layer
-- ui: ui/presentation layer
+- ui: ui/presentation layer (mvvm)
 - - screens: ui screens & view models
 - - shared: shared widgets & layouts
 - - core: shared abstract classes and router

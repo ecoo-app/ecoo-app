@@ -1,5 +1,5 @@
-import 'package:e_coupon/ui/shared/main_layout.dart';
-import 'package:e_coupon/ui/shared/transactions_list.dart';
+import 'package:e_coupon/ui/core/widgets/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 class TransactionOverviewScreen extends StatelessWidget {

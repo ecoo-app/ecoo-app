@@ -1,5 +1,5 @@
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
-import 'package:e_coupon/ui/shared/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 

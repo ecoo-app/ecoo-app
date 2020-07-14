@@ -3,14 +3,12 @@ import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
-import 'package:e_coupon/ui/shared/amount_display.dart';
-import 'package:e_coupon/ui/shared/ec_progress_indicator.dart';
-import 'package:e_coupon/ui/shared/icon_button.dart';
-import 'package:e_coupon/ui/shared/primary_button.dart';
-import 'package:e_coupon/ui/shared/transactions_list.dart';
+import 'package:e_coupon/ui/core/widgets/amount_display.dart';
+import 'package:e_coupon/ui/core/widgets/icon_button.dart';
+import 'package:e_coupon/ui/core/widgets/primary_button.dart';
+import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../../injection.dart';

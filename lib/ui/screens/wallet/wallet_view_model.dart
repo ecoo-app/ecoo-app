@@ -4,7 +4,7 @@ import 'package:e_coupon/business/use_cases/get_wallet.dart';
 import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 
-import 'package:e_coupon/ui/shared/transactions_list.dart';
+import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
 import 'package:injectable/injectable.dart';
 
 // add AppStateModel -> holds all wallets and the current selected... ?
