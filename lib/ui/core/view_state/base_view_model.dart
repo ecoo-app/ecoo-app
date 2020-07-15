@@ -13,6 +13,7 @@ class BaseViewModel extends ChangeNotifier {
 
   void setState(ViewStateEnum viewState) {
     _state = viewState;
+    // notifyListeners();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       notifyListeners();
     });
@@ -20,8 +21,10 @@ class BaseViewModel extends ChangeNotifier {
 
   void setViewState(ViewState viewState) {
     _viewState = viewState;
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      notifyListeners();
-    });
+    notifyListeners();
+    // if this is used success screen functionality does not work anymore ??
+    // SchedulerBinding.instance.addPostFrameCallback((_) {
+    //   notifyListeners();
+    // });
   }
 }

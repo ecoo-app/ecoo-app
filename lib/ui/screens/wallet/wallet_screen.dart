@@ -26,6 +26,7 @@ class WalletScreen extends StatelessWidget {
       body: BaseView<WalletViewModel>(
           // TODO how to do this with injectable only?
           model: getIt<WalletViewModel>(),
+          disposeState: false,
           onModelReady: (vmodel) async => await vmodel.setWalletId(walletId),
           builder: (context, vmodel, child) {
             if (vmodel.walletState.value is Loading) {
