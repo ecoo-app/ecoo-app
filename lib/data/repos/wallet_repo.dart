@@ -147,8 +147,7 @@ class WalletRepo implements IWalletRepo {
               amount: wallet.amount,
               currency: Currency(
                   id: wallet.currency.id, label: wallet.currency.label),
-              isShop: wallet.isShop,
-              transactions: _getTransactions(wallet.isShop));
+              isShop: wallet.isShop);
         }).toList(),
       );
 
@@ -167,8 +166,7 @@ class WalletRepo implements IWalletRepo {
               id: wallet.walletId,
               currency: CurrencyModel(
                   id: wallet.currency.id, label: wallet.currency.label),
-              isShop: wallet.isShop,
-              transactions: _getTransactions(wallet.isShop))));
+              isShop: wallet.isShop)));
           return completer.future;
         }
       }

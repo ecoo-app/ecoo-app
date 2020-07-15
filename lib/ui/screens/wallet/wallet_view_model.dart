@@ -1,7 +1,6 @@
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
-import 'package:e_coupon/ui/core/model/wallet_state.dart';
 import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 
@@ -55,3 +54,5 @@ class WalletViewModel extends BaseViewModel {
     setViewState(Loaded());
   }
 }
+
+class WalletState {}

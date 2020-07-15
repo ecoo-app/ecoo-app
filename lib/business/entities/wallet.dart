@@ -8,15 +8,14 @@ class Wallet extends Equatable {
   final double amount;
   final Currency currency;
   final bool isShop;
-  final List<TransactionRecord> transactions;
+  // final List<TransactionRecord> transactions;
 
   Wallet(
       {@required this.id,
       @required this.amount,
       @required this.currency,
-      this.isShop = false,
-      @required this.transactions});
+      this.isShop = false});
 
   @override
-  List<Object> get props => [id, amount, currency, isShop, transactions];
+  List<Object> get props => [id, amount, currency, isShop];
 }

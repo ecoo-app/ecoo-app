@@ -4,15 +4,6 @@ import 'package:e_coupon/business/entities/wallet.dart';
 
 class WalletModel extends Wallet {
   WalletModel(
-      {String id,
-      double amount,
-      Currency currency,
-      bool isShop = false,
-      List<TransactionRecord> transactions})
-      : super(
-            id: id,
-            amount: amount,
-            currency: currency,
-            isShop: isShop,
-            transactions: transactions);
+      {String id, double amount, Currency currency, bool isShop = false})
+      : super(id: id, amount: amount, currency: currency, isShop: isShop);
 }
