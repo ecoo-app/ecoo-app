@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 
 // TODO replace viewStateEnum with ViewState
 class BaseViewModel extends ChangeNotifier {
-  // deprecated use ViewState!
+  // _state deprecated use ViewState!
   ViewStateEnum _state = ViewStateEnum.Busy;
   ViewState _viewState = Initial();
 
@@ -13,7 +13,9 @@ class BaseViewModel extends ChangeNotifier {
 
   void setState(ViewStateEnum viewState) {
     _state = viewState;
-    notifyListeners();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 
   void setViewState(ViewState viewState) {

@@ -26,9 +26,9 @@ class WalletScreen extends StatelessWidget {
       body: BaseView<WalletViewModel>(
           // TODO how to do this with injectable only?
           model: getIt<WalletViewModel>(),
-          onModelReady: (vmodel) => vmodel.loadWalletDetail(walletId),
+          onModelReady: (vmodel) async => await vmodel.setWalletId(walletId),
           builder: (context, vmodel, child) {
-            if (vmodel.viewState is Empty) {
+            if (vmodel.walletState.value is Loading) {
               return Container();
             } else {
               return Column(
@@ -37,10 +37,9 @@ class WalletScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                   ),
                   AmountDisplay(
-                    isLoading: vmodel.viewState is Loading,
-                    amount: vmodel.viewState is Loading
-                        ? 0
-                        : vmodel.walletDetail.amount,
+                    isLoading: vmodel.walletState.value.amount.processingState
+                        is Loading,
+                    amount: vmodel.walletState.value.amount.value,
                     currency: 'CHF',
                   ),
                   Padding(
@@ -48,16 +47,16 @@ class WalletScreen extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      vmodel.walletDetail != null
-                          ? 'Wallet ${vmodel.walletDetail.id}'
+                      vmodel.walletState.processingState is Loaded
+                          ? 'Wallet ${vmodel.walletState.value.walletID}'
                           : 'loading',
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     // child: Text('Wallet no id'),
                   ),
                   Center(
-                    child: Text(vmodel.walletDetail != null
-                        ? '${vmodel.walletDetail.currency.label}'
+                    child: Text(vmodel.walletState.processingState is Loaded
+                        ? '${vmodel.walletState.value.currency.label}'
                         : 'loading'),
                   ),
                   Padding(
@@ -71,7 +70,7 @@ class WalletScreen extends StatelessWidget {
                           text: I18n.of(context).privateWalletSend,
                           onPressed: () {
                             Navigator.pushNamed(context, PaymentRoute,
-                                arguments: vmodel.walletDetail.id);
+                                arguments: vmodel.walletState.value.walletID);
                           },
                         ),
                         CustomIconButton(
@@ -79,7 +78,7 @@ class WalletScreen extends StatelessWidget {
                           text: I18n.of(context).privateWalletRecieve,
                           onPressed: () {
                             Navigator.pushNamed(context, RequestPaymentRoute,
-                                arguments: vmodel.walletDetail.id);
+                                arguments: vmodel.walletState.value.walletID);
                             // Navigator.push(
                             //   // TODO change to named route
                             //   context,
@@ -97,9 +96,13 @@ class WalletScreen extends StatelessWidget {
                               title: 'Zahlung bestätigen', shouldScan: true));
                     },
                   ),
-                  TransactionList(
-                    context: context,
-                    entries: vmodel.walletDetailTransactions,
+                  Expanded(
+                    child: TransactionList(
+                      isLoading: vmodel.walletState.value.transactions
+                          .processingState is Loading,
+                      context: context,
+                      entries: vmodel.walletState.value.transactions.value,
+                    ),
                   ),
                   Center(
                     child: FlatButton.icon(

@@ -1,17 +1,22 @@
+import 'package:e_coupon/business/entities/transaction_record.dart';
+import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class TransactionListEntry {
   final String text;
   final double amount;
 
-  TransactionListEntry(this.text, this.amount);
+  TransactionListEntry(TransactionRecord transactionRecord)
+      : this.text = transactionRecord.text,
+        this.amount = transactionRecord.amount;
 }
 
 class TransactionList extends StatelessWidget {
   final List<TransactionListEntry> entries;
   final BuildContext context;
+  final bool isLoading;
 
-  TransactionList({this.entries, @required this.context});
+  TransactionList({this.entries, @required this.context, this.isLoading});
 
   Widget _buildListItem(entryLabel, entryAmount) {
     return Container(
@@ -41,14 +46,20 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: entries != null ? entries.length : 0,
-            itemBuilder: (context, i) {
-              final entry = entries[i];
-              return _buildListItem(entry.text, entry.amount);
-            }));
+    return Column(
+      children: <Widget>[
+        isLoading ? ECProgressIndicator() : Container(),
+        Expanded(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: entries != null ? entries.length : 0,
+              itemBuilder: (context, i) {
+                final entry = entries[i];
+                return _buildListItem(entry.text, entry.amount);
+              }),
+        )
+      ],
+    );
 
     // TransactionItem('Bäckerei Confiserie Galli', 13.45, 'out'),
     // TransactionItem('Pusteblume GmbH', 25.00, 'in'),
