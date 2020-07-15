@@ -19,6 +19,7 @@ class WalletViewModel extends BaseViewModel {
 
   WalletState get walletState => this._walletState;
 
+  //
   Future<void> setWalletId(String walletId) async {
     if (walletId != null && walletId == _walletState.value.walletID) {
       await updateWalletDetail();
@@ -28,17 +29,23 @@ class WalletViewModel extends BaseViewModel {
       await updateWalletDetail();
     }
   }
-
   //
+
   //
   Future<void> loadWalletDetail() async {
     _walletState.processingState = Loading();
+    // why do i have to check for null when the constructor sets a wallet with default values?
     if (_walletState.value.amount == null)
       _walletState.value.amount = AmountState(0);
+
     _walletState.value.amount.processingState = Loading();
+
+    // why do i have to check for null when the constructor sets a wallet with default values?
     if (_walletState.value.transactions == null)
       _walletState.value.transactions = TransactionsState([]);
+
     _walletState.value.transactions.processingState = Loading();
+    // TODO how to improve and make a meanigful state change instead of just any replacement to trigger widget update?
     setState(ViewStateEnum.Busy);
 
     if (_walletState.value.walletID == null) {
@@ -46,20 +53,14 @@ class WalletViewModel extends BaseViewModel {
       _walletState.value.walletID = 'DR345GH67';
     }
 
-    var walletOrFailure =
-        await getWallet(WalletParams(id: _walletState.value.walletID));
-    walletOrFailure.fold((failure) => print('FAILURE'), (wallet) {
-      _walletState.value.currency = wallet.currency;
-      _walletState.value.isShop = wallet.isShop;
-      _walletState.value.amount.value = wallet.amount;
-    });
+    await _getWallet();
 
     _walletState.processingState = Loaded();
     _walletState.value.amount.processingState = Loaded();
     setState(ViewStateEnum.Idle);
   }
-
   //
+
   //
   Future<void> updateWalletDetail() async {
     _walletState.value.amount.processingState = Loading();
@@ -70,19 +71,26 @@ class WalletViewModel extends BaseViewModel {
       _walletState.value.walletID = 'DR345GH67';
     }
 
-    var walletOrFailure =
-        await getWallet(WalletParams(id: _walletState.value.walletID));
-    walletOrFailure.fold((failure) => print('FAILURE'), (wallet) {
-      _walletState.value.currency = wallet.currency;
-      _walletState.value.isShop = wallet.isShop;
-    });
+    await _getWallet();
 
     _walletState.value.amount.processingState = Loaded();
 
     await loadTransactions();
   }
+  //
 
   //
+  Future<void> _getWallet() async {
+    var walletOrFailure =
+        await getWallet(WalletParams(id: _walletState.value.walletID));
+    walletOrFailure.fold((failure) => print('FAILURE'), (wallet) {
+      _walletState.value.currency = wallet.currency;
+      _walletState.value.isShop = wallet.isShop;
+      _walletState.value.amount.value = wallet.amount;
+    });
+  }
+  //
+
   //
   Future<void> loadTransactions() async {
     _walletState.value.transactions.processingState = Loading();
@@ -98,32 +106,7 @@ class WalletViewModel extends BaseViewModel {
     _walletState.value.transactions.processingState = Loaded();
     setState(ViewStateEnum.Idle);
   }
-
-  // void loadWalletDetail(String walletId) async {
-  //   setViewState(Empty());
-
-  //   if (walletId == null) {
-  //     // TODO: handle in repository: if id == null get other data (from shared prefs) then if id != null
-  //     walletId = 'DR345GH67';
-  //   }
-  //   // 2. load wallet from cache or init
-
-  //   setViewState(Loading());
-
-  //   var walletOrFailure = await getWallet(WalletParams(id: walletId));
-  //   walletOrFailure.fold(
-  //       (failure) => print('FAILURE'), (wallet) => _walletData = wallet);
-
-  //   var transactionsOrFailure =
-  //       await getTransactions(GetTransactionParams(id: walletId));
-  //   transactionsOrFailure.fold((l) => print('FAILURE'), (transactions) {
-  //     _walletTransactions = transactions
-  //         .map((transaction) => TransactionListEntry(transaction))
-  //         .toList();
-  //   });
-
-  //   setViewState(Loaded());
-  // }
+  //
 }
 
 class ValueState<T> {

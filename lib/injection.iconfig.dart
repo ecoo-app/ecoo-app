@@ -15,7 +15,7 @@ import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/request_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
-import 'package:e_coupon/business/use_cases/verify_wallet.dart';
+import 'package:e_coupon/business/use_cases/verify.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
@@ -40,8 +40,7 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<PaymentViewModel>(() => PaymentViewModel());
   g.registerFactory<RequestViewModel>(() => RequestViewModel());
   g.registerFactory<SuccessViewModel>(() => SuccessViewModel());
-  g.registerLazySingleton<VerifyWallet>(
-      () => VerifyWallet(repository: g<IWalletRepo>()));
+  g.registerLazySingleton<Verify>(() => Verify(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetDefaultWallet>(
