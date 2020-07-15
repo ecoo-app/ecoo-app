@@ -16,6 +16,7 @@ import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/request_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
 import 'package:e_coupon/business/use_cases/verify_wallet.dart';
+import 'package:e_coupon/ui/core/model/wallet_state.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
@@ -42,6 +43,7 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<SuccessViewModel>(() => SuccessViewModel());
   g.registerLazySingleton<VerifyWallet>(
       () => VerifyWallet(repository: g<IWalletRepo>()));
+  g.registerLazySingleton<WalletState>(() => WalletState());
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetDefaultWallet>(
@@ -56,7 +58,7 @@ void $initGetIt(GetIt g, {String environment}) {
       () => HandleTransaction(repository: g<IWalletRepo>()));
   g.registerFactory<PaymentOverviewViewModel>(
       () => PaymentOverviewViewModel(g<HandleTransaction>(), g<IQRScanner>()));
-  g.registerFactory<WalletViewModel>(() => WalletViewModel(
+  g.registerLazySingleton<WalletViewModel>(() => WalletViewModel(
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(
       () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));

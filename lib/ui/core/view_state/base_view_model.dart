@@ -1,4 +1,5 @@
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 // TODO replace viewStateEnum with ViewState
@@ -17,6 +18,8 @@ class BaseViewModel extends ChangeNotifier {
 
   void setViewState(ViewState viewState) {
     _viewState = viewState;
-    notifyListeners();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 }

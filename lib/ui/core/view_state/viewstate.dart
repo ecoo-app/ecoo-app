@@ -1,5 +1,6 @@
 import 'package:e_coupon/business/core/failure.dart';
 
+// depracated use ViewState classes instead
 enum ViewStateEnum { Idle, Busy }
 
 // TODO use this

@@ -48,13 +48,17 @@ class WalletScreen extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      'Wallet ${vmodel.walletDetail.id}',
+                      vmodel.walletDetail != null
+                          ? 'Wallet ${vmodel.walletDetail.id}'
+                          : 'loading',
                       style: Theme.of(context).textTheme.headline3,
                     ),
                     // child: Text('Wallet no id'),
                   ),
                   Center(
-                    child: Text('${vmodel.walletDetail.currency.label}'),
+                    child: Text(vmodel.walletDetail != null
+                        ? '${vmodel.walletDetail.currency.label}'
+                        : 'loading'),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),

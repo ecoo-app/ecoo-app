@@ -1,6 +1,7 @@
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
+import 'package:e_coupon/ui/core/model/wallet_state.dart';
 import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 
@@ -9,9 +10,10 @@ import 'package:injectable/injectable.dart';
 
 // add AppStateModel -> holds all wallets and the current selected... ?
 
-@injectable
+@lazySingleton
 class WalletViewModel extends BaseViewModel {
   Wallet _walletData;
+  // WalletState walletState;
   List<TransactionListEntry> _walletTransactions;
   final GetWallet getWallet;
   final GetTransactions getTransactions;
@@ -21,6 +23,10 @@ class WalletViewModel extends BaseViewModel {
   Wallet get walletDetail => _walletData;
   List<TransactionListEntry> get walletDetailTransactions =>
       _walletTransactions;
+
+  // void init(String walletId) async{
+
+  // }
 
   void loadWalletDetail(String walletId) async {
     setViewState(Empty());
@@ -33,7 +39,6 @@ class WalletViewModel extends BaseViewModel {
 
     setViewState(Loading());
 
-    print('get wallet');
     var walletOrFailure = await getWallet(WalletParams(id: walletId));
     walletOrFailure.fold(
         (failure) => print('FAILURE'), (wallet) => _walletData = wallet);
