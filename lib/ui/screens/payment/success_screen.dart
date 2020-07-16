@@ -19,8 +19,15 @@ class SuccessScreen extends StatelessWidget {
                 builder: (_, vmodel, __) {
                   if (vmodel.viewState is DurationEnd) {
                     SchedulerBinding.instance.addPostFrameCallback((_) {
+                      // Navigator.of(context)
+                      //     .popUntil(ModalRoute.withName(WalletDetailRoute));
+                      // TODO which is correct?
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          WalletDetailRoute, (route) => false);
+                          WalletDetailRoute, (_) => false);
+                      // Navigator.of(context).pushNamedAndRemoveUntil(
+                      //     WalletDetailRoute,
+                      //     ModalRoute.withName(WalletDetailRoute));
+                      // Navigator.pushNamed(context, WalletDetailRoute);
                     });
                   }
                   return Center(

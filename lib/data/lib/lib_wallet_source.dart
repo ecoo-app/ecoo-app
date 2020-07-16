@@ -31,25 +31,25 @@ class LibWalletSource implements ILibWalletSource {
           id: 'name', i18nLabel: {'de': 'Vorname'}, inputType: InputType.Text),
       VerificationInputModel(
           id: 'surname', i18nLabel: {'de': 'Name'}, inputType: InputType.Text),
-      // VerificationInputModel(
-      //     id: 'street',
-      //     i18nLabel: {'de': 'Strasse'},
-      //     inputType: InputType.Text),
-      // VerificationInputModel(
-      //     id: 'number',
-      //     i18nLabel: {'de': 'Hausnummer'},
-      //     inputType: InputType.Text),
-      // VerificationInputModel(
-      //     id: 'extra',
-      //     i18nLabel: {'de': 'Adresszusatz'},
-      //     inputType: InputType.Text,
-      //     isRequired: false),
-      // VerificationInputModel(
-      //     id: 'postalcode',
-      //     i18nLabel: {'de': 'PLZ'},
-      //     inputType: InputType.Text),
-      // VerificationInputModel(
-      //     id: 'city', i18nLabel: {'de': 'Ort'}, inputType: InputType.Text),
+      VerificationInputModel(
+          id: 'street',
+          i18nLabel: {'de': 'Strasse'},
+          inputType: InputType.Text),
+      VerificationInputModel(
+          id: 'number',
+          i18nLabel: {'de': 'Hausnummer'},
+          inputType: InputType.Text),
+      VerificationInputModel(
+          id: 'extra',
+          i18nLabel: {'de': 'Adresszusatz'},
+          inputType: InputType.Text,
+          isRequired: false),
+      VerificationInputModel(
+          id: 'postalcode',
+          i18nLabel: {'de': 'PLZ'},
+          inputType: InputType.Text),
+      VerificationInputModel(
+          id: 'city', i18nLabel: {'de': 'Ort'}, inputType: InputType.Text),
       VerificationInputModel(
           id: 'birthdate',
           i18nLabel: {'de': 'Geburtsdatum'},

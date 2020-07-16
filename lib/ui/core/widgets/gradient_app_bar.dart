@@ -1,3 +1,4 @@
+/// copied library because shape were not supported. as soon as pull request is accepted the original library can be usesd. https://github.com/joostlek/GradientAppBar/pull/15
 library gradient_app_bar;
 
 import 'dart:math' as math;
