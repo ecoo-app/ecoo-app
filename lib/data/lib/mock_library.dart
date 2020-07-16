@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/verification_input.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -24,6 +25,12 @@ abstract class WalletAPI {
       this.isShop,
       this.amount,
       this.verificationState});
+}
+
+class VerificationFormModel extends VerificationForm {
+  VerificationFormModel(
+      {@required String title, @required List<VerificationInput> inputs})
+      : super(title: title, inputs: inputs);
 }
 
 class VerificationInputModel extends VerificationInput {
@@ -62,7 +69,7 @@ abstract class ILibWalletSource {
   Future<WalletAPI> createWalletForUser(
       String userIdentification, String currencyId, bool isShop);
   Future<List<CurrencyAPI>> getCurrencies();
-  Future<List<VerificationInputModel>> getVerificationInputs(
+  Future<VerificationFormModel> getVerificationInputs(
       String currencyId, bool isShop);
 
   // verification

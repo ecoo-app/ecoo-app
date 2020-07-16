@@ -1,6 +1,5 @@
-import 'package:e_coupon/ui/core/style/gradient.dart';
+import 'package:e_coupon/ui/core/widgets/gradient_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class MainLayout extends StatelessWidget {
@@ -12,7 +11,8 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // waiting for this: https://github.com/joostlek/GradientAppBar/pulls pull request to merge and support shapes
+      // TODO waiting for this: https://github.com/joostlek/GradientAppBar/pulls pull request to merge and support shapes
+      // until then i just copied the code, fixed it and added it as widget
       appBar: GradientAppBar(
         shape: AppBarShapeBorder(),
         //title: title,
@@ -25,7 +25,9 @@ class MainLayout extends StatelessWidget {
         gradient: Gradients.cosmicFusion,
         elevation: 0,
       ),
-      body: body,
+      body: Container(
+          margin: const EdgeInsets.only(left: 24, right: 24, top: 36),
+          child: body),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:e_coupon/business/entities/currency.dart';
+import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/verification_input.dart';
 import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/data/lib/mock_data.dart';
@@ -99,9 +100,9 @@ class WalletRepo implements IWalletRepo {
   }
 
   @override
-  Future<Either<Failure, List<VerificationInput>>> getVerificationInputs(
+  Future<Either<Failure, VerificationForm>> getVerificationInputs(
       String currencyId, bool isShop) async {
-    Either<Failure, List<VerificationInput>> result;
+    Either<Failure, VerificationForm> result;
 
     await libDataSource
         .getVerificationInputs(currencyId, isShop)

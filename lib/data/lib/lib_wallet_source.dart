@@ -22,7 +22,7 @@ class LibWalletSource implements ILibWalletSource {
   }
 
   @override
-  Future<List<VerificationInputModel>> getVerificationInputs(
+  Future<VerificationFormModel> getVerificationInputs(
       String currencyId, bool isShop) {
     List<VerificationInputModel> privateVerifications = List();
 
@@ -56,8 +56,9 @@ class LibWalletSource implements ILibWalletSource {
           inputType: InputType.Date),
     ]);
 
-    Completer completer = Completer<List<VerificationInputModel>>();
-    completer.complete(privateVerifications);
+    Completer completer = Completer<VerificationFormModel>();
+    completer.complete(VerificationFormModel(
+        title: 'Personalien', inputs: privateVerifications));
 
     return completer.future;
   }
