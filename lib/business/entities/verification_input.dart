@@ -6,6 +6,7 @@ class VerificationInput {
   String id;
   Map<String, String> i18nLabel;
   Map<String, String> i18nHint;
+  // TODO error message?
   bool isRequired;
   InputType inputType;
 

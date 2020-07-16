@@ -45,7 +45,7 @@ class WalletsOverviewScreen extends StatelessWidget {
                     FlatButton.icon(
                       onPressed: () {
                         // todo create new wallet -> verification needs new wallet id -> put wallet view model as app view model
-                        Navigator.pushNamed(context, VerificationRoute);
+                        Navigator.pushNamed(context, ClaimVerificationRoute);
                       },
                       icon: Icon(Icons.add_circle_outline),
                       label: Text(I18n.of(context).addWallet),

@@ -8,10 +8,10 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 @lazySingleton
-class Verify extends UseCase<VerificationState, VerificationParams> {
+class VerifyClaim extends UseCase<VerificationState, VerificationParams> {
   final IWalletRepo repository;
 
-  Verify({this.repository});
+  VerifyClaim({this.repository});
 
   Future<Either<Failure, VerificationState>> call(
       VerificationParams params) async {

@@ -26,8 +26,6 @@ abstract class WalletAPI {
       this.verificationState});
 }
 
-enum InputTypeAPI { Text, Number, Date, Bool }
-
 class VerificationInputModel extends VerificationInput {
   VerificationInputModel(
       {@required id,

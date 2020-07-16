@@ -16,7 +16,7 @@ const HomeRoute = '/';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
 const TransactionOverviewRoute = 'transactionOverview';
-const VerificationRoute = 'verification';
+const ClaimVerificationRoute = 'claimVerification';
 const PaymentRoute = 'payment';
 const PaymentOverviewRoute = 'paymentOverview';
 const SuccessRoute = 'success';
@@ -37,7 +37,7 @@ class Router {
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
       case TransactionOverviewRoute:
         return MaterialPageRoute(builder: (_) => TransactionOverviewScreen());
-      case VerificationRoute:
+      case ClaimVerificationRoute:
         return MaterialPageRoute(builder: (_) => VerificationScreen());
       case PaymentRoute:
         var senderID = settings.arguments as String;

@@ -15,7 +15,7 @@ import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/request_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
-import 'package:e_coupon/business/use_cases/verify.dart';
+import 'package:e_coupon/business/use_cases/verify_claim.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/business/use_cases/get_default_wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
@@ -25,6 +25,7 @@ import 'package:e_coupon/business/use_cases/handle_transaction.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_view_model.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
+import 'package:e_coupon/ui/screens/verification/verification_view_model.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
@@ -40,7 +41,8 @@ void $initGetIt(GetIt g, {String environment}) {
   g.registerFactory<PaymentViewModel>(() => PaymentViewModel());
   g.registerFactory<RequestViewModel>(() => RequestViewModel());
   g.registerFactory<SuccessViewModel>(() => SuccessViewModel());
-  g.registerLazySingleton<Verify>(() => Verify(repository: g<IWalletRepo>()));
+  g.registerLazySingleton<VerifyClaim>(
+      () => VerifyClaim(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetAllWallets>(
       () => GetAllWallets(repository: g<IWalletRepo>()));
   g.registerLazySingleton<GetDefaultWallet>(
@@ -59,4 +61,6 @@ void $initGetIt(GetIt g, {String environment}) {
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(
       () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));
+  g.registerLazySingleton<ClaimVerificationViewModel>(() =>
+      ClaimVerificationViewModel(g<VerifyClaim>(), g<GetVerificationInputs>()));
 }

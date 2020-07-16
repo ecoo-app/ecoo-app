@@ -103,7 +103,7 @@ class WalletRepo implements IWalletRepo {
       String currencyId, bool isShop) async {
     Either<Failure, List<VerificationInput>> result;
 
-    libDataSource
+    await libDataSource
         .getVerificationInputs(currencyId, isShop)
         .then((value) => result = Right(value))
         .catchError((error) => result = Left(MessageFailure(error)));

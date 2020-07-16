@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/abstract_use_case.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/verification_input.dart';
-import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -17,8 +16,10 @@ class GetVerificationInputs
 
   Future<Either<Failure, List<VerificationInput>>> call(
       VerificationInputsParams params) async {
-    return await repository.getVerificationInputs(
+    var future = await repository.getVerificationInputs(
         params.currencyId, params.isShop);
+
+    return future;
   }
 }
 

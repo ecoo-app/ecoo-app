@@ -22,6 +22,7 @@ class PaymentViewModel extends BaseViewModel {
   @override
   void dispose() {
     // Clean up the controllers when the widget is disposed.
+    // TODO call dispose -> this view model is not disposed
     amountInputController.dispose();
     recieverInputController.dispose();
     super.dispose();

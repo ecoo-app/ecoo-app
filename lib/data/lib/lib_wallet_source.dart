@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:e_coupon/business/entities/verification_input.dart';
 import 'package:injectable/injectable.dart';
 
 import 'mock_library.dart';
@@ -24,38 +25,35 @@ class LibWalletSource implements ILibWalletSource {
   Future<List<VerificationInputModel>> getVerificationInputs(
       String currencyId, bool isShop) {
     List<VerificationInputModel> privateVerifications = List();
+
     privateVerifications.addAll([
       VerificationInputModel(
-          id: 'name',
-          i18nLabel: {'de': 'Vorname'},
-          inputType: InputTypeAPI.Text),
+          id: 'name', i18nLabel: {'de': 'Vorname'}, inputType: InputType.Text),
       VerificationInputModel(
-          id: 'surname',
-          i18nLabel: {'de': 'Name'},
-          inputType: InputTypeAPI.Text),
+          id: 'surname', i18nLabel: {'de': 'Name'}, inputType: InputType.Text),
       VerificationInputModel(
           id: 'street',
           i18nLabel: {'de': 'Strasse'},
-          inputType: InputTypeAPI.Text),
+          inputType: InputType.Text),
       VerificationInputModel(
           id: 'number',
           i18nLabel: {'de': 'Hausnummer'},
-          inputType: InputTypeAPI.Text),
+          inputType: InputType.Text),
       VerificationInputModel(
           id: 'extra',
           i18nLabel: {'de': 'Adresszusatz'},
-          inputType: InputTypeAPI.Text,
+          inputType: InputType.Text,
           isRequired: false),
       VerificationInputModel(
           id: 'postalcode',
           i18nLabel: {'de': 'PLZ'},
-          inputType: InputTypeAPI.Text),
+          inputType: InputType.Text),
       VerificationInputModel(
-          id: 'city', i18nLabel: {'de': 'Ort'}, inputType: InputTypeAPI.Text),
+          id: 'city', i18nLabel: {'de': 'Ort'}, inputType: InputType.Text),
       VerificationInputModel(
           id: 'birthdate',
           i18nLabel: {'de': 'Geburtsdatum'},
-          inputType: InputTypeAPI.Date),
+          inputType: InputType.Date),
     ]);
 
     Completer completer = Completer<List<VerificationInputModel>>();

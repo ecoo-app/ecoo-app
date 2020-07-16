@@ -67,14 +67,6 @@ class WalletScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         CustomIconButton(
-                          icon: Icons.send,
-                          text: I18n.of(context).privateWalletSend,
-                          onPressed: () {
-                            Navigator.pushNamed(context, PaymentRoute,
-                                arguments: vmodel.walletState.value.walletID);
-                          },
-                        ),
-                        CustomIconButton(
                           icon: Icons.call_received,
                           text: I18n.of(context).privateWalletRecieve,
                           onPressed: () {
@@ -86,6 +78,14 @@ class WalletScreen extends StatelessWidget {
                             //   MaterialPageRoute(
                             //       builder: (context) => GenerateScreen()),
                             // );
+                          },
+                        ),
+                        CustomIconButton(
+                          icon: Icons.attach_money,
+                          text: I18n.of(context).privateWalletSend,
+                          onPressed: () {
+                            Navigator.pushNamed(context, ClaimVerificationRoute,
+                                arguments: vmodel.walletState.value.walletID);
                           },
                         )
                       ]),
