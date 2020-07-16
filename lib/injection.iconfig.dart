@@ -61,6 +61,6 @@ void $initGetIt(GetIt g, {String environment}) {
       getWallet: g<GetWallet>(), getTransactions: g<GetTransactions>()));
   g.registerFactory<WalletsViewModel>(
       () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));
-  g.registerLazySingleton<ClaimVerificationViewModel>(() =>
+  g.registerFactory<ClaimVerificationViewModel>(() =>
       ClaimVerificationViewModel(g<VerifyClaim>(), g<GetVerificationInputs>()));
 }

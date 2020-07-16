@@ -7,7 +7,7 @@ import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:injectable/injectable.dart';
 
-@lazySingleton
+@injectable
 class ClaimVerificationViewModel extends BaseViewModel {
   List<VerificationInput> verificationInputs = [];
   final VerifyClaim _verifyClaim;
@@ -16,13 +16,14 @@ class ClaimVerificationViewModel extends BaseViewModel {
   ClaimVerificationViewModel(this._verifyClaim, this._getVerificationInputs);
 
   void loadVerificationInputs() async {
-    setState(ViewStateEnum.Busy);
+    setViewState(Loading());
 
     Either<Failure, List<VerificationInput>> inputsOrFailure =
         await _getVerificationInputs(
             VerificationInputsParams(currencyId: 'wetzicoin', isShop: true));
-    inputsOrFailure.fold((failure) => print('FAILURE'), (inputs) => inputs);
+    inputsOrFailure.fold(
+        (failure) => print('FAILURE'), (inputs) => verificationInputs = inputs);
 
-    setState(ViewStateEnum.Idle);
+    setViewState(Loaded());
   }
 }

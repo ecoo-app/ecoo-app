@@ -5,5 +5,6 @@
   "privateWalletSend": "Senden",
   "privateWalletRecieve": "Anfordern",
   "showAllTransactions": "alle Bewegungen anzeigen",
-  "addWallet": "Wallet hinzufügen"
+  "addWallet": "Wallet hinzufügen",
+  "formErrorRequired": "Diese Feld muss ausgefüllt werden."
 }

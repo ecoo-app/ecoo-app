@@ -46,6 +46,8 @@ class I18n implements WidgetsLocalizations {
   String get showAllTransactions => "alle Bewegungen anzeigen";
   /// "Wallet hinzufügen"
   String get addWallet => "Wallet hinzufügen";
+  /// "Diese Feld muss ausgefüllt werden."
+  String get formErrorRequired => "Diese Feld muss ausgefüllt werden.";
 }
 
 class _I18n_de_CH extends I18n {
