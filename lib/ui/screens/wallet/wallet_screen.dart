@@ -64,7 +64,7 @@ class WalletScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                   ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         CustomIconButton(
                           icon: Icons.call_received,
@@ -72,17 +72,11 @@ class WalletScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.pushNamed(context, RequestPaymentRoute,
                                 arguments: vmodel.walletState.value.walletID);
-                            // Navigator.push(
-                            //   // TODO change to named route
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => GenerateScreen()),
-                            // );
                           },
                         ),
                         CustomIconButton(
                           icon: Icons.attach_money,
-                          text: I18n.of(context).privateWalletSend,
+                          text: 'Gutschrift anfordern',
                           onPressed: () {
                             Navigator.pushNamed(context, ClaimVerificationRoute,
                                 arguments: vmodel.walletState.value.walletID);

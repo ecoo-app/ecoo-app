@@ -17,7 +17,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(24),
+      margin: const EdgeInsets.only(top: 24, bottom: 24, left: 4, right: 4),
       child: GradientButton(
         increaseHeightBy: 15,
         increaseWidthBy: double.infinity,

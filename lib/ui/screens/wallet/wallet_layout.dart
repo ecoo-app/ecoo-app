@@ -25,6 +25,7 @@ class WalletLayout extends StatelessWidget {
           title: title,
           backgroundColor: Colors.cyan,
         ),
-        body: body);
+        body: Container(
+            margin: const EdgeInsets.only(left: 24, right: 24), child: body));
   }
 }

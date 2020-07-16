@@ -23,6 +23,7 @@ class CustomIconButton extends StatelessWidget {
         padding: EdgeInsets.all(15.0),
         shape: CircleBorder(),
       ),
+      Padding(padding: const EdgeInsets.only(top: 8)),
       Text(text)
     ]);
 
