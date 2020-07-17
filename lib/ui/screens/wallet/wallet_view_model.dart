@@ -21,18 +21,18 @@ class WalletViewModel extends BaseViewModel {
 
   //
   Future<void> setWalletId(String walletId) async {
-    if (walletId != null && walletId == _walletState.value.walletID) {
-      await updateWalletDetail();
+    if (walletId == null || walletId == _walletState.value.walletID) {
+      await updateWalletDetail(walletId);
     } else {
       _walletState = WalletState(WalletData(walletID: walletId));
-      await loadWalletDetail();
-      await updateWalletDetail();
+      await loadWalletDetail(walletId);
+      await updateWalletDetail(walletId);
     }
   }
   //
 
   //
-  Future<void> loadWalletDetail() async {
+  Future<void> loadWalletDetail(String walletId) async {
     _walletState.processingState = Loading();
     // why do i have to check for null when the constructor sets a wallet with default values?
     if (_walletState.value.amount == null)
@@ -48,12 +48,7 @@ class WalletViewModel extends BaseViewModel {
     // TODO how to improve and make a meanigful state change instead of just any replacement to trigger widget update?
     setState(ViewStateEnum.Busy);
 
-    if (_walletState.value.walletID == null) {
-      // TODO: handle in repository: if id == null get other data (from shared prefs) then if id != null
-      _walletState.value.walletID = 'DR345GH67';
-    }
-
-    await _getWallet();
+    await _getWallet(walletId);
 
     _walletState.processingState = Loaded();
     _walletState.value.amount.processingState = Loaded();
@@ -62,25 +57,28 @@ class WalletViewModel extends BaseViewModel {
   //
 
   //
-  Future<void> updateWalletDetail() async {
+  Future<void> updateWalletDetail(String walletId) async {
     _walletState.value.amount.processingState = Loading();
     setState(ViewStateEnum.Busy);
 
-    if (_walletState.value.walletID == null) {
-      // TODO: handle in repository: if id == null get other data (from shared prefs) then if id != null
-      _walletState.value.walletID = 'DR345GH67';
-    }
-
-    await _getWallet();
+    await _getWallet(walletId);
 
     _walletState.value.amount.processingState = Loaded();
 
+    _walletState.value.transactions.processingState = Loading();
     await loadTransactions();
+    _walletState.value.transactions.processingState = Loaded();
+    setState(ViewStateEnum.Idle);
   }
   //
 
   //
-  Future<void> _getWallet() async {
+  Future<void> _getWallet(String walletId) async {
+    if (walletId == null && _walletState.value.walletID == null) {
+      // TODO: handle in repository: if id == null get other data (from shared prefs) then if id != null
+      _walletState.value.walletID = 'DR345GH67';
+    }
+
     var walletOrFailure =
         await getWallet(WalletParams(id: _walletState.value.walletID));
     walletOrFailure.fold((failure) => print('FAILURE'), (wallet) {
@@ -93,8 +91,6 @@ class WalletViewModel extends BaseViewModel {
 
   //
   Future<void> loadTransactions() async {
-    _walletState.value.transactions.processingState = Loading();
-
     var transactionsOrFailure = await getTransactions(
         GetTransactionParams(id: _walletState.value.walletID));
     transactionsOrFailure.fold((l) => print('FAILURE'), (transactions) {
@@ -102,9 +98,6 @@ class WalletViewModel extends BaseViewModel {
           .map((transaction) => TransactionListEntry(transaction))
           .toList();
     });
-
-    _walletState.value.transactions.processingState = Loaded();
-    setState(ViewStateEnum.Idle);
   }
   //
 }

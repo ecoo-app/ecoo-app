@@ -1,5 +1,5 @@
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
-import 'package:e_coupon/ui/core/widgets/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -16,7 +16,7 @@ class RequestQRBillScreen extends StatelessWidget {
         MediaQuery.of(context).viewInsets.bottom;
 
     return MainLayout(
-      title: Text('QR Rechnung'),
+      title: 'QR Rechnung',
       // body: Text(requestData.amount.toString()),
       body: Container(
         // height: _topSectionHeight,

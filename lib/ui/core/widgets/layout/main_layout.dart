@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class MainLayout extends StatelessWidget {
-  final title;
-  final body;
+  final String title;
+  final Widget body;
 
   MainLayout({this.title, this.body});
 
@@ -15,9 +15,9 @@ class MainLayout extends StatelessWidget {
       // until then i just copied the code, fixed it and added it as widget
       appBar: GradientAppBar(
         shape: AppBarShapeBorder(),
-        //title: title,
+        // title: title,
         title: Text(
-          'text',
+          title,
           textAlign: TextAlign.end,
           style: TextStyle(color: Colors.white),
         ),

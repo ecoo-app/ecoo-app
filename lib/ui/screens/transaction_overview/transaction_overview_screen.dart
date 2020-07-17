@@ -1,5 +1,5 @@
 import 'package:e_coupon/business/entities/transaction_record.dart';
-import 'package:e_coupon/ui/core/widgets/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class TransactionOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: Text('Wallets'),
+      title: 'Wallets',
       body: Column(children: <Widget>[
         Text('Bewegungen'),
         TransactionList(

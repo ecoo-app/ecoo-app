@@ -5,7 +5,7 @@ import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
-import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
+import 'package:e_coupon/ui/screens/creation_verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';

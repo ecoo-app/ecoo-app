@@ -25,7 +25,7 @@ import 'package:e_coupon/business/use_cases/handle_transaction.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_view_model.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
-import 'package:e_coupon/ui/screens/verification/verification_view_model.dart';
+import 'package:e_coupon/ui/screens/creation_verification/verification_view_model.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {

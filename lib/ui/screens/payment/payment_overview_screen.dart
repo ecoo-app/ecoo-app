@@ -5,7 +5,7 @@ import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
-import 'package:e_coupon/ui/core/widgets/main_layout.dart';
+import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:e_coupon/ui/core/widgets/primary_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +28,7 @@ class PaymentOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: Text('Geld senden'),
+      title: 'Geld senden',
       body: BaseView<PaymentOverviewViewModel>(
         model: getIt<PaymentOverviewViewModel>(), // TODO injectable
         onModelReady: (vmodel) => vmodel.initState(
