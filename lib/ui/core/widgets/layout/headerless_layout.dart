@@ -12,11 +12,14 @@ class HeaderlessLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          // leading: Icon(titleIcon),
-          title: Text(title),
-          backgroundColor: Colors.white,
-        ),
-        body: body);
+      appBar: AppBar(
+        // leading: Icon(titleIcon),
+        title: title != null ? Text(title) : Text(''),
+        backgroundColor: Colors.white,
+      ),
+      body: Container(
+          margin: const EdgeInsets.only(left: 24, right: 24, top: 36),
+          child: body),
+    );
   }
 }

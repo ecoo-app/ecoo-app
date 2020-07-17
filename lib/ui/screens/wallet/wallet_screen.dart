@@ -6,8 +6,8 @@ import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/core/widgets/amount_display.dart';
-import 'package:e_coupon/ui/core/widgets/icon_button.dart';
-import 'package:e_coupon/ui/core/widgets/primary_button.dart';
+import 'package:e_coupon/ui/core/widgets/button/circular_icon_button.dart';
+import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
 import 'package:flutter/material.dart';
 
@@ -66,7 +66,7 @@ class WalletScreen extends StatelessWidget {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        CustomIconButton(
+                        CircularIconButton(
                           icon: Icons.call_received,
                           text: I18n.of(context).privateWalletRecieve,
                           onPressed: () {
@@ -74,7 +74,7 @@ class WalletScreen extends StatelessWidget {
                                 arguments: vmodel.walletState.value.walletID);
                           },
                         ),
-                        CustomIconButton(
+                        CircularIconButton(
                           icon: Icons.attach_money,
                           text: 'Gutschrift anfordern',
                           onPressed: () {

@@ -6,7 +6,7 @@ import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/core/widgets/amount_input.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
-import 'package:e_coupon/ui/core/widgets/primary_button.dart';
+import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../injection.dart';

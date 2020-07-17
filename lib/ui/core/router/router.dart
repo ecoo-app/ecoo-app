@@ -1,3 +1,4 @@
+import 'package:e_coupon/ui/screens/creation_verification/wallet_creation_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 
 // unfortunately routesetting does not allow enums
 const HomeRoute = '/';
+const WalletCreationRoute = 'walletCreation';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
 const TransactionOverviewRoute = 'transactionOverview';
@@ -26,6 +28,8 @@ const RequestQRBillRoute = 'requestQRBill';
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case WalletCreationRoute:
+        return MaterialPageRoute(builder: (_) => WalletCreationScreen());
       case HomeRoute:
       case WalletDetailRoute:
         var walletId = settings.arguments as String;

@@ -5,7 +5,7 @@ import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
 import 'package:e_coupon/ui/core/widgets/form_generator.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
-import 'package:e_coupon/ui/core/widgets/primary_button.dart';
+import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/screens/creation_verification/verification_view_model.dart';
 import 'package:flutter/cupertino.dart';
 

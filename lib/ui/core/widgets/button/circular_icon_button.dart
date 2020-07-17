@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CustomIconButton extends StatelessWidget {
+class CircularIconButton extends StatelessWidget {
   final GestureTapCallback onPressed;
   final IconData icon;
   final String text;
 
-  CustomIconButton(
+  CircularIconButton(
       {@required this.onPressed, @required this.icon, @required this.text});
 
   @override
