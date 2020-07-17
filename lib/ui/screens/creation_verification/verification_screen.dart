@@ -1,3 +1,4 @@
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
@@ -13,7 +14,7 @@ class VerificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: 'Verification',
+      title: I18n.of(context).titleFormClaimVerification,
       body: BaseView<ClaimVerificationViewModel>(
           model: getIt<ClaimVerificationViewModel>(),
           onModelReady: (vmodel) => vmodel.loadVerificationInputs(),
@@ -24,7 +25,7 @@ class VerificationScreen extends StatelessWidget {
                     Text(vmodel.verificationInputs.title),
                     FormGenerator(vmodel.verificationInputs.inputs),
                     PrimaryButton(
-                      text: 'Verifizierung',
+                      text: I18n.of(context).buttonFormClaimVerification,
                       onPressed: () =>
                           Navigator.pushNamed(context, WalletDetailRoute),
                     ),

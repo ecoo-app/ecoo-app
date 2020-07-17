@@ -28,7 +28,7 @@ class PaymentOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: 'Geld senden',
+      title: I18n.of(context).titlePaymentOverview,
       body: BaseView<PaymentOverviewViewModel>(
         model: getIt<PaymentOverviewViewModel>(), // TODO injectable
         onModelReady: (vmodel) => vmodel.initState(
@@ -69,7 +69,7 @@ class PaymentOverviewScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                 ),
                 PrimaryButton(
-                  text: I18n.of(context).personalWalletPay,
+                  text: I18n.of(context).buttonPaymentOverview,
                   isLoading: vmodel.viewState is Loading,
                   onPressed: () async {
                     vmodel.initiateTransaction();

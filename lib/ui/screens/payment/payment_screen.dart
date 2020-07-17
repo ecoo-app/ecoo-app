@@ -19,7 +19,7 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: 'scan',
+      title: I18n.of(context).titlePaymentScreen,
       // TODO does it need a view model?
       body: BaseView<PaymentViewModel>(
           // TODO how to do this with injectable only? -> research StateNotifier instead of ChangeNotifier?
@@ -43,13 +43,15 @@ class PaymentScreen extends StatelessWidget {
                             TextFormField(
                                 validator: (value) {
                                   if (value.isEmpty) {
-                                    return 'Uups, der Empfänger ist vergessen gegangen.';
+                                    return I18n.of(context)
+                                        .validationRecieverInput;
                                   }
                                   return null;
                                 },
                                 controller: vmodel.recieverInputController,
-                                decoration:
-                                    InputDecoration(hintText: 'Empfänger'),
+                                decoration: InputDecoration(
+                                    hintText:
+                                        I18n.of(context).hintRecieverInput),
                                 onEditingComplete: () =>
                                     print('empfänger editing complete')),
                           ],
@@ -58,7 +60,7 @@ class PaymentScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                     ),
                     PrimaryButton(
-                      text: I18n.of(context).personalWalletPay,
+                      text: '',
                       onPressed: () {
                         if (vmodel.formKey.currentState.validate()) {
                           Navigator.pushNamed(context, PaymentOverviewRoute,

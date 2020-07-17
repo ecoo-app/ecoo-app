@@ -1,3 +1,4 @@
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class RequestQRBillScreen extends StatelessWidget {
         MediaQuery.of(context).viewInsets.bottom;
 
     return MainLayout(
-      title: 'QR Rechnung',
+      title: I18n.of(context).titleRequestScreen,
       // body: Text(requestData.amount.toString()),
       body: Container(
         // height: _topSectionHeight,
@@ -25,8 +26,10 @@ class RequestQRBillScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Wallet ${requestData.requesterId}'),
-              Text('CHF ${requestData.amount.toString()}'),
+              Text(I18n.of(context)
+                  .walletRequestScreen(requestData.requesterId)),
+              Text(I18n.of(context)
+                  .amountRequestScreen(requestData.amount.toString())),
               RepaintBoundary(
                 child: QrImage(
                   data: requestData.amount.toString(),

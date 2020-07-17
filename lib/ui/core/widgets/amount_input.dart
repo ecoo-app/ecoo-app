@@ -1,3 +1,4 @@
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:flutter/material.dart';
 
 class AmountInputField extends StatelessWidget {
@@ -21,7 +22,7 @@ class AmountInputField extends StatelessWidget {
             onEditingComplete: () => print('amount editing complete'),
             validator: (value) {
               if (value.isEmpty) {
-                return 'Uups, der Betrag ist vergessen gegangen.';
+                return I18n.of(context).validationAmountInput;
               }
               return null;
             },

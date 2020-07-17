@@ -18,7 +18,7 @@ class RequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      title: 'anfordern',
+      title: I18n.of(context).titlePrivateRequest,
       body: BaseView<RequestViewModel>(
         model: getIt<RequestViewModel>(),
         builder: (_, vmodel, __) {
@@ -42,7 +42,7 @@ class RequestScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                   ),
                   PrimaryButton(
-                    text: I18n.of(context).personalWalletPay,
+                    text: I18n.of(context).buttonPrivateRequest,
                     onPressed: () {
                       if (vmodel.formKey.currentState.validate()) {
                         Navigator.pushNamed(context, RequestQRBillRoute,

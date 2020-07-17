@@ -37,17 +37,55 @@ class I18n implements WidgetsLocalizations {
   /// "Drücke mich"
   String get buttonTabMe => "Drücke mich";
   /// "Bezahlen"
-  String get personalWalletPay => "Bezahlen";
+  String get privateWalletPay => "Bezahlen";
   /// "Senden"
   String get privateWalletSend => "Senden";
   /// "Anfordern"
   String get privateWalletRecieve => "Anfordern";
+  /// "Gutschrift anfordern"
+  String get privateWalletClaim => "Gutschrift anfordern";
+  /// "Betrag"
+  String get titlePrivateRequest => "Betrag";
+  /// "Geld anfordern"
+  String get buttonPrivateRequest => "Geld anfordern";
   /// "alle Bewegungen anzeigen"
   String get showAllTransactions => "alle Bewegungen anzeigen";
   /// "Wallet hinzufügen"
   String get addWallet => "Wallet hinzufügen";
   /// "Diese Feld muss ausgefüllt werden."
   String get formErrorRequired => "Diese Feld muss ausgefüllt werden.";
+  /// "Wallet typ"
+  String get titleWalletCreation => "Wallet typ";
+  /// "Polaroid raw denim fingerstache lumbersexual street art kale chips cornhole before they sold out. Wolf VHS shabby chic asymmetrical intelligentsia blue bottle scenester edison bulb 8-bit. Typewriter neutra prism, raclette glossier chartreuse adaptogen food truck jianbing blog craft beer waistcoat paleo. Scenester iceland butcher brunch put a bird on it raw denim taiyaki selfies squid. Seitan bicycle rights man braid fixie truffaut chicharrones cray, vaporware gochujang."
+  String get textWalletCreation => "Polaroid raw denim fingerstache lumbersexual street art kale chips cornhole before they sold out. Wolf VHS shabby chic asymmetrical intelligentsia blue bottle scenester edison bulb 8-bit. Typewriter neutra prism, raclette glossier chartreuse adaptogen food truck jianbing blog craft beer waistcoat paleo. Scenester iceland butcher brunch put a bird on it raw denim taiyaki selfies squid. Seitan bicycle rights man braid fixie truffaut chicharrones cray, vaporware gochujang.";
+  /// "Verifizieren"
+  String get titleClaimVerification => "Verifizieren";
+  /// "Jetzt verifizieren"
+  String get buttonClaimVerification => "Jetzt verifizieren";
+  /// "Später verifizieren"
+  String get canselClaimVerification => "Später verifizieren";
+  /// "Verifizierung"
+  String get titleFormClaimVerification => "Verifizierung";
+  /// "Verifizierung"
+  String get buttonFormClaimVerification => "Verifizierung";
+  /// "Geld senden"
+  String get titlePaymentOverview => "Geld senden";
+  /// "Bezahlen"
+  String get buttonPaymentOverview => "Bezahlen";
+  /// "Betrag & Empfänger"
+  String get titlePaymentScreen => "Betrag & Empfänger";
+  /// "Empfänger"
+  String get hintRecieverInput => "Empfänger";
+  /// "Uups, der Betrag ist vergessen gegangen."
+  String get validationAmountInput => "Uups, der Betrag ist vergessen gegangen.";
+  /// "Uups, der Empfänger ist vergessen gegangen."
+  String get validationRecieverInput => "Uups, der Empfänger ist vergessen gegangen.";
+  /// "QR Rechnung"
+  String get titleRequestScreen => "QR Rechnung";
+  /// "Wallet ${walletId}"
+  String walletRequestScreen(String walletId) => "Wallet ${walletId}";
+  /// "CHF ${amount}"
+  String amountRequestScreen(String amount) => "CHF ${amount}";
 }
 
 class _I18n_de_CH extends I18n {

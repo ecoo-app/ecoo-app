@@ -76,7 +76,7 @@ class WalletScreen extends StatelessWidget {
                         ),
                         CircularIconButton(
                           icon: Icons.attach_money,
-                          text: 'Gutschrift anfordern',
+                          text: I18n.of(context).privateWalletClaim,
                           onPressed: () {
                             Navigator.pushNamed(context, ClaimVerificationRoute,
                                 arguments: vmodel.walletState.value.walletID);
@@ -84,7 +84,7 @@ class WalletScreen extends StatelessWidget {
                         )
                       ]),
                   PrimaryButton(
-                    text: I18n.of(context).personalWalletPay,
+                    text: I18n.of(context).privateWalletPay,
                     onPressed: () {
                       Navigator.pushNamed(context, PaymentOverviewRoute,
                           arguments: PaymentOverviewArguments(
