@@ -21,7 +21,12 @@ class WalletViewModel extends BaseViewModel {
 
   //
   Future<void> setWalletId(String walletId) async {
-    if (walletId == null || walletId == _walletState.value.walletID) {
+    // TODO improve ifs
+    if (_walletState.value.walletID == null) {
+      _walletState = WalletState(WalletData(walletID: walletId));
+      await loadWalletDetail(walletId);
+      await updateWalletDetail(walletId);
+    } else if (walletId == null || walletId == _walletState.value.walletID) {
       await updateWalletDetail(walletId);
     } else {
       _walletState = WalletState(WalletData(walletID: walletId));

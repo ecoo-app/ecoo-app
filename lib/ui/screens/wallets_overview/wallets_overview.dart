@@ -4,6 +4,7 @@ import 'package:e_coupon/ui/core/view_state/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/viewstate.dart';
 import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
+import 'package:e_coupon/ui/core/widgets/layout/headerless_layout.dart';
 
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 import 'package:e_coupon/ui/core/widgets/wallet_card.dart';
@@ -12,11 +13,8 @@ import 'package:flutter/material.dart';
 class WalletsOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Wallets'),
-          backgroundColor: Colors.cyan,
-        ),
+    return HeaderlessLayout(
+        title: 'Wallets',
         body: BaseView<WalletsViewModel>(
             model: getIt<WalletsViewModel>(),
             onModelReady: (vmodel) => vmodel.loadWallets(),
