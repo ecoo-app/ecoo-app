@@ -20,9 +20,9 @@ class WalletsOverviewScreen extends StatelessWidget {
             onModelReady: (vmodel) => vmodel.loadWallets(),
             builder: (context, vmodel, child) {
               // return vmodel.state == ViewStateEnum.Busy
-              if (vmodel.viewState is Initial || vmodel.viewState is Loading)
+              if (vmodel.viewState is Initial || vmodel.viewState is Loading) {
                 return Center(child: ECProgressIndicator());
-              else if (vmodel.viewState is Loaded)
+              } else if (vmodel.viewState is Loaded) {
                 return Column(
                   children: <Widget>[
                     ListView.builder(
@@ -50,6 +50,8 @@ class WalletsOverviewScreen extends StatelessWidget {
                     )
                   ],
                 );
+              }
+              return Container();
             }));
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class RequestQRBillScreen extends StatelessWidget {
+  // ignore: unused_field
   static const double _topSectionHeight = 150.0;
 
   final RequestData requestData;

@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class ClaimVerificationViewModel extends BaseViewModel {
   VerificationForm verificationInputs;
+  // ignore: unused_field
   final VerifyClaim _verifyClaim;
   final GetVerificationInputs _getVerificationInputs;
 

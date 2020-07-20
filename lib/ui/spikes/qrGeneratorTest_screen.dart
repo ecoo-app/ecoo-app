@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -18,7 +19,7 @@ class GenerateScreenState extends State<GenerateScreen> {
   static const double _topSectionBottomPadding = 20.0;
   static const double _topSectionHeight = 50.0;
 
-  GlobalKey globalKey = new GlobalKey();
+  GlobalKey globalKey = GlobalKey();
   String _dataString = "Hello from this QR";
   String _inputErrorText;
   final TextEditingController _textController = TextEditingController();
@@ -48,11 +49,11 @@ class GenerateScreenState extends State<GenerateScreen> {
       Uint8List pngBytes = byteData.buffer.asUint8List();
 
       final tempDir = await getTemporaryDirectory();
-      final file = await new File('${tempDir.path}/image.png').create();
+      final file = await File('${tempDir.path}/image.png').create();
       await file.writeAsBytes(pngBytes);
 
       final channel = const MethodChannel('channel:me.alfian.share/share');
-      channel.invokeMethod('shareFile', 'image.png');
+      unawaited(channel.invokeMethod('shareFile', 'image.png'));
     } catch (e) {
       print(e.toString());
     }

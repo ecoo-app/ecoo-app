@@ -12,7 +12,7 @@ abstract class Env {
   static const String prod = 'prod';
   static const String mock = 'mock';
 
-  static const devEnv = const Environment(dev);
-  static const prodEnv = const Environment(prod);
-  static const mockEnv = const Environment(mock);
+  static const devEnv = Environment(dev);
+  static const prodEnv = Environment(prod);
+  static const mockEnv = Environment(mock);
 }

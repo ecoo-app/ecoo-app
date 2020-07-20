@@ -1,11 +1,11 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart'
-    as scannerInterface;
+    as scanner_interface;
 import 'package:flutter/services.dart';
 
 // @Environment(Env.dev)
 // @Injectable(as: scannerInterface.IQRScanner)
-class QRScanner implements scannerInterface.IQRScanner {
+class QRScanner implements scanner_interface.IQRScanner {
   @override
   scan() async {
     // TODO: implement scan

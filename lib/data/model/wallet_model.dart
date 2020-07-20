@@ -1,5 +1,4 @@
 import 'package:e_coupon/business/entities/currency.dart';
-import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 
 class WalletModel extends Wallet {

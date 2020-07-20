@@ -2,7 +2,6 @@ import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/view_state/base_view.dart';
-import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/core/widgets/amount_input.dart';

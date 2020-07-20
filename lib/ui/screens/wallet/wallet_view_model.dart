@@ -40,14 +40,16 @@ class WalletViewModel extends BaseViewModel {
   Future<void> loadWalletDetail(String walletId) async {
     _walletState.processingState = Loading();
     // why do i have to check for null when the constructor sets a wallet with default values?
-    if (_walletState.value.amount == null)
+    if (_walletState.value.amount == null) {
       _walletState.value.amount = AmountState(0);
+    }
 
     _walletState.value.amount.processingState = Loading();
 
     // why do i have to check for null when the constructor sets a wallet with default values?
-    if (_walletState.value.transactions == null)
+    if (_walletState.value.transactions == null) {
       _walletState.value.transactions = TransactionsState([]);
+    }
 
     _walletState.value.transactions.processingState = Loading();
     // TODO how to improve and make a meanigful state change instead of just any replacement to trigger widget update?

@@ -13,6 +13,9 @@ const double _kLeadingWidth =
     kToolbarHeight; // So the leading button is square.
 
 // Bottom justify the kToolbarHeight child which may overflow the top.
+// ignore_for_file:missing_enum_constant_in_switch
+// ignore_for_file:deprecated_member_use
+// ignore_for_file:curly_braces_in_flow_control_structures
 class _ToolbarContainerLayout extends SingleChildLayoutDelegate {
   const _ToolbarContainerLayout();
 

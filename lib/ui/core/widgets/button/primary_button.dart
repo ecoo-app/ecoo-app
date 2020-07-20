@@ -29,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
                 children: <Widget>[
                   CircularProgressIndicator(
                       valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.white)),
+                          AlwaysStoppedAnimation<Color>(Colors.white)),
                   Text(text)
                 ],
               )

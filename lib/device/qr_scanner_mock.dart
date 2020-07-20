@@ -7,13 +7,14 @@ import 'package:e_coupon/data/lib/mock_data.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pedantic/pedantic.dart';
 
 @Injectable(as: IQRScanner)
 class MockQRScanner implements IQRScanner {
   @override
   Future<Either<Failure, ScannedResult>> scan() async {
     try {
-      BarcodeScanner.scan();
+      unawaited(BarcodeScanner.scan());
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         print('No camera permission!');

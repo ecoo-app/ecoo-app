@@ -1,16 +1,11 @@
-import 'dart:convert';
 
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
-import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
-import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 void main() {
   configureInjection(Env.dev);
@@ -53,7 +48,7 @@ class ECouponApp extends StatelessWidget {
       locale: _locale,
       supportedLocales: i18n.supportedLocales,
       localeResolutionCallback:
-          i18n.resolution(fallback: new Locale("de", "CH")),
+          i18n.resolution(fallback: Locale("de", "CH")),
       theme: generalTheme,
       title: "eCoupon",
       onGenerateRoute: Router.generateRoute,

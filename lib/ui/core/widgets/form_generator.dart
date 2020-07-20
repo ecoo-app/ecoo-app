@@ -4,6 +4,7 @@ import 'package:e_coupon/ui/core/widgets/date_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+// ignore: unused_element
 var _formKey = GlobalKey<FormState>();
 
 ///

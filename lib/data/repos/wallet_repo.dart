@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/verification_form.dart';
-import 'package:e_coupon/business/entities/verification_input.dart';
 import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/data/lib/mock_data.dart';
-import 'package:e_coupon/data/lib/mock_library.dart' as libAPI;
+import 'package:e_coupon/data/lib/mock_library.dart' as lib_api;
 import 'package:e_coupon/data/model/currency_model.dart';
 import 'package:e_coupon/data/model/wallet_model.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
@@ -16,13 +15,14 @@ import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/local/local_wallet_source.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pedantic/pedantic.dart';
 
 import '../network_info.dart';
 
 @LazySingleton(as: IWalletRepo)
 class WalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
-  final libAPI.ILibWalletSource libDataSource;
+  final lib_api.ILibWalletSource libDataSource;
   final INetworkInfo networkInfo;
 
   WalletRepo({this.localDataSource, this.networkInfo, this.libDataSource});
@@ -65,7 +65,7 @@ class WalletRepo implements IWalletRepo {
       try {
         // TODO use lib
         final wallets = await _getMockWallets();
-        localDataSource.cacheWallets('wallets', wallets);
+        unawaited(localDataSource.cacheWallets('wallets', wallets));
         return Right(wallets);
       } on MessageFailure {
         //ServerException

@@ -1,6 +1,5 @@
 import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/verification_input.dart';
-import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 enum VerificationState { Open, Pending, Successful }
