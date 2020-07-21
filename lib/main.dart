@@ -1,4 +1,3 @@
-
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
@@ -6,31 +5,23 @@ import 'package:e_coupon/ui/core/style/theme.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:injectable/injectable.dart';
 
-void main() {
-  configureInjection(Env.dev);
-  runApp(ECouponApp()
-      // MultiProvider(
-      //   providers: [
-      //     ChangeNotifierProvider<WalletViewModel>.value(
-      //         value: getIt<WalletViewModel>()),
-      //     ChangeNotifierProvider<WalletsViewModel>(
-      //         create: (_) => getIt<WalletsViewModel>()),
-      //   ],
-      //   child: ECouponApp(),
-      // ),
-      );
-  // runApp(
-  //   ChangeNotifierProvider<WalletsViewModel>(
-  //     create: (_) => serviceLocator<WalletsViewModel>(),
-  //     child: TestApp(),
-  //   ),
-  // );
-  //runApp(TestApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureInjection(Env.dev);
+
+  var app = getIt.get<ECouponApp>();
+  runApp(app);
 }
 
+@injectable
 class ECouponApp extends StatelessWidget {
   final Locale _locale = Locale('de', 'CH');
+
+  final IRouter router;
+
+  ECouponApp(this.router);
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +38,12 @@ class ECouponApp extends StatelessWidget {
       ],
       locale: _locale,
       supportedLocales: i18n.supportedLocales,
-      localeResolutionCallback:
-          i18n.resolution(fallback: Locale("de", "CH")),
+      localeResolutionCallback: i18n.resolution(fallback: Locale("de", "CH")),
       theme: generalTheme,
       title: "eCoupon",
-      onGenerateRoute: Router.generateRoute,
-      initialRoute: WalletDetailRoute,
+      onGenerateRoute: Router.onGenerateRoute,
+      navigatorKey: router.navigatorKey,
+      initialRoute: SplashRoute,
     );
   }
 }

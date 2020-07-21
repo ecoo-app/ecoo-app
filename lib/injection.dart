@@ -1,11 +1,11 @@
+import 'package:e_coupon/injection.config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'injection.iconfig.dart';
 
 final getIt = GetIt.instance;
 
 @injectableInit
-void configureInjection(env) => $initGetIt(getIt, environment: env);
+Future<void> configureInjection(env) => $initGetIt(getIt, environment: env);
 
 abstract class Env {
   static const String dev = 'dev';

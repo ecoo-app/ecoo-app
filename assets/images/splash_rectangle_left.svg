@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="115" height="181" viewBox="0 0 115 181">
+    <defs>
+        <linearGradient id="glda81a9va" x1="8.066%" x2="97.997%" y1="0%" y2="96.946%">
+            <stop offset="0%" stop-color="#45DEA3"/>
+            <stop offset="54.194%" stop-color="#39C1FF"/>
+            <stop offset="100%" stop-color="#3979FF"/>
+        </linearGradient>
+    </defs>
+    <rect width="160" height="160" x="-59" y="144.946" fill="url(#glda81a9va)" fill-rule="evenodd" opacity=".9" rx="10" transform="rotate(-13 -553.886 159.446)"/>
+</svg>

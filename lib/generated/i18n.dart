@@ -86,6 +86,16 @@ class I18n implements WidgetsLocalizations {
   String walletRequestScreen(String walletId) => "Wallet ${walletId}";
   /// "CHF ${amount}"
   String amountRequestScreen(String amount) => "CHF ${amount}";
+  /// "eCoupon"
+  String get titleSplashScreen => "eCoupon";
+  /// "Registrieren"
+  String get titleRegisterScreen => "Registrieren";
+  /// "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet"
+  String get descriptionRegisterScreen => "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet";
+  /// "Mit Apple fortfahren"
+  String get signinwithappleRegisterScreen => "Mit Apple fortfahren";
+  /// "Mit Google fortfahren"
+  String get signinwithgoogleRegisterScreen => "Mit Google fortfahren";
 }
 
 class _I18n_de_CH extends I18n {

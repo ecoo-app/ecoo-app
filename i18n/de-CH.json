@@ -25,5 +25,10 @@
   "validationRecieverInput": "Uups, der Empfänger ist vergessen gegangen.",
   "titleRequestScreen": "QR Rechnung",
   "walletRequestScreen": "Wallet {walletId}",
-  "amountRequestScreen": "CHF {amount}"
+  "amountRequestScreen": "CHF {amount}",
+  "titleSplashScreen": "eCoupon",
+  "titleRegisterScreen": "Registrieren",
+  "descriptionRegisterScreen": "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet",
+  "signinwithappleRegisterScreen": "Mit Apple fortfahren",
+  "signinwithgoogleRegisterScreen": "Mit Google fortfahren"
 }

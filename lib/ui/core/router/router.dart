@@ -1,3 +1,4 @@
+import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/creation_verification/wallet_creation_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
@@ -5,15 +6,22 @@ import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
+import 'package:e_coupon/ui/screens/start/register_screen.dart';
+import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
+import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
 import 'package:e_coupon/ui/screens/creation_verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 // unfortunately routesetting does not allow enums
 const HomeRoute = '/';
+const SplashRoute = '/splash';
+const OnboardingRoute = '/onboarding';
+const RegisterRoute = '/register';
 const WalletCreationRoute = 'walletCreation';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
@@ -25,9 +33,31 @@ const SuccessRoute = 'success';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
 
-class Router {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+abstract class IRouter {
+  GlobalKey<NavigatorState> get navigatorKey;
+
+  void pop();
+
+  Future<T> pushNamed<T>(String route, {dynamic arguments});
+
+  Future<void> pushAndRemoveUntil(String route, String until, {dynamic arguments});
+}
+
+@Singleton(as: IRouter)
+class Router implements IRouter {
+  final GlobalKey<NavigatorState> _globalNavKey = GlobalKey<NavigatorState>();
+
+  @override
+  GlobalKey<NavigatorState> get navigatorKey => _globalNavKey;
+
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case SplashRoute:
+        return _createRoute(settings, getIt<SplashScreen>(), false);
+      case OnboardingRoute:
+        return _createRoute(settings, getIt<OnboardingScreen>(), false);
+      case RegisterRoute:
+        return _createRoute(settings, getIt<RegisterScreen>(), false);
       case WalletCreationRoute:
         return MaterialPageRoute(builder: (_) => WalletCreationScreen());
       case HomeRoute:
@@ -77,5 +107,30 @@ class Router {
                   ),
                 ));
     }
+  }
+
+  static MaterialPageRoute _createRoute(
+      RouteSettings settings, Widget builder, bool modalDialog) {
+    return MaterialPageRoute(
+        settings: settings,
+        builder: (BuildContext context) => builder,
+        fullscreenDialog: modalDialog);
+  }
+
+  @override
+  void pop() {
+    return navigatorKey.currentState.pop();
+  }
+
+  @override
+  Future<T> pushNamed<T>(String route, {arguments}) {
+    return navigatorKey.currentState.pushNamed(route, arguments: arguments);
+  }
+
+  @override
+  Future<void> pushAndRemoveUntil(String route, String until, {arguments}) {
+    return navigatorKey.currentState.pushNamedAndRemoveUntil(
+        route, (route) => route.settings.name == until,
+        arguments: arguments);
   }
 }
