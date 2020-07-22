@@ -16,7 +16,7 @@ class WalletsViewModel extends BaseViewModel {
 
   get state => null;
 
-  void loadWallets() async {
+  Future<void> loadWallets() async {
     // setState(ViewStateEnum.Busy);
     setViewState(Loading());
 

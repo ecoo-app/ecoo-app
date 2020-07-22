@@ -1,4 +1,6 @@
+import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
+import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,12 +21,13 @@ class OnboardingScreen extends StatelessWidget {
             fit: StackFit.expand,
             alignment: AlignmentDirectional.topStart,
             children: <Widget>[
+              CustomHeader(
+                closeIcon: Assets.close_svg,
+                onClose: () => Navigator.of(context).pop(),
+              ),
               SizedBox(
                 height: 100,
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 16, right: 16),
-                child: Text('Onboarding')),
               Container(
                 margin: const EdgeInsets.only(left: 16, right: 16),
                 child: PrimaryButton(

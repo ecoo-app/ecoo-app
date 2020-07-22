@@ -55,7 +55,7 @@ class Router implements IRouter {
       case SplashRoute:
         return _createRoute(settings, getIt<SplashScreen>(), false);
       case OnboardingRoute:
-        return _createRoute(settings, getIt<OnboardingScreen>(), false);
+        return _createRoute(settings, getIt<OnboardingScreen>(), true);
       case RegisterRoute:
         return _createRoute(settings, getIt<RegisterScreen>(), false);
       case WalletCreationRoute:

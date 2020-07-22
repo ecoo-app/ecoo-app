@@ -1,3 +1,4 @@
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,6 +13,7 @@ class WidgetTestApp {
         const Locale('de', ''),
       ],
       localizationsDelegates: [
+        I18n.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],

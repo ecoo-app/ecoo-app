@@ -96,6 +96,18 @@ class I18n implements WidgetsLocalizations {
   String get signinwithappleRegisterScreen => "Mit Apple fortfahren";
   /// "Mit Google fortfahren"
   String get signinwithgoogleRegisterScreen => "Mit Google fortfahren";
+  /// "Meine Wallets"
+  String get titleMenuScreen => "Meine Wallets";
+  /// "Erste Schritte"
+  String get onboardingMenuScreen => "Erste Schritte";
+  /// "FAQ & Hilfe"
+  String get faqhelpMenuScreen => "FAQ & Hilfe";
+  /// "Datenschutzbestimmungen"
+  String get privacyPolicyMenuScreen => "Datenschutzbestimmungen";
+  /// "App Version:"
+  String get appversionMenuScreen => "App Version:";
+  /// "Wallet"
+  String get walletMenuScreen => "Wallet";
 }
 
 class _I18n_de_CH extends I18n {

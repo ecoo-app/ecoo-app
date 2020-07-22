@@ -30,5 +30,11 @@
   "titleRegisterScreen": "Registrieren",
   "descriptionRegisterScreen": "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet",
   "signinwithappleRegisterScreen": "Mit Apple fortfahren",
-  "signinwithgoogleRegisterScreen": "Mit Google fortfahren"
+  "signinwithgoogleRegisterScreen": "Mit Google fortfahren",
+  "titleMenuScreen": "Meine Wallets",
+  "onboardingMenuScreen": "Erste Schritte",
+  "faqhelpMenuScreen": "FAQ & Hilfe",
+  "privacyPolicyMenuScreen": "Datenschutzbestimmungen",
+  "appversionMenuScreen": "App Version:",
+  "walletMenuScreen": "Wallet"
 }

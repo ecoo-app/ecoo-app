@@ -17,4 +17,6 @@ class Wallet extends Equatable {
 
   @override
   List<Object> get props => [id, amount, currency, isShop];
+
+  String toAmountCurrencyLabel() => '${currency.label} ${amount.toStringAsFixed(2)}';
 }

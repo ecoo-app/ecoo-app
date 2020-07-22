@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:get_it/get_it.dart';
 import 'package:injectable/get_it_helper.dart';
+import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'business/repo_definitions/abstract_wallet_repo.dart';
@@ -28,9 +29,12 @@ import 'main.dart';
 import 'modules/third_party_library_module.dart';
 import 'ui/core/router/router.dart';
 import 'ui/core/services/abstract_qr_scanner.dart';
+import 'ui/core/services/app_service.dart';
 import 'ui/core/services/login_service.dart';
 import 'ui/core/services/settings_service.dart';
 import 'ui/screens/creation_verification/verification_view_model.dart';
+import 'ui/screens/menu/menu_screen.dart';
+import 'ui/screens/menu/menu_screen_view_model.dart';
 import 'ui/screens/payment/payment_overview_view_model.dart';
 import 'ui/screens/payment/payment_view_model.dart';
 import 'ui/screens/payment/request_view_model.dart';
@@ -60,6 +64,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         networkInfo: g<INetworkInfo>(),
         libDataSource: g<ILibWalletSource>(),
       ));
+  final packageInfo = await thirdPartyLibraryModule.packageInfo;
+  gh.factory<PackageInfo>(() => packageInfo);
   gh.factory<PaymentViewModel>(() => PaymentViewModel());
   gh.factory<RegisterScreenViewModel>(
       () => RegisterScreenViewModel(g<IRouter>()));
@@ -81,7 +87,10 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<GetWallet>(() => GetWallet(repository: g<IWalletRepo>()));
   gh.lazySingleton<HandleTransaction>(
       () => HandleTransaction(repository: g<IWalletRepo>()));
+  gh.factory<IAppService>(() => AppService(g<PackageInfo>()));
   gh.factory<ISettingsService>(() => SettingsService(g<SharedPreferences>()));
+  gh.factory<MenuScreenViewModel>(
+      () => MenuScreenViewModel(g<IAppService>(), g<IRouter>()));
   gh.factory<OnboardingScreenViewModel>(
       () => OnboardingScreenViewModel(g<IRouter>(), g<ISettingsService>()));
   gh.factory<PaymentOverviewViewModel>(
@@ -99,6 +108,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));
   gh.factory<ClaimVerificationViewModel>(() =>
       ClaimVerificationViewModel(g<VerifyClaim>(), g<GetVerificationInputs>()));
+  gh.factory<MenuScreen>(() => MenuScreen(g<MenuScreenViewModel>()));
   gh.factory<OnboardingScreen>(
       () => OnboardingScreen(g<OnboardingScreenViewModel>()));
   gh.factory<SplashScreen>(() => SplashScreen(g<SplashScreenViewModel>()));
