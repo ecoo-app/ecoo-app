@@ -1,14 +1,18 @@
+import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/data/lib/mock_data.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/core/widgets/amount_display.dart';
 import 'package:e_coupon/ui/core/widgets/button/circular_icon_button.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
+import 'package:ecoupon_lib/models/wallet.dart' as lib;
 import 'package:flutter/material.dart';
 
 import '../../../injection.dart';
@@ -86,9 +90,7 @@ class WalletScreen extends StatelessWidget {
                   PrimaryButton(
                     text: I18n.of(context).privateWalletPay,
                     onPressed: () {
-                      Navigator.pushNamed(context, PaymentOverviewRoute,
-                          arguments: PaymentOverviewArguments(
-                              title: 'Zahlung bestätigen', shouldScan: true));
+                      vmodel.makePayment();
                     },
                   ),
                   Expanded(

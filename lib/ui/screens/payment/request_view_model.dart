@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
+import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 

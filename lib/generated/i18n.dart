@@ -74,8 +74,10 @@ class I18n implements WidgetsLocalizations {
   String get buttonPaymentOverview => "Bezahlen";
   /// "Betrag & Empfänger"
   String get titlePaymentScreen => "Betrag & Empfänger";
-  /// "Empfänger"
-  String get hintRecieverInput => "Empfänger";
+  /// "Senden an:"
+  String get labelRecieverInput => "Senden an:";
+  /// "Wallet ID"
+  String get hintRecieverInput => "Wallet ID";
   /// "Uups, der Betrag ist vergessen gegangen."
   String get validationAmountInput => "Uups, der Betrag ist vergessen gegangen.";
   /// "Uups, der Empfänger ist vergessen gegangen."
@@ -108,6 +110,10 @@ class I18n implements WidgetsLocalizations {
   String get appversionMenuScreen => "App Version:";
   /// "Wallet"
   String get walletMenuScreen => "Wallet";
+  /// "Manuell eingeben"
+  String get cancelScan => "Manuell eingeben";
+  /// "Bezahlung erfolgreich"
+  String get paymentSuccessful => "Bezahlung erfolgreich";
 }
 
 class _I18n_de_CH extends I18n {

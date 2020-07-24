@@ -7,6 +7,7 @@ class TransactionOverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      isShop: false,
       title: 'Wallets',
       body: Column(children: <Widget>[
         Text('Bewegungen'),

@@ -1,8 +1,8 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
 
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';

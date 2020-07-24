@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 const FontWeight fontWeightMedium = FontWeight.w500;
 const FontWeight fontWeightRegular = FontWeight.w400;
@@ -42,6 +43,20 @@ ThemeData generalTheme = ThemeData(
           fontSize: 10.0, fontWeight: fontWeightRegular, fontFamily: 'Roboto')),
 );
 
+class TextStyles {
+  static const body_text_white = TextStyle(
+      fontSize: 15.0,
+      fontWeight: fontWeightRegular,
+      fontFamily: 'Roboto',
+      color: Colors.white);
+
+  static const headline3_text_white = TextStyle(
+      fontSize: 25.0,
+      fontWeight: fontWeightMedium,
+      fontFamily: fontFamiliyPanam,
+      color: ColorStyles.white);
+}
+
 class ColorStyles {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF373737);
@@ -51,10 +66,18 @@ class ColorStyles {
 
   static const Color blue = Color(0xFF3979FF);
   static const Color green = Color(0xFF3979FF);
+
+  static LinearGradient app_gradient = Gradients.blush;
+  static LinearGradient private_gradient = Gradients.coldLinear;
+  static LinearGradient shop_graident = Gradients.rainbowBlue;
 }
 
 class LayoutStyles {
   static const double iconSize = 23;
+
+  static const int spacing_xs = 4;
+  static const int spacing_s = 8;
+  static const int spacint_m = 32;
 }
 
 class Assets {
@@ -62,6 +85,8 @@ class Assets {
   static const tezos_svg = 'assets/images/tezos.svg';
   static const apple_icon_svg = 'assets/images/apple_icon.svg';
   static const google_icon_svg = 'assets/images/google_icon.svg';
+
+  static const icon_button_svg = 'assets/images/icon_button.svg';
 
   static const wallet_svg = 'assets/images/wallet_icon.svg';
   static const splash_recangle_left_svg =
@@ -73,4 +98,6 @@ class Assets {
 
   static const wallet_shop_svg = 'assets/images/wallet_shop.svg';
   static const wallet_private_svg = 'assets/images/wallet_private.svg';
+
+  static const check_double_svg = 'assets/images/check_double.svg';
 }

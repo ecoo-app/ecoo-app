@@ -1,16 +1,28 @@
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
 
 import '../../../injection.dart';
 
+class SuccessScreenArguments {
+  final bool isShop;
+  final String text;
+  final String iconAssetPath;
+  SuccessScreenArguments({this.isShop, this.text, this.iconAssetPath});
+}
+
 class SuccessScreen extends StatelessWidget {
+  final SuccessScreenArguments args;
+
+  SuccessScreen(this.args);
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return SafeArea(
         child: Scaffold(
             body: BaseView<SuccessViewModel>(
@@ -33,17 +45,25 @@ class SuccessScreen extends StatelessWidget {
                   return Center(
                       child: Container(
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topRight,
-                            end: Alignment.bottomLeft,
-                            colors: [Colors.blue, Colors.red])),
+                        gradient: args.isShop
+                            ? Gradients.rainbowBlue
+                            : Gradients.coldLinear),
                     child: Center(
-                      child: Text(
-                        'Success!',
-                        style: TextStyle(
-                            fontSize: 48.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SvgPicture.asset(
+                            args.iconAssetPath,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            height: 29,
+                          ),
+                          Text(
+                            args.text,
+                            style: TextStyles.headline3_text_white,
+                          )
+                        ],
                       ),
                     ),
                   ));

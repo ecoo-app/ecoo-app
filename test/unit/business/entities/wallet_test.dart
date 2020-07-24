@@ -1,15 +1,13 @@
-import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ecoupon_lib/models/wallet.dart' as libWallet;
+import 'package:ecoupon_lib/models/currency.dart' as libCurrency;
 
 void main() {
   test('get string with currency and amount', () async {
-    var wallet = Wallet(
-        amount: 10.0,
-        currency: Currency(id: 'CHF', label: 'CHF'),
-        id: 'TestID',
-        isShop: false);
+    var wallet = WalletEntity(libWallet.Wallet('TestID', 'TestKey',
+        libCurrency.Currency('CHF', 'CHF', 0), false, 1000, 'testState'));
 
-        expect(wallet.toAmountCurrencyLabel(), 'CHF 10.00');
+    expect(wallet.toAmountCurrencyLabel(), 'CHF 10.00');
   });
 }

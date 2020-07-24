@@ -20,7 +20,8 @@
   "titlePaymentOverview": "Geld senden",
   "buttonPaymentOverview": "Bezahlen",
   "titlePaymentScreen": "Betrag & Empfänger",
-  "hintRecieverInput": "Empfänger",
+  "labelRecieverInput": "Senden an:",
+  "hintRecieverInput": "Wallet ID",
   "validationAmountInput": "Uups, der Betrag ist vergessen gegangen.",
   "validationRecieverInput": "Uups, der Empfänger ist vergessen gegangen.",
   "titleRequestScreen": "QR Rechnung",
@@ -36,5 +37,7 @@
   "faqhelpMenuScreen": "FAQ & Hilfe",
   "privacyPolicyMenuScreen": "Datenschutzbestimmungen",
   "appversionMenuScreen": "App Version:",
-  "walletMenuScreen": "Wallet"
+  "walletMenuScreen": "Wallet",
+  "cancelScan": "Manuell eingeben",
+  "paymentSuccessful": "Bezahlung erfolgreich"
 }

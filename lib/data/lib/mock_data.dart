@@ -1,3 +1,7 @@
+import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:ecoupon_lib/models/currency.dart';
+import 'package:ecoupon_lib/models/wallet.dart' as lib;
+
 import 'mock_library.dart';
 
 class MockTransaction extends TransactionRecordAPI {
@@ -25,27 +29,18 @@ List<TransactionRecordAPI> MockTransactionWalletShop = [
   MockTransaction('Wallet-ID 3w45g5467', 13.60, [MockEncashmentTag()]),
 ];
 
-class MockWetzikonCurrency extends CurrencyAPI {
-  MockWetzikonCurrency() : super(id: 'wetzicoin', label: 'wetzicoin');
-}
-
-class MockWallet extends WalletAPI {
-  MockWallet(String id, double amount, CurrencyAPI currency, bool isShop,
-      VerificationState verificationState)
-      : super(
-            walletId: id,
-            amount: amount,
-            currency: currency,
-            isShop: isShop,
-            verificationState: verificationState);
+class MockWetzikonCurrency extends Currency {
+  MockWetzikonCurrency() : super('wetzicoin', 'wetzicoin', 67);
 }
 
 const PrivateWalletID = 'DR345GH67';
+const PrivatePublicKey = 'tz1Ns3YQJR6piMZ8GrD2iYu94Ybi1HFfNyBP';
 const ShopWalletID = '45FGH62SD';
+const ShopPublicKey = 'tz1Ns3YQJR6piMZ8GrD2iEn34Ybi1HFfNyBP';
 
-List<WalletAPI> MockWallets = [
-  MockWallet(PrivateWalletID, 105.50, MockWetzikonCurrency(), false,
-      VerificationState.Successful),
-  MockWallet(ShopWalletID, 1059.00, MockWetzikonCurrency(), true,
-      VerificationState.Successful)
+List<WalletEntity> MockWallets = [
+  WalletEntity(lib.Wallet(PrivateWalletID, PrivatePublicKey,
+      MockWetzikonCurrency(), false, 105, 'successful')),
+  WalletEntity(lib.Wallet(ShopWalletID, ShopPublicKey, MockWetzikonCurrency(),
+      true, 1059, 'successful'))
 ];

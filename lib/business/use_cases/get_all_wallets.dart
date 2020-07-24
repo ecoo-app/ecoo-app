@@ -8,12 +8,13 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 @lazySingleton
-class GetAllWallets extends UseCase<List<Wallet>, AllWalletParams> {
+class GetAllWallets extends UseCase<List<WalletEntity>, AllWalletParams> {
   final IWalletRepo repository;
 
   GetAllWallets({this.repository});
 
-  Future<Either<Failure, List<Wallet>>> call(AllWalletParams params) async {
+  Future<Either<Failure, List<WalletEntity>>> call(
+      AllWalletParams params) async {
     return await repository.getWallets(params.userIdentifier);
   }
 }

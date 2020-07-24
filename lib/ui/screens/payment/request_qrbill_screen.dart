@@ -18,6 +18,7 @@ class RequestQRBillScreen extends StatelessWidget {
         MediaQuery.of(context).viewInsets.bottom;
 
     return MainLayout(
+      isShop: false,
       title: I18n.of(context).titleRequestScreen,
       // body: Text(requestData.amount.toString()),
       body: Container(
@@ -28,7 +29,7 @@ class RequestQRBillScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(I18n.of(context)
-                  .walletRequestScreen(requestData.requesterId)),
+                  .walletRequestScreen(requestData.requester.id)),
               Text(I18n.of(context)
                   .amountRequestScreen(requestData.amount.toString())),
               RepaintBoundary(

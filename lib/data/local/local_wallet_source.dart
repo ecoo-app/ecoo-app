@@ -3,10 +3,10 @@ import 'package:injectable/injectable.dart';
 import 'package:localstorage/localstorage.dart';
 
 abstract class ILocalWalletSource {
-  Future<void> cacheWallet(String key, Wallet wallet);
-  Future<void> cacheWallets(String key, List<Wallet> wallets);
-  Future<Wallet> getWallet(String key);
-  Future<List<Wallet>> getWallets(String key);
+  Future<void> cacheWallet(String key, WalletEntity wallet);
+  Future<void> cacheWallets(String key, List<WalletEntity> wallets);
+  Future<WalletEntity> getWallet(String key);
+  Future<List<WalletEntity>> getWallets(String key);
 }
 
 @LazySingleton(as: ILocalWalletSource)
@@ -16,27 +16,27 @@ class LocalWalletSource implements ILocalWalletSource {
   LocalWalletSource() : _storage = LocalStorage('storageKey');
 
   @override
-  Future<void> cacheWallet(String key, Wallet wallet) async {
+  Future<void> cacheWallet(String key, WalletEntity wallet) async {
     await _storage.ready;
     //
     return _storage.setItem(key, {});
   }
 
   @override
-  Future<void> cacheWallets(String key, List<Wallet> wallets) async {
+  Future<void> cacheWallets(String key, List<WalletEntity> wallets) async {
     await _storage.ready;
     // TODO
     return _storage.setItem(key, {});
   }
 
   @override
-  Future<Wallet> getWallet(String key) async {
+  Future<WalletEntity> getWallet(String key) async {
     await _storage.ready;
     return _storage.getItem(key);
   }
 
   @override
-  Future<List<Wallet>> getWallets(String key) async {
+  Future<List<WalletEntity>> getWallets(String key) async {
     await _storage.ready;
     return _storage.getItem(key);
   }

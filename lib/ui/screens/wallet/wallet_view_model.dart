@@ -1,8 +1,13 @@
 import 'package:e_coupon/business/entities/currency.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/use_cases/get_transactions.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
-import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/router/router.dart';
+import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
+import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
+import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:meta/meta.dart';
 
 import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
@@ -13,8 +18,9 @@ class WalletViewModel extends BaseViewModel {
   WalletState _walletState;
   final GetWallet getWallet;
   final GetTransactions getTransactions;
+  final IRouter _router;
 
-  WalletViewModel({this.getWallet, this.getTransactions})
+  WalletViewModel(this.getWallet, this.getTransactions, this._router)
       : this._walletState = WalletState(WalletData(walletID: null));
 
   WalletState get walletState => this._walletState;
@@ -89,6 +95,7 @@ class WalletViewModel extends BaseViewModel {
     var walletOrFailure =
         await getWallet(WalletParams(id: _walletState.value.walletID));
     walletOrFailure.fold((failure) => print('FAILURE'), (wallet) {
+      _walletState.value.wallet = wallet;
       _walletState.value.currency = wallet.currency;
       _walletState.value.isShop = wallet.isShop;
       _walletState.value.amount.value = wallet.amount;
@@ -107,6 +114,11 @@ class WalletViewModel extends BaseViewModel {
     });
   }
   //
+
+  //
+  void makePayment() async {
+    await _router.pushNamed(PaymentRoute, arguments: walletState.value.wallet);
+  }
 }
 
 class ValueState<T> {
@@ -117,8 +129,9 @@ class ValueState<T> {
 }
 
 class WalletData {
+  WalletEntity wallet;
   String walletID;
-  Currency currency = Currency(id: 'loading', label: 'loading');
+  Currency currency = Currency(lib.Currency('loading', 'loading', 0));
   bool isShop = false;
   AmountState amount = AmountState(0);
   TransactionsState transactions = TransactionsState([]);
@@ -136,8 +149,8 @@ class WalletState extends ValueState<WalletData> {
   WalletState(WalletData initState) : super(initState);
 }
 
-class AmountState extends ValueState<double> {
-  AmountState(double initState) : super(initState);
+class AmountState extends ValueState<int> {
+  AmountState(int initState) : super(initState);
 }
 
 class TransactionsState extends ValueState<List<TransactionListEntry>> {

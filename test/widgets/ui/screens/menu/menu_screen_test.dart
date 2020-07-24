@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
@@ -13,6 +12,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
+import 'package:ecoupon_lib/models/wallet.dart' as libWallet;
+import 'package:ecoupon_lib/models/currency.dart' as libCurrency;
 
 import '../../../../helper/widget_test_app.dart';
 
@@ -39,11 +40,13 @@ void main() {
     _repositoryMock = WalletRepositoryMock();
     when(_repositoryMock.getWallets(any))
         .thenAnswer((realInvocation) => Future.value(Right([
-              Wallet(
-                  amount: 10.0,
-                  currency: Currency(id: 'CHF', label: 'CHF'),
-                  id: 'TestID',
-                  isShop: false)
+              WalletEntity(libWallet.Wallet(
+                  'TestID',
+                  'TestKey',
+                  libCurrency.Currency('CHF', 'CHF', 0),
+                  false,
+                  1000,
+                  'testState'))
             ])));
 
     var useCase = GetAllWallets(repository: _repositoryMock);

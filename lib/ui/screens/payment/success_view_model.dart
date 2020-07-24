@@ -1,14 +1,11 @@
-import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:injectable/injectable.dart';
 
 class DurationEnd extends ViewState {}
 
 @injectable
 class SuccessViewModel extends BaseViewModel {
-  // dont know how to make it work with a Duration object here directly....
-  int duration = 1000;
-
   void init() {
     Future.delayed(const Duration(milliseconds: 1000), () {
       setViewState(DurationEnd());

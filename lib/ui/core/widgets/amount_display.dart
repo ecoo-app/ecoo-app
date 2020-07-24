@@ -4,7 +4,7 @@ import 'ec_progress_indicator.dart';
 
 class AmountDisplay extends StatelessWidget {
   final bool isLoading;
-  final double amount;
+  final int amount;
   final String currency;
 
   AmountDisplay({this.isLoading, this.amount, this.currency});

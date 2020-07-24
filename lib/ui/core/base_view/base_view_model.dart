@@ -1,4 +1,4 @@
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 

@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/creation_verification/wallet_creation_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
@@ -40,7 +41,8 @@ abstract class IRouter {
 
   Future<T> pushNamed<T>(String route, {dynamic arguments});
 
-  Future<void> pushAndRemoveUntil(String route, String until, {dynamic arguments});
+  Future<void> pushAndRemoveUntil(String route, String until,
+      {dynamic arguments});
 }
 
 @Singleton(as: IRouter)
@@ -74,21 +76,18 @@ class Router implements IRouter {
       case ClaimVerificationRoute:
         return MaterialPageRoute(builder: (_) => VerificationScreen());
       case PaymentRoute:
-        var senderID = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => PaymentScreen(senderID: senderID));
+        var sender = settings.arguments as WalletEntity;
+        return _createRoute(settings, PaymentScreen(sender: sender), false);
       case PaymentOverviewRoute:
-        print('router arguments');
-        print(settings.arguments);
-        final PaymentOverviewArguments args =
-            settings.arguments as PaymentOverviewArguments;
+        final TransactionData args = settings.arguments as TransactionData;
         return MaterialPageRoute(
-            // whats the buildcontext? can it be use to have change notifiers from context of screen before?
             builder: (_) => PaymentOverviewScreen(
                   arguments: args,
                 ));
       case SuccessRoute:
-        return MaterialPageRoute(builder: (_) => SuccessScreen());
+        final SuccessScreenArguments args =
+            settings.arguments as SuccessScreenArguments;
+        return MaterialPageRoute(builder: (_) => SuccessScreen(args));
       case RequestPaymentRoute:
         // return MaterialPageRoute(builder: (_) => GenerateScreen());
         final String requesterId = settings.arguments as String;

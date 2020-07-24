@@ -1,18 +1,18 @@
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
-import 'package:e_coupon/ui/core/view_state/base_view_model.dart';
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 
 import 'package:injectable/injectable.dart';
 
 @injectable
 class WalletsViewModel extends BaseViewModel {
-  List<Wallet> _wallets = [];
+  List<WalletEntity> _wallets = [];
   final GetAllWallets getAllWallets;
 
   WalletsViewModel({this.getAllWallets});
 
-  List<Wallet> get wallets => _wallets;
+  List<WalletEntity> get wallets => _wallets;
 
   get state => null;
 

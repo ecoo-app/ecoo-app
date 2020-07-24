@@ -1,9 +1,11 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
-import 'package:e_coupon/ui/core/view_state/viewstate.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_view_model.dart';
+import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
@@ -11,29 +13,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-class PaymentOverviewArguments {
-  final bool shouldScan;
-  final String title;
-  final TransactionData transactionData;
-
-  PaymentOverviewArguments(
-      {this.title, this.shouldScan = false, this.transactionData});
-}
-
 class PaymentOverviewScreen extends StatelessWidget {
-  final PaymentOverviewArguments arguments;
+  final TransactionData arguments;
 
   PaymentOverviewScreen({@required this.arguments});
 
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      isShop: false,
       title: I18n.of(context).titlePaymentOverview,
       body: BaseView<PaymentOverviewViewModel>(
         model: getIt<PaymentOverviewViewModel>(), // TODO injectable
         onModelReady: (vmodel) => vmodel.initState(
-            transactionData: arguments.transactionData,
-            shouldScanQR: arguments.shouldScan),
+          transactionData: arguments,
+        ),
         builder: (context, vmodel, child) {
           // TODO show loading and success in a pop up?
           // if (vmodel.viewState is Loading) {
@@ -46,7 +40,11 @@ class PaymentOverviewScreen extends StatelessWidget {
           if (vmodel.viewState is Success) {
             // wait for the widget build process to finish (because vm setState) and then push new route
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              Navigator.pushNamed(context, SuccessRoute);
+              Navigator.pushNamed(context, SuccessRoute,
+                  arguments: SuccessScreenArguments(
+                      isShop: false,
+                      text: I18n.of(context).paymentSuccessful,
+                      iconAssetPath: Assets.check_double_svg));
               // Navigator.of(context)
               //     .pushNamedAndRemoveUntil(SuccessRoute, (route) => false);
             });
@@ -62,7 +60,7 @@ class PaymentOverviewScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                 ),
                 Text(
-                  'senden an ${vmodel.transactionData.recieverId}',
+                  'senden an ${vmodel.transactionData.reciever.id}',
                   style: TextStyle(fontSize: 25),
                 ),
                 Padding(
@@ -72,7 +70,8 @@ class PaymentOverviewScreen extends StatelessWidget {
                   text: I18n.of(context).buttonPaymentOverview,
                   isLoading: vmodel.viewState is Loading,
                   onPressed: () async {
-                    vmodel.initiateTransaction();
+                    vmodel.initiateTransaction(
+                        I18n.of(context).paymentSuccessful);
                     // Navigator.pushNamed(
                     //   context,
                     //   WalletDetailRoute,

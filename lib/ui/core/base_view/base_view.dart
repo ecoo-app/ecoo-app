@@ -8,7 +8,8 @@ class BaseView<T extends BaseViewModel> extends StatefulWidget {
   final T model;
   final Function(T) onModelReady;
 
-  /// defualt: true. set true to create a new provider and dispose it each time the view comes up. Set false to use the provider.value constructor.
+  /// defualt: true. set true to create a new provider and dispose it each time the view comes up.
+  /// Set false to use the provider.value constructor.
   final bool disposeState;
 
   BaseView(
@@ -51,32 +52,3 @@ class _BaseViewState<T extends BaseViewModel> extends State<BaseView<T>> {
     }
   }
 }
-
-// class BaseView<T extends BaseViewModel> extends StatefulWidget {
-//   final Widget Function(BuildContext context, T model, Widget child) builder;
-//   final Function(T) onModelReady;
-
-//   BaseView({this.builder, this.onModelReady});
-
-//   @override
-//   _BaseViewState<T> createState() => _BaseViewState<T>();
-// }
-
-// class _BaseViewState<T extends BaseViewModel> extends State<BaseView<T>> {
-//   T model = getIt<T>(); // TODO is this testable...?
-
-//   @override
-//   void initState() {
-//     if (widget.onModelReady != null) {
-//       widget.onModelReady(model);
-//     }
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChangeNotifierProvider<T>(
-//         create: (context) => model,
-//         child: Consumer<T>(builder: widget.builder));
-//   }
-// }

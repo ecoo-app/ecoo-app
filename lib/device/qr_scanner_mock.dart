@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
@@ -13,8 +12,16 @@ import 'package:pedantic/pedantic.dart';
 class MockQRScanner implements IQRScanner {
   @override
   Future<Either<Failure, ScannedResult>> scan() async {
+    final List<BarcodeFormat> _selectedFormats = [BarcodeFormat.qr];
+    var options = ScanOptions(
+      strings: {
+        "cancel": 'Manuell eingeben',
+      },
+      restrictFormat: _selectedFormats,
+    );
+
     try {
-      unawaited(BarcodeScanner.scan());
+      unawaited(BarcodeScanner.scan(options: options));
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         print('No camera permission!');
@@ -35,7 +42,7 @@ class MockQRScanner implements IQRScanner {
 
     var completer = Completer<Either<Failure, ScannedResult>>();
     completer.complete(
-        Right(ScannedResult(walletID: PrivateWalletID, amount: 120.50)));
+        Right(ScannedResult(walletID: PrivateWalletID, amount: null)));
     return completer.future;
   }
 }

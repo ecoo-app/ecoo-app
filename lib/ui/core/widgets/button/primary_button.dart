@@ -20,7 +20,7 @@ class PrimaryButton extends StatelessWidget {
       child: GradientButton(
         increaseHeightBy: 15,
         increaseWidthBy: double.infinity,
-        gradient: Gradients.coldLinear,
+        gradient: Gradients.blush,
         // gradient: ThemeGradients.defaultGradient,
         callback: onPressed,
         shapeRadius: BorderRadius.all(Radius.circular(10)),
@@ -28,8 +28,7 @@ class PrimaryButton extends StatelessWidget {
             ? Row(
                 children: <Widget>[
                   CircularProgressIndicator(
-                      valueColor:
-                          AlwaysStoppedAnimation<Color>(Colors.white)),
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
                   Text(text)
                 ],
               )

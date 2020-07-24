@@ -1,14 +1,15 @@
 import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 
 class TransactionData extends Transaction {
   // in dart constructors do not get inherited, so everything has to be written again.
-  TransactionData({String senderId, String recieverId, double amount})
-      : super(senderId: senderId, recieverId: recieverId, amount: amount);
+  TransactionData({WalletEntity sender, WalletEntity reciever, int amount})
+      : super(sender: sender, reciever: reciever, amount: amount);
 }
 
 class RequestData extends Transaction {
-  RequestData({String requesterId, double amount})
-      : super(senderId: requesterId, amount: amount);
+  RequestData({WalletEntity requester, int amount})
+      : super(sender: requester, amount: amount);
 
-  String get requesterId => super.senderId;
+  WalletEntity get requester => super.sender;
 }

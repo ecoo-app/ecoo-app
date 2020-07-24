@@ -1,6 +1,6 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
 import 'package:e_coupon/ui/screens/start/register_screen_view_model.dart';
 import 'package:flutter/material.dart';

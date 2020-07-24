@@ -9,12 +9,12 @@ import 'package:e_coupon/business/core/failure.dart';
 import 'package:meta/meta.dart';
 
 @lazySingleton
-class GetWallet extends UseCase<Wallet, WalletParams> {
+class GetWallet extends UseCase<WalletEntity, WalletParams> {
   final IWalletRepo repository;
 
   GetWallet({this.repository});
 
-  Future<Either<Failure, Wallet>> call(WalletParams params) async {
+  Future<Either<Failure, WalletEntity>> call(WalletParams params) async {
     return await repository.getWalletData(params.id);
   }
 }

@@ -1,12 +1,14 @@
+import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/gradient_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 class MainLayout extends StatelessWidget {
+  final bool isShop;
   final String title;
   final Widget body;
 
-  MainLayout({this.title, this.body});
+  MainLayout({this.isShop, this.title, this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -14,20 +16,25 @@ class MainLayout extends StatelessWidget {
       // TODO waiting for this: https://github.com/joostlek/GradientAppBar/pulls pull request to merge and support shapes
       // until then i just copied the code, fixed it and added it as widget
       appBar: GradientAppBar(
+        // leading: Icon(
+        //   Icons.arrow_back,
+        //   color: Colors.white,
+        // ),
         shape: AppBarShapeBorder(),
-        // title: title,
         title: Text(
           title,
           textAlign: TextAlign.end,
-          style: TextStyle(color: Colors.white),
+          style: TextStyles.body_text_white,
         ),
-        // gradient: ThemeGradients.defaultGradient,
-        gradient: Gradients.cosmicFusion,
+        gradient: isShop ? Gradients.rainbowBlue : Gradients.coldLinear,
         elevation: 0,
       ),
-      body: Container(
-          margin: const EdgeInsets.only(left: 24, right: 24, top: 36),
-          child: body),
+      body: SafeArea(
+        child: Container(
+            margin:
+                const EdgeInsets.only(left: 24, right: 24, top: 36, bottom: 48),
+            child: body),
+      ),
     );
   }
 }

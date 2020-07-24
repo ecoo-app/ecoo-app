@@ -28,7 +28,7 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - (run `flutter pub get` to install the dependencies) is run automagically
 - Go to debugger to run the app (hotreload)
 
-- run `flutter pub run build_runner watch --delete-conflicting-outputs` to generate injectables
+- run `make watch_generate_code` to generate injectables
 
 - use `@Environment(Env.mock)` to annotate mock classes. Use `@Environment(Env.dev)` to annotate dev classes. Use `@Environment(Env.prod)` to annotate prod classes.
 

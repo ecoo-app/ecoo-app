@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WalletCard extends StatelessWidget {
-  final Wallet wallet;
+  final WalletEntity wallet;
   final bool isActive;
   final onPressed;
 

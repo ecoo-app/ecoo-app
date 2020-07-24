@@ -96,24 +96,24 @@ flutter:
   fonts:
     - family: NewPanam
       fonts:
-        # - asset: assets/NewPanamSkyline-Black-WebTrial.ttf
+        # - asset: assets/NewPanamSkyline-Black.ttf
         #   weight: 700
-        # - asset: assets/NewPanamSkyline-BlackItalic-WebTrial.ttf
+        # - asset: assets/NewPanamSkyline-BlackItalic.ttf
         #   weight: 700
         #   style: italic
-        - asset: assets/NewPanamSkyline-Bold-WebTrial.ttf
+        - asset: assets/NewPanamSkyline-Bold.ttf
           weight: 600
-        # - asset: assets/NewPanamSkyline-BoldItalic-WebTrial.ttf
+        # - asset: assets/NewPanamSkyline-BoldItalic.ttf
         #   weight: 600
         #   style: italic
-        - asset: assets/NewPanamSkyline-Medium-WebTrial.ttf
+        - asset: assets/NewPanamSkyline-Medium.ttf
           weight: 500
-        # - asset: assets/NewPanamSkyline-MediumItalic-WebTrial.ttf
+        # - asset: assets/NewPanamSkyline-MediumItalic.ttf
         #   weight: 500
         #   style: italic
-        - asset: assets/NewPanamSkyline-Regular-WebTrial.ttf
+        - asset: assets/NewPanamSkyline-Regular.ttf
           weight: 400
-        # - asset: assets/NewPanamSkyline-RegularItalic-WebTrial.ttf
+        # - asset: assets/NewPanamSkyline-Italic.ttf
         #   weight: 400
         #   style: italic
   #

@@ -1,38 +1,43 @@
+import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/data/lib/mock_data.dart';
 import 'package:e_coupon/generated/i18n.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
+import 'package:e_coupon/ui/core/services/utils.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
+import 'package:e_coupon/ui/core/widgets/button/rhombus_icon_button.dart';
+import 'package:e_coupon/ui/core/widgets/ec_text_form_field.dart';
 import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/core/widgets/amount_input.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
+import 'package:ecoupon_lib/models/wallet.dart' as lib;
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../injection.dart';
 
+@injectable
 class PaymentScreen extends StatelessWidget {
-  final senderID;
+  final WalletEntity sender;
 
-  PaymentScreen({@required this.senderID});
+  PaymentScreen({@required this.sender});
 
   @override
   Widget build(BuildContext context) {
     return MainLayout(
+      isShop: false,
       title: I18n.of(context).titlePaymentScreen,
-      // TODO does it need a view model?
       body: BaseView<PaymentViewModel>(
-          // TODO how to do this with injectable only? -> research StateNotifier instead of ChangeNotifier?
           model: getIt<PaymentViewModel>(),
-          onModelReady: (vmodel) => vmodel.init(this.senderID),
+          onModelReady: (vmodel) => vmodel.init(this.sender),
           builder: (context, vmodel, child) {
             return Center(
               child: Container(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                    ),
                     Form(
                         key: vmodel.formKey,
                         child: Column(
@@ -40,45 +45,30 @@ class PaymentScreen extends StatelessWidget {
                             AmountInputField(
                               controller: vmodel.amountInputController,
                             ),
-                            TextFormField(
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return I18n.of(context)
-                                        .validationRecieverInput;
-                                  }
-                                  return null;
-                                },
-                                controller: vmodel.recieverInputController,
-                                decoration: InputDecoration(
-                                    hintText:
-                                        I18n.of(context).hintRecieverInput),
-                                onEditingComplete: () =>
-                                    print('empfänger editing complete')),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            ECTextFormField(
+                              hint: I18n.of(context).labelRecieverInput,
+                              label: I18n.of(context).hintRecieverInput,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return I18n.of(context)
+                                      .validationRecieverInput;
+                                }
+                                return null;
+                              },
+                              controller: vmodel.recieverInputController,
+                            ),
                           ],
                         )),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                    ),
-                    PrimaryButton(
-                      text: '',
+                    RhombusIconButton(
                       onPressed: () {
-                        if (vmodel.formKey.currentState.validate()) {
-                          Navigator.pushNamed(context, PaymentOverviewRoute,
-                              arguments: PaymentOverviewArguments(
-                                  title: 'Geld senden',
-                                  transactionData: TransactionData(
-                                      senderId: vmodel.senderId,
-                                      recieverId:
-                                          vmodel.recieverInputController.text,
-                                      amount: double.parse(
-                                          vmodel.amountInputController.text))));
-                        }
+                        vmodel.next();
                       },
                     ),
                   ],
                 ),
-                padding: const EdgeInsets.all(10.0),
-                margin: EdgeInsets.all(10),
               ),
             );
           }),

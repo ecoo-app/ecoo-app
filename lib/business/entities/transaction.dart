@@ -1,17 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 
-// TODO Equatable only works for immutable classes. This doesnt work here.
-class Transaction extends Equatable {
-  String senderId;
-  String recieverId;
-  double amount;
+class Transaction {
+  WalletEntity sender;
+  WalletEntity reciever;
+  int amount;
 
-  Transaction({this.senderId, this.recieverId, this.amount});
-
-  set sender(String senderId) => this.senderId = senderId;
-  set reciever(String recieverId) => this.recieverId = recieverId;
-  set transactionAmount(double amount) => this.amount = amount;
-
-  @override
-  List<Object> get props => [senderId, recieverId, amount];
+  Transaction({this.sender, this.reciever, this.amount});
 }

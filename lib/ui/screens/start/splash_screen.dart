@@ -1,5 +1,5 @@
 import 'package:e_coupon/ui/core/style/theme.dart';
-import 'package:e_coupon/ui/core/view_state/base_view.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
