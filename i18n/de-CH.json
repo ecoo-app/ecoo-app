@@ -32,6 +32,7 @@
   "descriptionRegisterScreen": "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet",
   "signinwithappleRegisterScreen": "Mit Apple fortfahren",
   "signinwithgoogleRegisterScreen": "Mit Google fortfahren",
+  "onboardingRegisterScreen": "Einführung wiederholen",
   "titleMenuScreen": "Meine Wallets",
   "onboardingMenuScreen": "Erste Schritte",
   "faqhelpMenuScreen": "FAQ & Hilfe",
@@ -46,7 +47,7 @@
   "generalErrorText": "Es ist ein unbekannter Fehler aufgetreten.",
   "paymentFailed": "Zahlung fehlgeschlagen",
   "paymentFailedInfo": "Überprüfe deine Internetverbindung und probiere es noch einmal oder lasse dein gegenüber den QR-Code scannen.",
-  "iPay": "Ich zahle den offenen Betrag an:"
+  "iPay": "Ich zahle den offenen Betrag an:",
   "page1TitleOnboardingScreen": "eCoupon",
   "page1HeadlineOnboardingScreen": "Registrierung und verifizierung",
   "page1DescriptionOnboardingScreen": "Um eCoupon zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.",
@@ -60,5 +61,13 @@
   "page4HeadlineOnboardingScreen": "Umsatz einlösen",
   "page4DescriptionOnboardingScreen": "Nach der Verifizierung bei ihrer Gemeinde können Sie mit wenigen Klicks den erzielten Umsatz bei der Gemeinde einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben.",
   "buttonTextSkipOnboardingScreen": "Einführung überspringen",
-  "buttonTextNexOnboardingScreen": "Weiter zur Registrierung"
+  "buttonTextNexOnboardingScreen": "Weiter zur Registrierung",
+  "titleRegisterWalletTypeScreen": "Wallet typ",
+  "descriptionRegisterWalletTypeScreen": "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.",
+  "privateRegisterWalletTypeScreen": "Privat",
+  "shopRegisterWalletTypeScreen": "Firma",
+  "titleRegisterVerifyScreen": "Verifizieren",
+  "descriptionRegisterVerifyScreen": "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.",
+  "verifyButtonRegisterVerifyScreen": "Jetzt verifizieren",
+  "verifyLaterButtonRegisterVerifyScreen": "Später verifizieren"
 }

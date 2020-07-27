@@ -44,10 +44,14 @@ import 'ui/screens/payment/payment_view_model.dart';
 import 'ui/screens/payment/qr_scanner_view_model.dart';
 import 'ui/screens/payment/request_view_model.dart';
 import 'ui/screens/payment/success_view_model.dart';
+import 'ui/screens/register/register_screen.dart';
+import 'ui/screens/register/register_screen_view_model.dart';
+import 'ui/screens/register/register_verifiy_screen.dart';
+import 'ui/screens/register/register_verify_screen_view_model.dart';
+import 'ui/screens/register/register_wallet_type_screen.dart';
+import 'ui/screens/register/register_wallet_type_screen_view_model.dart';
 import 'ui/screens/start/onboarding_screen.dart';
 import 'ui/screens/start/onboarding_screen_view_model.dart';
-import 'ui/screens/start/register_screen.dart';
-import 'ui/screens/start/register_screen_view_model.dart';
 import 'ui/screens/start/splash_screen.dart';
 import 'ui/screens/start/splash_screen_view_model.dart';
 import 'ui/screens/wallet/wallet_view_model.dart';
@@ -77,6 +81,10 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       () => QRScannerViewModel(g<ICameraService>(), g<IRouter>()));
   gh.factory<RegisterScreenViewModel>(
       () => RegisterScreenViewModel(g<IRouter>()));
+  gh.factory<RegisterVerifyScreenViewModel>(
+      () => RegisterVerifyScreenViewModel(g<IRouter>()));
+  gh.factory<RegisterWalletTypeScreenViewModel>(
+      () => RegisterWalletTypeScreenViewModel(g<IRouter>()));
   gh.factory<RequestViewModel>(() => RequestViewModel());
   final sharedPreferences = await thirdPartyLibraryModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
@@ -96,6 +104,10 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       () => OnboardingScreenViewModel(g<IRouter>(), g<ISettingsService>()));
   gh.factory<RegisterScreen>(
       () => RegisterScreen(g<RegisterScreenViewModel>()));
+  gh.factory<RegisterVerifyScreen>(
+      () => RegisterVerifyScreen(g<RegisterVerifyScreenViewModel>()));
+  gh.factory<RegisterWalletTypeScreen>(
+      () => RegisterWalletTypeScreen(g<RegisterWalletTypeScreenViewModel>()));
   gh.factory<SplashScreenViewModel>(() => SplashScreenViewModel(
         g<IRouter>(),
         g<ILoginService>(),

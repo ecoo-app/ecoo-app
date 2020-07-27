@@ -74,6 +74,9 @@ class ColorStyles {
 
   static const Color blue = Color(0xFF3979FF);
   static const Color green = Color(0xFF3979FF);
+  static const Color purple = Color(0xFF9774FF);
+  static const Color red = Color(0xFFFF5F5F);
+  static const Color pink = Color(0xFFFF96E3);
 
   static LinearGradient app_gradient = Gradients.blush;
   static LinearGradient private_gradient = Gradients.coldLinear;
@@ -90,13 +93,22 @@ class LayoutStyles {
 
 class Assets {
   static const close_svg = 'assets/images/close.svg';
+  static const back_svg = 'assets/images/back.svg';
   static const tezos_svg = 'assets/images/tezos.svg';
   static const apple_icon_svg = 'assets/images/apple_icon.svg';
   static const google_icon_svg = 'assets/images/google_icon.svg';
 
+  // Icons
   static const icon_button_svg = 'assets/images/icon_button.svg';
+  static const icon_close_svg = 'assets/images/icon_close.svg';
+  static const icon_arrow_right_svg = 'assets/images/icon_arrow_right.svg';
 
-  static const wallet_svg = 'assets/images/wallet_icon.svg';
+  static const wallet_icon_svg = 'assets/images/wallet_icon.svg';
+
+  // Rectangles
+  static const rectangle_blue_svg = 'assets/images/rectangle_blue.svg';
+  static const rectangle_green_svg = 'assets/images/rectangle_green.svg';
+  static const rectangle_purple_svg = 'assets/images/rectangle_purple.svg';
 
   // Splashscreen
   static const splash_wallet_graphic_svg =

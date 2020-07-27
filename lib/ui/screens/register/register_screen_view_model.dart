@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class RegisterScreenViewModel extends BaseViewModel {
-  // ignore: unused_field
   final IRouter _router;
 
   RegisterScreenViewModel(this._router);
@@ -19,6 +18,11 @@ class RegisterScreenViewModel extends BaseViewModel {
   }
 
   Future<void> registerWithGoogle() {
+    _router.pushNamed(RegisterWalletTypeRoute);
     return Future.value();
+  }
+
+  Future<void> onboarding() async {
+    await _router.pushAndRemoveUntil(OnboardingRoute, '');
   }
 }

@@ -83,6 +83,7 @@ class WalletScreen extends StatelessWidget {
                         )
                       ]),
                   PrimaryButton(
+                    margin: const EdgeInsets.symmetric(vertical: 24),
                     text: I18n.of(context).privateWalletPay,
                     onPressed: () {
                       vmodel.makePayment();

@@ -46,6 +46,7 @@ class RequestScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                   ),
                   PrimaryButton(
+                    margin: const EdgeInsets.symmetric(vertical: 24),
                     text: I18n.of(context).buttonPrivateRequest,
                     onPressed: () {
                       if (vmodel.formKey.currentState.validate()) {

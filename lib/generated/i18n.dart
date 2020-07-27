@@ -98,6 +98,8 @@ class I18n implements WidgetsLocalizations {
   String get signinwithappleRegisterScreen => "Mit Apple fortfahren";
   /// "Mit Google fortfahren"
   String get signinwithgoogleRegisterScreen => "Mit Google fortfahren";
+  /// "Einführung wiederholen"
+  String get onboardingRegisterScreen => "Einführung wiederholen";
   /// "Meine Wallets"
   String get titleMenuScreen => "Meine Wallets";
   /// "Erste Schritte"
@@ -156,6 +158,22 @@ class I18n implements WidgetsLocalizations {
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
   /// "Weiter zur Registrierung"
   String get buttonTextNexOnboardingScreen => "Weiter zur Registrierung";
+  /// "Wallet typ"
+  String get titleRegisterWalletTypeScreen => "Wallet typ";
+  /// "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet."
+  String get descriptionRegisterWalletTypeScreen => "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.";
+  /// "Privat"
+  String get privateRegisterWalletTypeScreen => "Privat";
+  /// "Firma"
+  String get shopRegisterWalletTypeScreen => "Firma";
+  /// "Verifizieren"
+  String get titleRegisterVerifyScreen => "Verifizieren";
+  /// "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet."
+  String get descriptionRegisterVerifyScreen => "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.";
+  /// "Jetzt verifizieren"
+  String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
+  /// "Später verifizieren"
+  String get verifyLaterButtonRegisterVerifyScreen => "Später verifizieren";
 }
 
 class _I18n_de_CH extends I18n {

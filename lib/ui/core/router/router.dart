@@ -7,7 +7,9 @@ import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
-import 'package:e_coupon/ui/screens/start/register_screen.dart';
+import 'package:e_coupon/ui/screens/register/register_screen.dart';
+import 'package:e_coupon/ui/screens/register/register_verifiy_screen.dart';
+import 'package:e_coupon/ui/screens/register/register_wallet_type_screen.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
@@ -23,6 +25,8 @@ const HomeRoute = '/';
 const SplashRoute = '/splash';
 const OnboardingRoute = '/onboarding';
 const RegisterRoute = '/register';
+const RegisterWalletTypeRoute = '/register/wallettype';
+const RegisterVerifyRoute = '/register/verify';
 const WalletCreationRoute = 'walletCreation';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
@@ -63,6 +67,10 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<OnboardingScreen>(), true);
       case RegisterRoute:
         return _createRoute(settings, getIt<RegisterScreen>(), false);
+      case RegisterWalletTypeRoute:
+        return _createRoute(settings, getIt<RegisterWalletTypeScreen>(), false);
+      case RegisterVerifyRoute:
+        return _createRoute(settings, getIt<RegisterVerifyScreen>(), false);
       case WalletCreationRoute:
         return MaterialPageRoute(builder: (_) => WalletCreationScreen());
       case HomeRoute:

@@ -26,6 +26,7 @@ class VerificationScreen extends StatelessWidget {
                     Text(vmodel.verificationInputs.title),
                     FormGenerator(vmodel.verificationInputs.inputs),
                     PrimaryButton(
+                      margin: const EdgeInsets.symmetric(vertical: 24),
                       text: I18n.of(context).buttonFormClaimVerification,
                       onPressed: () =>
                           Navigator.pushNamed(context, WalletDetailRoute),
