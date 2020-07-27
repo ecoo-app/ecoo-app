@@ -39,5 +39,19 @@
   "appversionMenuScreen": "App Version:",
   "walletMenuScreen": "Wallet",
   "cancelScan": "Manuell eingeben",
-  "paymentSuccessful": "Bezahlung erfolgreich"
+  "paymentSuccessful": "Bezahlung erfolgreich",
+  "page1TitleOnboardingScreen": "eCoupon",
+  "page1HeadlineOnboardingScreen": "Registrierung und verifizierung",
+  "page1DescriptionOnboardingScreen": "Um eCoupon zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.",
+  "page2TitleOnboardingScreen": "Privat wallet",
+  "page2HeadlineOnboardingScreen": "Zahlen, Senden & Geld anfordern",
+  "page2DescriptionOnboardingScreen": "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit eCoupon zu bezahlen.\n\nSie können andern eCoupon Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.",
+  "page3TitleOnboardingScreen": "Shop wallet",
+  "page3HeadlineOnboardingScreen": "Einkassieren & senden",
+  "page3DescriptionOnboardingScreen": "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die eCoupon App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen eCoupon Benutzern zu senden.",
+  "page4TitleOnboardingScreen": "Shop wallet",
+  "page4HeadlineOnboardingScreen": "Umsatz einlösen",
+  "page4DescriptionOnboardingScreen": "Nach der Verifizierung bei ihrer Gemeinde können Sie mit wenigen Klicks den erzielten Umsatz bei der Gemeinde einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben.",
+  "buttonTextSkipOnboardingScreen": "Einführung überspringen",
+  "buttonTextNexOnboardingScreen": "Weiter zur Registrierung"
 }

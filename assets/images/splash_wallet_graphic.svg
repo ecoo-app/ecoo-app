@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="523.891" height="361.891" viewBox="0 0 523.891 361.891">
+    <defs>
+        <linearGradient id="linear-gradient" x1=".215" x2="1" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ff96e3"/>
+            <stop offset=".493" stop-color="#c971ff"/>
+            <stop offset="1" stop-color="#9774ff"/>
+        </linearGradient>
+        <linearGradient id="linear-gradient-2" x1=".081" x2=".98" y2=".969" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#00eaea"/>
+            <stop offset=".542" stop-color="#39c1ff"/>
+            <stop offset="1" stop-color="#3979ff"/>
+        </linearGradient>
+        <linearGradient id="linear-gradient-3" x1=".142" x2="1" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#f1327f"/>
+            <stop offset=".501" stop-color="#db55b7"/>
+            <stop offset="1" stop-color="#9774ff"/>
+        </linearGradient>
+        <linearGradient id="linear-gradient-4" x1=".088" x2=".98" y2=".969" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#7dff7b"/>
+            <stop offset=".374" stop-color="#24e8ba"/>
+            <stop offset="1" stop-color="#20dbe0"/>
+            <stop offset="1" stop-color="#03cf80"/>
+        </linearGradient>
+    </defs>
+    <g id="Gruppe_13" data-name="Gruppe 13" transform="translate(74.946 41)">
+        <rect id="Rectangle_Copy_2" width="160" height="160" fill="url(#linear-gradient)" data-name="Rectangle Copy 2" opacity="0.9" rx="10" transform="rotate(-13 21.05 -380.147)"/>
+        <rect id="Rectangle" width="160" height="160" fill="url(#linear-gradient-2)" opacity="0.9" rx="10" transform="rotate(-13 686.585 411.392)"/>
+        <rect id="Rectangle_Copy" width="160" height="160" fill="url(#linear-gradient-3)" data-name="Rectangle Copy" opacity="0.9" rx="10" transform="rotate(-13 791.147 -1052.571)"/>
+        <g id="Wallet_Icon" data-name="Wallet Icon" transform="translate(127.729 155.675)">
+            <g id="Wallet_Icon-2" data-name="Wallet Icon">
+                <rect id="Flavour_Rectangle" width="99.674" height="99.674" fill="url(#linear-gradient-4)" data-name="Flavour Rectangle" rx="10" transform="rotate(-13 98.398 11.211)"/>
+                <g id="Icons_Wallet" data-name="Icons/Wallet" transform="translate(35.208 39.302)">
+                    <g id="wallet_Icon-3" data-name="wallet Icon">
+                        <path id="Shape" fill="#fff" d="M40.444 40.02H8.667A8.631 8.631 0 0 1 0 31.444V8.576A8.631 8.631 0 0 1 8.667 0h27.444a4.316 4.316 0 0 1 4.333 4.288v1.429h1.444A4.316 4.316 0 0 1 46.222 10v24.3a5.754 5.754 0 0 1-5.778 5.72zM8.667 2.859a5.754 5.754 0 0 0-5.778 5.717v22.868a5.754 5.754 0 0 0 5.778 5.717h31.777a2.877 2.877 0 0 0 2.889-2.861V10a1.439 1.439 0 0 0-1.444-1.429H10.111a1.429 1.429 0 1 1 0-2.859h27.445V4.288a1.439 1.439 0 0 0-1.444-1.429zm26 22.869a2.859 2.859 0 1 1 2.889-2.859 2.877 2.877 0 0 1-2.889 2.858z"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

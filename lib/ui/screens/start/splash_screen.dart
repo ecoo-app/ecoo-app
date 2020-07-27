@@ -1,3 +1,4 @@
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen_view_model.dart';
@@ -20,44 +21,27 @@ class SplashScreen extends StatelessWidget {
         onModelReady: (e) => viewModel.startup(),
         builder: (context, model, child) {
           return SafeArea(
+            top: false,
             child: Stack(
               fit: StackFit.expand,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 145),
-                  alignment: Alignment.topLeft,
-                  child: SvgPicture.asset(
-                    Assets.splash_recangle_left_svg,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 0),
-                  alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(
-                    Assets.splash_recangle_top_svg,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 130),
-                  alignment: Alignment.topRight,
-                  child: SvgPicture.asset(
-                    Assets.splash_recangle_right_svg,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 150),
-                  alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(
-                    Assets.wallet_svg,
-                    fit: BoxFit.contain,
+                Positioned.fill(
+                  top: -70,
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    child: SvgPicture.asset(
+                      Assets.splash_wallet_graphic_svg,
+                      fit: BoxFit.none,
+                    ),
                   ),
                 ),
                 Center(
-                  child: Text('eCoupon',
-                      style: Theme.of(context).textTheme.headline1),
+                  child: Text(I18n.of(context).titleSplashScreen,
+                      style: TextStyle(
+                          color: ColorStyles.black,
+                          fontSize: 50.0,
+                          fontFamily: fontFamiliyPanam,
+                          fontWeight: fontWeightBold)),
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
@@ -68,6 +52,7 @@ class SplashScreen extends StatelessWidget {
                           style: TextStyle(
                               color: ColorStyles.brown_gray,
                               fontSize: 12,
+                              fontWeight: fontWeightRegular,
                               letterSpacing: 0.0)),
                       SizedBox(
                         height: 15,
@@ -83,6 +68,7 @@ class SplashScreen extends StatelessWidget {
                         'Tezos',
                         style: TextStyle(
                             color: ColorStyles.bg_gray,
+                            fontWeight: fontWeightMedium,
                             fontSize: 25.0,
                             letterSpacing: 0.0),
                       ),

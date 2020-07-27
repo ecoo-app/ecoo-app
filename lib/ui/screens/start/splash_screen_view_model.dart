@@ -30,7 +30,7 @@ class SplashScreenViewModel extends BaseViewModel {
           await _router.pushAndRemoveUntil(OnboardingRoute, '');
           return;
         } else {
-          await _router.pushAndRemoveUntil(RegisterRoute, '');
+          await _router.pushAndRemoveUntil(HomeRoute, '');
         }
       }
     } catch (e) {

@@ -114,6 +114,34 @@ class I18n implements WidgetsLocalizations {
   String get cancelScan => "Manuell eingeben";
   /// "Bezahlung erfolgreich"
   String get paymentSuccessful => "Bezahlung erfolgreich";
+  /// "eCoupon"
+  String get page1TitleOnboardingScreen => "eCoupon";
+  /// "Registrierung und verifizierung"
+  String get page1HeadlineOnboardingScreen => "Registrierung und verifizierung";
+  /// "Um eCoupon zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet."
+  String get page1DescriptionOnboardingScreen => "Um eCoupon zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.";
+  /// "Privat wallet"
+  String get page2TitleOnboardingScreen => "Privat wallet";
+  /// "Zahlen, Senden & Geld anfordern"
+  String get page2HeadlineOnboardingScreen => "Zahlen, Senden & Geld anfordern";
+  /// "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit eCoupon zu bezahlen.\n\nSie können andern eCoupon Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern."
+  String get page2DescriptionOnboardingScreen => "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit eCoupon zu bezahlen.\n\nSie können andern eCoupon Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.";
+  /// "Shop wallet"
+  String get page3TitleOnboardingScreen => "Shop wallet";
+  /// "Einkassieren & senden"
+  String get page3HeadlineOnboardingScreen => "Einkassieren & senden";
+  /// "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die eCoupon App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen eCoupon Benutzern zu senden."
+  String get page3DescriptionOnboardingScreen => "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die eCoupon App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen eCoupon Benutzern zu senden.";
+  /// "Shop wallet"
+  String get page4TitleOnboardingScreen => "Shop wallet";
+  /// "Umsatz einlösen"
+  String get page4HeadlineOnboardingScreen => "Umsatz einlösen";
+  /// "Nach der Verifizierung bei ihrer Gemeinde können Sie mit wenigen Klicks den erzielten Umsatz bei der Gemeinde einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben."
+  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei ihrer Gemeinde können Sie mit wenigen Klicks den erzielten Umsatz bei der Gemeinde einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben.";
+  /// "Einführung überspringen"
+  String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
+  /// "Weiter zur Registrierung"
+  String get buttonTextNexOnboardingScreen => "Weiter zur Registrierung";
 }
 
 class _I18n_de_CH extends I18n {

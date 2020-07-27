@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
 
 const FontWeight fontWeightMedium = FontWeight.w500;
+const FontWeight fontWeightBold = FontWeight.w800;
 const FontWeight fontWeightRegular = FontWeight.w400;
 
 const String fontFamiliyPanam = 'NewPanam';
@@ -63,6 +64,7 @@ class ColorStyles {
   static const Color brown_gray = Color(0xFF979797);
   static const Color bg_gray = Color(0xFF575757);
   static const Color bg_light_gray = Color(0xFFF7F7F7);
+  static const Color bg_transparent = Color(0x40000000);
 
   static const Color blue = Color(0xFF3979FF);
   static const Color green = Color(0xFF3979FF);
@@ -75,9 +77,9 @@ class ColorStyles {
 class LayoutStyles {
   static const double iconSize = 23;
 
-  static const int spacing_xs = 4;
-  static const int spacing_s = 8;
-  static const int spacint_m = 32;
+  static const double spacing_xs = 4;
+  static const double spacing_s = 8;
+  static const double spacing_m = 25.0;
 }
 
 class Assets {
@@ -89,12 +91,18 @@ class Assets {
   static const icon_button_svg = 'assets/images/icon_button.svg';
 
   static const wallet_svg = 'assets/images/wallet_icon.svg';
-  static const splash_recangle_left_svg =
-      'assets/images/splash_rectangle_left.svg';
-  static const splash_recangle_top_svg =
-      'assets/images/splash_rectangle_top.svg';
-  static const splash_recangle_right_svg =
-      'assets/images/splash_rectangle_right.svg';
+
+  // Splashscreen
+  static const splash_wallet_graphic_svg =
+      'assets/images/splash_wallet_graphic.svg';
+
+  // Onboarding
+  static const onboarding_icon_wallet_svg =
+      'assets/images/onboarding_wallet_icon.svg';
+  static const onboarding_background_graphic_svg =
+      'assets/images/onboarding_background_graphic.svg';
+  static const onboarding_icon_background_svg =
+      'assets/images/onboarding_icon_background.svg';
 
   static const wallet_shop_svg = 'assets/images/wallet_shop.svg';
   static const wallet_private_svg = 'assets/images/wallet_private.svg';

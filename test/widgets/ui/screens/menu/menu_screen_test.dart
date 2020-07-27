@@ -12,8 +12,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
-import 'package:ecoupon_lib/models/wallet.dart' as libWallet;
-import 'package:ecoupon_lib/models/currency.dart' as libCurrency;
+import 'package:ecoupon_lib/models/wallet.dart' as lib_wallet;
+import 'package:ecoupon_lib/models/currency.dart' as lib_currency;
 
 import '../../../../helper/widget_test_app.dart';
 
@@ -40,10 +40,10 @@ void main() {
     _repositoryMock = WalletRepositoryMock();
     when(_repositoryMock.getWallets(any))
         .thenAnswer((realInvocation) => Future.value(Right([
-              WalletEntity(libWallet.Wallet(
+              WalletEntity(lib_wallet.Wallet(
                   'TestID',
                   'TestKey',
-                  libCurrency.Currency('CHF', 'CHF', 0),
+                  lib_currency.Currency('CHF', 'CHF', 0),
                   false,
                   1000,
                   'testState'))
