@@ -1,7 +1,7 @@
-import 'package:e_coupon/main.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/camera_service.dart';
+import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:injectable/injectable.dart';
 

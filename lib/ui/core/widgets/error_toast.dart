@@ -21,6 +21,10 @@ class ErrorToast {
     if (failure is NoService) {
       return I18n.of(context).noServiceErrorText;
     }
+    if (failure is MessageFailure) {
+      MessageFailure fail = failure;
+      return fail.message;
+    }
     return I18n.of(context).generalErrorText;
   }
 

@@ -26,7 +26,7 @@ class SuccessScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
             body: BaseView<SuccessViewModel>(
-                model: getIt<SuccessViewModel>(), // TODO injectable
+                model: getIt<SuccessViewModel>(),
                 onModelReady: (vmodel) => vmodel.init(),
                 builder: (_, vmodel, __) {
                   if (vmodel.viewState is DurationEnd) {

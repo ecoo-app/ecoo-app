@@ -1,9 +1,7 @@
-import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
-import 'package:e_coupon/ui/core/widgets/button/rhombus_icon_button.dart';
 import 'package:e_coupon/ui/core/widgets/ec_text_form_field.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';

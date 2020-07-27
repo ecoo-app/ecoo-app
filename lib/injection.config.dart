@@ -34,7 +34,7 @@ import 'ui/core/services/login_service.dart';
 import 'ui/core/services/qr_scan_parser.dart';
 import 'ui/core/services/settings_service.dart';
 import 'ui/core/services/transfer_service.dart';
-import 'ui/core/services/wallet_scervice.dart';
+import 'ui/core/services/wallet_service.dart';
 import 'ui/screens/creation_verification/verification_view_model.dart';
 import 'ui/screens/menu/menu_screen.dart';
 import 'ui/screens/menu/menu_screen_view_model.dart';
@@ -132,6 +132,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IQRScanner>(),
         g<IWalletService>(),
         g<HandleTransaction>(),
+        g<GetWallet>(),
       ));
   gh.factory<SplashScreen>(() => SplashScreen(g<SplashScreenViewModel>()));
   gh.lazySingleton<WalletViewModel>(() => WalletViewModel(

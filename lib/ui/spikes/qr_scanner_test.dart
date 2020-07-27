@@ -1,8 +1,8 @@
-import 'package:e_coupon/main.dart';
 import 'package:e_coupon/ui/core/services/camera_service.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
+import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

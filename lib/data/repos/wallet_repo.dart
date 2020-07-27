@@ -164,16 +164,17 @@ class WalletRepo implements IWalletRepo {
 
   Future<Either<Failure, WalletEntity>> _getMockWalletData(id) {
     return Future.delayed(const Duration(milliseconds: 600), () {
+      var completer = Completer<Either<Failure, WalletEntity>>();
       for (final wallet in MockWallets) {
         if (wallet.id == id) {
           // generate a future
-          var completer = Completer<Either<Failure, WalletEntity>>();
           completer.complete(Right(wallet));
           return completer.future;
         }
       }
 
-      return null;
+      completer.complete(Left(MessageFailure('No such wallet with ID $id')));
+      return completer.future;
     });
   }
 

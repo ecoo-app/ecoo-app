@@ -21,10 +21,10 @@ class Utils {
 
   static Map<String, RegExp> _getDefaultTranslator() {
     return {
-      'A': new RegExp(r'[A-Za-z]'),
-      '0': new RegExp(r'[0-9]'),
-      '@': new RegExp(r'[A-Za-z0-9]'),
-      '*': new RegExp(r'.*')
+      'A': RegExp(r'[A-Za-z]'),
+      '0': RegExp(r'[0-9]'),
+      '@': RegExp(r'[A-Za-z0-9]'),
+      '*': RegExp(r'.*')
     };
   }
 
