@@ -1,12 +1,17 @@
 class Utils {
   static int balanceFromString(String amount) {
     // TODO how to use local decimal separators... ?
-    List<String> splits = amount.split(".");
-    if (splits.length == 2) {
-      return int.parse(splits[0]) * 100 + int.parse(splits[1]);
-    } else {
-      return int.parse(splits[0]) * 100;
-    }
+    // List<String> splits = amount.split(".");
+    // if (splits.length == 2) {
+    //   return int.parse(splits[0]) * 100 + int.parse(splits[1]);
+    // } else {
+    //   return int.parse(splits[0]) * 100;
+    // }
+    return (double.parse(amount) * 100).floor();
+  }
+
+  static String moneyToString(int amount) {
+    return (amount / 100).toStringAsFixed(2);
   }
 
   //   String toString() {

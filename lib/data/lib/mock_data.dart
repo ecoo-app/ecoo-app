@@ -38,9 +38,12 @@ const PrivatePublicKey = 'tz1Ns3YQJR6piMZ8GrD2iYu94Ybi1HFfNyBP';
 const ShopWalletID = '45FGH62SD';
 const ShopPublicKey = 'tz1Ns3YQJR6piMZ8GrD2iEn34Ybi1HFfNyBP';
 
+lib.Wallet privateWalletMock = lib.Wallet(PrivateWalletID, PrivatePublicKey,
+    MockWetzikonCurrency(), false, 105, 'successful');
+lib.Wallet shopWalletMock = lib.Wallet(ShopWalletID, ShopPublicKey,
+    MockWetzikonCurrency(), true, 1059, 'successful');
+
 List<WalletEntity> MockWallets = [
-  WalletEntity(lib.Wallet(PrivateWalletID, PrivatePublicKey,
-      MockWetzikonCurrency(), false, 105, 'successful')),
-  WalletEntity(lib.Wallet(ShopWalletID, ShopPublicKey, MockWetzikonCurrency(),
-      true, 1059, 'successful'))
+  WalletEntity(privateWalletMock),
+  WalletEntity(shopWalletMock)
 ];

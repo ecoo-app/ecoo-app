@@ -1,8 +1,8 @@
-import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/creation_verification/wallet_creation_screen.dart';
-import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/screens/payment/error_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
+import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
@@ -29,10 +29,11 @@ const WalletsOverviewRoute = 'walletsOverview';
 const TransactionOverviewRoute = 'transactionOverview';
 const ClaimVerificationRoute = 'claimVerification';
 const PaymentRoute = 'payment';
-const PaymentOverviewRoute = 'paymentOverview';
 const SuccessRoute = 'success';
+const ErrorRoute = 'paymentError';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
+const TestRoute = '/test';
 
 abstract class IRouter {
   GlobalKey<NavigatorState> get navigatorKey;
@@ -54,6 +55,8 @@ class Router implements IRouter {
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case TestRoute:
+        return MaterialPageRoute(builder: (_) => QRScannerScreen());
       case SplashRoute:
         return _createRoute(settings, getIt<SplashScreen>(), false);
       case OnboardingRoute:
@@ -76,18 +79,13 @@ class Router implements IRouter {
       case ClaimVerificationRoute:
         return MaterialPageRoute(builder: (_) => VerificationScreen());
       case PaymentRoute:
-        var sender = settings.arguments as WalletEntity;
-        return _createRoute(settings, PaymentScreen(sender: sender), false);
-      case PaymentOverviewRoute:
-        final TransactionData args = settings.arguments as TransactionData;
-        return MaterialPageRoute(
-            builder: (_) => PaymentOverviewScreen(
-                  arguments: args,
-                ));
+        return _createRoute(settings, PaymentScreen(), false);
       case SuccessRoute:
         final SuccessScreenArguments args =
             settings.arguments as SuccessScreenArguments;
         return MaterialPageRoute(builder: (_) => SuccessScreen(args));
+      case ErrorRoute:
+        return _createRoute(settings, getIt<ErrorScreen>(), false);
       case RequestPaymentRoute:
         // return MaterialPageRoute(builder: (_) => GenerateScreen());
         final String requesterId = settings.arguments as String;

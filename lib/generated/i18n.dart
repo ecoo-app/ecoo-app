@@ -114,6 +114,20 @@ class I18n implements WidgetsLocalizations {
   String get cancelScan => "Manuell eingeben";
   /// "Bezahlung erfolgreich"
   String get paymentSuccessful => "Bezahlung erfolgreich";
+  /// "Keine Internetverbindung"
+  String get noServiceErrorTitle => "Keine Internetverbindung";
+  /// "Es besteht keine Verbindung zum Internet."
+  String get noServiceErrorText => "Es besteht keine Verbindung zum Internet.";
+  /// "Fehler"
+  String get generalErrorTitle => "Fehler";
+  /// "Es ist ein unbekannter Fehler aufgetreten."
+  String get generalErrorText => "Es ist ein unbekannter Fehler aufgetreten.";
+  /// "Zahlung fehlgeschlagen"
+  String get paymentFailed => "Zahlung fehlgeschlagen";
+  /// "Überprüfe deine Internetverbindung und probiere es noch einmal oder lasse dein gegenüber den QR-Code scannen."
+  String get paymentFailedInfo => "Überprüfe deine Internetverbindung und probiere es noch einmal oder lasse dein gegenüber den QR-Code scannen.";
+  /// "Ich zahle den offenen Betrag an:"
+  String get iPay => "Ich zahle den offenen Betrag an:";
   /// "eCoupon"
   String get page1TitleOnboardingScreen => "eCoupon";
   /// "Registrierung und verifizierung"

@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +8,7 @@ class BaseView<T extends BaseViewModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;
   final T model;
   final Function(T) onModelReady;
+  // final Function(Failure) onError;
 
   /// defualt: true. set true to create a new provider and dispose it each time the view comes up.
   /// Set false to use the provider.value constructor.

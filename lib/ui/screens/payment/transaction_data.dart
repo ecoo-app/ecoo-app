@@ -1,15 +1,21 @@
+import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 
-class TransactionData extends Transaction {
-  // in dart constructors do not get inherited, so everything has to be written again.
+class TransactionData extends Transfer {
   TransactionData({WalletEntity sender, WalletEntity reciever, int amount})
-      : super(sender: sender, reciever: reciever, amount: amount);
+      : super(
+            sender: Right(sender),
+            reciever: Right(reciever),
+            amount: Right(amount));
 }
 
-class RequestData extends Transaction {
+class RequestData extends Transfer {
   RequestData({WalletEntity requester, int amount})
-      : super(sender: requester, amount: amount);
+      : super(
+            sender: Left(Empty()),
+            reciever: Right(requester),
+            amount: Right(amount));
 
-  WalletEntity get requester => super.sender;
+  WalletEntity get requester => super.sender.fold((l) => null, (r) => null);
 }

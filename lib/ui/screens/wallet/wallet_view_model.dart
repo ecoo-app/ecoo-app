@@ -5,8 +5,6 @@ import 'package:e_coupon/business/use_cases/get_wallet.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
-import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
-import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:meta/meta.dart';
 
@@ -117,7 +115,8 @@ class WalletViewModel extends BaseViewModel {
 
   //
   void makePayment() async {
-    await _router.pushNamed(PaymentRoute, arguments: walletState.value.wallet);
+    await _router.pushNamed(TestRoute);
+    // await _router.pushNamed(PaymentRoute, arguments: walletState.value.wallet);
   }
 }
 

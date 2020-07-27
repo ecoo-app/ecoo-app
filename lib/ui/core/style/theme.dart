@@ -45,6 +45,12 @@ ThemeData generalTheme = ThemeData(
 );
 
 class TextStyles {
+  static const body_text_black = TextStyle(
+      fontSize: 15.0,
+      fontWeight: fontWeightRegular,
+      fontFamily: 'Roboto',
+      color: Colors.black);
+
   static const body_text_white = TextStyle(
       fontSize: 15.0,
       fontWeight: fontWeightRegular,
@@ -108,4 +114,34 @@ class Assets {
   static const wallet_private_svg = 'assets/images/wallet_private.svg';
 
   static const check_double_svg = 'assets/images/check_double.svg';
+
+  static const qr_code_svg = 'assets/images/qr_code.svg';
+}
+
+class GradientStyles extends Gradients {
+  static final AlignmentGeometry _beginAlignment = Alignment.topLeft;
+  static final AlignmentGeometry _endAlignment = Alignment.bottomRight;
+
+  // static LinearGradient defaultGradient = Gradients.buildGradient(
+  //     _beginAlignment,
+  //     _endAlignment,
+  //     const [Color(0xffFFF0D1), Color(0xffFFB8C6)]);
+
+  static LinearGradient actionGradient = Gradients.buildGradient(
+      _beginAlignment,
+      _endAlignment,
+      const [Color(0xff7dff7b), Color(0xff03cf80)]);
+
+  static LinearGradient privateGradient = Gradients.buildGradient(
+      _beginAlignment,
+      _endAlignment,
+      const [Color(0xff7dff7b), Color(0xff03cf80)]);
+
+  static LinearGradient shopGradient = Gradients.buildGradient(_beginAlignment,
+      _endAlignment, const [Color(0xff7dff7b), Color(0xff03cf80)]);
+
+  static LinearGradient errorGradient = Gradients.buildGradient(
+      Alignment.topCenter,
+      Alignment.bottomCenter,
+      const [Color(0xfff1327f), Color(0xff9774ff)]);
 }

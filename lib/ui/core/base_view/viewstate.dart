@@ -21,7 +21,7 @@ class Success<T> extends ViewState {
 }
 
 class Error<T extends Failure> extends ViewState {
-  final T messageId;
+  final T failure;
 
-  Error(this.messageId);
+  Error(this.failure);
 }

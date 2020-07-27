@@ -1,9 +1,12 @@
+import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 
-class Transaction {
-  WalletEntity sender;
-  WalletEntity reciever;
-  int amount;
+class Empty {}
 
-  Transaction({this.sender, this.reciever, this.amount});
+class Transfer {
+  Either<Empty, WalletEntity> sender;
+  Either<Empty, WalletEntity> reciever;
+  Either<Empty, int> amount;
+
+  Transfer({this.sender, this.reciever, this.amount});
 }

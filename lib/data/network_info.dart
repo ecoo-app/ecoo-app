@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 
@@ -9,10 +10,16 @@ abstract class INetworkInfo {
 @LazySingleton(as: INetworkInfo)
 class NetworkInfo implements INetworkInfo {
   @override
-  // TODO: implement isConnected
-  Future<bool> get isConnected {
-    var completer = Completer<bool>();
-    completer.complete(true);
-    return completer.future;
+  Future<bool> get isConnected async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+    } on SocketException catch (_) {
+      return false;
+    }
+
+    return false;
   }
 }

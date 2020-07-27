@@ -1,29 +1,22 @@
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/data/lib/mock_data.dart';
 import 'package:e_coupon/generated/i18n.dart';
-import 'package:e_coupon/ui/core/services/utils.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
-import 'package:e_coupon/ui/core/router/router.dart';
+import 'package:e_coupon/ui/core/base_view/viewstate.dart';
+import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/core/widgets/button/rhombus_icon_button.dart';
 import 'package:e_coupon/ui/core/widgets/ec_text_form_field.dart';
-import 'package:e_coupon/ui/screens/payment/payment_overview_screen.dart';
+import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/screens/payment/payment_view_model.dart';
-import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/core/widgets/amount_input.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
-import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
-import 'package:ecoupon_lib/models/wallet.dart' as lib;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../injection.dart';
 
 @injectable
 class PaymentScreen extends StatelessWidget {
-  final WalletEntity sender;
-
-  PaymentScreen({@required this.sender});
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -31,8 +24,15 @@ class PaymentScreen extends StatelessWidget {
       title: I18n.of(context).titlePaymentScreen,
       body: BaseView<PaymentViewModel>(
           model: getIt<PaymentViewModel>(),
-          onModelReady: (vmodel) => vmodel.init(this.sender),
+          onModelReady: (vmodel) => vmodel.init(),
           builder: (context, vmodel, child) {
+            if (vmodel.viewState is Error) {
+              Error error = vmodel.viewState;
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                ErrorToast(failure: error.failure).create(context)
+                  ..show(context);
+              });
+            }
             return Center(
               child: Container(
                 child: Column(
@@ -62,9 +62,12 @@ class PaymentScreen extends StatelessWidget {
                             ),
                           ],
                         )),
-                    RhombusIconButton(
-                      onPressed: () {
-                        vmodel.next();
+                    PrimaryButton(
+                      text: I18n.of(context).buttonPaymentOverview,
+                      isLoading: vmodel.viewState is Loading,
+                      onPressed: () async {
+                        vmodel.initiateTransaction(
+                            I18n.of(context).paymentSuccessful);
                       },
                     ),
                   ],

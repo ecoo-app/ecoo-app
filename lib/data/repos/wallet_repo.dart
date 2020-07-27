@@ -98,13 +98,12 @@ class WalletRepo implements IWalletRepo {
     Either<Failure, Transaction> result;
 
     if (await networkInfo.isConnected) {
-      // TODO
-      // await walletSource.walletService
-      //     .transfer(sender, reciever, amount)
-      //     .then((value) => result = Right(value))
-      //     .catchError(
-      //         (error) => result = Left(MessageFailure(error.toString())));
-      await _makeMockTransaction().then((value) => result = Right(value));
+      await walletSource.walletService
+          .transfer(sender.walletModel, reciever.walletModel, amount)
+          .then((value) => result = Right(value))
+          .catchError(
+              (error) => result = Left(MessageFailure(error.toString())));
+      // await _makeMockTransaction().then((value) => result = Right(value));
     } else {
       result = Left(NoService());
     }
