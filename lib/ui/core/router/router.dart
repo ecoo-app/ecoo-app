@@ -15,7 +15,7 @@ import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
 import 'package:e_coupon/ui/screens/creation_verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
-import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
+import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';

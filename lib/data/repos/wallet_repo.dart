@@ -66,25 +66,25 @@ class WalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<WalletEntity>>> getWallets(
       String userIdentifier) async {
-    if (await networkInfo.isConnected) {
-      try {
-        // TODO use lib
-        final wallets = await _getMockWallets();
-        unawaited(localDataSource.cacheWallets('wallets', wallets));
-        return Right(wallets);
-      } on MessageFailure {
-        //ServerException
-        return Left(ServerFailure());
-      }
-    } else {
-      try {
-        final wallets = await localDataSource.getWallets('wallets');
-        return Right(wallets);
-      } on MessageFailure {
-        //CacheException
-        return Left(CacheFailure());
-      }
+    // if (await networkInfo.isConnected) {
+    try {
+      // TODO use lib
+      final wallets = await _getMockWallets();
+      unawaited(localDataSource.cacheWallets('wallets', wallets));
+      return Right(wallets);
+    } on MessageFailure {
+      //ServerException
+      return Left(ServerFailure());
     }
+    // } else {
+    //   try {
+    //     final wallets = await localDataSource.getWallets('wallets');
+    //     return Right(wallets);
+    //   } on MessageFailure {
+    //     //CacheException
+    //     return Left(CacheFailure());
+    //   }
+    // }
   }
 
   @override

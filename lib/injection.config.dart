@@ -141,7 +141,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IRouter>(),
       ));
   gh.factory<WalletsViewModel>(
-      () => WalletsViewModel(getAllWallets: g<GetAllWallets>()));
+      () => WalletsViewModel(g<GetAllWallets>(), g<IWalletService>()));
   gh.factory<ClaimVerificationViewModel>(() =>
       ClaimVerificationViewModel(g<VerifyClaim>(), g<GetVerificationInputs>()));
 

@@ -6,6 +6,7 @@ abstract class IWalletService {
   List<WalletEntity> get wallets;
   WalletEntity get selectedWallet;
   set selected(WalletEntity wallet);
+  set wallets(List<WalletEntity> wallets);
 }
 
 @LazySingleton(as: IWalletService)
@@ -22,5 +23,10 @@ class WalletService implements IWalletService {
   @override
   set selected(WalletEntity wallet) {
     this._selected = wallet;
+  }
+
+  @override
+  set wallets(List<WalletEntity> wallets) {
+    this._wallets = wallets;
   }
 }

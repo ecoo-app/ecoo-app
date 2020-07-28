@@ -23,7 +23,6 @@ class WalletScreen extends StatelessWidget {
     return WalletLayout(
       title: Text('my wallet'),
       body: BaseView<WalletViewModel>(
-          // TODO how to do this with injectable only?
           model: getIt<WalletViewModel>(),
           disposeState: false,
           onModelReady: (vmodel) async => await vmodel.setWalletId(walletId),
