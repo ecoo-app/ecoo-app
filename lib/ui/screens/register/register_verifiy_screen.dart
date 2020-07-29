@@ -1,7 +1,6 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
-import 'package:e_coupon/ui/core/widgets/button/secondary_button.dart';
 import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
 import 'package:e_coupon/ui/screens/register/register_scaffold.dart';
 import 'package:e_coupon/ui/screens/register/register_verify_screen_view_model.dart';

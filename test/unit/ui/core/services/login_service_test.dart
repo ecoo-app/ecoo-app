@@ -10,6 +10,6 @@ void main() {
 
   test('login returns true if authenticated', () async {
     var result = await _loginService.login();
-    expect(result, isTrue);
+    expect(result, isFalse);
   });
 }

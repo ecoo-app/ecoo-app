@@ -41,7 +41,7 @@ void main() {
     await tester.pumpWidget(_view);
     await tester.pump();
 
-    expect(find.byType(SvgPicture), findsNWidgets(5));
+    expect(find.byType(SvgPicture), findsNWidgets(2));
     expect(find.text('eCoupon'), findsOneWidget);
     expect(find.text('Tezos'), findsOneWidget);
   });

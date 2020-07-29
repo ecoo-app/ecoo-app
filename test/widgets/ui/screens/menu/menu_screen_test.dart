@@ -4,6 +4,7 @@ import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/app_service.dart';
+import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:e_coupon/ui/screens/menu/menu_screen.dart';
 import 'package:e_coupon/ui/screens/menu/menu_screen_view_model.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_view_model.dart';
@@ -23,6 +24,8 @@ class RouterMock extends Mock implements IRouter {}
 
 class WalletRepositoryMock extends Mock implements IWalletRepo {}
 
+class WalletServiceMock extends Mock implements IWalletService {}
+
 void main() {
   Widget _view;
   WidgetTestApp _testApp;
@@ -30,6 +33,7 @@ void main() {
   IRouter _routerMock;
   IAppService _appService;
   IWalletRepo _repositoryMock;
+  IWalletService _walletServiceMock;
 
   tearDown(() {});
 
@@ -38,19 +42,14 @@ void main() {
     _routerMock = RouterMock();
     _appService = AppServiceMock();
     _repositoryMock = WalletRepositoryMock();
+    _walletServiceMock = WalletServiceMock();
+    var walletEntity = WalletEntity(lib_wallet.Wallet('TestID', 'TestKey',
+        lib_currency.Currency('CHF', 'CHF', 0), false, 1000, 'testState'));
     when(_repositoryMock.getWallets(any))
-        .thenAnswer((realInvocation) => Future.value(Right([
-              WalletEntity(lib_wallet.Wallet(
-                  'TestID',
-                  'TestKey',
-                  lib_currency.Currency('CHF', 'CHF', 0),
-                  false,
-                  1000,
-                  'testState'))
-            ])));
-
+        .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
+    when(_walletServiceMock.wallets).thenReturn([walletEntity]);
     var useCase = GetAllWallets(repository: _repositoryMock);
-    var walletsViewModel = WalletsViewModel(getAllWallets: useCase);
+    var walletsViewModel = WalletsViewModel(useCase, _walletServiceMock);
     GetIt.instance.allowReassignment = true;
     GetIt.instance.registerFactory(() => walletsViewModel);
 

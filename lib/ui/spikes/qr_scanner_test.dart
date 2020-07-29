@@ -18,7 +18,7 @@ class QRScannerTestScreen extends StatefulWidget {
 class _QRScannerState extends State<QRScannerTestScreen>
     with SingleTickerProviderStateMixin {
   QRReaderController controller;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AnimationController animationController;
   List<CameraDescription> _cameras;
   ICameraService _cameraService = getIt<ICameraService>();

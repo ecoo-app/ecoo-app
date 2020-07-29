@@ -178,6 +178,7 @@ class WalletRepo implements IWalletRepo {
     });
   }
 
+  // ignore: unused_element
   Future<Transaction> _makeMockTransaction() {
     return Future.delayed(const Duration(milliseconds: 400), () {
       var completer = Completer<Transaction>();
