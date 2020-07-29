@@ -128,6 +128,7 @@ class Assets {
   static const check_double_svg = 'assets/images/check_double.svg';
 
   static const qr_code_svg = 'assets/images/qr_code.svg';
+  static const cash_register_svg = 'assets/images/cash_register.svg';
 }
 
 class GradientStyles extends Gradients {

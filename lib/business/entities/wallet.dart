@@ -22,6 +22,7 @@ class WalletEntity extends Equatable {
 
   String toAmountCurrencyLabel() => '${_wallet.currency.name} $amountLabel';
 
+// TODO deprecated
   static WalletEntity createReciever(String reciverId, String reciverKey) {
     return WalletEntity(
         lib.Wallet(reciverId, reciverKey, null, null, null, null));

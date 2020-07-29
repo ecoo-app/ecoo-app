@@ -4,10 +4,11 @@ import 'ec_progress_indicator.dart';
 
 class AmountDisplay extends StatelessWidget {
   final bool isLoading;
-  final int amount;
+  final String amount;
   final String currency;
+  final bool isShopColor;
 
-  AmountDisplay({this.isLoading, this.amount, this.currency});
+  AmountDisplay({this.isLoading, this.amount, this.currency, this.isShopColor});
 
   @override
   Widget build(BuildContext context) {

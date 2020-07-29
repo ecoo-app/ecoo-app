@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/use_cases/get_wallet.dart';
@@ -34,22 +33,22 @@ class PaymentViewModel extends BaseViewModel {
   PaymentViewModel(this._router, this.qrScanner, this._walletService,
       this.handleTransaction, this.getWallet);
 
-  void init() {
-    this._transaction = Transfer(sender: Right(_walletService.selectedWallet));
+  void init() async {
+    var wallet = await _walletService.getSelected();
+    this._transaction = Transfer(sender: wallet);
   }
 
   void initiateTransaction(String successText) async {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
-      _transaction.amount =
-          Right(Utils.balanceFromString(amountInputController.text));
+      _transaction.amount = Utils.balanceFromString(amountInputController.text);
 
       var recieverOrFailure =
           await getWallet(WalletParams(id: recieverInputController.text));
       recieverOrFailure.fold((failure) => setViewState(Error(failure)),
           (wallet) async {
-        _transaction.reciever = Right(wallet);
+        _transaction.reciever = wallet;
         await transfer(successText);
         setViewState(Loaded());
       });
@@ -58,9 +57,9 @@ class PaymentViewModel extends BaseViewModel {
 
   void transfer(String successText) async {
     var transactionOrFailure = await handleTransaction(TransactionParams(
-        sender: _transaction.sender.fold((l) => null, (r) => r),
-        reciever: _transaction.reciever.fold((l) => null, (r) => r),
-        amount: _transaction.amount.fold((l) => null, (r) => r)));
+        sender: _transaction.sender,
+        reciever: _transaction.reciever,
+        amount: _transaction.amount));
 
     transactionOrFailure.fold(
         (failure) => onError(failure), (success) => onSuccess(successText));

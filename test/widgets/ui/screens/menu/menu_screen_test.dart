@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
-import 'package:e_coupon/business/use_cases/get_all_wallets.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/app_service.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
@@ -47,9 +46,10 @@ void main() {
         lib_currency.Currency('CHF', 'CHF', 0), false, 1000, 'testState'));
     when(_repositoryMock.getWallets(any))
         .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
-    when(_walletServiceMock.wallets).thenReturn([walletEntity]);
-    var useCase = GetAllWallets(repository: _repositoryMock);
-    var walletsViewModel = WalletsViewModel(useCase, _walletServiceMock);
+    when(_walletServiceMock.allWallets)
+        .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
+
+    var walletsViewModel = WalletsViewModel(_walletServiceMock);
     GetIt.instance.allowReassignment = true;
     GetIt.instance.registerFactory(() => walletsViewModel);
 

@@ -1,4 +1,10 @@
+import 'package:e_coupon/business/entities/currency.dart';
+
 class Utils {
+  static String toAmountCurrencyLabel(Currency currency, int amount) {
+    return '${currency.label} ${moneyToString(amount)}';
+  }
+
   static int balanceFromString(String amount) {
     // TODO how to use local decimal separators... ?
     // List<String> splits = amount.split(".");

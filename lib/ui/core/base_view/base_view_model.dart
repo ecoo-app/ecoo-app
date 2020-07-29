@@ -21,10 +21,10 @@ class BaseViewModel extends ChangeNotifier {
 
   void setViewState(ViewState viewState) {
     _viewState = viewState;
-    notifyListeners();
+    // notifyListeners();
     // if this is used success screen functionality does not work anymore ??
-    // SchedulerBinding.instance.addPostFrameCallback((_) {
-    //   notifyListeners();
-    // });
+    SchedulerBinding.instance.scheduleFrameCallback((_) {
+      notifyListeners();
+    });
   }
 }

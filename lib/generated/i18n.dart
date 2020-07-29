@@ -44,10 +44,16 @@ class I18n implements WidgetsLocalizations {
   String get privateWalletRecieve => "Anfordern";
   /// "Gutschrift anfordern"
   String get privateWalletClaim => "Gutschrift anfordern";
+  /// "Einlösen"
+  String get walletRedeem => "Einlösen";
+  /// "Kassieren"
+  String get walletCashier => "Kassieren";
   /// "Betrag"
   String get titlePrivateRequest => "Betrag";
   /// "Geld anfordern"
   String get buttonPrivateRequest => "Geld anfordern";
+  /// "Rechnung erstellen"
+  String get buttonShopRequest => "Rechnung erstellen";
   /// "alle Bewegungen anzeigen"
   String get showAllTransactions => "alle Bewegungen anzeigen";
   /// "Wallet hinzufügen"

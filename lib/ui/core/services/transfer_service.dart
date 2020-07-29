@@ -3,13 +3,17 @@ import 'package:injectable/injectable.dart';
 
 abstract class ITransferService {
   void setTransaction(Transfer transfer);
+  Transfer get transfer;
 }
 
 @LazySingleton(as: ITransferService)
 class TransferService extends ITransferService {
-  Transfer transfer;
+  Transfer _transfer;
   @override
   void setTransaction(Transfer transfer) {
-    this.transfer = transfer;
+    this._transfer = transfer;
   }
+
+  @override
+  Transfer get transfer => this._transfer;
 }

@@ -20,7 +20,6 @@ class RhombusButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 24, bottom: 24, left: 4, right: 4),
-      // TODO
       child: Container(
         width: size,
         height: size,

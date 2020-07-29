@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/creation_verification/wallet_creation_screen.dart';
 import 'package:e_coupon/ui/screens/payment/error_screen.dart';
@@ -6,7 +7,6 @@ import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
-import 'package:e_coupon/ui/screens/payment/transaction_data.dart';
 import 'package:e_coupon/ui/screens/register/register_screen.dart';
 import 'package:e_coupon/ui/screens/register/register_verifiy_screen.dart';
 import 'package:e_coupon/ui/screens/register/register_wallet_type_screen.dart';
@@ -15,7 +15,7 @@ import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
 import 'package:e_coupon/ui/screens/creation_verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
-import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview_screen.dart';
+import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -75,12 +75,9 @@ class Router implements IRouter {
         return MaterialPageRoute(builder: (_) => WalletCreationScreen());
       case HomeRoute:
       case WalletDetailRoute:
-        var walletId = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => WalletScreen(walletId: walletId));
+        var wallet = settings.arguments as WalletEntity;
+        return MaterialPageRoute(builder: (_) => WalletScreen(wallet: wallet));
       case WalletsOverviewRoute:
-        // var post = settings.arguments as Post;
-        // return MaterialPageRoute(builder: (_) => WalletScreen(post: post));
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
       case TransactionOverviewRoute:
         return MaterialPageRoute(builder: (_) => TransactionOverviewScreen());
@@ -95,15 +92,9 @@ class Router implements IRouter {
       case ErrorRoute:
         return _createRoute(settings, getIt<ErrorScreen>(), false);
       case RequestPaymentRoute:
-        // return MaterialPageRoute(builder: (_) => GenerateScreen());
-        final String requesterId = settings.arguments as String;
-        return MaterialPageRoute(
-            builder: (_) => RequestScreen(
-                  requesterId: requesterId,
-                ));
+        return _createRoute(settings, getIt<RequestScreen>(), false);
       case RequestQRBillRoute:
-        final RequestData args = settings.arguments as RequestData;
-        return MaterialPageRoute(builder: (_) => RequestQRBillScreen(args));
+        return _createRoute(settings, getIt<RequestQRBillScreen>(), false);
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/data/lib/mock_data.dart';
-import 'package:e_coupon/data/lib/mock_library.dart' as lib_api;
+import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
+import 'package:e_coupon/data/e_coupon_library/mock_library.dart' as lib_api;
 import 'package:e_coupon/business/entities/transaction_record.dart';
-import 'package:e_coupon/data/lib/lib_wallet_source.dart';
+import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 
 import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
 import 'package:dartz/dartz.dart';

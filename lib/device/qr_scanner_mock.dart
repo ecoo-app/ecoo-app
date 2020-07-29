@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
-import 'package:e_coupon/data/lib/mock_data.dart';
+import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';

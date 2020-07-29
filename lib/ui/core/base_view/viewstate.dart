@@ -25,3 +25,5 @@ class Error<T extends Failure> extends ViewState {
 
   Error(this.failure);
 }
+
+class Update extends ViewState {}

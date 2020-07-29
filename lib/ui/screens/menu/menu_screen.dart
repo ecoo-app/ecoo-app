@@ -2,7 +2,7 @@ import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
 import 'package:e_coupon/ui/screens/menu/menu_screen_view_model.dart';
-import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview_screen.dart';
+import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
