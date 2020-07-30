@@ -5,7 +5,6 @@ import 'package:e_coupon/ui/screens/payment/success_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gradient_widgets/gradient_widgets.dart';
 
 import '../../../injection.dart';
 
@@ -46,8 +45,8 @@ class SuccessScreen extends StatelessWidget {
                       child: Container(
                     decoration: BoxDecoration(
                         gradient: args.isShop
-                            ? Gradients.rainbowBlue
-                            : Gradients.coldLinear),
+                            ? GradientStyles.privateWalletAppbarGradient
+                            : GradientStyles.shopWalletAppbarGradient),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

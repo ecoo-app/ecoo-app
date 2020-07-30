@@ -1,7 +1,6 @@
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/gradient_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_widgets/gradient_widgets.dart';
 
 class MainLayout extends StatelessWidget {
   final bool isShop;
@@ -26,7 +25,9 @@ class MainLayout extends StatelessWidget {
           textAlign: TextAlign.end,
           style: TextStyles.body_text_white,
         ),
-        gradient: isShop ? Gradients.rainbowBlue : Gradients.coldLinear,
+        gradient: isShop
+            ? GradientStyles.shopWalletAppbarGradient
+            : GradientStyles.privateWalletAppbarGradient,
         elevation: 0,
       ),
       body: SafeArea(

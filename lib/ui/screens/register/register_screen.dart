@@ -1,8 +1,8 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/button/flat_secondary_button.dart';
 import 'package:e_coupon/ui/screens/register/register_scaffold.dart';
 import 'package:e_coupon/ui/screens/register/register_screen_view_model.dart';
-import 'package:e_coupon/ui/screens/register/register_verifiy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -49,8 +49,8 @@ class RegisterScreen extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 70.0),
             child: FlatSecondaryButton(
               text: I18n.of(context).onboardingRegisterScreen,
-              color: ColorStyles.purple,
-              onTap: viewModel.onboarding,
+              textColor: ColorStyles.purple,
+              onPressed: viewModel.onboarding,
             ),
           ),
         ));

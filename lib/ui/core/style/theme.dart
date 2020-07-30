@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gradient_widgets/gradient_widgets.dart';
 
 const FontWeight fontWeightMedium = FontWeight.w500;
 const FontWeight fontWeightBold = FontWeight.w800;
@@ -71,6 +70,7 @@ class ColorStyles {
   static const Color bg_gray = Color(0xFF575757);
   static const Color bg_light_gray = Color(0xFFF7F7F7);
   static const Color bg_transparent = Color(0x40000000);
+  static const Color bg_white_9 = Color(0xE6FFFFFF);
 
   static const Color blue = Color(0xFF3979FF);
   static const Color green = Color(0xFF3979FF);
@@ -78,9 +78,6 @@ class ColorStyles {
   static const Color red = Color(0xFFFF5F5F);
   static const Color pink = Color(0xFFFF96E3);
 
-  static LinearGradient app_gradient = Gradients.blush;
-  static LinearGradient private_gradient = Gradients.coldLinear;
-  static LinearGradient shop_graident = Gradients.rainbowBlue;
 }
 
 class LayoutStyles {
@@ -95,6 +92,7 @@ class Assets {
   static const close_svg = 'assets/images/close.svg';
   static const back_svg = 'assets/images/back.svg';
   static const tezos_svg = 'assets/images/tezos.svg';
+  static const keyboard_purpe_svg = 'assets/images/icon_keyboard_purple.svg';
   static const apple_icon_svg = 'assets/images/apple_icon.svg';
   static const google_icon_svg = 'assets/images/google_icon.svg';
 
@@ -131,30 +129,90 @@ class Assets {
   static const cash_register_svg = 'assets/images/cash_register.svg';
 }
 
-class GradientStyles extends Gradients {
-  static final AlignmentGeometry _beginAlignment = Alignment.topLeft;
-  static final AlignmentGeometry _endAlignment = Alignment.bottomRight;
+class GradientStyles {
+  static final LinearGradient purpleGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    stops: [
+      0.0,
+      0.49,
+      1.0,
+      1.0,
+    ],
+    colors: [
+      ColorStyles.pink,
+      Color(0xFFC971FF),
+      ColorStyles.purple,
+      ColorStyles.purple
+    ],
+  );
 
-  // static LinearGradient defaultGradient = Gradients.buildGradient(
-  //     _beginAlignment,
-  //     _endAlignment,
-  //     const [Color(0xffFFF0D1), Color(0xffFFB8C6)]);
+  static final LinearGradient privateWalletBackgroundGradient = LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFF7DFF7b),
+        Color(0xFF24E8BA),
+        Color(0xFF20DBE0),
+        Color(0xFF03CF80)
+      ],
+      stops: [
+        0.0,
+        0.37,
+        1.0,
+        1.0
+      ]);
 
-  static LinearGradient actionGradient = Gradients.buildGradient(
-      _beginAlignment,
-      _endAlignment,
-      const [Color(0xff7dff7b), Color(0xff03cf80)]);
+  static final LinearGradient shopWalletBackgroundGradient = LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFF00EAEA),
+        Color(0xFF39C1FF),
+        Color(0xFF3979FF),
+      ],
+      stops: [
+        0.0,
+        0.54,
+        1.0,
+      ]);
 
-  static LinearGradient privateGradient = Gradients.buildGradient(
-      _beginAlignment,
-      _endAlignment,
-      const [Color(0xff7dff7b), Color(0xff03cf80)]);
+  static final LinearGradient privateWalletAppbarGradient = LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      colors: [
+        Color(0xFF7DFF7b),
+        Color(0xFF24E8BA),
+        Color(0xFF20DBE0),
+        Color(0xFF03CF80)
+      ],
+      stops: [
+        0.0,
+        0.37,
+        1.0,
+        1.0
+      ]);
 
-  static LinearGradient shopGradient = Gradients.buildGradient(_beginAlignment,
-      _endAlignment, const [Color(0xff7dff7b), Color(0xff03cf80)]);
+  static final LinearGradient shopWalletAppbarGradient = LinearGradient(
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+      colors: [
+        Color(0xFF00EAEA),
+        Color(0xFF39C1FF),
+        Color(0xFF3979FF),
+      ],
+      stops: [
+        0.0,
+        0.54,
+        1.0,
+      ]);
 
-  static LinearGradient errorGradient = Gradients.buildGradient(
-      Alignment.topCenter,
-      Alignment.bottomCenter,
-      const [Color(0xfff1327f), Color(0xff9774ff)]);
+  static LinearGradient errorGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xfff1327f),
+      Color(0xff9774ff),
+    ],
+  );
 }

@@ -24,36 +24,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   bool _isShopOnboardingPage = false;
   bool _isLastPage = false;
 
-  LinearGradient _privateWalletGradient = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        Color(0xFF7DFF7b),
-        Color(0xFF24E8BA),
-        Color(0xFF20DBE0),
-        Color(0xFF03CF80)
-      ],
-      stops: [
-        0.0,
-        0.37,
-        1.0,
-        1.0
-      ]);
-
-  LinearGradient _shopWalletGradient = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        Color(0xFF00EAEA),
-        Color(0xFF39C1FF),
-        Color(0xFF3979FF),
-      ],
-      stops: [
-        0.0,
-        0.54,
-        1.0,
-      ]);
-
   @override
   void initState() {
     super.initState();
@@ -103,8 +73,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Container(
           decoration: BoxDecoration(
               gradient: _isShopOnboardingPage
-                  ? _shopWalletGradient
-                  : _privateWalletGradient),
+                  ? GradientStyles.shopWalletBackgroundGradient
+                  : GradientStyles.privateWalletBackgroundGradient),
           child: Stack(
             fit: StackFit.expand,
             alignment: AlignmentDirectional.topStart,

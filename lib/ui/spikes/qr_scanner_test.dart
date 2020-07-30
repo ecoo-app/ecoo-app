@@ -115,7 +115,9 @@ class _QRScannerState extends State<QRScannerTestScreen>
                 SizedBox(
                   height: 170,
                 ),
-                PrimaryButton(text: 'manuell eingeben')
+                Container(
+                    margin: const EdgeInsets.symmetric(vertical: 25),
+                    child: PrimaryButton(text: 'manuell eingeben'))
               ],
             ),
           ),

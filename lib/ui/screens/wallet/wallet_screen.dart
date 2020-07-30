@@ -41,13 +41,15 @@ class WalletScreen extends StatelessWidget {
                 },
               )
             ]),
-        PrimaryButton(
-          margin: const EdgeInsets.symmetric(vertical: 24),
-          text: I18n.of(context).walletCashier,
-          onPressed: () {
-            vmodel.makePaymentRequest();
-          },
-        )
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 25),
+          child: PrimaryButton(
+            text: I18n.of(context).walletCashier,
+            onPressed: () {
+              vmodel.makePaymentRequest();
+            },
+          ),
+        ),
       ];
     } else {
       return [
@@ -70,13 +72,15 @@ class WalletScreen extends StatelessWidget {
                 },
               )
             ]),
-        PrimaryButton(
-          margin: const EdgeInsets.symmetric(vertical: 24),
-          text: I18n.of(context).privateWalletPay,
-          onPressed: () {
-            vmodel.makePayment();
-          },
-        )
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 25),
+          child: PrimaryButton(
+            text: I18n.of(context).privateWalletPay,
+            onPressed: () {
+              vmodel.makePayment();
+            },
+          ),
+        ),
       ];
     }
   }

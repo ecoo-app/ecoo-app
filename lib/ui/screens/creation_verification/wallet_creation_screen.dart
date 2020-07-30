@@ -19,15 +19,21 @@ class WalletCreationScreen extends StatelessWidget {
               I18n.of(context).textWalletCreation,
               style: Theme.of(context).textTheme.bodyText2,
             ),
-            RhombusButton(
-              text: 'private',
-              onPressed: () =>
-                  Navigator.pushNamed(context, ClaimVerificationRoute),
-            ),
-            RhombusButton(
-              text: 'shop',
-              onPressed: () =>
-                  Navigator.pushNamed(context, ClaimVerificationRoute),
+            Column(
+              children: <Widget>[
+                RhombusButton(
+                  text: I18n.of(context).privateRegisterWalletTypeScreen,
+                  private: true,
+                  onTap: () =>
+                      Navigator.pushNamed(context, ClaimVerificationRoute),
+                ),
+                RhombusButton(
+                  text: I18n.of(context).shopRegisterWalletTypeScreen,
+                  private: false,
+                  onTap: () =>
+                      Navigator.pushNamed(context, ClaimVerificationRoute),
+                )
+              ],
             )
           ],
         ),

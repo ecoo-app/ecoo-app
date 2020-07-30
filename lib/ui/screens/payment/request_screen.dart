@@ -20,39 +20,35 @@ class RequestScreen extends StatelessWidget {
               isShop: vmodel.wallet.isShop,
               title: I18n.of(context).titlePrivateRequest,
               body: Center(
-                child: Container(
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                      ),
-                      Form(
-                          key: vmodel.formKey,
-                          child: Column(
-                            children: <Widget>[
-                              AmountInputField(
-                                controller: vmodel.amountInputController,
-                              ),
-                            ],
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                      ),
-                      PrimaryButton(
-                        margin: const EdgeInsets.symmetric(vertical: 24),
-                        text: vmodel.wallet.isShop
-                            ? I18n.of(context).buttonShopRequest
-                            : I18n.of(context).buttonPrivateRequest,
-                        onPressed: () {
-                          vmodel.next();
-                        },
-                      ),
-                    ],
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  margin: EdgeInsets.all(10),
+                  child: Container(
+                      child: Column(children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
                 ),
-              ));
+                Form(
+                    key: vmodel.formKey,
+                    child: Column(
+                      children: <Widget>[
+                        AmountInputField(
+                          controller: vmodel.amountInputController,
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 25),
+                  child: PrimaryButton(
+                    text: vmodel.wallet.isShop
+                        ? I18n.of(context).buttonShopRequest
+                        : I18n.of(context).buttonPrivateRequest,
+                    onPressed: () {
+                      vmodel.next();
+                    },
+                  ),
+                ),
+              ]))));
         });
   }
 }

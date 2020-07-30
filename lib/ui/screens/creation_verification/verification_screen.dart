@@ -25,11 +25,13 @@ class VerificationScreen extends StatelessWidget {
                 : Column(children: <Widget>[
                     Text(vmodel.verificationInputs.title),
                     FormGenerator(vmodel.verificationInputs.inputs),
-                    PrimaryButton(
-                      margin: const EdgeInsets.symmetric(vertical: 24),
-                      text: I18n.of(context).buttonFormClaimVerification,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, WalletDetailRoute),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 25),
+                      child: PrimaryButton(
+                        text: I18n.of(context).buttonFormClaimVerification,
+                        onPressed: () =>
+                            Navigator.pushNamed(context, WalletDetailRoute),
+                      ),
                     ),
                   ]);
           }),

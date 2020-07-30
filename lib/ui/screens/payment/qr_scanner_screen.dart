@@ -1,7 +1,7 @@
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
-import 'package:e_coupon/ui/core/widgets/button/secondary_button.dart';
+import 'package:e_coupon/ui/core/widgets/button/outlined_secondary_button.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:e_coupon/ui/screens/payment/qr_scanner_view_model.dart';
 import 'package:flutter/material.dart';
@@ -87,10 +87,13 @@ class QRScannerScreen extends StatelessWidget {
                     SizedBox(
                       height: 170,
                     ),
-                    SecondaryButton(
-                      text: 'manuell eingeben',
-                      icon: Icon(Icons.keyboard),
-                      onPressed: () => vmodel.next(),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 25, horizontal: 4),
+                      child: OutlinedSecondaryButton(
+                        text: 'manuell eingeben',
+                        onPressed: () => vmodel.next(),
+                      ),
                     )
                   ],
                 ),

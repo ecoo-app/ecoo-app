@@ -1,57 +1,69 @@
-import 'package:e_coupon/ui/core/widgets/button/rhombus_shape_border.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:flutter_svg/svg.dart';
 
 class RhombusButton extends StatelessWidget {
-  final GestureTapCallback onPressed;
   final String text;
-  final colorTheme;
-  final bool isLoading;
-  final double size;
+  final VoidCallback onTap;
+  final bool private;
 
-  RhombusButton(
-      {this.onPressed,
-      @required this.text,
-      this.colorTheme,
-      this.isLoading = false,
-      this.size = 150});
+  const RhombusButton({
+    Key key,
+    @required this.private,
+    @required this.onTap,
+    @required this.text,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 24, bottom: 24, left: 4, right: 4),
+    var positionedImage = private
+        ? Positioned(
+            top: 109,
+            left: 106,
+            child: SvgPicture.asset(Assets.icon_arrow_right_svg))
+        : Positioned(
+            top: 56,
+            left: 93,
+            child: SvgPicture.asset(Assets.icon_arrow_right_svg));
+
+    var positionedText = private
+        ? Positioned(
+            top: 59,
+            left: 51,
+            child: _text(text),
+          )
+        : Positioned(
+            top: 90,
+            left: 40,
+            child: _text(text),
+          );
+
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
-        width: size,
-        height: size,
-        child: GradientButton(
-          increaseHeightBy: double.infinity,
-          increaseWidthBy: double.infinity,
-          gradient: Gradients.coldLinear,
-          shape: RhombusShapeBorder(),
-          // gradient: ThemeGradients.defaultGradient,
-          callback: onPressed,
-          shapeRadius: BorderRadius.all(Radius.circular(10)),
-          child: isLoading
-              ? Row(
-                  children: <Widget>[
-                    CircularProgressIndicator(
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.white)),
-                    Text(text)
-                  ],
-                )
-              : Text(
-                  text,
-                ),
-          elevation: 0,
+        alignment: private ? Alignment.topLeft : Alignment.bottomRight,
+        child: Stack(
+          children: <Widget>[
+            SvgPicture.asset(private
+                ? Assets.rectangle_green_svg
+                : Assets.rectangle_blue_svg),
+            positionedText,
+            positionedImage
+          ],
         ),
       ),
     );
   }
-}
 
-// rotate something for some degrees: https://stackoverflow.com/questions/44276080/how-do-i-rotate-something-15-degrees-in-flutter
-// RotationTransition(
-//   turns: new AlwaysStoppedAnimation(15 / 360),
-//   child: new Text("Lorem ipsum"),
-// )
+  Widget _text(String text) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          fontSize: 35.0,
+          color: ColorStyles.white,
+          fontFamily: fontFamiliyPanam,
+          fontWeight: fontWeightMedium),
+    );
+  }
+}

@@ -19,18 +19,6 @@ class RhombusIconButton extends StatelessWidget {
           onTap: onPressed,
           child: SvgPicture.asset(Assets.icon_button_svg),
         ),
-        // child: GradientButton(
-        //   increaseHeightBy: double.infinity,
-        //   increaseWidthBy: double.infinity,
-        //   gradient: ColorStyles.app_gradient,
-        //   shape: RhombusShapeBorder(),
-        //   callback: onPressed,
-        //   shapeRadius: BorderRadius.all(Radius.circular(10)),
-        //   child: Text(
-        //     'next',
-        //   ),
-        //   elevation: 0,
-        // ),
       ),
     );
   }
