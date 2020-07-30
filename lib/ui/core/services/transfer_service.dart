@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class ITransferService {
   void setTransaction(Transfer transfer);
+  void reset();
   Transfer get transfer;
 }
 
@@ -16,4 +17,9 @@ class TransferService extends ITransferService {
 
   @override
   Transfer get transfer => this._transfer;
+
+  @override
+  void reset() {
+    this._transfer = Transfer();
+  }
 }

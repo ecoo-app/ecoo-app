@@ -1,7 +1,6 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/services/camera_service.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 
 import 'package:flutter/material.dart';
@@ -11,8 +10,6 @@ import 'package:injectable/injectable.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Env.dev);
-  var cameraService = getIt.get<ICameraService>();
-  cameraService.init();
 
   var app = getIt.get<ECouponApp>();
   runApp(app);

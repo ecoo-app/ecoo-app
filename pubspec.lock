@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
-  bloc:
-    dependency: transitive
-    description:
-      name: bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -211,13 +204,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
-  cubit:
-    dependency: transitive
-    description:
-      name: cubit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -255,15 +241,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.2"
-  fast_qr_reader_view:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: "05d629020b19b426c5d8f20a88d5a810ff304d7b"
-      resolved-ref: "05d629020b19b426c5d8f20a88d5a810ff304d7b"
-      url: "git://github.com/facundomedica/fast_qr_reader_view.git"
-    source: git
-    version: "0.1.6"
   ffi:
     dependency: transitive
     description:
@@ -297,20 +274,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_bloc:
-    dependency: "direct main"
-    description:
-      name: flutter_bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.1"
-  flutter_cubit:
-    dependency: transitive
-    description:
-      name: flutter_cubit
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.0"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -676,6 +639,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  qr_code_scanner:
+    dependency: "direct main"
+    description:
+      name: qr_code_scanner
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.13"
   qr_flutter:
     dependency: "direct main"
     description:

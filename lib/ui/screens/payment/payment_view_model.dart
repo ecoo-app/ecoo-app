@@ -5,6 +5,7 @@ import 'package:e_coupon/business/use_cases/handle_transaction.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/abstract_qr_scanner.dart';
+import 'package:e_coupon/ui/core/services/transfer_service.dart';
 import 'package:e_coupon/ui/core/services/utils.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
@@ -20,35 +21,47 @@ class PaymentViewModel extends BaseViewModel {
   final IRouter _router;
   final IQRScanner qrScanner;
   final IWalletService _walletService;
+  final ITransferService _transferService;
   final HandleTransaction handleTransaction;
   final GetWallet getWallet;
 
-  Transfer _transaction;
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
   final formKey = GlobalKey<FormState>();
   final amountInputController = TextEditingController();
   final recieverInputController = TextEditingController();
 
   PaymentViewModel(this._router, this.qrScanner, this._walletService,
-      this.handleTransaction, this.getWallet);
+      this._transferService, this.handleTransaction, this.getWallet);
 
   void init() async {
-    var wallet = await _walletService.getSelected();
-    this._transaction = Transfer(sender: wallet);
+    var sender = await _walletService.getSelected();
+    _transferService.transfer.sender = sender;
+
+    Transfer transfer = _transferService.transfer;
+    if (transfer.reciever != null) {
+      recieverInputController.value = TextEditingValue(
+        text: transfer.reciever.id,
+      );
+    }
+
+    if (transfer.amount != null) {
+      amountInputController.value = TextEditingValue(
+        text: transfer.amountLabel,
+      );
+    }
   }
 
   void initiateTransaction(String successText) async {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
-      _transaction.amount = Utils.balanceFromString(amountInputController.text);
+      _transferService.transfer.amount =
+          Utils.balanceFromString(amountInputController.text);
 
       var recieverOrFailure =
           await getWallet(WalletParams(id: recieverInputController.text));
       recieverOrFailure.fold((failure) => setViewState(Error(failure)),
           (wallet) async {
-        _transaction.reciever = wallet;
+        _transferService.transfer.reciever = wallet;
         await transfer(successText);
         setViewState(Loaded());
       });
@@ -57,9 +70,9 @@ class PaymentViewModel extends BaseViewModel {
 
   void transfer(String successText) async {
     var transactionOrFailure = await handleTransaction(TransactionParams(
-        sender: _transaction.sender,
-        reciever: _transaction.reciever,
-        amount: _transaction.amount));
+        sender: _transferService.transfer.sender,
+        reciever: _transferService.transfer.reciever,
+        amount: _transferService.transfer.amount));
 
     transactionOrFailure.fold(
         (failure) => onError(failure), (success) => onSuccess(successText));
@@ -77,6 +90,11 @@ class PaymentViewModel extends BaseViewModel {
 
   void onError(Failure failure) {
     _router.pushNamed(ErrorRoute);
+  }
+
+  void onPop() {
+    _transferService.reset();
+    _router.pop();
   }
 
   @override

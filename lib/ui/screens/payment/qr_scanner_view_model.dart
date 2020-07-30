@@ -1,60 +1,48 @@
+import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/services/camera_service.dart';
-import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
-import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
+import 'package:e_coupon/ui/core/services/qr_scan_parser.dart';
+import 'package:e_coupon/ui/core/services/transfer_service.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:injectable/injectable.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+const String EncryptedLabel = 'encrypted';
 
 @injectable
 class QRScannerViewModel extends BaseViewModel {
-  QRReaderController controller;
-  List<CameraDescription> _cameras;
-  ICameraService _cameraService;
-  IRouter _router;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final IRouter _router;
+  final ITransferService _transferService;
+  final IQRScanParser _scanParser;
+  QRViewController controller;
 
-  QRScannerViewModel(this._cameraService, this._router);
+  QRScannerViewModel(this._router, this._transferService, this._scanParser);
 
-  void init() {
-    _cameras = _cameraService.cameras;
-
-    // pick the first available camera
-    if (_cameras.isNotEmpty) {
-      onNewCameraSelected(_cameras[0]);
-    } else {
-      print('keine kamera gefunden');
-    }
+  void onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      onCodeRead(scanData);
+    });
   }
 
-  void onCodeRead(dynamic value) {
+  void onCodeRead(String value) {
     print(value.toString());
+    Transfer transferData;
+
+    if (value.contains(EncryptedLabel)) {
+      transferData = _scanParser.parseEncryptedTransaction(value);
+    } else {
+      transferData = _scanParser.parseTransaction(value);
+    }
+
+    _transferService.setTransaction(transferData);
+
     next();
   }
 
   void next() {
     _router.pushNamed(PaymentRoute);
-  }
-
-  void onNewCameraSelected(CameraDescription cameraDescription) async {
-    if (controller != null) {
-      await controller.dispose();
-    }
-    controller = QRReaderController(cameraDescription, ResolutionPreset.low,
-        [CodeFormat.qr, CodeFormat.pdf417], onCodeRead);
-
-    // If the controller is updated then update the UI.
-    controller.addListener(() {
-      if (controller.value.hasError) {
-        print('Camera error ${controller.value.errorDescription}');
-      }
-    });
-
-    try {
-      await controller.initialize();
-    } on QRReaderException catch (e) {
-      logError(e.code, e.description);
-      print('Error: ${e.code}\n${e.description}');
-    }
-
-    await controller.startScanning();
   }
 }

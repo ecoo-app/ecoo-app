@@ -48,8 +48,6 @@ dependencies:
   # suggestions from reso coder clean architecture & ttd tutorials
   # Service locator
   get_it: ^4.0.2
-  # Bloc for state management
-  flutter_bloc: ^5.0.1
   # Value equality
   equatable: ^1.2.2
   # Functional programming thingies
@@ -64,11 +62,7 @@ dependencies:
   flutter_svg: ^0.17.4
   # Package Info
   package_info: ^0.4.1
-
-  fast_qr_reader_view: 
-    git:
-      url: git://github.com/facundomedica/fast_qr_reader_view.git
-      ref: 05d629020b19b426c5d8f20a88d5a810ff304d7b
+  qr_code_scanner: ^0.0.13
 
 dev_dependencies:
   flutter_test:

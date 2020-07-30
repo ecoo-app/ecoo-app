@@ -27,7 +27,6 @@ import 'modules/third_party_library_module.dart';
 import 'ui/core/router/router.dart';
 import 'ui/core/services/abstract_qr_scanner.dart';
 import 'ui/core/services/app_service.dart';
-import 'ui/core/services/camera_service.dart';
 import 'ui/core/services/login_service.dart';
 import 'ui/core/services/qr_scan_parser.dart';
 import 'ui/core/services/settings_service.dart';
@@ -65,20 +64,22 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final thirdPartyLibraryModule = _$ThirdPartyLibraryModule();
   gh.factory<ErrorScreen>(() => ErrorScreen());
-  gh.lazySingleton<ICameraService>(() => CameraService());
   gh.lazySingleton<ILibWalletSource>(() => LibWalletSource());
   gh.lazySingleton<ILocalWalletSource>(() => LocalWalletSource());
   gh.factory<ILoginService>(() => LoginService());
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo());
-  gh.lazySingleton<IQRScanParser>(() => MockQRScanParser());
+  gh.lazySingleton<IQRScanParser>(() => QRScanParser());
   gh.factory<IQRScanner>(() => MockQRScanner());
   gh.lazySingleton<ITransferService>(() => TransferService());
   gh.lazySingleton<IWalletSource>(() => WalletSource());
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
   gh.factory<PackageInfo>(() => packageInfo);
   gh.factory<PaymentScreen>(() => PaymentScreen());
-  gh.factory<QRScannerViewModel>(
-      () => QRScannerViewModel(g<ICameraService>(), g<IRouter>()));
+  gh.factory<QRScannerViewModel>(() => QRScannerViewModel(
+        g<IRouter>(),
+        g<ITransferService>(),
+        g<IQRScanParser>(),
+      ));
   gh.factory<RegisterScreenViewModel>(
       () => RegisterScreenViewModel(g<IRouter>()));
   gh.factory<RegisterVerifyScreenViewModel>(
@@ -143,6 +144,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IRouter>(),
         g<IQRScanner>(),
         g<IWalletService>(),
+        g<ITransferService>(),
         g<HandleTransaction>(),
         g<GetWallet>(),
       ));

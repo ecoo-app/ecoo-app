@@ -15,4 +15,6 @@ class Transfer {
 
   String toAmountCurrencyLabel() =>
       Utils.toAmountCurrencyLabel(reciever.currency, amount);
+
+  String get amountLabel => Utils.moneyToString(this.amount);
 }
