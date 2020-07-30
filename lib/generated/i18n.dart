@@ -118,6 +118,8 @@ class I18n implements WidgetsLocalizations {
   String get appversionMenuScreen => "App Version:";
   /// "Wallet"
   String get walletMenuScreen => "Wallet";
+  /// "QR Code scannen"
+  String get titleScanScreen => "QR Code scannen";
   /// "Manuell eingeben"
   String get cancelScan => "Manuell eingeben";
   /// "Bezahlung erfolgreich"

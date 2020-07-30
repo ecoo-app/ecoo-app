@@ -42,6 +42,7 @@
   "privacyPolicyMenuScreen": "Datenschutzbestimmungen",
   "appversionMenuScreen": "App Version:",
   "walletMenuScreen": "Wallet",
+  "titleScanScreen": "QR Code scannen",
   "cancelScan": "Manuell eingeben",
   "paymentSuccessful": "Bezahlung erfolgreich",
   "noServiceErrorTitle": "Keine Internetverbindung",

@@ -29,11 +29,14 @@ class PaymentViewModel extends BaseViewModel {
   final amountInputController = TextEditingController();
   final recieverInputController = TextEditingController();
 
+  bool isShop;
+
   PaymentViewModel(this._router, this.qrScanner, this._walletService,
       this._transferService, this.handleTransaction, this.getWallet);
 
-  void init() async {
-    var sender = await _walletService.getSelected();
+  void init() {
+    var sender = _walletService.getSelected();
+    isShop = sender.isShop;
     _transferService.transfer.sender = sender;
 
     Transfer transfer = _transferService.transfer;

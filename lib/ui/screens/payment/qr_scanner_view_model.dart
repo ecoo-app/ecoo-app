@@ -3,6 +3,7 @@ import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/qr_scan_parser.dart';
 import 'package:e_coupon/ui/core/services/transfer_service.dart';
+import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:injectable/injectable.dart';
@@ -15,10 +16,14 @@ class QRScannerViewModel extends BaseViewModel {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   final IRouter _router;
   final ITransferService _transferService;
+  final IWalletService _walletService;
   final IQRScanParser _scanParser;
   QRViewController controller;
 
-  QRScannerViewModel(this._router, this._transferService, this._scanParser);
+  QRScannerViewModel(this._router, this._transferService, this._scanParser,
+      this._walletService);
+
+  bool get isShop => _walletService.getSelected().isShop;
 
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
@@ -44,5 +49,9 @@ class QRScannerViewModel extends BaseViewModel {
 
   void next() {
     _router.pushNamed(PaymentRoute);
+  }
+
+  void onBack() {
+    _router.pop();
   }
 }

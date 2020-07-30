@@ -17,62 +17,61 @@ import '../../../injection.dart';
 class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      isShop: false,
-      title: I18n.of(context).titlePaymentScreen,
-      body: BaseView<PaymentViewModel>(
-          model: getIt<PaymentViewModel>(),
-          onModelReady: (vmodel) => vmodel.init(),
-          builder: (context, vmodel, child) {
-            if (vmodel.viewState is Error) {
-              Error error = vmodel.viewState;
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                ErrorToast(failure: error.failure).create(context)
-                  ..show(context);
-              });
-            }
-            return Center(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Form(
-                        key: vmodel.formKey,
-                        child: Column(
-                          children: <Widget>[
-                            AmountInputField(
-                              controller: vmodel.amountInputController,
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            ECTextFormField(
-                              hint: I18n.of(context).labelRecieverInput,
-                              label: I18n.of(context).hintRecieverInput,
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return I18n.of(context)
-                                      .validationRecieverInput;
-                                }
-                                return null;
-                              },
-                              controller: vmodel.recieverInputController,
-                            ),
-                          ],
-                        )),
-                    PrimaryButton(
-                      text: I18n.of(context).buttonPaymentOverview,
-                      isLoading: vmodel.viewState is Loading,
-                      onPressed: () async {
-                        vmodel.initiateTransaction(
-                            I18n.of(context).paymentSuccessful);
-                      },
-                    ),
-                  ],
+    return BaseView<PaymentViewModel>(
+        model: getIt<PaymentViewModel>(),
+        onModelReady: (vmodel) => vmodel.init(),
+        builder: (context, vmodel, child) {
+          if (vmodel.viewState is Error) {
+            Error error = vmodel.viewState;
+            SchedulerBinding.instance.addPostFrameCallback((_) {
+              ErrorToast(failure: error.failure).create(context)..show(context);
+            });
+          }
+          return MainLayout(
+              leadingType: BackButtonType.Back,
+              isShop: vmodel.isShop,
+              title: I18n.of(context).titlePaymentScreen,
+              body: Center(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Form(
+                          key: vmodel.formKey,
+                          child: Column(
+                            children: <Widget>[
+                              AmountInputField(
+                                controller: vmodel.amountInputController,
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              ECTextFormField(
+                                hint: I18n.of(context).labelRecieverInput,
+                                label: I18n.of(context).hintRecieverInput,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return I18n.of(context)
+                                        .validationRecieverInput;
+                                  }
+                                  return null;
+                                },
+                                controller: vmodel.recieverInputController,
+                              ),
+                            ],
+                          )),
+                      PrimaryButton(
+                        text: I18n.of(context).buttonPaymentOverview,
+                        isLoading: vmodel.viewState is Loading,
+                        onPressed: () async {
+                          vmodel.initiateTransaction(
+                              I18n.of(context).paymentSuccessful);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }),
-    );
+              ));
+        });
   }
 }

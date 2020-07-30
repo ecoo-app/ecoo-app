@@ -75,11 +75,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
   gh.factory<PackageInfo>(() => packageInfo);
   gh.factory<PaymentScreen>(() => PaymentScreen());
-  gh.factory<QRScannerViewModel>(() => QRScannerViewModel(
-        g<IRouter>(),
-        g<ITransferService>(),
-        g<IQRScanParser>(),
-      ));
   gh.factory<RegisterScreenViewModel>(
       () => RegisterScreenViewModel(g<IRouter>()));
   gh.factory<RegisterVerifyScreenViewModel>(
@@ -109,6 +104,12 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<QRBillViewModel>(() => QRBillViewModel(
         g<ITransferService>(),
         g<IRouter>(),
+        g<IWalletService>(),
+      ));
+  gh.factory<QRScannerViewModel>(() => QRScannerViewModel(
+        g<IRouter>(),
+        g<ITransferService>(),
+        g<IQRScanParser>(),
         g<IWalletService>(),
       ));
   gh.factory<RegisterScreen>(

@@ -9,12 +9,8 @@ class OutlinedSecondaryButton extends StatelessWidget {
   final Color textColor;
   final String svgAsset;
 
-  OutlinedSecondaryButton({
-    this.onPressed,
-    @required this.text,
-    this.textColor,
-    this.svgAsset,
-  });
+  OutlinedSecondaryButton(
+      {this.onPressed, @required this.text, this.textColor, this.svgAsset});
 
   @override
   Widget build(BuildContext context) {

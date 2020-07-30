@@ -9,7 +9,7 @@ abstract class ITransferService {
 
 @LazySingleton(as: ITransferService)
 class TransferService extends ITransferService {
-  Transfer _transfer;
+  Transfer _transfer = Transfer();
   @override
   void setTransaction(Transfer transfer) {
     this._transfer = transfer;

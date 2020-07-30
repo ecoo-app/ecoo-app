@@ -17,6 +17,7 @@ class RequestScreen extends StatelessWidget {
         onModelReady: (vmodel) => vmodel.init(),
         builder: (_, vmodel, __) {
           return MainLayout(
+              leadingType: BackButtonType.Close,
               isShop: vmodel.wallet.isShop,
               title: I18n.of(context).titlePrivateRequest,
               body: Center(

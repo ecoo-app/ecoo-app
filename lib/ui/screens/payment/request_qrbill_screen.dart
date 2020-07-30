@@ -22,6 +22,7 @@ class RequestQRBillScreen extends StatelessWidget {
       model: getIt<QRBillViewModel>(),
       builder: (_, vmodel, __) {
         return MainLayout(
+          leadingType: BackButtonType.Back,
           isShop: vmodel.isShop,
           title: I18n.of(context).titleRequestScreen,
           body: Container(
