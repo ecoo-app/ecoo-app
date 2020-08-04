@@ -5,8 +5,14 @@ import 'package:ecoupon_lib/models/currency.dart' as lib_currency;
 
 void main() {
   test('get string with currency and amount', () async {
-    var wallet = WalletEntity(lib_wallet.Wallet('TestID', 'TestKey',
-        lib_currency.Currency('CHF', 'CHF', 0), false, 1000, 'testState'));
+    var wallet = WalletEntity(lib_wallet.Wallet(
+        'TestID',
+        'TestKey',
+        lib_currency.Currency(
+            'wetzicoin', 'wetzicoin', 'CHF', 0, 2, null, null, true, null, 10),
+        lib_wallet.WalletCategoy.consumer,
+        1000,
+        lib_wallet.WalletState.verified));
 
     expect(wallet.toAmountCurrencyLabel(), 'CHF 10.00');
   });

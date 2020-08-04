@@ -229,8 +229,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: ios-deploy-target-fix
-      resolved-ref: eec47b092427284997936f1985bf494e7c8b0c3d
+      ref: HEAD
+      resolved-ref: "1f688a99ca192de9237fd427ec24b9806b0741b2"
       url: "https://github.com/dudagroup/ecoupon-library.git"
     source: git
     version: "0.0.1"

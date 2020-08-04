@@ -42,8 +42,14 @@ void main() {
     _appService = AppServiceMock();
     _repositoryMock = WalletRepositoryMock();
     _walletServiceMock = WalletServiceMock();
-    var walletEntity = WalletEntity(lib_wallet.Wallet('TestID', 'TestKey',
-        lib_currency.Currency('CHF', 'CHF', 0), false, 1000, 'testState'));
+    var walletEntity = WalletEntity(lib_wallet.Wallet(
+        'TestID',
+        'TestKey',
+        lib_currency.Currency(
+            'wetzicoin', 'wetzicoin', 'CHF', 0, 2, null, null, true, null, 10),
+        lib_wallet.WalletCategoy.consumer,
+        1000,
+        lib_wallet.WalletState.verified));
     when(_repositoryMock.getWallets(any))
         .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
     when(_walletServiceMock.allWallets)

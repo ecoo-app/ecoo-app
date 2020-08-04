@@ -182,8 +182,8 @@ class WalletRepo implements IWalletRepo {
   Future<Transaction> _makeMockTransaction() {
     return Future.delayed(const Duration(milliseconds: 400), () {
       var completer = Completer<Transaction>();
-      completer.complete(Transaction(
-          PrivateWalletID, ShopWalletID, 2000, '', DateTime.now())); // TODO
+      completer.complete(Transaction(PrivateWalletID, ShopWalletID, 2000,
+          TransactionState.done, DateTime.now(), '')); // TODO
       return completer.future;
     });
   }
