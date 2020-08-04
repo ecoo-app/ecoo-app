@@ -1,0 +1,76 @@
+# Continuous Deployment
+
+name: CD
+
+# only 'master'
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Fetch all history for all tags and branches
+        run: git fetch --prune --unshallow
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.2
+        with:
+          versionSpec: "5.2.x"
+      - name: Use GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - uses: fusion-engineering/setup-git-credentials@v2
+        with:
+          credentials: ${{secrets.ECOUPON_LIB_GIT_ACCESS_TOKEN}}
+          # Generate SemVer Info for setting app version
+      - name: Define Variables
+        run: |
+          echo "::set-env name=test=test1"
+          echo "::set-env name=VersionMajorMinorPatch::${{ steps.gitversion.outputs.majorMinorPatch }}"
+          echo "::set-env name=VersionMajorMinorPatchBuild::$(printf '%s.%s' "${{ steps.gitversion.outputs.majorMinorPatch }}" "$GITHUB_RUN_NUMBER")"
+          echo "::set-env name=VersionAndroidFullNumeric::$(printf '%02d%02d%02d%03d' "${{ steps.gitversion.outputs.major }}" "${{ steps.gitversion.outputs.minor }}" "${{ steps.gitversion.outputs.patch }}" "$GITHUB_RUN_NUMBER")"
+
+      # Prepare Build Tools
+      - name: Setup
+        run: |
+          flutter --version
+          flutter pub get
+          make generate_code
+
+      # Build iOS App
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+      - uses: apple-actions/import-codesign-certs@v1
+        with:
+          p12-file-base64: ${{ secrets.IOS_CERTIFICATES_P12 }}
+          p12-password: ${{ secrets.IOS_CERTIFICATES_P12_PASSWORD }}
+      - name: Build iOS
+        run: |
+          flutter build ios --release --no-codesign --build-name ${{ env.VersionMajorMinorPatch }} --build-number ${{ env.VersionMajorMinorPatchBuild }}
+          cd ios
+          gem install bundler
+          bundle install
+          bundle exec fastlane deploy
+        env:
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+      # # Create Github Release
+      # - name: Create Github Pre-Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ env.VersionMajorMinorPatchBuild }}
+      #     release_name: Pre-Release ${{ env.VersionMajorMinorPatchBuild }}
+      #     draft: false
+      #     prerelease: true

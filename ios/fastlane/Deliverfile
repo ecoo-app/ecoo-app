@@ -1,0 +1,12 @@
+# The Deliverfile allows you to store various App Store Connect metadata
+# For more information, check out the docs
+# https://docs.fastlane.tools/actions/deliver/
+
+# Make it free :)
+price_tier 0
+
+# App Keywords
+keywords(
+    "de-DE" => "ecoo,währung,currency,tezos"
+)
+  
