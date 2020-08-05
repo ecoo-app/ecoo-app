@@ -36,8 +36,7 @@ class WalletScreen extends StatelessWidget {
                 icon: Icons.attach_money,
                 text: I18n.of(context).walletRedeem,
                 onPressed: () {
-                  Navigator.pushNamed(context, ClaimVerificationRoute,
-                      arguments: vmodel.wallet.id);
+                  vmodel.onRedeem();
                 },
               )
             ]),
@@ -67,7 +66,7 @@ class WalletScreen extends StatelessWidget {
                 icon: Icons.attach_money,
                 text: I18n.of(context).privateWalletClaim,
                 onPressed: () {
-                  Navigator.pushNamed(context, ClaimVerificationRoute,
+                  Navigator.pushNamed(context, VerificationRoute,
                       arguments: vmodel.wallet.id);
                 },
               )

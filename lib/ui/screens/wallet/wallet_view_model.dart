@@ -5,6 +5,7 @@ import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
 
 import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
+import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -74,7 +75,28 @@ class WalletViewModel extends BaseViewModel {
     await _router.pushNamed(TestRoute);
   }
 
+//
   void makePaymentRequest() async {
     await _router.pushNamed(RequestPaymentRoute);
+  }
+
+  //
+  void onClaim() async {
+    await _router.pushNamed(VerificationRoute, arguments: wallet.id);
+  }
+
+  //
+  void onRedeem() async {
+    switch (wallet.verificationState) {
+      case WalletState.verified:
+        await _router.pushNamed(RedeemRoute);
+        break;
+      case WalletState.pending:
+        await _router.pushNamed(VerifyPinRoute);
+        break;
+      case WalletState.unverified:
+        await _router.pushNamed(VerificationRoute);
+        break;
+    }
   }
 }

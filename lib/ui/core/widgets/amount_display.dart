@@ -8,7 +8,8 @@ class AmountDisplay extends StatelessWidget {
   final String currency;
   final bool isShopColor;
 
-  AmountDisplay({this.isLoading, this.amount, this.currency, this.isShopColor});
+  AmountDisplay(
+      {this.isLoading = false, this.amount, this.currency, this.isShopColor});
 
   @override
   Widget build(BuildContext context) {

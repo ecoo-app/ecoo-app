@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/business/entities/verification_form.dart';
-import 'package:e_coupon/business/entities/verification_state.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
+import 'package:ecoupon_lib/models/verification_input_data.dart';
+import 'package:ecoupon_lib/models/wallet.dart';
 
 abstract class IWalletRepo {
   Future<Either<Failure, List<WalletEntity>>> getCachedWallets(
@@ -26,8 +28,8 @@ abstract class IWalletRepo {
       WalletEntity sender, WalletEntity reciever, int amount);
 
   Future<Either<Failure, VerificationForm>> getVerificationInputs(
-      String currencyId, bool isShop);
+      Currency currency, bool isShop);
 
-  Future<Either<Failure, VerificationState>> verifyWallet(
-      String walletId, List<String> verificationInputs);
+  Future<Either<Failure, Wallet>> verifyWallet(
+      Wallet wallet, List<VerificationInputData> verificationInputs);
 }

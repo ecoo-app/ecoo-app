@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await configureInjection(Env.dev);
+  await configureInjection(Env.mock);
 
   var app = getIt.get<ECouponApp>();
   runApp(app);

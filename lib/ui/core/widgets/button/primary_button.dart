@@ -44,7 +44,7 @@ class PrimaryButton extends StatelessWidget {
         decoration: decoration,
         child: OutlineButton(
           padding: const EdgeInsets.symmetric(vertical: 15),
-          onPressed: onPressed,
+          onPressed: isLoading ? () {} : onPressed,
           shape: border,
           borderSide: BorderSide.none,
           child: Row(
@@ -52,7 +52,7 @@ class PrimaryButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                text,
+                isLoading ? 'loading...' : text,
                 style: Theme.of(context)
                     .textTheme
                     .headline3

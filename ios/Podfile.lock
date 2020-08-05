@@ -117,6 +117,6 @@ SPEC CHECKSUMS:
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
   SwiftProtobuf: bfafffa9e26d1561c3bd0045e188c4fab5f527ae
 
-PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
+PODFILE CHECKSUM: 885377b8521c9c0abbc7b2dcc6bf3503f093164f
 
 COCOAPODS: 1.9.3

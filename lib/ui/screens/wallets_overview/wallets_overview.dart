@@ -46,7 +46,7 @@ class WalletsOverviewScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: FlatButton.icon(
                       onPressed: () {
-                        Navigator.pushNamed(context, WalletCreationRoute);
+                        Navigator.pushNamed(context, RegisterWalletTypeRoute);
                       },
                       icon: Icon(Icons.add_circle_outline),
                       label: Text(I18n.of(context).addWallet),

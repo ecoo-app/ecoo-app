@@ -13,7 +13,6 @@ import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/local/local_wallet_source.dart';
 import 'package:e_coupon/injection.dart';
-import 'package:ecoupon_lib/common/errors.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:ecoupon_lib/models/verification_input_data.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
@@ -22,16 +21,15 @@ import 'package:pedantic/pedantic.dart';
 
 import '../network_info.dart';
 
-@devEnv
-@prodEnv
+@mockEnv
 @LazySingleton(as: IWalletRepo)
-class WalletRepo implements IWalletRepo {
+class MockWalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
   final lib_api.ILibWalletSource libDataSource;
   final INetworkInfo networkInfo;
   final IWalletSource walletSource;
 
-  WalletRepo(
+  MockWalletRepo(
       {this.localDataSource,
       this.networkInfo,
       this.libDataSource,
@@ -120,25 +118,25 @@ class WalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, Wallet>> verifyWallet(
       Wallet wallet, List<VerificationInputData> verificationInputs) async {
-    Either<Failure, Wallet> result;
+    // Either<Failure, VerifyInputsResponse> result;
 
-    if (await networkInfo.isConnected) {
-      try {
-        var walletOrFailure = await walletSource.walletService
-            .verifyInputs(verificationInputs, wallet);
-        result = Right(walletOrFailure);
-        //
-      } on NotAuthenticatedError {
-        result = Left(NotAuthenticatedFailure());
-      } on HTTPError catch (e) {
-        result = Left(HTTPFailure(e.statusCode));
-      }
-    } else {
-      result = Left(NoService());
-    }
+    // if (await networkInfo.isConnected) {
+    //   try {
+    //     var walletOfFailure = await walletSource.walletService
+    //         .verifyInputs(verificationInputs, wallet);
+    //     result = Right(walletOfFailure);
+    //     //
+    //   } on NotAuthenticatedError {
+    //     result = Left(NotAuthenticatedFailure());
+    //   } on HTTPError catch (e) {
+    //     result = Left(HTTPFailure(e.statusCode));
+    //   }
+    // } else {
+    //   result = Left(NoService());
+    // }
 
-    return result;
-    // return _mockVerification();
+    // return result;
+    return _mockVerification(wallet);
   }
 
   @override
@@ -146,24 +144,33 @@ class WalletRepo implements IWalletRepo {
       Currency currency, bool isShop) async {
     Either<Failure, VerificationForm> result;
 
-    if (await networkInfo.isConnected) {
-      try {
-        var inputsOrFailure = await walletSource.walletService
-            .fetchVerificationInputs(currency.currencyModel, isCompany: isShop);
+    // if (await networkInfo.isConnected) {
+    //   try {
+    //     var inputsOrFailure = await walletSource.walletService
+    //         .fetchVerificationInputs(currency.currencyModel, isCompany: isShop);
 
-        result = Right(
-            VerificationForm(isShop: isShop, inputModel: inputsOrFailure));
+    //     result = Right(
+    //         VerificationForm(isShop: isShop, inputModel: inputsOrFailure));
 
-        //
-      } on NotAuthenticatedError {
-        result = Left(NotAuthenticatedFailure());
-      } on HTTPError catch (e) {
-        result = Left(HTTPFailure(e.statusCode));
-      }
+    //     //
+    //   } on NotAuthenticatedError {
+    //     result = Left(NotAuthenticatedFailure());
+    //   } on HTTPError catch (e) {
+    //     result = Left(HTTPFailure(e.statusCode));
+    //   }
 
-      //
-    } else {
-      result = Left(NoService());
+    //   //
+    // } else {
+    //   result = Left(NoService());
+    // }
+
+    try {
+      var res = await libDataSource.getVerificationInputs(
+          'currency.currencyModel', isShop);
+      result = Right(VerificationForm(isShop: false, inputModel: res));
+    } catch (error) {
+      print(error);
+      result = Left(MessageFailure('error'));
     }
 
     return result;
@@ -241,5 +248,19 @@ class WalletRepo implements IWalletRepo {
                 amount: transRecord.amount,
               )).toList();
     }
+  }
+
+  Future<Either<Failure, Wallet>> _mockVerification(Wallet wallet) {
+    return Future.delayed(const Duration(milliseconds: 400), () {
+      var completer = Completer<Either<Failure, Wallet>>();
+      completer.complete(Right(Wallet(
+          wallet.walletID,
+          wallet.publicKey,
+          wallet.currency,
+          wallet.category,
+          wallet.balance,
+          WalletState.verified)));
+      return completer.future;
+    });
   }
 }

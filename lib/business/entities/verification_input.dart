@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-enum InputType { Text, Number, Date, Bool }
+enum InputType { Text, Number, Date, Bool, Uuid }
 
 class VerificationInput {
   String id;

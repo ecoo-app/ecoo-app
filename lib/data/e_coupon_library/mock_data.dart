@@ -53,7 +53,7 @@ lib.Wallet shopWalletMock = lib.Wallet(
     MockWetzikonCurrency(),
     lib.WalletCategoy.company,
     1059,
-    lib.WalletState.verified);
+    lib.WalletState.pending);
 
 List<WalletEntity> MockWallets = [
   WalletEntity(privateWalletMock),

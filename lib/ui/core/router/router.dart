@@ -1,6 +1,7 @@
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/injection.dart';
-import 'package:e_coupon/ui/screens/creation_verification/wallet_creation_screen.dart';
+import 'package:e_coupon/ui/screens/redeem/redeem_screen.dart';
+import 'package:e_coupon/ui/screens/verification/pin_verification_screen.dart';
 import 'package:e_coupon/ui/screens/payment/error_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
 import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
@@ -13,7 +14,7 @@ import 'package:e_coupon/ui/screens/register/register_wallet_type_screen.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
-import 'package:e_coupon/ui/screens/creation_verification/verification_screen.dart';
+import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,17 +28,18 @@ const OnboardingRoute = '/onboarding';
 const RegisterRoute = '/register';
 const RegisterWalletTypeRoute = '/register/wallettype';
 const RegisterVerifyRoute = '/register/verify';
-const WalletCreationRoute = 'walletCreation';
+const VerifyPinRoute = '/verify/pin';
+const VerificationRoute = '/verify';
 const WalletDetailRoute = 'walletDetail';
 const WalletsOverviewRoute = 'walletsOverview';
 const TransactionOverviewRoute = 'transactionOverview';
-const ClaimVerificationRoute = 'claimVerification';
 const PaymentRoute = 'payment';
 const SuccessRoute = 'success';
 const ErrorRoute = 'paymentError';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
 const TestRoute = '/test';
+const RedeemRoute = '/redeem';
 
 abstract class IRouter {
   GlobalKey<NavigatorState> get navigatorKey;
@@ -71,8 +73,6 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<RegisterWalletTypeScreen>(), false);
       case RegisterVerifyRoute:
         return _createRoute(settings, getIt<RegisterVerifyScreen>(), false);
-      case WalletCreationRoute:
-        return MaterialPageRoute(builder: (_) => WalletCreationScreen());
       case HomeRoute:
       case WalletDetailRoute:
         var wallet = settings.arguments as WalletEntity;
@@ -81,8 +81,8 @@ class Router implements IRouter {
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
       case TransactionOverviewRoute:
         return MaterialPageRoute(builder: (_) => TransactionOverviewScreen());
-      case ClaimVerificationRoute:
-        return MaterialPageRoute(builder: (_) => VerificationScreen());
+      case VerificationRoute:
+        return MaterialPageRoute(builder: (_) => getIt<VerificationScreen>());
       case PaymentRoute:
         return _createRoute(settings, PaymentScreen(), false);
       case SuccessRoute:
@@ -95,6 +95,10 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<RequestScreen>(), false);
       case RequestQRBillRoute:
         return _createRoute(settings, getIt<RequestQRBillScreen>(), false);
+      case VerifyPinRoute:
+        return _createRoute(settings, getIt<PinVerificationScreen>(), false);
+      case RedeemRoute:
+        return _createRoute(settings, getIt<RedeemScreen>(), false);
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

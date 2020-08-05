@@ -26,32 +26,45 @@ class FieldFail extends StatelessWidget {
 ///
 class FormGenerator extends StatefulWidget {
   final List<VerificationInput> inputs;
+  final Map<String, String> inputData;
+  final GlobalKey<FormState> formKey;
 
-  FormGenerator(this.inputs);
+  FormGenerator({this.inputs, this.inputData, this.formKey});
 
   @override
-  _FormGeneratorState createState() => _FormGeneratorState(inputs);
+  _FormGeneratorState createState() =>
+      _FormGeneratorState(inputs, inputData, formKey);
 }
 
 ///
 ///
 ///
 class _FormGeneratorState extends State<FormGenerator> {
-  final amountInputController = TextEditingController();
-  final recieverInputController = TextEditingController();
   final List<VerificationInput> inputs;
+  final Map<String, String> inputData;
+  final GlobalKey<FormState> formKey;
 
-  _FormGeneratorState(this.inputs);
+  _FormGeneratorState(this.inputs, this.inputData, this.formKey);
+
+  void _setInputValue(String uuid, String value) {
+    if (inputData.containsKey(uuid)) {
+      // inputData[uuid] = value;
+      inputData.update(uuid, (_) => value);
+    } else {
+      inputData.putIfAbsent(uuid, () => value);
+    }
+  }
 
   List<Widget> _generateFields(List<VerificationInput> inputsInput) {
     return inputsInput.map((input) {
       switch (input.inputType) {
         case InputType.Text:
           return TextFormField(
+            key: Key('${input.i18nLabel['all']}${input.inputType}'),
+            onChanged: (text) => _setInputValue(input.id, text),
             decoration: InputDecoration(
-                hintText: input.i18nHint != null ? input.i18nHint['de'] : '',
-                labelText: input.i18nLabel['de']),
-            // The validator receives the text that the user has entered.
+                hintText: input.i18nHint != null ? input.i18nHint['all'] : '',
+                labelText: input.i18nLabel['all']),
             validator: (value) {
               if (value.isEmpty) {
                 return I18n.of(context).formErrorRequired;
@@ -61,7 +74,8 @@ class _FormGeneratorState extends State<FormGenerator> {
           );
         case InputType.Date:
           return DateFormField(
-            labelText: 'Geburststag',
+            key: Key('${input.i18nLabel['all']}${input.inputType}'),
+            labelText: input.i18nLabel['all'],
             suffixIcon: Icon(Icons.calendar_today),
             initialDate: DateTime.now(),
             firstDate: DateTime.utc(1870),
@@ -76,31 +90,13 @@ class _FormGeneratorState extends State<FormGenerator> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(child: Column(children: _generateFields(inputs)));
-    // return Form(
-    //   child: Column(
-    //     children: <Widget>[
-    //       TextFormField(
-    //         decoration:
-    //             InputDecoration(hintText: 'a hint', labelText: 'a label'),
-    //         // The validator receives the text that the user has entered.
-    //         validator: (value) {
-    //           if (value.isEmpty) {
-    //             return 'Please enter some text';
-    //           }
-    //           return null;
-    //         },
-    //       )
-    //     ],
-    //   ),
-    // );
+    return Form(
+        key: formKey,
+        child: Expanded(child: ListView(children: _generateFields(inputs))));
   }
 
   @override
   void dispose() {
-    // Clean up the controllers when the widget is disposed.
-    amountInputController.dispose();
-    recieverInputController.dispose();
     super.dispose();
   }
 }

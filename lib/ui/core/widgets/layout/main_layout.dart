@@ -8,6 +8,7 @@ class MainLayout extends StatelessWidget {
   final bool isShop;
   final String title;
   final Widget body;
+  final Widget bottom;
   final VoidCallback onBackPressed;
   final BackButtonType leadingType;
 
@@ -16,7 +17,8 @@ class MainLayout extends StatelessWidget {
       this.title,
       this.body,
       this.onBackPressed,
-      this.leadingType});
+      this.leadingType,
+      this.bottom});
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +61,10 @@ class MainLayout extends StatelessWidget {
                 const EdgeInsets.only(left: 24, right: 24, top: 36, bottom: 48),
             child: body),
       ),
+      bottomNavigationBar: (BottomAppBar(
+        elevation: 0,
+        child: bottom,
+      )),
     );
   }
 }

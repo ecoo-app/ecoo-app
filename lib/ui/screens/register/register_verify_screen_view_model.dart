@@ -13,7 +13,7 @@ class RegisterVerifyScreenViewModel {
   }
 
   Future<void> verify() async {
-    await _router.pushAndRemoveUntil(HomeRoute, '');
+    await _router.pushNamed(VerificationRoute);
   }
 
   Future<void> verifyLater() async {

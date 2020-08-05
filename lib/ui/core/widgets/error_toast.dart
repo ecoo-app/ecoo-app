@@ -14,12 +14,24 @@ class ErrorToast {
     if (failure is NoService) {
       return I18n.of(context).noServiceErrorTitle;
     }
+    if (failure is NotAuthenticatedFailure) {
+      return 'Login erforderlich';
+    }
+    if (failure is HTTPFailure) {
+      return 'Server fehler';
+    }
     return I18n.of(context).generalErrorTitle;
   }
 
   String _failureMessage(BuildContext context) {
     if (failure is NoService) {
       return I18n.of(context).noServiceErrorText;
+    }
+    if (failure is NotAuthenticatedFailure) {
+      return 'Du bist nicht eingeloggt.';
+    }
+    if (failure is HTTPFailure) {
+      return 'Fehler: ${(failure as HTTPFailure).code}';
     }
     if (failure is MessageFailure) {
       MessageFailure fail = failure;

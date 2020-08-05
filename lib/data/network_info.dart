@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:e_coupon/injection.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class INetworkInfo {
   Future<bool> get isConnected;
 }
 
+@devEnv
+@prodEnv
 @LazySingleton(as: INetworkInfo)
 class NetworkInfo implements INetworkInfo {
   @override

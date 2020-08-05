@@ -18,6 +18,18 @@ class NoService extends Failure {
   List<Object> get props => [];
 }
 
+class HTTPFailure extends Failure {
+  final int code;
+  HTTPFailure(this.code);
+  @override
+  List<Object> get props => [code];
+}
+
+class NotAuthenticatedFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
 // General failures
 class ServerFailure extends Failure {
   @override

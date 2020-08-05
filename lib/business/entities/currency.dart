@@ -8,6 +8,7 @@ class Currency extends Equatable {
 
   String get id => this._currency.uuid;
   String get label => this._currency.name;
+  String get symbol => this._currency.symbol;
   lib.Currency get currencyModel => this._currency;
 
   @override

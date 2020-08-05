@@ -74,6 +74,40 @@ class I18n implements WidgetsLocalizations {
   String get titleFormClaimVerification => "Verifizierung";
   /// "Verifizierung"
   String get buttonFormClaimVerification => "Verifizierung";
+  /// "Personalien"
+  String get verificationPrivateFormTitle => "Personalien";
+  /// "UID"
+  String get verificationShopFormTitle => "UID";
+  /// "Ich bestätige alles wahrheitsgetreu ausgefüllt zu haben."
+  String get verificationFilledTruthfully => "Ich bestätige alles wahrheitsgetreu ausgefüllt zu haben.";
+  /// "Anfrage gesendet."
+  String get verificationSend => "Anfrage gesendet.";
+  /// "PIN eingeben"
+  String get pinVerificationTitle => "PIN eingeben";
+  /// "PIN erhalten von der Gemeinde"
+  String get pinRecieved => "PIN erhalten von der Gemeinde";
+  /// "Geben Sie den PIN ein, den sie von Ihrer Gemeinde erhalten haben."
+  String get enterPin => "Geben Sie den PIN ein, den sie von Ihrer Gemeinde erhalten haben.";
+  /// "PIN"
+  String get pinInputLabel => "PIN";
+  /// "Verifizierung erfolgreich"
+  String get successTextVerification => "Verifizierung erfolgreich";
+  /// "Überprüfen"
+  String get verifyPinButton => "Überprüfen";
+  /// "Umsatz einlösen"
+  String get titleRedeem => "Umsatz einlösen";
+  /// "Umsatz einlösen"
+  String get buttonRedeem => "Umsatz einlösen";
+  /// "Der Betrag wird übermittelt an:"
+  String get redeemTransferTo => "Der Betrag wird übermittelt an:";
+  /// "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwieden."
+  String get redeemInfo => "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwieden.";
+  /// "Name der Bank"
+  String get redeemFieldNameBank => "Name der Bank";
+  /// "IBAN Nummer"
+  String get redeemFieldIBAN => "IBAN Nummer";
+  /// "Kontoinhaber"
+  String get redeemFieldAccountOwner => "Kontoinhaber";
   /// "Geld senden"
   String get titlePaymentOverview => "Geld senden";
   /// "Bezahlen"
@@ -84,6 +118,8 @@ class I18n implements WidgetsLocalizations {
   String get labelRecieverInput => "Senden an:";
   /// "Wallet ID"
   String get hintRecieverInput => "Wallet ID";
+  /// "Uups, ist etwas vergessen gegangen."
+  String get inputValidation => "Uups, ist etwas vergessen gegangen.";
   /// "Uups, der Betrag ist vergessen gegangen."
   String get validationAmountInput => "Uups, der Betrag ist vergessen gegangen.";
   /// "Uups, der Empfänger ist vergessen gegangen."

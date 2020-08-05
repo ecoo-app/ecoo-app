@@ -33,6 +33,7 @@ class RegisterVerifyScreen extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 25),
             child: PrimaryButton(
               text: I18n.of(context).buttonTextNexOnboardingScreen,
+              onPressed: viewModel.verify,
             ),
           ),
           SizedBox(

@@ -1,5 +1,5 @@
 import 'package:e_coupon/business/entities/verification_form.dart';
-import 'package:e_coupon/business/entities/verification_input.dart';
+import 'package:ecoupon_lib/models/verification_input.dart';
 import 'package:meta/meta.dart';
 
 enum VerificationState { Open, Pending, Successful }
@@ -29,22 +29,16 @@ abstract class WalletAPI {
 class VerificationFormModel extends VerificationForm {
   VerificationFormModel(
       {@required String title, @required List<VerificationInput> inputs})
-      : super(title: title, inputs: inputs);
+      : super(title: title, inputModel: inputs);
 }
 
 class VerificationInputModel extends VerificationInput {
   VerificationInputModel(
-      {@required id,
-      @required i18nLabel,
-      i18nHint,
-      @required inputType,
+      {@required String id,
+      @required String i18nLabel,
+      @required String inputType,
       isRequired = true})
-      : super(
-            id: id,
-            i18nLabel: i18nLabel,
-            i18nHint: i18nHint,
-            inputType: inputType,
-            isRequired: isRequired);
+      : super(i18nLabel, inputType);
 }
 
 abstract class TransactionRecordAPI {
@@ -68,7 +62,7 @@ abstract class ILibWalletSource {
   Future<WalletAPI> createWalletForUser(
       String userIdentification, String currencyId, bool isShop);
   Future<List<CurrencyAPI>> getCurrencies();
-  Future<VerificationFormModel> getVerificationInputs(
+  Future<List<VerificationInput>> getVerificationInputs(
       String currencyId, bool isShop);
 
   // verification

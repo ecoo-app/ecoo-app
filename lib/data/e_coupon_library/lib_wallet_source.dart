@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:e_coupon/business/entities/verification_input.dart';
+import 'package:ecoupon_lib/models/verification_input.dart';
 import 'package:ecoupon_lib/services/wallet_service.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,43 +35,27 @@ class LibWalletSource implements ILibWalletSource {
   }
 
   @override
-  Future<VerificationFormModel> getVerificationInputs(
+  Future<List<VerificationInput>> getVerificationInputs(
       String currencyId, bool isShop) {
-    List<VerificationInputModel> privateVerifications = List();
+    List<VerificationInput> privateVerifications = [];
 
     privateVerifications.addAll([
-      VerificationInputModel(
-          id: 'name', i18nLabel: {'de': 'Vorname'}, inputType: InputType.Text),
-      VerificationInputModel(
-          id: 'surname', i18nLabel: {'de': 'Name'}, inputType: InputType.Text),
-      VerificationInputModel(
-          id: 'street',
-          i18nLabel: {'de': 'Strasse'},
-          inputType: InputType.Text),
-      VerificationInputModel(
-          id: 'number',
-          i18nLabel: {'de': 'Hausnummer'},
-          inputType: InputType.Text),
-      VerificationInputModel(
-          id: 'extra',
-          i18nLabel: {'de': 'Adresszusatz'},
-          inputType: InputType.Text,
-          isRequired: false),
-      VerificationInputModel(
-          id: 'postalcode',
-          i18nLabel: {'de': 'PLZ'},
-          inputType: InputType.Text),
-      VerificationInputModel(
-          id: 'city', i18nLabel: {'de': 'Ort'}, inputType: InputType.Text),
-      VerificationInputModel(
-          id: 'birthdate',
-          i18nLabel: {'de': 'Geburtsdatum'},
-          inputType: InputType.Date),
+      VerificationInput('Vorname', 'text'),
+      VerificationInput('Name', 'text'),
+      VerificationInput('Adresse', 'text'),
+      // VerificationInput('number', 'Hausnummer', 'text'),
+      // VerificationInput(
+      //     id: 'extra',
+      //     i18nLabel: 'Adresszusatz',
+      //     inputType: 'text',
+      //     isRequired: false),
+      VerificationInput('PLZ', 'text'),
+      // VerificationInput('city', 'Ort', 'text'),
+      VerificationInput('Geburtsdatum', 'date'),
     ]);
 
-    Completer completer = Completer<VerificationFormModel>();
-    completer.complete(VerificationFormModel(
-        title: 'Personalien', inputs: privateVerifications));
+    Completer completer = Completer<List<VerificationInput>>();
+    completer.complete(privateVerifications);
 
     return completer.future;
   }

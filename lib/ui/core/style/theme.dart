@@ -14,7 +14,7 @@ ThemeData generalTheme = ThemeData(
   textTheme: TextTheme(
       headline1: TextStyle(
           fontSize: 75.0,
-          fontWeight: fontWeightMedium,
+          fontWeight: fontWeightBold,
           fontFamily: fontFamiliyPanam,
           color: ColorStyles.black),
       headline2: TextStyle(
@@ -77,7 +77,6 @@ class ColorStyles {
   static const Color purple = Color(0xFF9774FF);
   static const Color red = Color(0xFFFF5F5F);
   static const Color pink = Color(0xFFFF96E3);
-
 }
 
 class LayoutStyles {
@@ -95,6 +94,8 @@ class Assets {
   static const keyboard_purpe_svg = 'assets/images/icon_keyboard_purple.svg';
   static const apple_icon_svg = 'assets/images/apple_icon.svg';
   static const google_icon_svg = 'assets/images/google_icon.svg';
+  static const envelope_open_dollar_svg =
+      'assets/images/envelope_open_dollar.svg';
 
   // Icons
   static const icon_button_svg = 'assets/images/icon_button.svg';
