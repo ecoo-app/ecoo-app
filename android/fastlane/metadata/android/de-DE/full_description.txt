@@ -1,0 +1,23 @@
+Die ecoo App erlaubt das Zahlen mit der Zweckgebundenen Währung die von einer  beteiligten Organisation zu Verfügung gestellt wird.
+
+ecoo stellt Wallets für zweckgebundene Währungen zur Verfügung. Jede Währung lebt in einem eigenen Ökosystem das von einem Wechselstube (Exchange) kontrolliert wird. Der Exchange ist eine Organisation,einen Gemeindeverwaltung, ein Konzertveranstalter oder eine Firma. Der Exchange bestimmt die geltenden Regeln und wie ein User Guthaben in der Währung erhält. 
+Zum Beispiel ob das Guthaben vom Exchange gutgeschrieben wird oder per Kreditkarte eingekauft werden muss. 
+
+Privatperson (Einkäufer)
+Alle Personen können ein Wallet in ecoo eröffnen. Ein Nutzer kann sich zusätzlich bei dem Exchange via ecoo App verifizieren um so allfällige Gutschriften zu erhalten. 
+
+Zahlungen können zwischen allen Wallets der gleichen Währung gemacht werden. Empfänger-Wallet und Betrag werden per QR Code vom Zahler gescannt..
+
+Aktueller Kontostand, so wie Details über die getätigten Transaktionen sind gut ersichtlich auf dem Homescreen.
+
+Shop (Verkäufer)
+Das App erlaubt Einkäufe in der zweckgebundenen Währung zu kassieren. Eine einfache Rechnungsstellung an den Kunden erlaubt effizientes einkassieren. 
+
+Aktueller Kontostand, so wie Details über die getätigten Transaktionen sind gut ersichtlich auf dem Homescreen.
+
+Durch einen einfachen Prozess kann sich der Verkäufer vom Exchange verifizieren lassen, und ist damit berechtigt seinen App-Saldo in Franken umzutauschen. .
+
+Exchange
+Jede Währung wird von einem Exchange betrieben. Die Währung kann zeitlich unbegrenzt sein, wie eine Lokalwährung, oder teil einer Kampagne, wie eine Post-Corona Wirtschaftsunterstüzungskampagne. 
+
+Mehr Informationen, gibt es auf https://payecoo.ch.
