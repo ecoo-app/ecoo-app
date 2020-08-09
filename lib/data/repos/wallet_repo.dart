@@ -8,13 +8,14 @@ import 'package:e_coupon/data/e_coupon_library/mock_library.dart' as lib_api;
 import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 
-import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/local/local_wallet_source.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:ecoupon_lib/common/errors.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
+import 'package:ecoupon_lib/models/transaction_list_response.dart';
 import 'package:ecoupon_lib/models/verification_input_data.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:injectable/injectable.dart';
@@ -40,13 +41,30 @@ class WalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<TransactionRecord>>> getCachedWalletTransactions(
       String id, filter) {
-    return _getMockTransactions(id, filter);
+    throw UnimplementedError();
   }
 
   @override
-  Future<Either<Failure, List<TransactionRecord>>> getWalletTransactions(
-      String id, filter) {
-    return _getMockTransactions(id, filter);
+  Future<Either<Failure, TransactionListResponse>> getWalletTransactions(
+      String id, TransactionListCursor cursor) async {
+    Either<Failure, TransactionListResponse> result;
+
+    if (await networkInfo.isConnected) {
+      try {
+        var transactions = await walletSource.walletService
+            .fetchTransactions(walletID: id, cursor: cursor);
+        result = Right(transactions);
+        //
+      } on NotAuthenticatedError {
+        result = Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        result = Left(HTTPFailure(e.statusCode));
+      }
+    } else {
+      result = Left(NoService());
+    }
+
+    return result;
   }
 
   @override
@@ -170,21 +188,6 @@ class WalletRepo implements IWalletRepo {
   }
 
   /// mock code
-  Future<Either<Failure, List<TransactionRecord>>> _getMockTransactions(
-      id, filter) {
-    // mock delay
-    return Future.delayed(const Duration(milliseconds: 400), () {
-      for (final wallet in MockWallets) {
-        if (wallet.id == id) {
-          var completer = Completer<Either<Failure, List<TransactionRecord>>>();
-          completer.complete(Right(_getTransactions(wallet.isShop)));
-          return completer.future;
-        }
-      }
-      return null;
-    });
-  }
-
   Future<List<WalletEntity>> _getMockWallets() {
     return Future.delayed(const Duration(milliseconds: 500), () {
       var completer = Completer<List<WalletEntity>>();
@@ -225,21 +228,5 @@ class WalletRepo implements IWalletRepo {
           TransactionState.done, DateTime.now(), '')); // TODO
       return completer.future;
     });
-  }
-
-  List<TransactionRecord> _getTransactions(bool isShop) {
-    if (isShop) {
-      return MockTransactionWalletShop.map((transRecord) => TransactionRecord(
-            text: transRecord.text,
-            amount: transRecord.amount,
-            isEncashment: transRecord.tags.contains(MockEncashmentTag()),
-          )).toList();
-    } else {
-      return MockTransactionWalletPrivate.map(
-          (transRecord) => TransactionRecord(
-                text: transRecord.text,
-                amount: transRecord.amount,
-              )).toList();
-    }
   }
 }

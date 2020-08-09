@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="281px" height="182px" viewBox="0 0 281 182" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Header_BG-2 Clipped</title>
+    <defs>
+        <polygon id="path-1" points="0 0.315 281 0.315 281 180.315 0 180.315"></polygon>
+        <linearGradient x1="14.2%" y1="0%" x2="100%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#7DFF7B" offset="0%"></stop>
+            <stop stop-color="#24E8BA" offset="37.4%"></stop>
+            <stop stop-color="#20DBE0" offset="100%"></stop>
+            <stop stop-color="#03CF80" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Header_BG-2-Clipped" transform="translate(0.000000, 0.685000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Rectangle"></g>
+            <rect id="Rectangle-3" fill="url(#linearGradient-3)" fill-rule="nonzero" mask="url(#mask-2)" transform="translate(177.685201, 9.999889) rotate(-13.000000) translate(-177.685201, -9.999889) " x="27.6852009" y="-140.000111" width="300" height="300" rx="50"></rect>
+        </g>
+    </g>
+</svg>

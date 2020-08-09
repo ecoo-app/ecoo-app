@@ -3,14 +3,16 @@ import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
-import 'package:e_coupon/ui/screens/wallet/wallet_layout.dart';
+import 'package:e_coupon/ui/screens/menu/menu_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/core/widgets/amount_display.dart';
 import 'package:e_coupon/ui/core/widgets/button/circular_icon_button.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
-import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
+import 'package:e_coupon/ui/screens/wallet/transactions_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../injection.dart';
 
@@ -25,19 +27,28 @@ class WalletScreen extends StatelessWidget {
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              CircularIconButton(
-                icon: Icons.call_received,
-                text: I18n.of(context).privateWalletSend,
-                onPressed: () {
-                  vmodel.makePayment();
-                },
+              Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: CircularIconButton(
+                  iconAsset: Assets.shop_envelope_open_dollar_svg,
+                  text: I18n.of(context).privateWalletSend,
+                  onPressed: () {
+                    vmodel.makePayment();
+                  },
+                ),
               ),
-              CircularIconButton(
-                icon: Icons.attach_money,
-                text: I18n.of(context).walletRedeem,
-                onPressed: () {
-                  vmodel.onRedeem();
-                },
+              Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: CircularIconButton(
+                  iconAsset: Assets.shop_send_money_svg,
+                  text: I18n.of(context).walletRedeem,
+                  onPressed: () {
+                    vmodel.onRedeem();
+                    ;
+                  },
+                ),
               )
             ]),
         Container(
@@ -55,20 +66,28 @@ class WalletScreen extends StatelessWidget {
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              CircularIconButton(
-                icon: Icons.call_received,
-                text: I18n.of(context).privateWalletRecieve,
-                onPressed: () {
-                  vmodel.makePaymentRequest();
-                },
+              Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: CircularIconButton(
+                  iconAsset: Assets.private_recieve_money_svg,
+                  text: I18n.of(context).privateWalletRecieve,
+                  onPressed: () {
+                    vmodel.makePaymentRequest();
+                  },
+                ),
               ),
-              CircularIconButton(
-                icon: Icons.attach_money,
-                text: I18n.of(context).privateWalletClaim,
-                onPressed: () {
-                  Navigator.pushNamed(context, VerificationRoute,
-                      arguments: vmodel.wallet.id);
-                },
+              Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: CircularIconButton(
+                  iconAsset: Assets.private_claim_money_svg,
+                  text: I18n.of(context).privateWalletClaim,
+                  onPressed: () {
+                    Navigator.pushNamed(context, VerificationRoute,
+                        arguments: vmodel.wallet.id);
+                  },
+                ),
               )
             ]),
         Container(
@@ -86,8 +105,8 @@ class WalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WalletLayout(
-      title: Text('my wallet'),
+    return Scaffold(
+      drawer: getIt.get<MenuScreen>(),
       body: BaseView<WalletViewModel>(
           model: getIt<WalletViewModel>(),
           disposeState: false,
@@ -98,49 +117,89 @@ class WalletScreen extends StatelessWidget {
             } else {
               return Column(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(left: 25),
+                        child: IconButton(
+                          key: Key('menu_button'),
+                          icon: SvgPicture.asset(Assets.menu_svg),
+                          iconSize: LayoutStyles.iconSize,
+                          onPressed: Scaffold.of(context).openDrawer,
+                        ),
+                      ),
+                      AmountDisplay(
+                        isShopColor: vmodel.wallet.isShop,
+                        isLoading: vmodel.amountState is Loading,
+                        amount: vmodel.wallet.amountLabel,
+                        symbol: 'CHF',
+                      ),
+                    ],
                   ),
-                  AmountDisplay(
-                    isShopColor: vmodel.wallet.isShop,
-                    isLoading: vmodel.amountState is Loading,
-                    amount: vmodel.wallet.amountLabel,
-                    currency: 'CHF',
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                  ),
-                  Center(
-                    child: Text(
-                      vmodel.walletState is Loaded
-                          ? 'Wallet ${vmodel.wallet.id}'
-                          : 'loading',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                  ),
-                  Center(
-                    child: Text(vmodel.walletState is Loaded
-                        ? '${vmodel.wallet.currency.label}'
-                        : 'loading'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                  ),
-                  ..._createButtons(vmodel.wallet.isShop, context, vmodel),
                   Expanded(
-                    child: TransactionList(
-                      isLoading: vmodel.transactionState is Loading,
-                      context: context,
-                      entries: vmodel.transactions,
-                    ),
-                  ),
-                  Center(
-                    child: FlatButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, TransactionOverviewRoute);
-                      },
-                      icon: Icon(Icons.folder_open),
-                      label: Text(I18n.of(context).showAllTransactions),
+                    child: Container(
+                      margin: EdgeInsets.only(left: 25, right: 25),
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                          ),
+                          Center(
+                            child: Text(vmodel.walletState is Loaded
+                                ? '${vmodel.wallet.currency.label}'
+                                : 'loading'),
+                          ),
+                          Center(
+                            child: Text(
+                              vmodel.walletState is Loaded
+                                  ? 'Wallet ${vmodel.wallet.id}'
+                                  : 'loading',
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                          ),
+                          InkWell(
+                              child: SvgPicture.asset(Assets.icon_qrcode_svg),
+                              onTap: () => Navigator.of(context)
+                                  .pushNamed(WalletQROverlayRoute)),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                          ),
+                          ..._createButtons(
+                              vmodel.wallet.isShop, context, vmodel),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              I18n.of(context).walletTimline,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2
+                                  .merge(TextStyle(fontWeight: fontWeightBold)),
+                            ),
+                          ),
+                          Expanded(
+                            child: NotificationListener<ScrollNotification>(
+                              onNotification: (ScrollNotification scrollInfo) {
+                                if (scrollInfo.metrics.pixels ==
+                                    scrollInfo.metrics.maxScrollExtent) {
+                                  vmodel.loadMore();
+                                }
+                                // Return true to cancel the notification bubbling.
+                                // Return false (or null) to allow the notification to continue to be dispatched to further ancestors.
+                                return true;
+                              },
+                              child: TransactionList(
+                                isLoading: vmodel.transactionState is Loading,
+                                context: context,
+                                entries: vmodel.transactions,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

@@ -1,22 +1,29 @@
+import 'package:e_coupon/ui/core/services/utils.dart';
+import 'package:injectable/injectable.dart';
+
+import 'package:e_coupon/core/extensions.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
+import 'package:e_coupon/ui/screens/wallet/transactions_list.dart';
 
-import 'package:e_coupon/ui/core/widgets/transactions_list.dart';
+import 'package:ecoupon_lib/models/transaction_list_response.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
-import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class WalletViewModel extends BaseViewModel {
+  final IRouter _router;
+  final IWalletService _walletService;
+
   ViewState _walletState = Initial();
   ViewState _amountState = Initial();
   ViewState _transactionState = Initial();
+
   WalletEntity _wallet;
-  List<TransactionListEntry> _transactions;
-  final IRouter _router;
-  final IWalletService _walletService;
+  TransactionListCursor _transactionListCursor;
+  List<TransactionListEntry> _transactions = [];
 
   WalletViewModel(this._router, this._walletService);
 
@@ -47,25 +54,60 @@ class WalletViewModel extends BaseViewModel {
     _amountState = Loading();
     _transactionState = Loading();
     setViewState(Update());
+
     var walletOrFailure = await _walletService.fetchAndUpdateSelected();
     walletOrFailure.fold((failure) => setViewState(Error(failure)), (success) {
       _wallet = success;
       _amountState = Loaded();
     });
+
     await loadTransactions();
+
     setViewState(Update());
   }
 
   //
   Future<void> loadTransactions() async {
+    _transactions = [];
+    await _loadTransactions(null);
+  }
+
+  Future<void> loadMore() async {
+    // how to check if there is more to load?
+    await _loadTransactions(_transactionListCursor);
+  }
+
+  Future<void> _loadTransactions(TransactionListCursor cursor) async {
     var transactionsOrFailure =
-        await _walletService.fetchAndUpdateSelectedTransactions();
-    transactionsOrFailure.fold((failure) => setViewState(Error(failure)),
-        (transactions) {
+        await _walletService.fetchAndUpdateSelectedTransactions(cursor);
+
+    transactionsOrFailure.fold((failure) {
+      setViewState(Error(failure));
+    }, (transactionResponse) {
+      _transactionListCursor = transactionResponse.cursor;
+
+      DateTime lastShownDate;
+
+      transactionResponse.transactions.forEach((transaction) {
+        if (lastShownDate != null &&
+            lastShownDate.isSameDate(transaction.created)) {
+          _transactions.add(TransactionListEntry(
+            date: transaction.created,
+            text: transaction.from,
+            amount: Utils.moneyToString(transaction.amount),
+          ));
+        } else {
+          _transactions.add(TransactionListEntry(
+            date: transaction.created,
+            text: transaction.from,
+            amount: Utils.moneyToString(transaction.amount),
+            showDate: true,
+          ));
+          lastShownDate = transaction.created;
+        }
+      });
+
       _transactionState = Loaded();
-      _transactions = transactions
-          .map((transaction) => TransactionListEntry(transaction))
-          .toList();
     });
   }
   //

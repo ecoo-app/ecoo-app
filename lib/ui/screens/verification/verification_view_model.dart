@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';

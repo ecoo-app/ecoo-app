@@ -48,6 +48,8 @@ class I18n implements WidgetsLocalizations {
   String get walletRedeem => "Einlösen";
   /// "Kassieren"
   String get walletCashier => "Kassieren";
+  /// "Verlauf"
+  String get walletTimline => "Verlauf";
   /// "Betrag"
   String get titlePrivateRequest => "Betrag";
   /// "Geld anfordern"

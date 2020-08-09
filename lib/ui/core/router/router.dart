@@ -13,7 +13,7 @@ import 'package:e_coupon/ui/screens/register/register_verifiy_screen.dart';
 import 'package:e_coupon/ui/screens/register/register_wallet_type_screen.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen.dart';
-import 'package:e_coupon/ui/screens/transaction_overview/transaction_overview_screen.dart';
+import 'package:e_coupon/ui/screens/wallet/qr_overlay.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
 import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
@@ -30,7 +30,7 @@ const RegisterWalletTypeRoute = '/register/wallettype';
 const RegisterVerifyRoute = '/register/verify';
 const VerifyPinRoute = '/verify/pin';
 const VerificationRoute = '/verify';
-const WalletDetailRoute = 'walletDetail';
+const WalletDetailRoute = '/wallet';
 const WalletsOverviewRoute = 'walletsOverview';
 const TransactionOverviewRoute = 'transactionOverview';
 const PaymentRoute = 'payment';
@@ -39,6 +39,7 @@ const ErrorRoute = 'paymentError';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
 const TestRoute = '/test';
+const WalletQROverlayRoute = '/wallet/qrOverlay';
 const RedeemRoute = '/redeem';
 
 abstract class IRouter {
@@ -79,8 +80,6 @@ class Router implements IRouter {
         return MaterialPageRoute(builder: (_) => WalletScreen(wallet: wallet));
       case WalletsOverviewRoute:
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
-      case TransactionOverviewRoute:
-        return MaterialPageRoute(builder: (_) => TransactionOverviewScreen());
       case VerificationRoute:
         return MaterialPageRoute(builder: (_) => getIt<VerificationScreen>());
       case PaymentRoute:
@@ -95,6 +94,10 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<RequestScreen>(), false);
       case RequestQRBillRoute:
         return _createRoute(settings, getIt<RequestQRBillScreen>(), false);
+      case WalletQROverlayRoute:
+        // return _createRoute(settings, getIt<WalletQROverlay>(), true);
+        return MaterialPageRoute(
+            builder: (_) => WalletQROverlay(), fullscreenDialog: true);
       case VerifyPinRoute:
         return _createRoute(settings, getIt<PinVerificationScreen>(), false);
       case RedeemRoute:

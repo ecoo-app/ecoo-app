@@ -11,7 +11,6 @@ import 'package:injectable/get_it_helper.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'business/repo_definitions/abstract_wallet_repo.dart';
 import 'business/use_cases/get_wallet.dart';
 import 'business/use_cases/handle_transaction.dart';
 import 'data/e_coupon_library/lib_wallet_source.dart';
@@ -19,6 +18,7 @@ import 'data/e_coupon_library/mock_library.dart';
 import 'data/local/local_wallet_source.dart';
 import 'data/mock_network_info.dart';
 import 'data/network_info.dart';
+import 'data/repos/abstract_wallet_repo.dart';
 import 'data/repos/mock_wallet_repo.dart';
 import 'data/repos/wallet_repo.dart';
 import 'device/qr_scanner_mock.dart';
@@ -59,13 +59,14 @@ import 'ui/screens/verification/pin_verification_screen.dart';
 import 'ui/screens/verification/pin_verification_view_model.dart';
 import 'ui/screens/verification/verification_screen.dart';
 import 'ui/screens/verification/verification_view_model.dart';
+import 'ui/screens/wallet/qr_overlay.dart';
 import 'ui/screens/wallet/wallet_view_model.dart';
 import 'ui/screens/wallets_overview/wallets_view_model.dart';
 
 /// Environment names
-const _mock = 'mock';
 const _dev = 'dev';
 const _prod = 'prod';
+const _mock = 'mock';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -77,9 +78,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<ILibWalletSource>(() => LibWalletSource());
   gh.lazySingleton<ILocalWalletSource>(() => LocalWalletSource());
   gh.factory<ILoginService>(() => LoginService());
-  gh.lazySingleton<INetworkInfo>(() => MockNetworkInfo(), registerFor: {_mock});
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo(),
       registerFor: {_dev, _prod});
+  gh.lazySingleton<INetworkInfo>(() => MockNetworkInfo(), registerFor: {_mock});
   gh.lazySingleton<IQRScanParser>(() => QRScanParser());
   gh.factory<IQRScanner>(() => MockQRScanner());
   gh.lazySingleton<ITransferService>(() => TransferService());
@@ -96,6 +97,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final sharedPreferences = await thirdPartyLibraryModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.factory<SuccessViewModel>(() => SuccessViewModel());
+  gh.factory<WalletQROverlay>(() => WalletQROverlay());
   gh.factory<ECouponApp>(() => ECouponApp(g<IRouter>()));
   gh.factory<IAppService>(() => AppService(g<PackageInfo>()));
   gh.factory<ISettingsService>(() => SettingsService(g<SharedPreferences>()));

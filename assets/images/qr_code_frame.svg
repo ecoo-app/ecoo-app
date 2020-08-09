@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="327px" height="327px" viewBox="0 0 327 327" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Frame</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Frame" transform="translate(1.000000, 1.000000)" stroke-width="2">
+            <polyline id="Path_2" stroke="#9779FC" points="60.568 0 0 0 0 60.568"></polyline>
+            <polyline id="Path_2_Copy" stroke="#9779FC" transform="translate(294.716000, 30.284000) rotate(90.000000) translate(-294.716000, -30.284000) " points="325 3.55271368e-15 264.432 3.55271368e-15 264.432 60.568"></polyline>
+            <polyline id="Path_2_Copy_2" stroke="#AC6BEA" transform="translate(294.716000, 294.716000) rotate(180.000000) translate(-294.716000, -294.716000) " points="325 264.432 264.432 264.432 264.432 325"></polyline>
+            <polyline id="Path_2_Copy_3" stroke="#9779FC" transform="translate(30.284000, 294.716000) rotate(-90.000000) translate(-30.284000, -294.716000) " points="60.568 264.432 0 264.432 0 325"></polyline>
+        </g>
+    </g>
+</svg>

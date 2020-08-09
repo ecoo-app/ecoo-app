@@ -19,7 +19,7 @@ ThemeData generalTheme = ThemeData(
           color: ColorStyles.black),
       headline2: TextStyle(
           fontSize: 50.0,
-          fontWeight: fontWeightMedium,
+          fontWeight: fontWeightBold,
           fontFamily: fontFamiliyPanam,
           color: ColorStyles.black),
       headline3: TextStyle(
@@ -40,7 +40,7 @@ ThemeData generalTheme = ThemeData(
       bodyText2: TextStyle(
           fontSize: 15.0, fontWeight: fontWeightRegular, fontFamily: 'Roboto'),
       caption: TextStyle(
-          fontSize: 10.0, fontWeight: fontWeightRegular, fontFamily: 'Roboto')),
+          fontSize: 12.0, fontWeight: fontWeightRegular, fontFamily: 'Roboto')),
 );
 
 class TextStyles {
@@ -59,6 +59,12 @@ class TextStyles {
   static const headline3_text_white = TextStyle(
       fontSize: 25.0,
       fontWeight: fontWeightMedium,
+      fontFamily: fontFamiliyPanam,
+      color: ColorStyles.white);
+
+  static const headline2_text_white = TextStyle(
+      fontSize: 50.0,
+      fontWeight: fontWeightBold,
       fontFamily: fontFamiliyPanam,
       color: ColorStyles.white);
 }
@@ -94,6 +100,8 @@ class Assets {
   static const keyboard_purpe_svg = 'assets/images/icon_keyboard_purple.svg';
   static const apple_icon_svg = 'assets/images/apple_icon.svg';
   static const google_icon_svg = 'assets/images/google_icon.svg';
+  static const menu_svg = 'assets/images/stream.svg';
+  static const qr_code_frame_svg = 'assets/images/qr_code_frame.svg';
   static const envelope_open_dollar_svg =
       'assets/images/envelope_open_dollar.svg';
 
@@ -101,13 +109,24 @@ class Assets {
   static const icon_button_svg = 'assets/images/icon_button.svg';
   static const icon_close_svg = 'assets/images/icon_close.svg';
   static const icon_arrow_right_svg = 'assets/images/icon_arrow_right.svg';
+  static const icon_qrcode_svg = 'assets/images/icons_qrcode.svg';
 
   static const wallet_icon_svg = 'assets/images/wallet_icon.svg';
+  static const shop_envelope_open_dollar_svg =
+      'assets/images/shop_envelope_open_dollar.svg';
+  static const shop_send_money_svg = 'assets/images/shop_send_money.svg';
+  static const private_recieve_money_svg =
+      'assets/images/private_recieve_money.svg';
+  static const private_claim_money_svg =
+      'assets/images/private_claim_money.svg';
 
   // Rectangles
   static const rectangle_blue_svg = 'assets/images/rectangle_blue.svg';
   static const rectangle_green_svg = 'assets/images/rectangle_green.svg';
   static const rectangle_purple_svg = 'assets/images/rectangle_purple.svg';
+
+  static const private_header_svg = 'assets/images/private_header_bg.svg';
+  static const shop_header_svg = 'assets/images/shop_header_bg.svg';
 
   // Splashscreen
   static const splash_wallet_graphic_svg =

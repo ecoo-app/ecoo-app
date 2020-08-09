@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="281px" height="182px" viewBox="0 0 281 182" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Header_BG-2 Clipped</title>
+    <defs>
+        <polygon id="path-1" points="0 0.315 281 0.315 281 180.315 0 180.315"></polygon>
+        <linearGradient x1="8.1%" y1="0%" x2="98%" y2="96.9%" id="linearGradient-3">
+            <stop stop-color="#00EAEA" offset="0%"></stop>
+            <stop stop-color="#39C1FF" offset="54.2%"></stop>
+            <stop stop-color="#3979FF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Header_BG-2-Clipped" transform="translate(0.000000, 0.685000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Rectangle"></g>
+            <g id="Header_BG-2" mask="url(#mask-2)" fill="url(#linearGradient-3)" fill-rule="nonzero">
+                <g transform="translate(-3.000000, -170.000000)" id="Rectangle-3">
+                    <path d="M80.6852009,29.9998894 L280.685201,29.9998894 C308.299438,29.9998894 330.685201,52.3856519 330.685201,79.9998894 L330.685201,279.999889 C330.685201,307.614127 308.299438,329.999889 280.685201,329.999889 L80.6852009,329.999889 C53.0709634,329.999889 30.6852009,307.614127 30.6852009,279.999889 L30.6852009,79.9998894 C30.6852009,52.3856519 53.0709634,29.9998894 80.6852009,29.9998894 Z" transform="translate(180.685201, 179.999889) rotate(-13.000000) translate(-180.685201, -179.999889) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

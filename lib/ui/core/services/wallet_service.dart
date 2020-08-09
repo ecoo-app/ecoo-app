@@ -1,22 +1,22 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
-import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
+import 'package:ecoupon_lib/models/transaction_list_response.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IWalletService {
   Future<Either<Failure, List<WalletEntity>>> get allWallets;
   WalletEntity getSelected();
-  List<TransactionRecord> getSelectedTransactions();
+  TransactionListResponse getSelectedTransactions();
   Future<void> setSelected(WalletEntity wallet);
   Future<Either<Failure, List<WalletEntity>>> fetchAndUpdateWallets();
   Future<Either<Failure, WalletEntity>> fetchAndUpdateSelected();
-  Future<Either<Failure, List<TransactionRecord>>>
-      fetchAndUpdateSelectedTransactions();
+  Future<Either<Failure, TransactionListResponse>>
+      fetchAndUpdateSelectedTransactions(TransactionListCursor cursor);
 }
 
 @LazySingleton(as: IWalletService)
@@ -25,7 +25,8 @@ class WalletService implements IWalletService {
   final ISettingsService _settingsService;
   List<WalletEntity> _wallets;
   WalletEntity _selected = WalletEntity(privateWalletMock);
-  List<TransactionRecord> _selectedTransactions = [];
+  TransactionListResponse _selectedTransactions =
+      TransactionListResponse([], null);
 
   WalletService(this._walletRepo, this._settingsService);
 
@@ -75,15 +76,15 @@ class WalletService implements IWalletService {
   }
 
   @override
-  List<TransactionRecord> getSelectedTransactions() {
+  TransactionListResponse getSelectedTransactions() {
     return this._selectedTransactions;
   }
 
   @override
-  Future<Either<Failure, List<TransactionRecord>>>
-      fetchAndUpdateSelectedTransactions() async {
+  Future<Either<Failure, TransactionListResponse>>
+      fetchAndUpdateSelectedTransactions(TransactionListCursor cursor) async {
     var transactionsOrFailure =
-        await _walletRepo.getWalletTransactions(_selected.id, null);
+        await _walletRepo.getWalletTransactions(_selected.id, cursor);
     transactionsOrFailure.fold(
         (fail) => null, (success) => this._selectedTransactions = success);
 

@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/abstract_use_case.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:equatable/equatable.dart';

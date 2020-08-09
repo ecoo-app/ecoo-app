@@ -1,5 +1,9 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import 'package:pedantic/pedantic.dart';
+
 import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
@@ -7,17 +11,14 @@ import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
 import 'package:e_coupon/data/e_coupon_library/mock_library.dart' as lib_api;
 import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
-
-import 'package:e_coupon/business/repo_definitions/abstract_wallet_repo.dart';
-import 'package:dartz/dartz.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/local/local_wallet_source.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
+import 'package:ecoupon_lib/models/transaction_list_response.dart';
 import 'package:ecoupon_lib/models/verification_input_data.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
-import 'package:injectable/injectable.dart';
-import 'package:pedantic/pedantic.dart';
 
 import '../network_info.dart';
 
@@ -38,11 +39,12 @@ class MockWalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<TransactionRecord>>> getCachedWalletTransactions(
       String id, filter) {
-    return _getMockTransactions(id, filter);
+    throw UnimplementedError();
+    // return _getMockTransactions(id, filter);
   }
 
   @override
-  Future<Either<Failure, List<TransactionRecord>>> getWalletTransactions(
+  Future<Either<Failure, TransactionListResponse>> getWalletTransactions(
       String id, filter) {
     return _getMockTransactions(id, filter);
   }
@@ -177,13 +179,13 @@ class MockWalletRepo implements IWalletRepo {
   }
 
   /// mock code
-  Future<Either<Failure, List<TransactionRecord>>> _getMockTransactions(
+  Future<Either<Failure, TransactionListResponse>> _getMockTransactions(
       id, filter) {
     // mock delay
     return Future.delayed(const Duration(milliseconds: 400), () {
       for (final wallet in MockWallets) {
         if (wallet.id == id) {
-          var completer = Completer<Either<Failure, List<TransactionRecord>>>();
+          var completer = Completer<Either<Failure, TransactionListResponse>>();
           completer.complete(Right(_getTransactions(wallet.isShop)));
           return completer.future;
         }
@@ -234,20 +236,15 @@ class MockWalletRepo implements IWalletRepo {
     });
   }
 
-  List<TransactionRecord> _getTransactions(bool isShop) {
+  TransactionListResponse _getTransactions(bool isShop) {
+    var transactions = [];
     if (isShop) {
-      return MockTransactionWalletShop.map((transRecord) => TransactionRecord(
-            text: transRecord.text,
-            amount: transRecord.amount,
-            isEncashment: transRecord.tags.contains(MockEncashmentTag()),
-          )).toList();
+      transactions = MockTransactionWalletShop;
     } else {
-      return MockTransactionWalletPrivate.map(
-          (transRecord) => TransactionRecord(
-                text: transRecord.text,
-                amount: transRecord.amount,
-              )).toList();
+      transactions = MockTransactionWalletPrivate;
     }
+    transactions.sort((a, b) => b.created.compareTo(a.created));
+    return TransactionListResponse(transactions, null);
   }
 
   Future<Either<Failure, Wallet>> _mockVerification(Wallet wallet) {

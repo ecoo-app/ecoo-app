@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Icons_SendMoney" width="40" height="40" data-name="Icons/SendMoney" viewBox="0 0 40 40">
+    <defs>
+        <linearGradient id="linear-gradient" x1=".215" x2="1" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ff96e3"/>
+            <stop offset=".493" stop-color="#c971ff"/>
+            <stop offset="1" stop-color="#9774ff"/>
+        </linearGradient>
+    </defs>
+    <g id="exchange-alt" transform="translate(0 .105)">
+        <path id="Shape" fill="url(#linear-gradient)" d="M7.478 39.207a2.237 2.237 0 0 1-1.847-1.145l-5-7.67a4.381 4.381 0 0 1 0-4.53l5-7.67a2.236 2.236 0 0 1 1.846-1.145c1.24 0 2.523 1.276 2.523 3.411v5.965h29.062c.517 0 .938.574.938 1.279v.852c0 .705-.421 1.279-.938 1.279H10V35.8c0 2.132-1.282 3.407-2.522 3.407zM7.5 20.456l-5 7.67 5 7.67zm25.022 1.706c-1.24 0-2.522-1.276-2.522-3.411v-5.965H.937c-.517 0-.937-.574-.937-1.279v-.853c0-.7.42-1.278.937-1.278H30V3.41C30 1.276 31.282 0 32.522 0a2.237 2.237 0 0 1 1.847 1.145l5 7.67a4.381 4.381 0 0 1 0 4.53l-5 7.67a2.237 2.237 0 0 1-1.847 1.147zM32.5 3.41v15.341l5-7.67z"/>
+    </g>
+</svg>

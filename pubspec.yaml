@@ -101,7 +101,7 @@ flutter:
         #   weight: 700
         #   style: italic
         - asset: assets/NewPanamSkyline-Bold.ttf
-          weight: 600
+          weight: 800
         # - asset: assets/NewPanamSkyline-BoldItalic.ttf
         #   weight: 600
         #   style: italic
