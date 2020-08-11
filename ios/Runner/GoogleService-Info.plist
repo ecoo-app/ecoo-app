@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>152256546965-916649i9nq3lss57nf1rqq7nfn6aamlo.apps.googleusercontent.com</string>
+	<string>1056883972202-ishmpd7flpmfal98ju8v36rdovbgvgkp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.152256546965-916649i9nq3lss57nf1rqq7nfn6aamlo</string>
+	<string>com.googleusercontent.apps.1056883972202-ishmpd7flpmfal98ju8v36rdovbgvgkp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCv1E6yA0R2rn7c6TdTrSQDcFbhW_wONpY</string>
+	<string>AIzaSyAu8rPy7I3e6Y66uy-p7IlcnYIOn8aFglk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>152256546965</string>
+	<string>1056883972202</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>ch.ecoupon.mobile</string>
 	<key>PROJECT_ID</key>
-	<string>ecoo-16465</string>
+	<string>ecoupon-fcm</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ecoo-16465.appspot.com</string>
+	<string>ecoupon-fcm.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:152256546965:ios:c5f8915ad0c625e49cf39c</string>
+	<string>1:1056883972202:ios:393edcb86cb65e3f639213</string>
 	<key>DATABASE_URL</key>
-	<string>https://ecoo-16465.firebaseio.com</string>
+	<string>https://ecoupon-fcm.firebaseio.com</string>
 </dict>
 </plist>
