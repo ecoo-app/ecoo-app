@@ -51,12 +51,12 @@ class DevWalletRepo implements IWalletRepo {
   @override
   Future<Either<Failure, List<WalletEntity>>> getWallets(
       String userIdentifier) async {
-    // if (useMock) {
-    //   return _mockWalletRepo.getWallets(userIdentifier);
-    // } else {
-    await _mockLoginService.testLogin(false);
-    return _walletRepo.getWallets(userIdentifier);
-    // }
+    if (useMock) {
+      return _mockWalletRepo.getWallets(userIdentifier);
+    } else {
+      await _mockLoginService.testLogin(false);
+      return _walletRepo.getWallets(userIdentifier);
+    }
   }
 
   @override
