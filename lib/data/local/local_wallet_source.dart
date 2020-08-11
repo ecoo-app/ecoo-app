@@ -1,6 +1,11 @@
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:injectable/injectable.dart';
 import 'package:localstorage/localstorage.dart';
+
+const walletsKey = 'wallets';
+const singleWalletKey = 'wallet';
+const transactionsKey = 'transactions';
 
 abstract class ILocalWalletSource {
   Future<void> cacheWallet(String key, WalletEntity wallet);
@@ -19,7 +24,7 @@ class LocalWalletSource implements ILocalWalletSource {
   Future<void> cacheWallet(String key, WalletEntity wallet) async {
     await _storage.ready;
     //
-    return _storage.setItem(key, {});
+    return _storage.setItem(key, wallet.walletModel.toJson());
   }
 
   @override
@@ -32,7 +37,8 @@ class LocalWalletSource implements ILocalWalletSource {
   @override
   Future<WalletEntity> getWallet(String key) async {
     await _storage.ready;
-    return _storage.getItem(key);
+    var walletJson = await _storage.getItem(key);
+    return WalletEntity(Wallet.fromJson(walletJson));
   }
 
   @override

@@ -1,53 +1,68 @@
 import 'dart:async';
 
-import 'package:e_coupon/business/entities/currency.dart';
-import 'package:e_coupon/business/entities/verification_form.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
-import 'package:e_coupon/data/e_coupon_library/mock_library.dart' as lib_api;
-import 'package:e_coupon/business/entities/transaction_record.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/local/local_wallet_source.dart';
-import 'package:e_coupon/injection.dart';
+
 import 'package:ecoupon_lib/common/errors.dart';
+import 'package:ecoupon_lib/models/currency.dart' as lib;
+import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
-import 'package:ecoupon_lib/models/transaction_list_response.dart';
-import 'package:ecoupon_lib/models/verification_input_data.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
 
 import '../network_info.dart';
 
-@devEnv
-@prodEnv
-@LazySingleton(as: IWalletRepo)
+// @prodEnv
+// @LazySingleton(as: IWalletRepo)
+@lazySingleton
 class WalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
-  final lib_api.ILibWalletSource libDataSource;
   final INetworkInfo networkInfo;
   final IWalletSource walletSource;
 
-  WalletRepo(
-      {this.localDataSource,
-      this.networkInfo,
-      this.libDataSource,
-      this.walletSource});
+  WalletRepo({this.localDataSource, this.networkInfo, this.walletSource});
 
   @override
-  Future<Either<Failure, List<TransactionRecord>>> getCachedWalletTransactions(
-      String id, filter) {
-    throw UnimplementedError();
+  Future<Either<Failure, Wallet>> createWallet(lib.Currency currency,
+      {bool isShop = false}) async {
+    Either<Failure, Wallet> result;
+
+    if (await networkInfo.isConnected) {
+      try {
+        if (currency == null) {
+          var currencies = await walletSource.walletService.fetchCurrencies();
+          currency = currencies.items[0];
+        }
+        print('create wallet currency ${currency.name}');
+        final wallet = await walletSource.walletService.createWallet(currency);
+        print('create wallet wallet ${wallet.walletID}');
+        result = Right(wallet);
+      } on NotAuthenticatedError {
+        result = Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        result = Left(HTTPFailure(e.statusCode));
+      } catch (anyerror) {
+        print('error $anyerror');
+        // TODO log/send error
+        result = Left(UnknownFailure());
+      }
+    } else {
+      result = Left(NoService());
+    }
+
+    return result;
   }
 
   @override
-  Future<Either<Failure, TransactionListResponse>> getWalletTransactions(
-      String id, TransactionListCursor cursor) async {
-    Either<Failure, TransactionListResponse> result;
+  Future<Either<Failure, ListResponse<Transaction>>> getWalletTransactions(
+      String id, ListCursor cursor) async {
+    Either<Failure, ListResponse<Transaction>> result;
 
     if (await networkInfo.isConnected) {
       try {
@@ -68,52 +83,57 @@ class WalletRepo implements IWalletRepo {
   }
 
   @override
-  Future<Either<Failure, List<WalletEntity>>> getCachedWallets(
-      String id) async {
-    try {
-      final wallets = await localDataSource.getWallets(
-          'wallets'); // todo does it return an empty string if no wallets cached?
-      return Right(wallets);
-    } on Exception catch (error) {
-      //CacheException
-      print(error);
-      // return Left(CacheFailure());
-      return Left(MessageFailure(error));
-    }
-  }
-
-  @override
-  Future<Either<Failure, WalletEntity>> getCachedWalletData(String id) {
-    return _getMockWalletData(id);
-  }
-
-  @override
   Future<Either<Failure, List<WalletEntity>>> getWallets(
       String userIdentifier) async {
-    // if (await networkInfo.isConnected) {
-    try {
-      // TODO use lib
-      final wallets = await _getMockWallets();
-      unawaited(localDataSource.cacheWallets('wallets', wallets));
-      return Right(wallets);
-    } on MessageFailure {
-      //ServerException
-      return Left(ServerFailure());
+    if (await networkInfo.isConnected) {
+      try {
+        final wallets = await walletSource.walletService.fetchWallets();
+        final walletEntities =
+            wallets.items.map((wallet) => WalletEntity(wallet)).toList();
+        unawaited(localDataSource.cacheWallets(walletsKey, walletEntities));
+        return Right(walletEntities);
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure(e.statusCode));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    } else {
+      try {
+        final wallets = await localDataSource.getWallets(walletsKey);
+        return Right(wallets);
+      } catch (e) {
+        //CacheException
+        return Left(CacheFailure());
+      }
     }
-    // } else {
-    //   try {
-    //     final wallets = await localDataSource.getWallets('wallets');
-    //     return Right(wallets);
-    //   } on MessageFailure {
-    //     //CacheException
-    //     return Left(CacheFailure());
-    //   }
-    // }
   }
 
   @override
-  Future<Either<Failure, WalletEntity>> getWalletData(String id) {
-    return _getMockWalletData(id);
+  Future<Either<Failure, WalletEntity>> getWalletData(String walletID) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final wallet = await walletSource.walletService.fetchWallet(walletID);
+        final walletEntity = WalletEntity(wallet);
+        unawaited(localDataSource.cacheWallet(singleWalletKey, walletEntity));
+        return Right(walletEntity);
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure(e.statusCode));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    } else {
+      try {
+        final wallet = await localDataSource.getWallet(singleWalletKey);
+        return Right(wallet);
+      } catch (e) {
+        //CacheException
+        return Left(CacheFailure());
+      }
+    }
   }
 
   @override
@@ -133,100 +153,5 @@ class WalletRepo implements IWalletRepo {
     }
 
     return result;
-  }
-
-  @override
-  Future<Either<Failure, Wallet>> verifyWallet(
-      Wallet wallet, List<VerificationInputData> verificationInputs) async {
-    Either<Failure, Wallet> result;
-
-    if (await networkInfo.isConnected) {
-      try {
-        var walletOrFailure = await walletSource.walletService
-            .verifyInputs(verificationInputs, wallet);
-        result = Right(walletOrFailure);
-        //
-      } on NotAuthenticatedError {
-        result = Left(NotAuthenticatedFailure());
-      } on HTTPError catch (e) {
-        result = Left(HTTPFailure(e.statusCode));
-      }
-    } else {
-      result = Left(NoService());
-    }
-
-    return result;
-    // return _mockVerification();
-  }
-
-  @override
-  Future<Either<Failure, VerificationForm>> getVerificationInputs(
-      Currency currency, bool isShop) async {
-    Either<Failure, VerificationForm> result;
-
-    if (await networkInfo.isConnected) {
-      try {
-        var inputsOrFailure = await walletSource.walletService
-            .fetchVerificationInputs(currency.currencyModel, isCompany: isShop);
-
-        result = Right(
-            VerificationForm(isShop: isShop, inputModel: inputsOrFailure));
-
-        //
-      } on NotAuthenticatedError {
-        result = Left(NotAuthenticatedFailure());
-      } on HTTPError catch (e) {
-        result = Left(HTTPFailure(e.statusCode));
-      }
-
-      //
-    } else {
-      result = Left(NoService());
-    }
-
-    return result;
-  }
-
-  /// mock code
-  Future<List<WalletEntity>> _getMockWallets() {
-    return Future.delayed(const Duration(milliseconds: 500), () {
-      var completer = Completer<List<WalletEntity>>();
-
-      // completer.complete(
-      //   MockWallets.map((wallet) {
-      //     return wallet;
-      //   }).toList(),
-      // );
-
-      completer.complete(MockWallets);
-
-      return completer.future;
-    });
-  }
-
-  Future<Either<Failure, WalletEntity>> _getMockWalletData(id) {
-    return Future.delayed(const Duration(milliseconds: 600), () {
-      var completer = Completer<Either<Failure, WalletEntity>>();
-      for (final wallet in MockWallets) {
-        if (wallet.id == id) {
-          // generate a future
-          completer.complete(Right(wallet));
-          return completer.future;
-        }
-      }
-
-      completer.complete(Left(MessageFailure('No such wallet with ID $id')));
-      return completer.future;
-    });
-  }
-
-  // ignore: unused_element
-  Future<Transaction> _makeMockTransaction() {
-    return Future.delayed(const Duration(milliseconds: 400), () {
-      var completer = Completer<Transaction>();
-      completer.complete(Transaction(PrivateWalletID, ShopWalletID, 2000,
-          TransactionState.done, DateTime.now(), '')); // TODO
-      return completer.future;
-    });
   }
 }

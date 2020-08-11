@@ -1,48 +1,53 @@
-import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
-import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
-import 'package:ecoupon_lib/common/errors.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class RegisterWalletTypeScreenViewModel extends BaseViewModel {
   final IRouter _router;
-  final IWalletSource _walletSource;
   final IWalletService _walletService;
+  final IWalletRepo _walletRepo;
 
   RegisterWalletTypeScreenViewModel(
-      this._router, this._walletSource, this._walletService);
+      this._router, this._walletService, this._walletRepo);
 
   Future<void> privateWalletSelected() async {
-    try {
-      var currencies = await _walletSource.walletService.fetchCurrencies();
-      var wallet =
-          await _walletSource.walletService.createWallet(currencies[0]);
-      await _walletService.setSelected(WalletEntity(wallet));
-      await _router.pushNamed(RegisterVerifyRoute);
-    } on HTTPError catch (e) {
-      setViewState(Error(HTTPFailure(e.statusCode)));
-    } on NotAuthenticatedError {
-      setViewState(Error(NotAuthenticatedFailure()));
-    }
+    await _onWalletTypeSelected(isTypeShop: false);
+    // try {
+    //   var currencies = await _walletSource.walletService.fetchCurrencies();
+    //   var wallet =
+    //       await _walletSource.walletService.createWallet(currencies[0]);
+    //   await _walletService.setSelected(WalletEntity(wallet));
+    //   await _router.pushNamed(RegisterVerifyRoute);
+    // } on HTTPError catch (e) {
+    //   setViewState(Error(HTTPFailure(e.statusCode)));
+    // } on NotAuthenticatedError {
+    //   setViewState(Error(NotAuthenticatedFailure()));
+    // }
   }
 
   Future<void> shopWalletSelected() async {
-    try {
-      var currencies = await _walletSource.walletService.fetchCurrencies();
-      var wallet = await _walletSource.walletService
-          .createWallet(currencies[0], isCompany: true);
-      await _walletService.setSelected(WalletEntity(wallet));
-      await _router.pushNamed(RegisterVerifyRoute);
-    } on HTTPError catch (e) {
-      setViewState(Error(HTTPFailure(e.statusCode)));
-    } on NotAuthenticatedError {
-      setViewState(Error(NotAuthenticatedFailure()));
-    }
+    await _onWalletTypeSelected(isTypeShop: true);
+  }
+
+  Future<void> _onWalletTypeSelected({bool isTypeShop}) async {
+    var walletOrFailure =
+        await _walletRepo.createWallet(null, isShop: isTypeShop);
+
+    walletOrFailure.fold((failure) {
+      setViewState(Error(failure));
+    }, (wallet) {
+      _onWalletCreated(WalletEntity(wallet));
+    });
+  }
+
+  Future<void> _onWalletCreated(WalletEntity wallet) async {
+    await _walletService.setSelected(wallet);
+    await _router.pushNamed(RegisterVerifyRoute);
   }
 
   Future<void> back() {

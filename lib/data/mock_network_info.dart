@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 import 'network_info.dart';
 
+@devEnv
 @mockEnv
 @LazySingleton(as: INetworkInfo)
 class MockNetworkInfo implements INetworkInfo {

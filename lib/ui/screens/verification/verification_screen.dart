@@ -3,7 +3,6 @@ import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
-import 'package:e_coupon/ui/core/widgets/form_generator.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/screens/verification/verification_view_model.dart';
@@ -38,14 +37,15 @@ class VerificationScreen extends StatelessWidget {
                 return Container();
               } else {
                 return Column(children: <Widget>[
-                  Text(vmodel.verificationInputs.isShop
-                      ? I18n.of(context).verificationShopFormTitle
-                      : I18n.of(context).verificationPrivateFormTitle),
-                  FormGenerator(
-                    inputs: vmodel.verificationInputs.inputs,
-                    inputData: vmodel.inputData,
-                    formKey: vmodel.formKey,
-                  ),
+                  Text('TODO')
+                  // Text(vmodel.verificationInputs.isShop
+                  //     ? I18n.of(context).verificationShopFormTitle
+                  //     : I18n.of(context).verificationPrivateFormTitle),
+                  // FormGenerator(
+                  //   inputs: vmodel.verificationInputs.inputs,
+                  //   inputData: vmodel.inputData,
+                  //   formKey: vmodel.formKey,
+                  // ),
                 ]);
               }
             }()),

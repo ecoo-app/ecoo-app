@@ -8,7 +8,6 @@ abstract class INetworkInfo {
   Future<bool> get isConnected;
 }
 
-@devEnv
 @prodEnv
 @LazySingleton(as: INetworkInfo)
 class NetworkInfo implements INetworkInfo {

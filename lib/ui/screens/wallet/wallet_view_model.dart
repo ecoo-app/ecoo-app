@@ -1,4 +1,6 @@
+import 'package:e_coupon/ui/core/services/mock_login_service.dart';
 import 'package:e_coupon/ui/core/services/utils.dart';
+import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:e_coupon/core/extensions.dart';
@@ -9,7 +11,6 @@ import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:e_coupon/ui/screens/wallet/transactions_list.dart';
 
-import 'package:ecoupon_lib/models/transaction_list_response.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
 
 @lazySingleton
@@ -22,10 +23,10 @@ class WalletViewModel extends BaseViewModel {
   ViewState _transactionState = Initial();
 
   WalletEntity _wallet;
-  TransactionListCursor _transactionListCursor;
+  ListCursor _transactionListCursor;
   List<TransactionListEntry> _transactions = [];
 
-  WalletViewModel(this._router, this._walletService);
+  WalletViewModel(this._router, this._walletService, this.mockLogin);
 
   ViewState get walletState => this._walletState;
   ViewState get amountState => this._amountState;
@@ -77,7 +78,12 @@ class WalletViewModel extends BaseViewModel {
     await _loadTransactions(_transactionListCursor);
   }
 
-  Future<void> _loadTransactions(TransactionListCursor cursor) async {
+  final MockLoginService mockLogin;
+  Future<void> testLogin() async {
+    await mockLogin.registerWithGoogle();
+  }
+
+  Future<void> _loadTransactions(ListCursor cursor) async {
     var transactionsOrFailure =
         await _walletService.fetchAndUpdateSelectedTransactions(cursor);
 
@@ -88,7 +94,7 @@ class WalletViewModel extends BaseViewModel {
 
       DateTime lastShownDate;
 
-      transactionResponse.transactions.forEach((transaction) {
+      transactionResponse.items.forEach((transaction) {
         if (lastShownDate != null &&
             lastShownDate.isSameDate(transaction.created)) {
           _transactions.add(TransactionListEntry(
