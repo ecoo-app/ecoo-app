@@ -1,1 +1,1 @@
-
+ecoo,währung,currency,tezos
