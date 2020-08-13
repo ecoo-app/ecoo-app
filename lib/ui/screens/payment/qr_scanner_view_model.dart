@@ -60,7 +60,7 @@ class QRScannerViewModel extends BaseViewModel {
             decodedValue[Constants.qrDataDestinationId],
             decodedValue[Constants.qrDataNonce],
             decodedValue[Constants.qrDataPublicKey]),
-        decodedValue[Constants.qrDataAmount],
+        _transferService.transfer.amount,
       );
     } else {
       _transferService.setTransaction(Transfer(

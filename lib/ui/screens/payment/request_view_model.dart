@@ -25,7 +25,6 @@ class RequestViewModel extends BaseViewModel {
 
   void next() {
     if (formKey.currentState.validate()) {
-      print(amountInputController.text);
       _transferService.setTransaction(Transfer(
           destWalletId: wallet.id,
           amount: Utils.balanceFromString(amountInputController.text)));
