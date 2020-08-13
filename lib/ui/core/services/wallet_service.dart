@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
-import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
 import 'package:ecoupon_lib/models/list_response.dart';
@@ -26,7 +25,7 @@ class WalletService implements IWalletService {
   final IWalletRepo _walletRepo;
   final ISettingsService _settingsService;
   List<WalletEntity> _wallets = [];
-  WalletEntity _selected = WalletEntity(privateWalletMock); // TODO Remove
+  WalletEntity _selected;
   ListResponse<Transaction> _selectedTransactions = ListResponse([], null);
 
   WalletService(this._walletRepo, this._settingsService);
@@ -52,20 +51,31 @@ class WalletService implements IWalletService {
       String walletId =
           await _settingsService.getString(Constants.lastWalletIDSettingsKey);
 
-      // TODO if walletId == null : fetch all wallets and select first one.
+      // TODO error handlin!
+      if (walletId == null) {
+        var walletsOrFailure = await _walletRepo.getWallets('');
+        walletsOrFailure.fold((failure) => null, (success) {
+          this._selected = success[0];
+        });
+      } else {
+        var walletOrFailure = await _walletRepo.getWalletData(walletId);
+        walletOrFailure.fold((failure) => null, (success) {
+          this._selected = success;
+        });
+      }
 
       // TODO wallet migration...
 
-      var walletOrFailure = await _walletRepo.getWalletData(walletId);
-      walletOrFailure.fold((failure) => null, (success) {
-        this._selected = success;
-      });
-      await fetchAndUpdateSelected();
+      if (this._selected != null) {
+        await fetchAndUpdateSelected();
+      }
     } else if (this._selected != wallet) {
       await _settingsService.setStringValue(
           Constants.lastWalletIDSettingsKey, wallet.id);
       this._selected = wallet;
-      await fetchAndUpdateSelected();
+      if (this._selected != null) {
+        await fetchAndUpdateSelected();
+      }
     }
   }
 
@@ -86,6 +96,10 @@ class WalletService implements IWalletService {
 
   @override
   Future<Either<Failure, WalletEntity>> fetchAndUpdateSelected() async {
+    if (this._selected == null) {
+      await setSelected(null);
+      print(this._selected);
+    }
     return await _walletRepo.getWalletData(this._selected.id);
   }
 

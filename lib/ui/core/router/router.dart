@@ -21,7 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 // unfortunately routesetting does not allow enums
-const HomeRoute = '/';
+const HomeRoute = 'home';
 const SplashRoute = '/splash';
 const OnboardingRoute = '/onboarding';
 const RegisterRoute = '/register';
@@ -77,6 +77,7 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<RegisterWalletTypeScreen>(), false);
       case RegisterVerifyRoute:
         return _createRoute(settings, getIt<RegisterVerifyScreen>(), false);
+      // TODO fix home route
       case HomeRoute:
       case WalletDetailRoute:
         return _createRoute(settings, getIt<WalletScreen>(), false);

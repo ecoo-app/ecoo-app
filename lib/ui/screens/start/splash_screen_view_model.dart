@@ -16,10 +16,10 @@ class SplashScreenViewModel extends BaseViewModel {
   Future<void> startup() async {
     try {
       var loginResult = await _loginService.login();
-      await _notificationService.registerDevice();
       switch (loginResult) {
         case LoginResult.Home:
         case LoginResult.Success:
+          await _notificationService.registerDevice();
           await _router.pushAndRemoveUntil(HomeRoute, '');
           break;
         case LoginResult.Onboarding:

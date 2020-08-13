@@ -17,7 +17,6 @@ import 'data/local/local_wallet_source.dart';
 import 'data/mock_network_info.dart';
 import 'data/network_info.dart';
 import 'data/repos/abstract_wallet_repo.dart';
-import 'data/repos/mock_wallet_repo.dart';
 import 'data/repos/wallet_repo.dart';
 import 'main.dart';
 import 'modules/third_party_library_module.dart';
@@ -35,7 +34,6 @@ import 'ui/screens/menu/menu_screen_view_model.dart';
 import 'ui/screens/payment/error_screen.dart';
 import 'ui/screens/payment/payment_screen.dart';
 import 'ui/screens/payment/payment_view_model.dart';
-import 'ui/screens/payment/qr_scanner_screen.dart';
 import 'ui/screens/payment/qr_scanner_view_model.dart';
 import 'ui/screens/payment/qrbill_screen.dart';
 import 'ui/screens/payment/qrbill_view_model.dart';
@@ -64,9 +62,9 @@ import 'ui/screens/wallet/wallet_view_model.dart';
 import 'ui/screens/wallets_overview/wallets_view_model.dart';
 
 /// Environment names
+const _prod = 'prod';
 const _dev = 'dev';
 const _mock = 'mock';
-const _prod = 'prod';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -77,9 +75,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<ErrorScreen>(() => ErrorScreen());
   gh.factory<FlutterSecureStorage>(() => thirdPartyLibraryModule.securePrefs);
   gh.lazySingleton<ILocalWalletSource>(() => LocalWalletSource());
+  gh.lazySingleton<INetworkInfo>(() => NetworkInfo(), registerFor: {_prod});
   gh.lazySingleton<INetworkInfo>(() => MockNetworkInfo(),
       registerFor: {_dev, _mock});
-  gh.lazySingleton<INetworkInfo>(() => NetworkInfo(), registerFor: {_prod});
   gh.lazySingleton<ITransferService>(() => TransferService());
   gh.lazySingleton<IWalletSource>(() => WalletSource());
   gh.lazySingleton<MockLoginService>(
@@ -87,7 +85,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
   gh.factory<PackageInfo>(() => packageInfo);
   gh.factory<PaymentScreen>(() => PaymentScreen());
-  gh.factory<QRScannerScreen>(() => QRScannerScreen(showButton: g<bool>()));
   gh.factory<RegisterVerifyScreenViewModel>(
       () => RegisterVerifyScreenViewModel(g<IRouter>()));
   gh.factory<RequestQRBillScreen>(() => RequestQRBillScreen());
@@ -100,13 +97,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<IAppService>(() => AppService(g<PackageInfo>()));
   gh.factory<ISettingsService>(
       () => SettingsService(g<SharedPreferences>(), g<FlutterSecureStorage>()));
-  gh.lazySingleton<IWalletRepo>(
-      () => MockWalletRepo(
-            localDataSource: g<ILocalWalletSource>(),
-            networkInfo: g<INetworkInfo>(),
-            walletSource: g<IWalletSource>(),
-          ),
-      registerFor: {_mock});
   gh.lazySingleton<IWalletRepo>(
       () => WalletRepo(
             localDataSource: g<ILocalWalletSource>(),

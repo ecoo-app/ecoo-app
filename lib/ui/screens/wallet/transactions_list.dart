@@ -9,12 +9,40 @@ class TransactionListEntry {
   final DateTime date;
   final String text;
   final String amount;
+  final bool isNegative;
 
   TransactionListEntry(
       {@required this.date,
       @required this.text,
       @required this.amount,
-      this.showDate = false});
+      this.showDate = false,
+      this.isNegative = false});
+
+  //       factory TransactionListEntry.from(Transaction other, String thisWalletId) {
+  //         var isNegative = thisWalletId == other.from;
+  //   return TransactionListEntry(
+  //       other.created,
+  //       isNegative ? other.to : other.from,
+  //       Utils.moneyToString(other.amount),
+  //       other.uid,
+  //       other.addressStreet,
+  //       other.addressTown,
+  //       other.addressPostalCode,
+  //       other.verificationStage);
+  // }
+
+  // lib_company.CompanyProfile toLibProfile() {
+  //   return lib_company.CompanyProfile(
+  //     uuid,
+  //     walletId,
+  //     name,
+  //     uid,
+  //     addressStreet,
+  //     addressTown,
+  //     addressPostalCode,
+  //     verificationStage,
+  //   );
+  // }
 }
 
 class TransactionList extends StatelessWidget {
@@ -57,7 +85,7 @@ class TransactionList extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
-                entry.amount,
+                entry.isNegative ? '- ${entry.amount}' : '+ ${entry.amount}',
                 style: Theme.of(context).textTheme.bodyText1,
                 textAlign: TextAlign.end,
               ),

@@ -94,7 +94,8 @@ class QRScannerViewModel extends BaseViewModel {
           arguments: SuccessScreenArguments(
               isShop: _walletService.getSelected().isShop,
               text: successText,
-              iconAssetPath: Assets.cash_register_svg));
+              iconAssetPath: Assets.cash_register_svg,
+              nextRoute: WalletDetailRoute));
     });
   }
 

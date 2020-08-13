@@ -12,10 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:flutter_svg/svg.dart';
-import 'package:injectable/injectable.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-@injectable
 class QRScannerScreen extends StatelessWidget {
   final double _qrRectSize = 230;
   final double _headerSize = 120;

@@ -24,14 +24,9 @@ class QRBillViewModel extends BaseViewModel {
   void init() {
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        // onMessage: {notification: {title: Test notification, body: Test single notification}, data: {}}
+        // onMessage: {notification: {title: eCoupon, body: You have received 0.01 CHF from DJ888240}, data: {}}
         print("onMessage: $message");
-        await _router.pushNamed(SuccessRoute,
-            arguments: SuccessScreenArguments(
-                text: 'Transaktion erfolgreich',
-                iconAssetPath:
-                    isShop ? Assets.cash_register_svg : Assets.check_double_svg,
-                isShop: isShop));
+        await onSuccess();
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");

@@ -50,13 +50,17 @@ class WalletViewModel extends BaseViewModel {
   Future<void> init() async {
     _walletState = Loading();
     setViewState(Update());
-    
+
     _wallet = _walletService.getSelected();
 
     _walletState = Loaded();
     setViewState(Update());
 
-    await updateWallet();
+    try {
+      await updateWallet();
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> updateWallet() async {
@@ -103,20 +107,22 @@ class WalletViewModel extends BaseViewModel {
       DateTime lastShownDate;
 
       transactionResponse.items.forEach((transaction) {
+        var isNegative = _wallet.id == transaction.from;
+
         if (lastShownDate != null &&
             lastShownDate.isSameDate(transaction.created)) {
           _transactions.add(TransactionListEntry(
-            date: transaction.created,
-            text: transaction.from,
-            amount: Utils.moneyToString(transaction.amount),
-          ));
+              date: transaction.created,
+              text: isNegative ? transaction.to : transaction.from,
+              amount: Utils.moneyToString(transaction.amount),
+              isNegative: isNegative));
         } else {
           _transactions.add(TransactionListEntry(
-            date: transaction.created,
-            text: transaction.from,
-            amount: Utils.moneyToString(transaction.amount),
-            showDate: true,
-          ));
+              date: transaction.created,
+              text: isNegative ? transaction.to : transaction.from,
+              amount: Utils.moneyToString(transaction.amount),
+              showDate: true,
+              isNegative: isNegative));
           lastShownDate = transaction.created;
         }
       });
