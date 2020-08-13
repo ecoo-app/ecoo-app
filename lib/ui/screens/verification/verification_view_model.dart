@@ -29,6 +29,7 @@ class VerificationViewModel extends BaseViewModel {
         isShop ? inputData.toCompanyEntity() : inputData.toProfileEntity();
 
     var result = await _profileService.create(profile);
+    print('profile successfully created $result');
 
     if (result != null) {
       if (result.verificationStage == VerificationStage.notMatched) {

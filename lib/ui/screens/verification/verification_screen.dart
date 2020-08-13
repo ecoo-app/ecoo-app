@@ -55,6 +55,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
             model: value.phoneNumber,
             label: I18n.of(context).verifyFormFieldPhoneNumber,
             keyboardType: TextInputType.phone),
+        VerificationFormField(
+          model: value.address,
+          label: 'Strasse und Nummer',
+          // label: I18n.of(context).verifyFormFieldPhoneNumber,
+        ),
         DateFormField(
           labelText: I18n.of(context).verifyFormFieldBirthday,
           suffixIcon: Icon(Icons.calendar_today),

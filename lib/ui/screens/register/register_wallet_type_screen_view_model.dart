@@ -17,17 +17,6 @@ class RegisterWalletTypeScreenViewModel extends BaseViewModel {
 
   Future<void> privateWalletSelected() async {
     await _onWalletTypeSelected(isTypeShop: false);
-    // try {
-    //   var currencies = await _walletSource.walletService.fetchCurrencies();
-    //   var wallet =
-    //       await _walletSource.walletService.createWallet(currencies[0]);
-    //   await _walletService.setSelected(WalletEntity(wallet));
-    //   await _router.pushNamed(RegisterVerifyRoute);
-    // } on HTTPError catch (e) {
-    //   setViewState(Error(HTTPFailure(e.statusCode)));
-    // } on NotAuthenticatedError {
-    //   setViewState(Error(NotAuthenticatedFailure()));
-    // }
   }
 
   Future<void> shopWalletSelected() async {

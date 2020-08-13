@@ -28,51 +28,55 @@ class PaymentScreen extends StatelessWidget {
             });
           }
           return MainLayout(
-              leadingType: BackButtonType.Back,
-              isShop: vmodel.isShop,
-              onBackPressed: vmodel.onBack,
-              title: I18n.of(context).titlePaymentScreen,
-              body: Center(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Form(
-                          key: vmodel.formKey,
-                          child: Column(
-                            children: <Widget>[
-                              AmountInputField(
-                                controller: vmodel.amountInputController,
-                              ),
-                              SizedBox(
-                                height: 40,
-                              ),
-                              ECTextFormField(
-                                hint: I18n.of(context).labelRecieverInput,
-                                label: I18n.of(context).hintRecieverInput,
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return I18n.of(context)
-                                        .validationRecieverInput;
-                                  }
-                                  return null;
-                                },
-                                controller: vmodel.recieverInputController,
-                              ),
-                            ],
-                          )),
-                      PrimaryButton(
-                        text: I18n.of(context).buttonPaymentOverview,
-                        isLoading: vmodel.viewState is Loading,
-                        onPressed: () async {
-                          vmodel.initiateTransaction(
-                              I18n.of(context).paymentSuccessful);
-                        },
-                      ),
-                    ],
-                  ),
+            leadingType: BackButtonType.Back,
+            isShop: vmodel.isShop,
+            onBackPressed: vmodel.onBack,
+            title: I18n.of(context).titlePaymentScreen,
+            body: Center(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Form(
+                        key: vmodel.formKey,
+                        child: Column(
+                          children: <Widget>[
+                            AmountInputField(
+                              controller: vmodel.amountInputController,
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                            ECTextFormField(
+                              hint: I18n.of(context).labelRecieverInput,
+                              label: I18n.of(context).hintRecieverInput,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return I18n.of(context)
+                                      .validationRecieverInput;
+                                }
+                                return null;
+                              },
+                              controller: vmodel.recieverInputController,
+                            ),
+                          ],
+                        )),
+                  ],
                 ),
-              ));
+              ),
+            ),
+            bottom: Container(
+              margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+              child: PrimaryButton(
+                text: I18n.of(context).buttonPaymentOverview,
+                isLoading: vmodel.viewState is Loading,
+                onPressed: () async {
+                  vmodel
+                      .initiateTransaction(I18n.of(context).paymentSuccessful);
+                },
+              ),
+            ),
+          );
         });
   }
 }
