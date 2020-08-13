@@ -81,7 +81,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         VerificationFormTitle(
             text: I18n.of(context).verificationShopFormCompanyTitle),
         VerificationFormField(
-          model: value.address,
+          model: value.name,
           label: I18n.of(context).verifyFormFieldCompany,
         ),
         VerificationFormField(

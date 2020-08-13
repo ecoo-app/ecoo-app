@@ -23,78 +23,80 @@ class RedeemScreen extends StatelessWidget {
         return MainLayout(
           isShop: vmodel.wallet.isShop,
           title: I18n.of(context).titleRedeem,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  vmodel.wallet.amountLabel,
-                  style: Theme.of(context).textTheme.headline1,
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    vmodel.wallet.amountLabel,
+                    style: Theme.of(context).textTheme.headline1,
+                  ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  vmodel.wallet.currency.symbol,
-                  style: Theme.of(context).textTheme.headline4,
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    vmodel.wallet.currency.symbol,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(I18n.of(context).redeemTransferTo,
-                  style: Theme.of(context).textTheme.caption),
-              SizedBox(
-                height: 8,
-              ),
-              Text(
-                vmodel.wallet.currency.label,
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              SizedBox(
-                height: 23,
-              ),
-              Text(I18n.of(context).redeemInfo),
-              SizedBox(
-                height: 30,
-              ),
-              Form(
-                  child: Column(
-                children: <Widget>[
-                  ECTextFormField(
-                    label: I18n.of(context).redeemFieldNameBank,
-                    onChanged: (value) => vmodel.nameOfBank = value,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return I18n.of(context).inputValidation;
-                      }
-                      return null;
-                    },
-                  ),
-                  ECTextFormField(
-                    label: I18n.of(context).redeemFieldIBAN,
-                    onChanged: (value) => vmodel.iban = value,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return I18n.of(context).inputValidation;
-                      }
-                      return null;
-                    },
-                  ),
-                  ECTextFormField(
-                    label: I18n.of(context).redeemFieldAccountOwner,
-                    onChanged: (value) => vmodel.owner = value,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return I18n.of(context).inputValidation;
-                      }
-                      return null;
-                    },
-                  ),
-                ],
-              ))
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                Text(I18n.of(context).redeemTransferTo,
+                    style: Theme.of(context).textTheme.caption),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  vmodel.wallet.currency.label,
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                SizedBox(
+                  height: 23,
+                ),
+                Text(I18n.of(context).redeemInfo),
+                SizedBox(
+                  height: 30,
+                ),
+                Form(
+                    child: Column(
+                  children: <Widget>[
+                    ECTextFormField(
+                      label: I18n.of(context).redeemFieldNameBank,
+                      onChanged: (value) => vmodel.nameOfBank = value,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return I18n.of(context).inputValidation;
+                        }
+                        return null;
+                      },
+                    ),
+                    ECTextFormField(
+                      label: I18n.of(context).redeemFieldIBAN,
+                      onChanged: (value) => vmodel.iban = value,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return I18n.of(context).inputValidation;
+                        }
+                        return null;
+                      },
+                    ),
+                    ECTextFormField(
+                      label: I18n.of(context).redeemFieldAccountOwner,
+                      onChanged: (value) => vmodel.owner = value,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return I18n.of(context).inputValidation;
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ))
+              ],
+            ),
           ),
           bottom: Container(
             margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),

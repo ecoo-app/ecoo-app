@@ -26,7 +26,7 @@ class PinVerificationViewModel extends BaseViewModel {
   void onVerify(String successText) async {
     setViewState(Loading());
 
-    var result = await _profileService.verify(pin);
+    var result = await _profileService.verify(pin, wallet);
     if (result) {
       await _router.pushNamed(SuccessRoute,
           arguments: SuccessScreenArguments(

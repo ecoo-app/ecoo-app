@@ -38,7 +38,7 @@
   "titleRedeem": "Umsatz einlösen",
   "buttonRedeem": "Umsatz einlösen",
   "redeemTransferTo": "Der Betrag wird übermittelt an:",
-  "redeemInfo": "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwieden.",
+  "redeemInfo": "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwiesen.",
   "redeemFieldNameBank": "Name der Bank",
   "redeemFieldIBAN": "IBAN Nummer",
   "redeemFieldAccountOwner": "Kontoinhaber",

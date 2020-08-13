@@ -81,18 +81,22 @@ class UidVerificationInput extends TextVerificationInput {
   String part1;
   String part2;
   String part3;
+  String part4;
 
   bool hasUid = true;
 
   @override
-  String get value => '${part1}.${part2}.${part3}';
+  String get value => '${part1}-${part2}-${part3}-${part4}';
 
   @override
   void setValue(String text) {}
 
   @override
   bool isValid() {
-    final partsOk = part1.length == 3 && part2.length == 3 && part3.length == 3;
+    final partsOk = part1.length == 2 &&
+        part2.length == 1 &&
+        part3.length == 1 &&
+        part4.length == 1;
     return partsOk && value.isNotEmpty;
   }
 
@@ -108,6 +112,11 @@ class UidVerificationInput extends TextVerificationInput {
 
   void part3Changed(String text) {
     part3 = text;
+    notifyListeners();
+  }
+
+  void part4Changed(String text) {
+    part4 = text;
     notifyListeners();
   }
 

@@ -127,8 +127,11 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IWalletService>(),
         g<IWalletRepo>(),
       ));
-  gh.factory<RedeemViewModel>(
-      () => RedeemViewModel(g<IWalletService>(), g<IRouter>()));
+  gh.factory<RedeemViewModel>(() => RedeemViewModel(
+        g<IWalletService>(),
+        g<IRouter>(),
+        g<IWalletSource>(),
+      ));
   gh.factory<RegisterVerifyScreen>(
       () => RegisterVerifyScreen(g<RegisterVerifyScreenViewModel>()));
   gh.factory<RegisterWalletTypeScreenViewModel>(
@@ -148,6 +151,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IWalletService>(),
         g<MockLoginService>(),
         g<INetworkInfo>(),
+        g<IWalletRepo>(),
       ));
   gh.factory<WalletsViewModel>(() => WalletsViewModel(
         g<IWalletService>(),

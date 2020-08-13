@@ -44,7 +44,8 @@ class WalletRepo implements IWalletRepo {
           currency = currencies.items[0];
         }
         print('create wallet currency ${currency.name}');
-        final wallet = await walletSource.walletService.createWallet(currency);
+        final wallet = await walletSource.walletService
+            .createWallet(currency, isCompany: isShop);
         print('create wallet wallet ${wallet.walletID}');
         result = Right(wallet);
       } on NotAuthenticatedError {
@@ -250,15 +251,97 @@ class WalletRepo implements IWalletRepo {
   }
 
   @override
-  Future<Either<Failure, List<ProfileEntity>>> profiles() async {
+  Future<Either<Failure, List<ProfileEntity>>> profiles(bool isCompany,
+      {String forWalletId}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        List<ProfileEntity> profileList;
+
+        if (isCompany) {
+          profileList = await _fetchCompanyProfiles();
+        } else {
+          profileList = await _fetchUserProfiles();
+        }
+
+        if (profileList.isNotEmpty) {
+          return Right(profileList);
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure(e.statusCode));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    }
+    return Right(<ProfileEntity>[]);
+  }
+
+  Future<List<ProfileEntity>> _fetchUserProfiles({String forWalletId}) async {
+    var backendProfiles = await walletSource.walletService.fetchUserProfiles();
+    if (backendProfiles.items.isNotEmpty) {
+      var profileList = <ProfileEntity>[];
+      for (final backendProfile in backendProfiles.items) {
+        if (forWalletId != null) {
+          if (forWalletId == backendProfile.walletID) {
+            profileList.add(UserProfileEntity.from(backendProfile));
+          }
+        } else {
+          profileList.add(UserProfileEntity.from(backendProfile));
+        }
+      }
+
+      return profileList;
+    }
+    return [];
+    // var backendProfiles = await walletSource.walletService.fetchUserProfiles();
+    // if (backendProfiles.items.isNotEmpty) {
+    //   var profileList = <ProfileEntity>[];
+    //   for (final backendProfile in backendProfiles.items) {
+    //     profileList.add(UserProfileEntity.from(backendProfile));
+    //   }
+    //   return profileList;
+    // }
+  }
+
+  Future<List<ProfileEntity>> _fetchCompanyProfiles(
+      {String forWalletId}) async {
+    var backendProfiles =
+        await walletSource.walletService.fetchCompanyProfiles();
+    if (backendProfiles.items.isNotEmpty) {
+      var profileList = <ProfileEntity>[];
+      for (final backendProfile in backendProfiles.items) {
+        if (forWalletId != null) {
+          if (forWalletId == backendProfile.walletID) {
+            profileList.add(CompanyProfileEntity.from(backendProfile));
+          }
+        } else {
+          profileList.add(CompanyProfileEntity.from(backendProfile));
+        }
+      }
+
+      return profileList;
+    }
+    return [];
+  }
+
+  @override
+  Future<Either<Failure, List<ProfileEntity>>> companyProfiles(
+      {String walletId}) async {
     if (await networkInfo.isConnected) {
       try {
         var backendProfiles =
-            await walletSource.walletService.fetchUserProfiles();
+            await walletSource.walletService.fetchCompanyProfiles();
         if (backendProfiles.items.isNotEmpty) {
           var profileList = <ProfileEntity>[];
           for (final backendProfile in backendProfiles.items) {
-            profileList.add(UserProfileEntity.from(backendProfile));
+            if (walletId != null) {
+              if (walletId == backendProfile.walletID) {
+                profileList.add(CompanyProfileEntity.from(backendProfile));
+              }
+            } else {
+              profileList.add(CompanyProfileEntity.from(backendProfile));
+            }
           }
 
           return Right(profileList);

@@ -1,6 +1,9 @@
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/network_info.dart';
+import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/core/services/mock_login_service.dart';
 import 'package:e_coupon/ui/core/services/utils.dart';
+import 'package:ecoupon_lib/common/verification_stage.dart';
 import 'package:ecoupon_lib/models/currency.dart';
 import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:injectable/injectable.dart';
@@ -18,6 +21,7 @@ import 'package:ecoupon_lib/models/wallet.dart';
 @lazySingleton
 class WalletViewModel extends BaseViewModel {
   final IRouter _router;
+  final IWalletRepo _walletRepo;
   final IWalletService _walletService;
   final INetworkInfo _networkInfo;
 
@@ -29,8 +33,8 @@ class WalletViewModel extends BaseViewModel {
   ListCursor _transactionListCursor;
   List<TransactionListEntry> _transactions = [];
 
-  WalletViewModel(
-      this._router, this._walletService, this.mockLogin, this._networkInfo);
+  WalletViewModel(this._router, this._walletService, this.mockLogin,
+      this._networkInfo, this._walletRepo);
 
   ViewState get walletState => this._walletState;
   ViewState get amountState => this._amountState;
@@ -148,16 +152,30 @@ class WalletViewModel extends BaseViewModel {
 
   //
   void onRedeem() async {
-    switch (wallet.verificationState) {
-      case WalletState.verified:
-        await _router.pushNamed(RedeemRoute);
-        break;
-      case WalletState.pending:
-        await _router.pushNamed(VerifyPinRoute);
-        break;
-      case WalletState.unverified:
-        await _router.pushNamed(VerificationRoute);
-        break;
-    }
+    var profileOrFailure =
+        await _walletRepo.companyProfiles(walletId: _wallet.id);
+
+    await profileOrFailure.fold((failure) {
+      setViewState(Error(failure));
+    }, (profiles) async {
+      if (profiles != null) {
+        var profile = profiles[0];
+
+        switch (profile.verificationStage) {
+          case VerificationStage.verified:
+            await _router.pushNamed(RedeemRoute);
+            break;
+          case VerificationStage.pendingPIN:
+            await _router.pushNamed(VerifyPinRoute);
+            break;
+          // TODO verification stage : no verification possible ?
+          case VerificationStage.notMatched:
+            await _router.pushNamed(VerificationRoute);
+            break;
+        }
+      } else {
+        setViewState(Error(UnknownFailure()));
+      }
+    });
   }
 }

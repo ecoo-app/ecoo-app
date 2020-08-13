@@ -6,6 +6,8 @@ abstract class ProfileEntity {
   String get uuid;
 
   VerificationStage get verificationStage;
+
+  String get walletID;
 }
 
 class CompanyProfileEntity implements ProfileEntity {
@@ -34,6 +36,9 @@ class CompanyProfileEntity implements ProfileEntity {
 
   @override
   String get uuid => _uuid;
+
+  @override
+  String get walletID => walletId;
 
   factory CompanyProfileEntity.from(lib_company.CompanyProfile other) {
     return CompanyProfileEntity(
@@ -120,4 +125,7 @@ class UserProfileEntity implements ProfileEntity {
 
   @override
   String get uuid => _uuid;
+
+  @override
+  String get walletID => walletId;
 }

@@ -1,4 +1,5 @@
 import 'package:e_coupon/business/entities/user_profile.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
@@ -9,9 +10,13 @@ import 'package:injectable/injectable.dart';
 abstract class IProfileService {
   Future<ProfileEntity> currentProfile();
 
+  Future<ProfileEntity> currentProfileForWallet(WalletEntity wallet);
+
   Future<ProfileEntity> create(ProfileEntity profileEntity);
 
-  Future<bool> verify(String pin);
+  // Future<bool> verify(String pin);
+
+  Future<bool> verify(String pin, WalletEntity wallet);
 
   Future<bool> testApi();
 }
@@ -42,7 +47,24 @@ class ProfileService implements IProfileService {
   }
 
   Future<List<ProfileEntity>> fetchProfiles() async {
-    var answer = await _walletRepo.profiles();
+    var answer = await _walletRepo.profiles(false);
+    if (answer.isRight()) {
+      var profiles = answer.getOrElse(() => null);
+      return profiles ?? [];
+    } else {
+      if (answer.isLeft()) {
+        var error = answer.getOrElse(() => null);
+        throw error;
+      }
+    }
+
+    return [];
+  }
+
+  Future<List<ProfileEntity>> fetchProfilesForWallet(
+      WalletEntity wallet) async {
+    var answer =
+        await _walletRepo.profiles(wallet.isShop, forWalletId: wallet.id);
     if (answer.isRight()) {
       var profiles = answer.getOrElse(() => null);
       return profiles ?? [];
@@ -91,10 +113,43 @@ class ProfileService implements IProfileService {
     return _currentProfile;
   }
 
+  // Future<bool> verify(String pin) async {
+  //   ProfileEntity profileEntity = await currentProfile();
+  //   if (profileEntity is UserProfileEntity) {
+  //     var answer = await _walletRepo.verify(profileEntity, pin);
+  //     if (answer.isRight()) {
+  //       if (answer.getOrElse(() => false)) {
+  //         return true;
+  //       }
+  //     } else {
+  //       return false;
+  //     }
+  //   } // TODO verify CompanyProfile
+
+  //   return false;
+  // }
+
   @override
-  Future<bool> verify(String pin) async {
-    ProfileEntity profileEntity = await currentProfile();
-    if (profileEntity is UserProfileEntity) {
+  Future<ProfileEntity> currentProfileForWallet(WalletEntity wallet) async {
+    var profiles = await fetchProfilesForWallet(wallet);
+    if (profiles.isNotEmpty) {
+      var pendingProfiles = profiles
+          .where((element) =>
+              element.verificationStage == VerificationStage.pendingPIN)
+          .toList();
+
+      if (pendingProfiles.isNotEmpty) {
+        return pendingProfiles?.first;
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> verify(String pin, WalletEntity wallet) async {
+    ProfileEntity profileEntity = await currentProfileForWallet(wallet);
+    // if (profileEntity is UserProfileEntity) {
+    if (profileEntity != null) {
       var answer = await _walletRepo.verify(profileEntity, pin);
       if (answer.isRight()) {
         if (answer.getOrElse(() => false)) {
@@ -105,12 +160,14 @@ class ProfileService implements IProfileService {
       }
     }
 
+    // }
+
     return false;
   }
 
   @override
   Future<bool> testApi() async {
-    var answer = await _walletRepo.profiles();
+    var answer = await _walletRepo.profiles(false);
     var result = answer.fold((l) => throw l, (r) => true);
     return result;
   }

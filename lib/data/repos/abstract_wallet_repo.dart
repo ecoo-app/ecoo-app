@@ -31,5 +31,9 @@ abstract class IWalletRepo {
   Future<Either<Failure, ProfileEntity>> createProfile(
       WalletEntity walletEntity, ProfileEntity profile);
 
-  Future<Either<Failure, List<ProfileEntity>>> profiles();
+  Future<Either<Failure, List<ProfileEntity>>> profiles(bool isCompany,
+      {String forWalletId});
+
+  Future<Either<Failure, List<ProfileEntity>>> companyProfiles(
+      {String walletId});
 }
