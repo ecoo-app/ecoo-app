@@ -92,5 +92,7 @@
   "titleRegisterVerifyScreen": "Verifizieren",
   "descriptionRegisterVerifyScreen": "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.",
   "verifyButtonRegisterVerifyScreen": "Jetzt verifizieren",
-  "verifyLaterButtonRegisterVerifyScreen": "Später verifizieren"
+  "verifyLaterButtonRegisterVerifyScreen": "Später verifizieren",
+  "transactionSuccessful": "Transaktion erfolgreich",
+  "scanPaperWalletButton": "Paper Wallet scannen"
 }

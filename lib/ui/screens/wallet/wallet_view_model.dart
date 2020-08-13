@@ -1,5 +1,7 @@
+import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/ui/core/services/mock_login_service.dart';
 import 'package:e_coupon/ui/core/services/utils.dart';
+import 'package:ecoupon_lib/models/currency.dart';
 import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:injectable/injectable.dart';
 
@@ -17,6 +19,7 @@ import 'package:ecoupon_lib/models/wallet.dart';
 class WalletViewModel extends BaseViewModel {
   final IRouter _router;
   final IWalletService _walletService;
+  final INetworkInfo _networkInfo;
 
   ViewState _walletState = Initial();
   ViewState _amountState = Initial();
@@ -26,29 +29,43 @@ class WalletViewModel extends BaseViewModel {
   ListCursor _transactionListCursor;
   List<TransactionListEntry> _transactions = [];
 
-  WalletViewModel(this._router, this._walletService, this.mockLogin);
+  WalletViewModel(
+      this._router, this._walletService, this.mockLogin, this._networkInfo);
 
   ViewState get walletState => this._walletState;
   ViewState get amountState => this._amountState;
   ViewState get transactionState => this._transactionState;
-  WalletEntity get wallet => this._wallet;
+  WalletEntity get wallet => this._wallet == null
+      ? WalletEntity(Wallet(
+          '',
+          '',
+          Currency('', '', '', 0, 0, null, null, false, null, null),
+          null,
+          0,
+          null))
+      : this._wallet;
   List<TransactionListEntry> get transactions => this._transactions;
+  Future<bool> get isConnected => _networkInfo.isConnected;
 
   Future<void> init(WalletEntity wallet) async {
-    if (wallet != _wallet) {
+    if (wallet == null || wallet != _wallet) {
       _walletState = Loading();
       setViewState(Update());
 
       await _walletService.setSelected(wallet);
       _wallet = _walletService.getSelected();
 
-      await loadTransactions();
+      if (_wallet != null) {
+        await loadTransactions();
+      }
 
       _walletState = Loaded();
       setViewState(Update());
     }
 
-    await updateWallet();
+    if (_wallet != null) {
+      await updateWallet();
+    }
   }
 
   Future<void> updateWallet() async {
@@ -112,15 +129,14 @@ class WalletViewModel extends BaseViewModel {
           lastShownDate = transaction.created;
         }
       });
-
-      _transactionState = Loaded();
     });
+    _transactionState = Loaded();
   }
   //
 
   //
   void makePayment() async {
-    await _router.pushNamed(TestRoute);
+    await _router.pushNamed(QRScanRoute);
   }
 
 //

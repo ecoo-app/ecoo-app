@@ -5,7 +5,7 @@ import 'package:e_coupon/ui/screens/verification/pin_verification_screen.dart';
 import 'package:e_coupon/ui/screens/payment/error_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
 import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
-import 'package:e_coupon/ui/screens/payment/request_qrbill_screen.dart';
+import 'package:e_coupon/ui/screens/payment/qrbill_screen.dart';
 import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/register/register_screen.dart';
@@ -38,7 +38,7 @@ const SuccessRoute = 'success';
 const ErrorRoute = 'paymentError';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
-const TestRoute = '/test';
+const QRScanRoute = '/scan';
 const WalletQROverlayRoute = '/wallet/qrOverlay';
 const RedeemRoute = '/redeem';
 
@@ -62,8 +62,12 @@ class Router implements IRouter {
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case TestRoute:
-        return MaterialPageRoute(builder: (_) => QRScannerScreen());
+      case QRScanRoute:
+        var showButton = settings.arguments as bool;
+        return showButton == null
+            ? MaterialPageRoute(builder: (_) => QRScannerScreen())
+            : MaterialPageRoute(
+                builder: (_) => QRScannerScreen(showButton: showButton));
       case SplashRoute:
         return _createRoute(settings, getIt<SplashScreen>(), false);
       case OnboardingRoute:
@@ -95,9 +99,7 @@ class Router implements IRouter {
       case RequestQRBillRoute:
         return _createRoute(settings, getIt<RequestQRBillScreen>(), false);
       case WalletQROverlayRoute:
-        // return _createRoute(settings, getIt<WalletQROverlay>(), true);
-        return MaterialPageRoute(
-            builder: (_) => WalletQROverlay(), fullscreenDialog: true);
+        return _createRoute(settings, getIt<WalletQROverlay>(), true);
       case VerifyPinRoute:
         return _createRoute(settings, getIt<PinVerificationScreen>(), false);
       case RedeemRoute:

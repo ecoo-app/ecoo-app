@@ -3,6 +3,7 @@ import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:ecoupon_lib/models/list_response.dart';
+import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
 
@@ -16,6 +17,9 @@ abstract class IWalletRepo {
 
   Future<Either<Failure, Transaction>> handleTransaction(
       WalletEntity sender, WalletEntity reciever, int amount);
+
+  Future<Either<Failure, Transaction>> handlePaperTransfer(
+      PaperWallet source, WalletEntity destination, int amount);
 
   Future<Either<Failure, Wallet>> createWallet(lib.Currency currency,
       {bool isShop = false});

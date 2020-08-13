@@ -186,6 +186,21 @@ class WalletScreen extends StatelessWidget {
                                   .merge(TextStyle(fontWeight: fontWeightBold)),
                             ),
                           ),
+                          FutureBuilder(
+                            future: vmodel.isConnected,
+                            builder: (context, snapsho) {
+                              if (snapsho.connectionState ==
+                                  ConnectionState.done) {
+                                if (snapsho.data) {
+                                  return Container();
+                                } else {
+                                  return Icon(Icons.signal_wifi_off);
+                                }
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
                           Expanded(
                             child: NotificationListener<ScrollNotification>(
                               onNotification: (ScrollNotification scrollInfo) {

@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:e_coupon/injection.dart';
 import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:ecoupon_lib/models/list_response.dart';
+import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
 
@@ -17,9 +19,9 @@ import 'package:ecoupon_lib/models/wallet.dart';
 
 import '../network_info.dart';
 
-// @mockEnv
-// @LazySingleton(as: IWalletRepo)
-@lazySingleton
+@mockEnv
+@LazySingleton(as: IWalletRepo)
+// @lazySingleton
 class MockWalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
   final INetworkInfo networkInfo;
@@ -125,7 +127,7 @@ class MockWalletRepo implements IWalletRepo {
           return completer.future;
         }
       }
-      return null;
+      return Right(ListResponse([], null));
     });
   }
 
@@ -201,6 +203,13 @@ class MockWalletRepo implements IWalletRepo {
   Future<Either<Failure, Wallet>> createWallet(lib.Currency currency,
       {bool isShop = false}) {
     // TODO: implement createWallet
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, Transaction>> handlePaperTransfer(
+      PaperWallet source, WalletEntity destination, int amount) {
+    // TODO: implement handlePaperTransfer
     throw UnimplementedError();
   }
 }

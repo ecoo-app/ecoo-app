@@ -18,6 +18,7 @@ abstract class IWalletService {
   Future<Either<Failure, WalletEntity>> fetchAndUpdateSelected();
   Future<Either<Failure, ListResponse<Transaction>>>
       fetchAndUpdateSelectedTransactions(ListCursor cursor);
+  List<WalletEntity> get wallets;
 }
 
 @LazySingleton(as: IWalletService)
@@ -35,6 +36,8 @@ class WalletService implements IWalletService {
     return this._selected;
   }
 
+  List<WalletEntity> get wallets => this._wallets;
+
   @override
   Future<Either<Failure, List<WalletEntity>>> get allWallets async {
     if (_wallets == null || _wallets.isEmpty) {
@@ -48,12 +51,19 @@ class WalletService implements IWalletService {
     if (this._selected == null || wallet == null) {
       String walletId =
           await _settingsService.getString(Constants.lastWalletIDSettingsKey);
+
+      // TODO if walletId == null : fetch all wallets and select first one.
+
+      // TODO wallet migration...
+
       var walletOrFailure = await _walletRepo.getWalletData(walletId);
       walletOrFailure.fold((failure) => null, (success) {
         this._selected = success;
       });
       await fetchAndUpdateSelected();
     } else if (this._selected != wallet) {
+      await _settingsService.setStringValue(
+          Constants.lastWalletIDSettingsKey, wallet.id);
       this._selected = wallet;
       await fetchAndUpdateSelected();
     }

@@ -1,5 +1,6 @@
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
+import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
@@ -32,13 +33,14 @@ class PaymentViewModel extends BaseViewModel {
 
   void init() {
     var sender = _walletService.getSelected();
+    print('selected wallet ${sender.id}');
     isShop = sender.isShop;
     _transferService.transfer.sender = sender;
 
     Transfer transfer = _transferService.transfer;
-    if (transfer.reciever != null) {
+    if (transfer.destWalletId != null) {
       recieverInputController.value = TextEditingValue(
-        text: transfer.reciever.id,
+        text: transfer.destWalletId,
       );
     }
 
@@ -59,19 +61,19 @@ class PaymentViewModel extends BaseViewModel {
       var recieverOrFailure =
           await _walletRepo.getWalletData(recieverInputController.text);
 
-      recieverOrFailure.fold((failure) => setViewState(Error(failure)),
-          (wallet) async {
-        _transferService.transfer.reciever = wallet;
-        await transfer(successText);
+      await recieverOrFailure.fold((failure) {
+        setViewState(Error(failure));
+      }, (wallet) async {
+        await transfer(successText, wallet);
         setViewState(Loaded());
       });
     }
   }
 
-  void transfer(String successText) async {
+  void transfer(String successText, WalletEntity destWallet) async {
     var transactionOrFailure = await _walletRepo.handleTransaction(
         _transferService.transfer.sender,
-        _transferService.transfer.reciever,
+        destWallet,
         _transferService.transfer.amount);
 
     transactionOrFailure.fold(
@@ -92,9 +94,8 @@ class PaymentViewModel extends BaseViewModel {
     _router.pushNamed(ErrorRoute);
   }
 
-  void onPop() {
+  void onBack() {
     _transferService.reset();
-    _router.pop();
   }
 
   @override

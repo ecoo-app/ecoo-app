@@ -27,9 +27,13 @@ class RequestViewModel extends BaseViewModel {
     if (formKey.currentState.validate()) {
       print(amountInputController.text);
       _transferService.setTransaction(Transfer(
-          reciever: wallet,
+          destWalletId: wallet.id,
           amount: Utils.balanceFromString(amountInputController.text)));
       _router.pushNamed(RequestQRBillRoute);
     }
+  }
+
+  void onBack() {
+    _transferService.reset();
   }
 }

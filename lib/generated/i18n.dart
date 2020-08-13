@@ -220,6 +220,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Später verifizieren"
   String get verifyLaterButtonRegisterVerifyScreen => "Später verifizieren";
+  /// "Transaktion erfolgreich"
+  String get transactionSuccessful => "Transaktion erfolgreich";
+  /// "Paper Wallet scannen"
+  String get scanPaperWalletButton => "Paper Wallet scannen";
 }
 
 class _I18n_de_CH extends I18n {

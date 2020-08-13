@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/app_service.dart';
@@ -25,6 +26,8 @@ class WalletRepositoryMock extends Mock implements IWalletRepo {}
 
 class WalletServiceMock extends Mock implements IWalletService {}
 
+class NetworkInfoMock extends Mock implements INetworkInfo {}
+
 void main() {
   Widget _view;
   WidgetTestApp _testApp;
@@ -33,6 +36,7 @@ void main() {
   IAppService _appService;
   IWalletRepo _repositoryMock;
   IWalletService _walletServiceMock;
+  INetworkInfo _networkInfoMock;
 
   tearDown(() {});
 
@@ -42,6 +46,9 @@ void main() {
     _appService = AppServiceMock();
     _repositoryMock = WalletRepositoryMock();
     _walletServiceMock = WalletServiceMock();
+    _networkInfoMock = NetworkInfoMock();
+    when(_networkInfoMock.isConnected)
+        .thenAnswer((realInvocation) => Future.value(true));
     var walletEntity = WalletEntity(lib_wallet.Wallet(
         'TestID',
         'TestKey',
@@ -55,7 +62,8 @@ void main() {
     when(_walletServiceMock.allWallets)
         .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
 
-    var walletsViewModel = WalletsViewModel(_walletServiceMock);
+    var walletsViewModel =
+        WalletsViewModel(_walletServiceMock, _routerMock, _networkInfoMock);
     GetIt.instance.allowReassignment = true;
     GetIt.instance.registerFactory(() => walletsViewModel);
 

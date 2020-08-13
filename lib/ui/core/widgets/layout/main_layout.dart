@@ -23,24 +23,6 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO waiting for this: https://github.com/joostlek/GradientAppBar/pulls pull request to merge and support shapes
-      // until then i just copied the code, fixed it and added it as widget
-      // appBar: GradientAppBar(
-      //   // leading: Icon(
-      //   //   Icons.arrow_back,
-      //   //   color: Colors.white,
-      //   // ),
-      //   shape: AppBarShapeBorder(),
-      //   title: Text(
-      //     title,
-      //     textAlign: TextAlign.end,
-      //     style: TextStyles.body_text_white,
-      //   ),
-      //   gradient: isShop
-      //       ? GradientStyles.shopWalletAppbarGradient
-      //       : GradientStyles.privateWalletAppbarGradient,
-      //   elevation: 0,
-      // ),
       appBar: MainHeader(
           leadingIcon: leadingType == BackButtonType.Close
               ? Assets.close_svg

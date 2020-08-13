@@ -1,6 +1,15 @@
 import 'package:e_coupon/business/entities/currency.dart';
+import 'package:e_coupon/ui/core/constants.dart';
 
 class Utils {
+  static String qrData({String destinationId, int amount}) {
+    if (amount == null) {
+      return '{"${Constants.qrDataDestinationId}":"$destinationId"}';
+    } else {
+      return '{"${Constants.qrDataDestinationId}":"$destinationId","${Constants.qrDataAmount}":$amount}';
+    }
+  }
+
   static String toAmountCurrencyLabel(Currency currency, int amount) {
     return '${currency.label} ${moneyToString(amount)}';
   }

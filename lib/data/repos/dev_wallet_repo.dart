@@ -13,16 +13,16 @@ import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/services/mock_login_service.dart';
 import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:ecoupon_lib/models/list_response.dart';
+import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
-import 'package:injectable/injectable.dart';
 
-@devEnv
-@LazySingleton(as: IWalletRepo)
+// @devEnv
+// @LazySingleton(as: IWalletRepo)
 class DevWalletRepo implements IWalletRepo {
   final ILocalWalletSource localDataSource;
 
-  final bool useMock = true;
+  final bool useMock = false;
 
   final MockLoginService _mockLoginService;
   final WalletRepo _walletRepo = getIt<WalletRepo>();
@@ -100,5 +100,16 @@ class DevWalletRepo implements IWalletRepo {
       completer.complete(Left(MessageFailure('No such wallet with ID $id')));
       return completer.future;
     });
+  }
+
+  @override
+  Future<Either<Failure, Transaction>> handlePaperTransfer(
+      PaperWallet source, WalletEntity destination, int amount) async {
+    if (useMock) {
+      throw UnimplementedError();
+    } else {
+      await _mockLoginService.testLogin(false);
+      return _walletRepo.handlePaperTransfer(source, destination, amount);
+    }
   }
 }

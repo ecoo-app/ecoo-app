@@ -16,7 +16,6 @@ import 'data/local/local_wallet_source.dart';
 import 'data/mock_network_info.dart';
 import 'data/network_info.dart';
 import 'data/repos/abstract_wallet_repo.dart';
-import 'data/repos/dev_wallet_repo.dart';
 import 'data/repos/mock_wallet_repo.dart';
 import 'data/repos/wallet_repo.dart';
 import 'main.dart';
@@ -25,7 +24,7 @@ import 'ui/core/router/router.dart';
 import 'ui/core/services/app_service.dart';
 import 'ui/core/services/login_service.dart';
 import 'ui/core/services/mock_login_service.dart';
-import 'ui/core/services/qr_scan_parser.dart';
+import 'ui/core/services/notification_service.dart';
 import 'ui/core/services/settings_service.dart';
 import 'ui/core/services/transfer_service.dart';
 import 'ui/core/services/wallet_service.dart';
@@ -34,9 +33,10 @@ import 'ui/screens/menu/menu_screen_view_model.dart';
 import 'ui/screens/payment/error_screen.dart';
 import 'ui/screens/payment/payment_screen.dart';
 import 'ui/screens/payment/payment_view_model.dart';
+import 'ui/screens/payment/qr_scanner_screen.dart';
 import 'ui/screens/payment/qr_scanner_view_model.dart';
+import 'ui/screens/payment/qrbill_screen.dart';
 import 'ui/screens/payment/qrbill_view_model.dart';
-import 'ui/screens/payment/request_qrbill_screen.dart';
 import 'ui/screens/payment/request_screen.dart';
 import 'ui/screens/payment/request_view_model.dart';
 import 'ui/screens/payment/success_view_model.dart';
@@ -61,9 +61,9 @@ import 'ui/screens/wallet/wallet_view_model.dart';
 import 'ui/screens/wallets_overview/wallets_view_model.dart';
 
 /// Environment names
+const _prod = 'prod';
 const _dev = 'dev';
 const _mock = 'mock';
-const _prod = 'prod';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -74,22 +74,17 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<ErrorScreen>(() => ErrorScreen());
   gh.lazySingleton<ILocalWalletSource>(() => LocalWalletSource());
   gh.factory<ILoginService>(() => LoginService());
+  gh.lazySingleton<INetworkInfo>(() => NetworkInfo(), registerFor: {_prod});
   gh.lazySingleton<INetworkInfo>(() => MockNetworkInfo(),
       registerFor: {_dev, _mock});
-  gh.lazySingleton<INetworkInfo>(() => NetworkInfo(), registerFor: {_prod});
-  gh.lazySingleton<IQRScanParser>(() => QRScanParser());
   gh.lazySingleton<ITransferService>(() => TransferService());
   gh.lazySingleton<IWalletSource>(() => WalletSource());
   gh.lazySingleton<MockLoginService>(
       () => MockLoginService(g<IWalletSource>()));
-  gh.lazySingleton<MockWalletRepo>(() => MockWalletRepo(
-        localDataSource: g<ILocalWalletSource>(),
-        networkInfo: g<INetworkInfo>(),
-        walletSource: g<IWalletSource>(),
-      ));
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
   gh.factory<PackageInfo>(() => packageInfo);
   gh.factory<PaymentScreen>(() => PaymentScreen());
+  gh.factory<QRScannerScreen>(() => QRScannerScreen(showButton: g<bool>()));
   gh.factory<RegisterScreenViewModel>(
       () => RegisterScreenViewModel(g<IRouter>()));
   gh.factory<RegisterVerifyScreenViewModel>(
@@ -100,18 +95,23 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.factory<SuccessViewModel>(() => SuccessViewModel());
   gh.factory<VerificationViewModel>(() => VerificationViewModel());
-  gh.factory<WalletQROverlay>(() => WalletQROverlay());
-  gh.lazySingleton<WalletRepo>(() => WalletRepo(
-        localDataSource: g<ILocalWalletSource>(),
-        networkInfo: g<INetworkInfo>(),
-        walletSource: g<IWalletSource>(),
-      ));
   gh.factory<ECouponApp>(() => ECouponApp(g<IRouter>()));
   gh.factory<IAppService>(() => AppService(g<PackageInfo>()));
   gh.factory<ISettingsService>(() => SettingsService(g<SharedPreferences>()));
   gh.lazySingleton<IWalletRepo>(
-      () => DevWalletRepo(g<ILocalWalletSource>(), g<MockLoginService>()),
-      registerFor: {_dev});
+      () => MockWalletRepo(
+            localDataSource: g<ILocalWalletSource>(),
+            networkInfo: g<INetworkInfo>(),
+            walletSource: g<IWalletSource>(),
+          ),
+      registerFor: {_mock});
+  gh.lazySingleton<IWalletRepo>(
+      () => WalletRepo(
+            localDataSource: g<ILocalWalletSource>(),
+            networkInfo: g<INetworkInfo>(),
+            walletSource: g<IWalletSource>(),
+          ),
+      registerFor: {_prod, _dev});
   gh.lazySingleton<IWalletService>(
       () => WalletService(g<IWalletRepo>(), g<ISettingsService>()));
   gh.factory<MenuScreenViewModel>(
@@ -137,8 +137,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<QRScannerViewModel>(() => QRScannerViewModel(
         g<IRouter>(),
         g<ITransferService>(),
-        g<IQRScanParser>(),
         g<IWalletService>(),
+        g<IWalletRepo>(),
       ));
   gh.factory<RedeemViewModel>(
       () => RedeemViewModel(g<IWalletService>(), g<IRouter>()));
@@ -164,12 +164,20 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       ));
   gh.factory<VerificationScreen>(
       () => VerificationScreen(g<VerificationViewModel>()));
+  gh.factory<WalletQROverlay>(() => WalletQROverlay(g<IWalletService>()));
   gh.lazySingleton<WalletViewModel>(() => WalletViewModel(
         g<IRouter>(),
         g<IWalletService>(),
         g<MockLoginService>(),
+        g<INetworkInfo>(),
       ));
-  gh.factory<WalletsViewModel>(() => WalletsViewModel(g<IWalletService>()));
+  gh.factory<WalletsViewModel>(() => WalletsViewModel(
+        g<IWalletService>(),
+        g<IRouter>(),
+        g<INetworkInfo>(),
+      ));
+  gh.factory<INotificationService>(
+      () => NotificationService(g<IWalletSource>(), g<ISettingsService>()));
   gh.factory<MenuScreen>(() => MenuScreen(g<MenuScreenViewModel>()));
   gh.factory<OnboardingScreen>(
       () => OnboardingScreen(g<OnboardingScreenViewModel>()));

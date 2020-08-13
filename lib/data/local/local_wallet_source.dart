@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:injectable/injectable.dart';
@@ -23,15 +25,16 @@ class LocalWalletSource implements ILocalWalletSource {
   @override
   Future<void> cacheWallet(String key, WalletEntity wallet) async {
     await _storage.ready;
-    //
     return _storage.setItem(key, wallet.walletModel.toJson());
   }
+
+  String _walletsToJson(List<WalletEntity> data) =>
+      json.encode(List<dynamic>.from(data.map((x) => x.walletModel.toJson())));
 
   @override
   Future<void> cacheWallets(String key, List<WalletEntity> wallets) async {
     await _storage.ready;
-    // TODO
-    return _storage.setItem(key, {});
+    return _storage.setItem(key, _walletsToJson(wallets));
   }
 
   @override
@@ -41,9 +44,13 @@ class LocalWalletSource implements ILocalWalletSource {
     return WalletEntity(Wallet.fromJson(walletJson));
   }
 
+  List<WalletEntity> _walletsFromJson(String str) => List<WalletEntity>.from(
+      json.decode(str).map((x) => WalletEntity(Wallet.fromJson(x))));
+
   @override
   Future<List<WalletEntity>> getWallets(String key) async {
     await _storage.ready;
-    return _storage.getItem(key);
+    var result = _storage.getItem(key);
+    return _walletsFromJson(result);
   }
 }

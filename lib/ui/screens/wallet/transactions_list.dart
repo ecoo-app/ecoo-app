@@ -21,8 +21,13 @@ class TransactionList extends StatelessWidget {
   final List<TransactionListEntry> entries;
   final BuildContext context;
   final bool isLoading;
+  final bool hasConnection;
 
-  TransactionList({this.entries, @required this.context, this.isLoading});
+  TransactionList(
+      {this.entries,
+      @required this.context,
+      this.isLoading,
+      this.hasConnection = true});
 
   Widget _buildListItem(TransactionListEntry entry, int index) {
     return Container(
@@ -30,6 +35,9 @@ class TransactionList extends StatelessWidget {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        (!hasConnection && index == 0)
+            ? Icon(Icons.signal_wifi_off)
+            : Container(),
         entry.showDate
             ? Padding(
                 padding: EdgeInsets.only(top: index == 0 ? 16.0 : 30.0),

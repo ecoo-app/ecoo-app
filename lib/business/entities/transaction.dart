@@ -8,13 +8,28 @@ class Transfer {
   // Either<Empty, WalletEntity> reciever;
   // Either<Empty, int> amount;
   WalletEntity sender;
-  WalletEntity reciever;
+  String destWalletId;
   int amount;
 
-  Transfer({this.sender, this.reciever, this.amount});
-
-  String toAmountCurrencyLabel() =>
-      Utils.toAmountCurrencyLabel(reciever.currency, amount);
+  Transfer({this.sender, this.destWalletId, this.amount});
 
   String get amountLabel => Utils.moneyToString(this.amount);
 }
+
+// abstract class ITransfer {
+//   int amount;
+//   ITransfer(this.amount);
+//   String get amountLabel => Utils.moneyToString(this.amount);
+// }
+
+// class Transfer extends ITransfer {
+//   WalletEntity sender;
+//   String destWalletId;
+//   Transfer({this.sender, this.destWalletId, amount}) : super(amount);
+// }
+
+// class PaperTransfer extends ITransfer {
+//   PaperWallet source;
+//   WalletEntity destination;
+//   PaperTransfer({this.source, this.destination, amount}) : super(amount);
+// }

@@ -1,5 +1,7 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/button/outlined_secondary_button.dart';
 import 'package:e_coupon/ui/screens/payment/qrbill_view_model.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class RequestQRBillScreen extends StatelessWidget {
 
     return BaseView<QRBillViewModel>(
       model: getIt<QRBillViewModel>(),
+      onModelReady: (vmodel) => vmodel.init(),
       builder: (_, vmodel, __) {
         return MainLayout(
           leadingType: BackButtonType.Back,
@@ -33,12 +36,12 @@ class RequestQRBillScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(I18n.of(context)
-                      .walletRequestScreen(vmodel.transferData.reciever.id)),
-                  Text(I18n.of(context).amountRequestScreen(
-                      vmodel.transferData.toAmountCurrencyLabel())),
+                      .walletRequestScreen(vmodel.transferData.destWalletId)),
+                  Text(I18n.of(context)
+                      .amountRequestScreen(vmodel.transferData.amountLabel)),
                   RepaintBoundary(
                     child: QrImage(
-                      data: vmodel.qrImageDate,
+                      data: vmodel.qrImageData,
                       size: 0.5 * bodyHeight,
                       errorStateBuilder: (cxt, err) {
                         return Container(
@@ -57,7 +60,14 @@ class RequestQRBillScreen extends StatelessWidget {
                       //   });
                       // },
                     ),
-                  )
+                  ),
+                  vmodel.isShop
+                      ? OutlinedSecondaryButton(
+                          text: I18n.of(context).scanPaperWalletButton,
+                          onPressed: vmodel.onPaperWalletScan,
+                          svgAsset: Assets.icon_qrcode_svg,
+                        )
+                      : Container(),
                 ],
               ),
             ),

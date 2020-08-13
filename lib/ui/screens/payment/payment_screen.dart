@@ -30,6 +30,7 @@ class PaymentScreen extends StatelessWidget {
           return MainLayout(
               leadingType: BackButtonType.Back,
               isShop: vmodel.isShop,
+              onBackPressed: vmodel.onBack,
               title: I18n.of(context).titlePaymentScreen,
               body: Center(
                 child: Container(
