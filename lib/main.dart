@@ -1,8 +1,6 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:e_coupon/ui/core/services/mock_login_service.dart';
-import 'package:e_coupon/ui/core/services/notification_service.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 
 import 'package:flutter/material.dart';
