@@ -1,4 +1,3 @@
-import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/redeem/redeem_screen.dart';
 import 'package:e_coupon/ui/screens/verification/pin_verification_screen.dart';
@@ -80,18 +79,18 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<RegisterVerifyScreen>(), false);
       case HomeRoute:
       case WalletDetailRoute:
-        var wallet = settings.arguments as WalletEntity;
-        return MaterialPageRoute(builder: (_) => WalletScreen(wallet: wallet));
+        return _createRoute(settings, getIt<WalletScreen>(), false);
       case WalletsOverviewRoute:
         return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
       case VerificationRoute:
-        return MaterialPageRoute(builder: (_) => getIt<VerificationScreen>());
+        return _createRoute(settings, getIt<VerificationScreen>(), true);
       case PaymentRoute:
         return _createRoute(settings, PaymentScreen(), false);
       case SuccessRoute:
         final SuccessScreenArguments args =
             settings.arguments as SuccessScreenArguments;
-        return MaterialPageRoute(builder: (_) => SuccessScreen(args));
+        return MaterialPageRoute(
+            builder: (_) => SuccessScreen(args), fullscreenDialog: true);
       case ErrorRoute:
         return _createRoute(settings, getIt<ErrorScreen>(), false);
       case RequestPaymentRoute:

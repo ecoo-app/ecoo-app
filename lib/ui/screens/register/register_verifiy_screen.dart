@@ -25,6 +25,8 @@ class RegisterVerifyScreen extends StatelessWidget {
       title: I18n.of(context).titleRegisterVerifyScreen,
       subhead: I18n.of(context).descriptionRegisterVerifyScreen,
       content: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           SizedBox(
             height: 60,
@@ -35,9 +37,6 @@ class RegisterVerifyScreen extends StatelessWidget {
               text: I18n.of(context).buttonTextNexOnboardingScreen,
               onPressed: viewModel.verify,
             ),
-          ),
-          SizedBox(
-            height: 30,
           ),
           FlatSecondaryButton(
             textColor: ColorStyles.red,

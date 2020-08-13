@@ -20,7 +20,6 @@ class RegisterScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: SafeArea(
             bottom: false,
@@ -30,34 +29,36 @@ class RegisterScaffold extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 header,
-                SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 40, right: 40, top: 90, bottom: 10),
-                          child: Text(title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline2
-                                  .merge(
-                                      TextStyle(fontWeight: fontWeightBold))),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 40, right: 40, bottom: 20),
-                          child: Text(
-                            subhead,
-                            style: Theme.of(context).textTheme.bodyText2,
-                            textAlign: TextAlign.center,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 40, right: 40, top: 90, bottom: 10),
+                            child: Text(title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline2
+                                    .merge(
+                                        TextStyle(fontWeight: fontWeightBold))),
                           ),
-                        ),
-                        content,
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 40, right: 40, bottom: 20),
+                            child: Text(
+                              subhead,
+                              style: Theme.of(context).textTheme.bodyText2,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          content,
+                        ],
+                      ),
                     ),
                   ),
                 ),

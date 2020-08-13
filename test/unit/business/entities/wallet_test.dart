@@ -10,7 +10,7 @@ void main() {
         'TestKey',
         lib_currency.Currency(
             'wetzicoin', 'wetzicoin', 'CHF', 0, 2, null, null, true, null, 10),
-        lib_wallet.WalletCategoy.consumer,
+        lib_wallet.WalletCategory.consumer,
         1000,
         lib_wallet.WalletState.verified));
 

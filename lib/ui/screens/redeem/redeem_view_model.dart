@@ -29,9 +29,11 @@ class RedeemViewModel extends BaseViewModel {
         'redeem is not yet implemented on backend. send $nameOfBank $iban $owner');
     await _router.pushNamed(SuccessRoute,
         arguments: SuccessScreenArguments(
-            isShop: true,
-            text: successText,
-            iconAssetPath: Assets.envelope_open_dollar_svg));
+          isShop: true,
+          text: successText,
+          iconAssetPath: Assets.envelope_open_dollar_svg,
+          nextRoute: WalletDetailRoute,
+        ));
     setViewState(Loaded());
   }
 }

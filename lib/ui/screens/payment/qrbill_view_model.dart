@@ -56,8 +56,10 @@ class QRBillViewModel extends BaseViewModel {
   void onSuccess() {
     _router.pushNamed(SuccessRoute,
         arguments: SuccessScreenArguments(
-            isShop: isShop,
-            text: 'Transaktion erfolgreich',
-            iconAssetPath: Assets.cash_register_svg));
+          isShop: isShop,
+          text: 'Transaktion erfolgreich',
+          iconAssetPath: Assets.cash_register_svg,
+          nextRoute: WalletDetailRoute,
+        ));
   }
 }

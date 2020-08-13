@@ -236,8 +236,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: master
-      resolved-ref: e55eeac88121cb06393fc35ab54a16dac1d8c531
+      ref: "859a9ca9ecc751e667cfd3663752f3415b485e13"
+      resolved-ref: "859a9ca9ecc751e667cfd3663752f3415b485e13"
       url: "https://github.com/dudagroup/ecoupon-library.git"
     source: git
     version: "0.0.1"
@@ -293,6 +293,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_secure_storage:
+    dependency: "direct main"
+    description:
+      name: flutter_secure_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.3"
   flutter_sodium:
     dependency: transitive
     description:
@@ -758,6 +765,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
+  sign_in_with_apple:
+    dependency: "direct main"
+    description:
+      name: sign_in_with_apple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.5.2"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
+import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
+
 import 'package:ecoupon_lib/models/wallet.dart';
 
 abstract class IWalletRepo {
@@ -23,4 +25,11 @@ abstract class IWalletRepo {
 
   Future<Either<Failure, Wallet>> createWallet(lib.Currency currency,
       {bool isShop = false});
+
+  Future<Either<Failure, bool>> verify(ProfileEntity profileEntity, String pin);
+
+  Future<Either<Failure, ProfileEntity>> createProfile(
+      WalletEntity walletEntity, ProfileEntity profile);
+
+  Future<Either<Failure, List<ProfileEntity>>> profiles();
 }

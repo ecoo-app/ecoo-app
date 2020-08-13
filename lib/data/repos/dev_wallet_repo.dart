@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
 
@@ -111,5 +112,23 @@ class DevWalletRepo implements IWalletRepo {
       await _mockLoginService.testLogin(false);
       return _walletRepo.handlePaperTransfer(source, destination, amount);
     }
+  }
+
+  @override
+  Future<Either<Failure, ProfileEntity>> createProfile(WalletEntity walletEntity, ProfileEntity profile) {
+      // TODO: implement createProfile
+      throw UnimplementedError();
+    }
+  
+    @override
+    Future<Either<Failure, List<ProfileEntity>>> profiles() {
+      // TODO: implement profiles
+      throw UnimplementedError();
+    }
+  
+    @override
+    Future<Either<Failure, bool>> verify(ProfileEntity  profile, String pin) {
+    // TODO: implement verify
+    throw UnimplementedError();
   }
 }

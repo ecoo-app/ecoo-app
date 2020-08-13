@@ -14,6 +14,6 @@ class OnboardingScreenViewModel extends BaseViewModel {
   Future<void> complete() async {
     await _settingsService.setBool(
         Constants.firstInstallCompleteSettingsKey, true);
-    await _router.pushAndRemoveUntil(HomeRoute, '');
+    await _router.pushAndRemoveUntil(RegisterRoute, '');
   }
 }

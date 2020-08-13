@@ -1,4 +1,3 @@
-import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
@@ -13,14 +12,12 @@ import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/screens/wallet/transactions_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../injection.dart';
 
+@injectable
 class WalletScreen extends StatelessWidget {
-  final WalletEntity wallet;
-
-  WalletScreen({Key key, @required this.wallet});
-
   _createButtons(bool isShop, BuildContext context, WalletViewModel vmodel) {
     if (isShop) {
       return [
@@ -110,7 +107,7 @@ class WalletScreen extends StatelessWidget {
       body: BaseView<WalletViewModel>(
           model: getIt<WalletViewModel>(),
           disposeState: false,
-          onModelReady: (vmodel) async => await vmodel.init(wallet),
+          onModelReady: (vmodel) async => await vmodel.init(),
           builder: (context, vmodel, child) {
             if (vmodel.wallet == null || vmodel.walletState is Loading) {
               return Center(child: ECProgressIndicator());

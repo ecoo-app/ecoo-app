@@ -47,25 +47,16 @@ class WalletViewModel extends BaseViewModel {
   List<TransactionListEntry> get transactions => this._transactions;
   Future<bool> get isConnected => _networkInfo.isConnected;
 
-  Future<void> init(WalletEntity wallet) async {
-    if (wallet == null || wallet != _wallet) {
-      _walletState = Loading();
-      setViewState(Update());
+  Future<void> init() async {
+    _walletState = Loading();
+    setViewState(Update());
+    
+    _wallet = _walletService.getSelected();
 
-      await _walletService.setSelected(wallet);
-      _wallet = _walletService.getSelected();
+    _walletState = Loaded();
+    setViewState(Update());
 
-      if (_wallet != null) {
-        await loadTransactions();
-      }
-
-      _walletState = Loaded();
-      setViewState(Update());
-    }
-
-    if (_wallet != null) {
-      await updateWallet();
-    }
+    await updateWallet();
   }
 
   Future<void> updateWallet() async {

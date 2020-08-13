@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
+import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:ecoupon_lib/models/currency.dart' as lib;
 import 'package:ecoupon_lib/models/list_response.dart';
@@ -210,6 +211,24 @@ class MockWalletRepo implements IWalletRepo {
   Future<Either<Failure, Transaction>> handlePaperTransfer(
       PaperWallet source, WalletEntity destination, int amount) {
     // TODO: implement handlePaperTransfer
+    throw UnimplementedError();
+  }
+
+    @override
+  Future<Either<Failure, ProfileEntity>> createProfile(WalletEntity walletEntity, ProfileEntity profile) {
+      // TODO: implement createProfile
+      throw UnimplementedError();
+    }
+  
+    @override
+    Future<Either<Failure, List<ProfileEntity>>> profiles() {
+      // TODO: implement profiles
+      throw UnimplementedError();
+    }
+  
+    @override
+    Future<Either<Failure, bool>> verify(ProfileEntity  profile, String pin) {
+    // TODO: implement verify
     throw UnimplementedError();
   }
 }

@@ -26,11 +26,19 @@ class RegisterScreen extends StatelessWidget {
             SizedBox(
               height: 60,
             ),
-            RegisterButton(
-              text: I18n.of(context).signinwithappleRegisterScreen,
-              svgAsset: Assets.apple_icon_svg,
-              onTap: viewModel.registerWithApple,
-              brightness: Brightness.dark,
+            FutureBuilder(
+              future: viewModel.isAppleAvailable(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return RegisterButton(
+                    text: I18n.of(context).signinwithappleRegisterScreen,
+                    svgAsset: Assets.apple_icon_svg,
+                    onTap: snapshot.data ? viewModel.registerWithApple : null,
+                    brightness: Brightness.dark,
+                  );
+                }
+                return Container();
+              },
             ),
             SizedBox(
               height: 30,
@@ -43,15 +51,13 @@ class RegisterScreen extends StatelessWidget {
             ),
           ],
         ),
-        footer: Expanded(
-          child: Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.only(bottom: 70.0),
-            child: FlatSecondaryButton(
-              text: I18n.of(context).onboardingRegisterScreen,
-              textColor: ColorStyles.purple,
-              onPressed: viewModel.onboarding,
-            ),
+        footer: Container(
+          alignment: Alignment.bottomCenter,
+          padding: const EdgeInsets.only(bottom: 70.0),
+          child: FlatSecondaryButton(
+            text: I18n.of(context).onboardingRegisterScreen,
+            textColor: ColorStyles.purple,
+            onPressed: viewModel.onboarding,
           ),
         ));
   }

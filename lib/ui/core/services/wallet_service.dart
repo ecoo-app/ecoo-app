@@ -26,7 +26,7 @@ class WalletService implements IWalletService {
   final IWalletRepo _walletRepo;
   final ISettingsService _settingsService;
   List<WalletEntity> _wallets = [];
-  WalletEntity _selected = WalletEntity(privateWalletMock);
+  WalletEntity _selected = WalletEntity(privateWalletMock); // TODO Remove
   ListResponse<Transaction> _selectedTransactions = ListResponse([], null);
 
   WalletService(this._walletRepo, this._settingsService);

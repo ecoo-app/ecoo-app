@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 
@@ -207,5 +208,96 @@ class WalletRepo implements IWalletRepo {
     } else {
       return Left(NoService());
     }
+  }
+
+  @override
+  Future<Either<Failure, ProfileEntity>> createProfile(
+      WalletEntity walletEntity, ProfileEntity profile) async {
+    if (await networkInfo.isConnected) {
+      try {
+        if (profile is UserProfileEntity) {
+          var backendUser = await walletSource.walletService.createUserProfile(
+              walletEntity.walletModel,
+              profile.firstName,
+              profile.lastName,
+              profile.phoneNumber,
+              profile.dateOfBirth,
+              profile.addressStreet);
+          if (backendUser != null) {
+            return Right(UserProfileEntity.from(backendUser));
+          }
+        }
+        if (profile is CompanyProfileEntity) {
+          var backendCompany =
+              await walletSource.walletService.createCompanyProfile(
+            walletEntity.walletModel,
+            profile.name,
+            profile.uid,
+          );
+          if (backendCompany != null) {
+            return Right(CompanyProfileEntity.from(backendCompany));
+          }
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure(e.statusCode));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    }
+    return Left(NoService());
+  }
+
+  @override
+  Future<Either<Failure, List<ProfileEntity>>> profiles() async {
+    if (await networkInfo.isConnected) {
+      try {
+        var backendProfiles =
+            await walletSource.walletService.fetchUserProfiles();
+        if (backendProfiles.items.isNotEmpty) {
+          var profileList = <ProfileEntity>[];
+          for (final backendProfile in backendProfiles.items) {
+            profileList.add(UserProfileEntity.from(backendProfile));
+          }
+
+          return Right(profileList);
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure(e.statusCode));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    }
+    return Right(<ProfileEntity>[]);
+  }
+
+  @override
+  Future<Either<Failure, bool>> verify(
+      ProfileEntity profileEntity, String pin) async {
+    if (await networkInfo.isConnected) {
+      try {
+        if (profileEntity is UserProfileEntity) {
+          await walletSource.walletService
+              .verifyUser(profileEntity.toLibProfile(), pin);
+          return Right(true);
+        }
+        if (profileEntity is CompanyProfileEntity) {
+          await walletSource.walletService
+              .verifyCompany(profileEntity.toLibProfile(), pin);
+          return Right(true);
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure(e.statusCode));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    }
+
+    return Right(false);
   }
 }

@@ -44,6 +44,8 @@ class WalletsViewModel extends BaseViewModel {
   //   failureOrWallets.fold((failure) => setViewState(Error(failure)),
   //       (result) => _wallets = result);
 
-  //   setViewState(Loaded());
-  // }
+  void select(WalletEntity wallet) {
+    _walletService.setSelected(wallet);
+    _router.pushNamed(WalletDetailRoute);
+  }
 }

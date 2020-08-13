@@ -1,5 +1,6 @@
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/login_service.dart';
+import 'package:e_coupon/ui/core/services/notification_service.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen_view_model.dart';
@@ -16,22 +17,24 @@ class SettingsServiceMock extends Mock implements ISettingsService {}
 
 class RouterMock extends Mock implements IRouter {}
 
+class NotificationServiceMock extends Mock implements INotificationService {}
+
 void main() {
   Widget _view;
   WidgetTestApp _testApp;
 
   IRouter _routerMock;
   ILoginService _loginService;
-  ISettingsService _settingsService;
+  INotificationService _notificationServiceMock;
 
   setUp(() {
     _testApp = WidgetTestApp();
     _routerMock = RouterMock();
     _loginService = LoginServiceMock();
-    _settingsService = SettingsServiceMock();
+    _notificationServiceMock = NotificationServiceMock();
 
-    var viewModel =
-        SplashScreenViewModel(_routerMock, _loginService, _settingsService);
+    var viewModel = SplashScreenViewModel(
+        _routerMock, _loginService, _notificationServiceMock);
 
     _view = _testApp.createTestApp(SplashScreen(viewModel));
   });

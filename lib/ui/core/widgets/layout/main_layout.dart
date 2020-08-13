@@ -11,6 +11,7 @@ class MainLayout extends StatelessWidget {
   final Widget bottom;
   final VoidCallback onBackPressed;
   final BackButtonType leadingType;
+  final EdgeInsets insets;
 
   MainLayout(
       {this.isShop,
@@ -18,7 +19,9 @@ class MainLayout extends StatelessWidget {
       this.body,
       this.onBackPressed,
       this.leadingType,
-      this.bottom});
+      this.bottom,
+      this.insets =
+          const EdgeInsets.only(left: 24, right: 24, top: 36, bottom: 48)});
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +41,7 @@ class MainLayout extends StatelessWidget {
             Navigator.pop(context);
           }),
       body: SafeArea(
-        child: Container(
-            margin:
-                const EdgeInsets.only(left: 24, right: 24, top: 36, bottom: 48),
-            child: body),
+        child: Container(margin: insets, child: body),
       ),
       bottomNavigationBar: (BottomAppBar(
         elevation: 0,

@@ -68,6 +68,8 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 6.5)
     - Protobuf (>= 3.9.2, ~> 3.9)
   - Flutter (1.0.0)
+  - flutter_secure_storage (3.3.1):
+    - Flutter
   - flutter_sodium (0.0.1):
     - Flutter
   - google_sign_in (0.0.1):
@@ -144,6 +146,8 @@ PODS:
     - Flutter
   - shared_preferences_web (0.0.1):
     - Flutter
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - SwiftProtobuf (1.10.0)
 
 DEPENDENCIES:
@@ -155,6 +159,7 @@ DEPENDENCIES:
   - ecoupon_lib (from `.symlinks/plugins/ecoupon_lib/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - flutter_sodium (from `.symlinks/plugins/flutter_sodium/ios`)
   - google_sign_in (from `.symlinks/plugins/google_sign_in/ios`)
   - google_sign_in_web (from `.symlinks/plugins/google_sign_in_web/ios`)
@@ -167,6 +172,7 @@ DEPENDENCIES:
   - shared_preferences_linux (from `.symlinks/plugins/shared_preferences_linux/ios`)
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
 
 SPEC REPOS:
   trunk:
@@ -209,6 +215,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
   flutter_sodium:
     :path: ".symlinks/plugins/flutter_sodium/ios"
   google_sign_in:
@@ -233,6 +241,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_macos/ios"
   shared_preferences_web:
     :path: ".symlinks/plugins/shared_preferences_web/ios"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
 
 SPEC CHECKSUMS:
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
@@ -251,6 +261,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 3b119bfe90e904851218159c9a4ecb847cc51d18
   FirebaseMessaging: ad9e1a80ea64905e01a0ce1b3eb76a2944544151
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   flutter_sodium: c84426b4de738514b5b66cfdeb8a06634e72fe0b
   google_sign_in: 6bd214b9c154f881422f5fe27b66aaa7bbd580cc
   google_sign_in_web: 52deb24929ac0992baff65c57956031c44ed44c3
@@ -275,6 +286,7 @@ SPEC CHECKSUMS:
   shared_preferences_linux: afefbfe8d921e207f01ede8b60373d9e3b566b78
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9
+  sign_in_with_apple: 34f3f5456a45fd7ac5fb42905e2ad31dae061b4a
   SwiftProtobuf: bfafffa9e26d1561c3bd0045e188c4fab5f527ae
 
 PODFILE CHECKSUM: 885377b8521c9c0abbc7b2dcc6bf3503f093164f

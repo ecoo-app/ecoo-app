@@ -16,7 +16,7 @@ class WalletEntity extends Equatable {
   String get amountLabel => Utils.moneyToString(this._wallet.balance);
   int get amount => this._wallet.balance;
   Currency get currency => Currency(this._wallet.currency);
-  bool get isShop => this._wallet.category == WalletCategoy.company;
+  bool get isShop => this._wallet.category == WalletCategory.company;
   WalletState get verificationState => this._wallet.state;
 
   Wallet get walletModel => this._wallet;

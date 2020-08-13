@@ -2,6 +2,11 @@ class Constants {
   static const firstInstallCompleteSettingsKey = 'firstInstallComplete';
   static const lastWalletIDSettingsKey = 'lasWalletID';
 
+  static const userProfileUuid = 'userProfileUuid';
+
+  static const identityTokenKey = 'refreshTokenKey';
+  static const identityTokenProvider = 'identityTokenProvider';
+
   static const qrDataDestinationId = 'id';
   static const qrDataAmount = 'amount';
   static const qrDataNonce = 'nonce';

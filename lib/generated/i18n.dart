@@ -80,6 +80,14 @@ class I18n implements WidgetsLocalizations {
   String get verificationPrivateFormTitle => "Personalien";
   /// "UID"
   String get verificationShopFormTitle => "UID";
+  /// "Firma"
+  String get verificationShopFormCompanyTitle => "Firma";
+  /// "Unternehmens-Identifikationsnummer (UID) \n\nIhre UID finden Sie unter: "
+  String get verificationShopFormUidDescription => "Unternehmens-Identifikationsnummer (UID) \n\nIhre UID finden Sie unter: ";
+  /// "https://www.uid.admin.ch/"
+  String get verificationShopFormUidLink => "https://www.uid.admin.ch/";
+  /// "Ich habe keine UID"
+  String get verificationShopFormUidNoUid => "Ich habe keine UID";
   /// "Ich bestätige alles wahrheitsgetreu ausgefüllt zu haben."
   String get verificationFilledTruthfully => "Ich bestätige alles wahrheitsgetreu ausgefüllt zu haben.";
   /// "Anfrage gesendet."
@@ -202,8 +210,8 @@ class I18n implements WidgetsLocalizations {
   String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei ihrer Gemeinde können Sie mit wenigen Klicks den erzielten Umsatz bei der Gemeinde einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben.";
   /// "Einführung überspringen"
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
-  /// "Weiter zur Registrierung"
-  String get buttonTextNexOnboardingScreen => "Weiter zur Registrierung";
+  /// "Jetzt verifizieren"
+  String get buttonTextNexOnboardingScreen => "Jetzt verifizieren";
   /// "Wallet typ"
   String get titleRegisterWalletTypeScreen => "Wallet typ";
   /// "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet."
@@ -220,6 +228,22 @@ class I18n implements WidgetsLocalizations {
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Später verifizieren"
   String get verifyLaterButtonRegisterVerifyScreen => "Später verifizieren";
+  /// "Vorname"
+  String get verifyFormFieldFirstName => "Vorname";
+  /// "Nachname"
+  String get verifyFormFieldLastName => "Nachname";
+  /// "Telefonnummer"
+  String get verifyFormFieldPhoneNumber => "Telefonnummer";
+  /// "Geburtsdatum"
+  String get verifyFormFieldBirthday => "Geburtsdatum";
+  /// "Strasse & Hausnummer"
+  String get verifyFormFieldAddress => "Strasse & Hausnummer";
+  /// "PLZ"
+  String get verifyFormFieldPostcode => "PLZ";
+  /// "Ort"
+  String get verifyFormFieldCity => "Ort";
+  /// "Firmenname"
+  String get verifyFormFieldCompany => "Firmenname";
   /// "Transaktion erfolgreich"
   String get transactionSuccessful => "Transaktion erfolgreich";
   /// "Paper Wallet scannen"

@@ -1,3 +1,4 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class ThirdPartyLibraryModule {
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
+
+  FlutterSecureStorage get securePrefs => FlutterSecureStorage();
 
   @preResolve
   Future<PackageInfo> get packageInfo => PackageInfo.fromPlatform();

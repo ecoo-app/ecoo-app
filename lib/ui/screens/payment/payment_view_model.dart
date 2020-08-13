@@ -86,7 +86,8 @@ class PaymentViewModel extends BaseViewModel {
           arguments: SuccessScreenArguments(
               isShop: false,
               text: successText,
-              iconAssetPath: Assets.check_double_svg));
+              iconAssetPath: Assets.check_double_svg,
+              nextRoute: WalletDetailRoute));
     });
   }
 

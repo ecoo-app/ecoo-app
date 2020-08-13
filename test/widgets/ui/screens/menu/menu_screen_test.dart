@@ -54,7 +54,7 @@ void main() {
         'TestKey',
         lib_currency.Currency(
             'wetzicoin', 'wetzicoin', 'CHF', 0, 2, null, null, true, null, 10),
-        lib_wallet.WalletCategoy.consumer,
+        lib_wallet.WalletCategory.consumer,
         1000,
         lib_wallet.WalletState.verified));
     when(_repositoryMock.getWallets(any))
@@ -62,8 +62,7 @@ void main() {
     when(_walletServiceMock.allWallets)
         .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
 
-    var walletsViewModel =
-        WalletsViewModel(_walletServiceMock, _routerMock, _networkInfoMock);
+    var walletsViewModel = WalletsViewModel(_walletServiceMock, _routerMock, _networkInfoMock);
     GetIt.instance.allowReassignment = true;
     GetIt.instance.registerFactory(() => walletsViewModel);
 

@@ -1,64 +1,43 @@
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
-import 'package:flutter/material.dart';
+import 'package:e_coupon/ui/core/router/router.dart';
+import 'package:e_coupon/ui/core/services/profile_service.dart';
+import 'package:e_coupon/ui/core/services/wallet_service.dart';
+import 'package:e_coupon/ui/screens/verification/verification_input_data.dart';
+import 'package:ecoupon_lib/common/verification_stage.dart';
 import 'package:injectable/injectable.dart';
 
 class VerificationLoading extends ViewState {}
 
 @injectable
 class VerificationViewModel extends BaseViewModel {
-  final formKey = GlobalKey<FormState>();
+  final IWalletService _walletService;
+  final IProfileService _profileService;
+  final IRouter _router;
 
-  // final IWalletRepo _walletRepo;
-  // final IWalletService _walletService;
-  // final IRouter _router;
+  VerificationInputData _inputData = VerificationInputData();
 
-  bool isShop;
-  Map<String, String> inputData = Map();
+  VerificationViewModel(
+      this._walletService, this._profileService, this._router);
 
-  // VerificationViewModel(this._walletService, this._walletRepo, this._router);
+  VerificationInputData get inputData => _inputData;
 
-  void loadVerificationInputs() async {
-    // setViewState(Loading());
+  bool get isShop => _walletService.getSelected()?.isShop ?? false;
 
-    // WalletEntity wallet = _walletService.getSelected();
-    // isShop = wallet.isShop;
+  Future<void> onVerify(String successText) async {
+    var profile =
+        isShop ? inputData.toCompanyEntity() : inputData.toProfileEntity();
 
-    // Either<Failure, VerificationForm> inputsOrFailure =
-    //     await _walletRepo.getVerificationInputs(wallet.currency, wallet.isShop);
+    var result = await _profileService.create(profile);
 
-    //     var inputs =
+    if (result != null) {
+      if (result.verificationStage == VerificationStage.notMatched) {
+        // TODO Show Error Message
+        return;
+      }
 
-    // inputsOrFailure.fold((failure) => setViewState(Error(failure)),
-    //     (successInputs) {
-    //   verificationInputs = successInputs;
-    //   setViewState(Loaded());
-    // });
-  }
-
-  // TODO verification inputs are not generic anymore.
-
-  void onVerify(String successText) async {
-    // if (formKey.currentState.validate()) {
-    //   setViewState(VerificationLoading());
-    //   List<VerificationInputData> data = [];
-    //   inputData.forEach((key, value) {
-    //     data.add(VerificationInputData(key, value));
-    //   });
-
-    //   WalletEntity wallet = _walletService.getSelected();
-    //   var verificationOrFaiure =
-    //       await _walletRepo.verifyWallet(wallet.walletModel, data);
-
-    //   verificationOrFaiure.fold((failure) => setViewState(Error(failure)),
-    //       (success) {
-    //     setViewState(Loaded());
-    //     _router.pushNamed(SuccessRoute,
-    //         arguments: SuccessScreenArguments(
-    //             isShop: wallet.isShop,
-    //             iconAssetPath: Assets.envelope_open_dollar_svg,
-    //             text: successText));
-    //   });
-    // }
+      print('profile successfully created');
+      await _router.pushNamed(VerifyPinRoute);
+    }
   }
 }

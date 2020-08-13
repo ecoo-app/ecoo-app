@@ -84,14 +84,14 @@ lib.Wallet privateWalletMock = lib.Wallet(
     PrivateWalletID,
     PrivatePublicKey,
     MockWetzikonCurrency(),
-    lib.WalletCategoy.consumer,
+    lib.WalletCategory.consumer,
     105,
     lib.WalletState.verified);
 lib.Wallet shopWalletMock = lib.Wallet(
     ShopWalletID,
     ShopPublicKey,
     MockWetzikonCurrency(),
-    lib.WalletCategoy.company,
+    lib.WalletCategory.company,
     1059,
     lib.WalletState.pending);
 
