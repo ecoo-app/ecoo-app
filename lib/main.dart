@@ -9,14 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
 
-final INotificationService _notificationService = getIt<INotificationService>();
-final MockLoginService _mockLoginService = getIt<MockLoginService>();
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Env.dev);
-  await _mockLoginService.testLogin(false);
-  await _notificationService.registerDevice();
 
   var app = getIt.get<ECouponApp>();
   runApp(app);

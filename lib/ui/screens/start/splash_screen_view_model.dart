@@ -1,6 +1,8 @@
+import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/login_service.dart';
+import 'package:e_coupon/ui/core/services/notification_service.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:injectable/injectable.dart';
@@ -10,6 +12,8 @@ class SplashScreenViewModel extends BaseViewModel {
   final IRouter _router;
   final ILoginService _loginService;
   final ISettingsService _settingsService;
+  final INotificationService _notificationService =
+      getIt<INotificationService>();
 
   SplashScreenViewModel(
       this._router, this._loginService, this._settingsService);
@@ -30,6 +34,7 @@ class SplashScreenViewModel extends BaseViewModel {
           await _router.pushAndRemoveUntil(OnboardingRoute, '');
           return;
         } else {
+          await _notificationService.registerDevice();
           await _router.pushAndRemoveUntil(HomeRoute, '');
         }
       }
