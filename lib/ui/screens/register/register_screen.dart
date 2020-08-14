@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:injectable/injectable.dart';
+import 'dart:io' show Platform;
 
 @injectable
 class RegisterScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class RegisterScreen extends StatelessWidget {
             FutureBuilder(
               future: viewModel.isAppleAvailable(),
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.hasData && !Platform.isAndroid) {
                   return RegisterButton(
                     text: I18n.of(context).signinwithappleRegisterScreen,
                     svgAsset: Assets.apple_icon_svg,

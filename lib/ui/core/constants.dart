@@ -6,6 +6,7 @@ class Constants {
 
   static const identityTokenKey = 'refreshTokenKey';
   static const identityTokenProvider = 'identityTokenProvider';
+  static const appleAuthorizationCode = 'appleAuthorizationCode';
 
   static const qrDataDestinationId = 'id';
   static const qrDataAmount = 'amount';

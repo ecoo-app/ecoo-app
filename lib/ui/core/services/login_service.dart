@@ -27,10 +27,7 @@ abstract class ILoginService {
 }
 
 enum LoginResult {
-  Success,
   Onboarding,
-  UserVerify,
-  PinVerification,
   Home,
 }
 
@@ -78,6 +75,7 @@ class LoginService implements ILoginService {
       var result = false;
       switch (provider) {
         case SignInProvider.Apple:
+          result = await _signInWithApple(clientInfo);
           break;
         case SignInProvider.Google:
           result = await _signInWithGoogle(clientInfo);
@@ -136,10 +134,12 @@ class LoginService implements ILoginService {
 
   Future<bool> _registerWithApple(ClientInfo clientInfo) async {
     final AuthorizationCredentialAppleID credential = await appleAuthorization;
-
     var token = await walletSource
         .session()
         .convertToken(credential.identityToken, clientInfo, AuthProvider.apple);
+
+    await _settingsService.writeSecureString(
+        Constants.appleAuthorizationCode, credential.identityToken);
 
     if (token != null) {
       await _settingsService.saveIdentityToken(jsonEncode(token.toJson()));
@@ -185,6 +185,29 @@ class LoginService implements ILoginService {
       }
     }
     return false;
+  }
+
+  Future<bool> _signInWithApple(ClientInfo clientInfo) async {
+    var authCode = await _settingsService
+        .readSecureString(Constants.appleAuthorizationCode);
+
+    if (authCode != null) {
+      var token = await walletSource
+          .session()
+          .convertToken(authCode, clientInfo, AuthProvider.apple);
+
+      if (token != null) {
+        await _settingsService.saveIdentityToken(jsonEncode(token.toJson()));
+        await _settingsService.writeSecureString(
+            Constants.identityTokenProvider, AuthProvider.apple.value);
+        await _notificationService.registerDevice();
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    return _registerWithApple(clientInfo);
   }
 
   @override

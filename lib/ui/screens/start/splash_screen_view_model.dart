@@ -18,19 +18,14 @@ class SplashScreenViewModel extends BaseViewModel {
       var loginResult = await _loginService.login();
       switch (loginResult) {
         case LoginResult.Home:
-        case LoginResult.Success:
           await _notificationService.registerDevice();
           await _router.pushAndRemoveUntil(HomeRoute, '');
           break;
         case LoginResult.Onboarding:
           await _router.pushAndRemoveUntil(OnboardingRoute, '');
           break;
-        case LoginResult.UserVerify:
-          await _router.pushAndRemoveUntil(RegisterVerifyRoute, '');
-          break;
-        case LoginResult.PinVerification:
-          await _router.pushAndRemoveUntil(VerifyPinRoute, '');
-          break;
+        default:
+          await _router.pushAndRemoveUntil(OnboardingRoute, '');
       }
     } catch (e) {
       print(e);
