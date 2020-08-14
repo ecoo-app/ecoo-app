@@ -1,4 +1,5 @@
 import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -51,8 +52,14 @@ class PrimaryButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              isLoading
+                  ? ECProgressIndicator()
+                  : SizedBox(
+                      width: 0,
+                      height: 0,
+                    ),
               Text(
-                isLoading ? 'loading...' : text,
+                text,
                 style: Theme.of(context)
                     .textTheme
                     .headline3

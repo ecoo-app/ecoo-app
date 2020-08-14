@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
@@ -32,6 +33,8 @@ class ProfileService implements IProfileService {
   ProfileService(this._walletRepo, this._walletService, this._settingsService);
 
   @override
+
+  /// throws Failure
   Future<ProfileEntity> create(ProfileEntity profileEntity) async {
     var currentWallet = _walletService.getSelected();
 
@@ -42,6 +45,13 @@ class ProfileService implements IProfileService {
       await _settingsService.writeSecureString(
           Constants.userProfileUuid, profile.uuid);
       return profile;
+    }
+
+    if (answer.isLeft()) {
+      answer.fold((failure) {
+        print('profile service');
+        throw failure;
+      }, (r) => null);
     }
     return null;
   }
@@ -146,7 +156,10 @@ class ProfileService implements IProfileService {
   }
 
   @override
+
+  /// throws Failure
   Future<bool> verify(String pin, WalletEntity wallet) async {
+    print(wallet.id);
     ProfileEntity profileEntity = await currentProfileForWallet(wallet);
     // if (profileEntity is UserProfileEntity) {
     if (profileEntity != null) {
@@ -156,13 +169,13 @@ class ProfileService implements IProfileService {
           return true;
         }
       } else {
+        answer.fold((failure) => throw failure, (r) => null);
         return false;
       }
     }
 
     // }
-
-    return false;
+    throw MessageFailure('Profile Entity is null');
   }
 
   @override

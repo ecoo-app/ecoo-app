@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
@@ -26,18 +27,23 @@ class PinVerificationViewModel extends BaseViewModel {
   void onVerify(String successText) async {
     setViewState(Loading());
 
-    var result = await _profileService.verify(pin, wallet);
-    if (result) {
-      await _router.pushNamed(SuccessRoute,
-          arguments: SuccessScreenArguments(
-              isShop: true,
-              text: successText,
-              iconAssetPath: Assets.check_double_svg,
-              nextRoute: HomeRoute));
-    } else {
-      // Verification unsuccessful -> Show Message
-    }
+    try {
+      var result = await _profileService.verify(pin, wallet);
+      if (result) {
+        await _router.pushNamed(SuccessRoute,
+            arguments: SuccessScreenArguments(
+                isShop: wallet.isShop,
+                text: successText,
+                iconAssetPath: Assets.check_double_svg,
+                nextRoute: HomeRoute));
 
-    setViewState(Loaded());
+        setViewState(Loaded());
+      }
+    } on Failure catch (failure) {
+      setViewState(Loaded());
+      setViewState(Error((failure)));
+    } catch (e) {
+      print(e);
+    }
   }
 }

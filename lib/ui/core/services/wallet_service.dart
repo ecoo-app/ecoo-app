@@ -98,7 +98,6 @@ class WalletService implements IWalletService {
   Future<Either<Failure, WalletEntity>> fetchAndUpdateSelected() async {
     if (this._selected == null) {
       await setSelected(null);
-      print(this._selected);
     }
     return await _walletRepo.getWalletData(this._selected.id);
   }

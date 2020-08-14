@@ -147,7 +147,34 @@ class WalletViewModel extends BaseViewModel {
 
   //
   void onClaim() async {
-    await _router.pushNamed(VerificationRoute, arguments: wallet.id);
+    var profileOrFailure =
+        await _walletRepo.profiles(false, forWalletId: _wallet.id);
+
+    await profileOrFailure.fold((failure) {
+      setViewState(Error(failure));
+    }, (profiles) async {
+      if (profiles != null) {
+        var pendingProfiles = profiles
+            .where((element) =>
+                element.verificationStage == VerificationStage.pendingPIN)
+            .toList();
+
+        if (pendingProfiles.length > 1) {
+          setViewState(Error(MessageFailure(
+              'Die Pin Verifizierung von mehr als einem Profil ist noch offen. Bitte melde dich bei der Gemeinde.')));
+          return;
+        }
+
+        if (pendingProfiles.isEmpty) {
+          await _router.pushNamed(VerificationRoute, arguments: wallet.id);
+          return;
+        }
+
+        await _router.pushNamed(VerifyPinRoute);
+      } else {
+        setViewState(Error(UnknownFailure()));
+      }
+    });
   }
 
   //

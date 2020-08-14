@@ -47,7 +47,7 @@ class MockLoginService {
       // await service.session().convertToken(
       //     authentication.accessToken, clientInfo, AuthProvider.google);
     } catch (e) {
-      print('error ${e.toString()}');
+      // print('error ${e.toString()}');
     }
 
     // } else {

@@ -35,10 +35,18 @@ class RequestQRBillScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(I18n.of(context)
-                      .walletRequestScreen(vmodel.transferData.destWalletId)),
-                  Text(I18n.of(context)
-                      .amountRequestScreen(vmodel.transferData.amountLabel)),
+                  Text(
+                    I18n.of(context)
+                        .walletRequestScreen(vmodel.transferData.destWalletId),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        .merge(TextStyle(color: ColorStyles.brown_gray)),
+                  ),
+                  Text(
+                      I18n.of(context)
+                          .amountRequestScreen(vmodel.transferData.amountLabel),
+                      style: Theme.of(context).textTheme.headline4),
                   RepaintBoundary(
                     child: QrImage(
                       data: vmodel.qrImageData,

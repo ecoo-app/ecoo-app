@@ -51,7 +51,7 @@ class LoginService implements ILoginService {
     try {
       var token = await _settingsService.identityToken();
       if (token == null || token == '') {
-        print('No existing Token found');
+        // print('No existing Token found');
         return LoginResult.Onboarding;
       } else {
         var newToken = SessionToken.fromJson(jsonDecode(token));
@@ -87,7 +87,7 @@ class LoginService implements ILoginService {
       }
       return result ? LoginResult.Home : LoginResult.Onboarding;
     } catch (e) {
-      print('Unable to sign-in' + e.toString());
+      // print('Unable to sign-in' + e.toString());
       return LoginResult.Onboarding;
     }
   }

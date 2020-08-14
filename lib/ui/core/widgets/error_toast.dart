@@ -18,7 +18,7 @@ class ErrorToast {
       return 'Login erforderlich';
     }
     if (failure is HTTPFailure) {
-      return 'Server fehler';
+      return 'Server fehler ${(failure as HTTPFailure).code}';
     }
     return I18n.of(context).generalErrorTitle;
   }
@@ -31,7 +31,12 @@ class ErrorToast {
       return 'Du bist nicht eingeloggt.';
     }
     if (failure is HTTPFailure) {
-      return 'Fehler: ${(failure as HTTPFailure).code}';
+      var responseDetails = (failure as HTTPFailure).response;
+      print(responseDetails);
+      if (responseDetails == null) {
+        return '-';
+      }
+      return responseDetails;
     }
     if (failure is MessageFailure) {
       MessageFailure fail = failure;

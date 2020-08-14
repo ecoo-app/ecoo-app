@@ -33,7 +33,6 @@ class PaymentViewModel extends BaseViewModel {
 
   void init() {
     var sender = _walletService.getSelected();
-    print('selected wallet ${sender.id}');
     isShop = sender.isShop;
     _transferService.transfer.sender = sender;
 
@@ -65,7 +64,6 @@ class PaymentViewModel extends BaseViewModel {
         setViewState(Error(failure));
       }, (wallet) async {
         await transfer(successText, wallet);
-        setViewState(Loaded());
       });
     }
   }
@@ -81,6 +79,7 @@ class PaymentViewModel extends BaseViewModel {
   }
 
   void onSuccess(String successText) {
+    _transferService.reset();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       _router.pushNamed(SuccessRoute,
           arguments: SuccessScreenArguments(
@@ -89,10 +88,11 @@ class PaymentViewModel extends BaseViewModel {
               iconAssetPath: Assets.check_double_svg,
               nextRoute: WalletDetailRoute));
     });
+    setViewState(Loaded());
   }
 
   void onError(Failure failure) {
-    _router.pushNamed(ErrorRoute);
+    setViewState(Error(failure));
   }
 
   void onBack() {

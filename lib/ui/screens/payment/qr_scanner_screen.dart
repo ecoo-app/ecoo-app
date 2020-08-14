@@ -30,7 +30,6 @@ class QRScannerScreen extends StatelessWidget {
           vmodel.init(I18n.of(context).transactionSuccessful),
       builder: (context, vmodel, child) {
         if (vmodel.viewState is Error) {
-          print('error state');
           Error error = vmodel.viewState;
           SchedulerBinding.instance.addPostFrameCallback((_) {
             ErrorToast(failure: error.failure).create(context)..show(context);

@@ -81,8 +81,9 @@ class WalletScreen extends StatelessWidget {
                   iconAsset: Assets.private_claim_money_svg,
                   text: I18n.of(context).privateWalletClaim,
                   onPressed: () {
-                    Navigator.pushNamed(context, VerificationRoute,
-                        arguments: vmodel.wallet.id);
+                    vmodel.onClaim();
+                    // Navigator.pushNamed(context, VerificationRoute,
+                    //     arguments: vmodel.wallet.id);
                   },
                 ),
               )

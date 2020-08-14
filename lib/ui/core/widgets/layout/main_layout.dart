@@ -54,7 +54,6 @@ class MainLayout extends StatelessWidget {
 class AppBarShapeBorder extends ContinuousRectangleBorder {
   @override
   Path getOuterPath(Rect rect, {TextDirection textDirection}) {
-    print(rect.height);
     // final double extraHeight = 15.0;
     // final double stepWidth = 20.0;
 

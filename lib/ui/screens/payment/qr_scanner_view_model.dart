@@ -39,7 +39,6 @@ class QRScannerViewModel extends BaseViewModel {
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
-      print(scanData);
       if (num.tryParse(scanData) != null) {
         print('scanning...');
         // bracode found. do more scanning until a json is found
@@ -82,7 +81,6 @@ class QRScannerViewModel extends BaseViewModel {
         source, _walletService.getSelected(), amount);
 
     transactionOrFailure.fold((failure) {
-      print(failure);
       setViewState(Error(failure));
     }, (success) => onSuccess());
     setViewState(Loaded());

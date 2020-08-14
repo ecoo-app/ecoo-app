@@ -43,16 +43,15 @@ class WalletRepo implements IWalletRepo {
           var currencies = await walletSource.walletService.fetchCurrencies();
           currency = currencies.items[0];
         }
-        print('create wallet currency ${currency.name}');
         final wallet = await walletSource.walletService
             .createWallet(currency, isCompany: isShop);
-        print('create wallet wallet ${wallet.walletID}');
         result = Right(wallet);
       } on NotAuthenticatedError {
         result = Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        result = Left(HTTPFailure(e.statusCode));
+        result = Left(HTTPFailure.from(e));
       } catch (anyerror) {
+        // TODO hand error handling for case: 'Secure lock screen must be enabled to create keys requiring user authentication'
         print('error $anyerror');
         // TODO log/send error
         result = Left(UnknownFailure());
@@ -78,7 +77,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         result = Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        result = Left(HTTPFailure(e.statusCode));
+        result = Left(HTTPFailure.from(e));
       }
     } else {
       result = Left(NoService());
@@ -100,7 +99,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
       }
@@ -111,7 +110,7 @@ class WalletRepo implements IWalletRepo {
       } catch (e) {
         // type '_InternalLinkedHashMap<String, dynamic>' is not a subtype of type 'FutureOr<List<WalletEntity>>'
         //CacheException
-        print('get walletS $e');
+        print('$e');
         return Left(CacheFailure());
       }
     }
@@ -128,7 +127,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
       }
@@ -137,7 +136,7 @@ class WalletRepo implements IWalletRepo {
         final wallet = await localDataSource.getWallet(singleWalletKey);
         return Right(wallet);
       } catch (e) {
-        print('get wallet $e');
+        print('$e');
         //CacheException
         return Left(CacheFailure());
       }
@@ -152,40 +151,41 @@ class WalletRepo implements IWalletRepo {
       try {
         if (!(await walletSource.walletService
             .canSignWithWallet(senderModel))) {
-          print('cannot sign with wallet');
-          var walletMigration =
-              await walletSource.walletService.migrateWallet(senderModel);
-//
-          if (walletMigration.state == TransactionState.done) {
-            print('fetch new wallet');
-            senderModel = await walletSource.walletService
-                .fetchWallet(walletMigration.walletID);
-            // TODO update local wallet
-            //
-          } else if (walletMigration.state == TransactionState.open ||
-              walletMigration.state == TransactionState.pending) {
-            print('wallet migration state is open or pending');
-            //
-          } else {
-            print('wallet migration has failed');
-            return Left(UnknownFailure());
-          }
+          // TODO migration
+          return Left(MessageFailure(
+              'Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator.'));
+//           print('cannot sign with wallet');
+//           var walletMigration =
+//               await walletSource.walletService.migrateWallet(senderModel);
+// //
+//           if (walletMigration.state == TransactionState.done) {
+//             print('fetch new wallet');
+//             senderModel = await walletSource.walletService
+//                 .fetchWallet(walletMigration.walletID);
+//             // TODO update local wallet
+//             //
+//           } else if (walletMigration.state == TransactionState.open ||
+//               walletMigration.state == TransactionState.pending) {
+//             print('wallet migration state is open or pending');
+//             //
+//           } else {
+//             print('wallet migration has failed');
+//             return Left(UnknownFailure());
+//           }
         }
         final transaction = await walletSource.walletService
             .transfer(senderModel, reciever.walletModel, amount);
         return Right(transaction);
       } on NotAuthenticatedError {
-        print('not autheticated failure');
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        print('http failure');
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         print(e);
+        // return Left(MessageFailure(e.toString()));
         return Left(UnknownFailure());
       }
     } else {
-      print('no service failure');
       return Left(NoService());
     }
   }
@@ -201,9 +201,9 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
-        print('error code $e');
+        // return Left(MessageFailure(e.toString()));
         return Left(UnknownFailure());
       }
     } else {
@@ -242,7 +242,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
       }
@@ -258,9 +258,9 @@ class WalletRepo implements IWalletRepo {
         List<ProfileEntity> profileList;
 
         if (isCompany) {
-          profileList = await _fetchCompanyProfiles();
+          profileList = await _fetchCompanyProfiles(forWalletId: forWalletId);
         } else {
-          profileList = await _fetchUserProfiles();
+          profileList = await _fetchUserProfiles(forWalletId: forWalletId);
         }
 
         if (profileList.isNotEmpty) {
@@ -269,7 +269,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
       }
@@ -278,7 +278,9 @@ class WalletRepo implements IWalletRepo {
   }
 
   Future<List<ProfileEntity>> _fetchUserProfiles({String forWalletId}) async {
-    var backendProfiles = await walletSource.walletService.fetchUserProfiles();
+    // TODO fetch all!
+    var backendProfiles =
+        await walletSource.walletService.fetchUserProfiles(pageSize: 100);
     if (backendProfiles.items.isNotEmpty) {
       var profileList = <ProfileEntity>[];
       for (final backendProfile in backendProfiles.items) {
@@ -306,8 +308,9 @@ class WalletRepo implements IWalletRepo {
 
   Future<List<ProfileEntity>> _fetchCompanyProfiles(
       {String forWalletId}) async {
+    // TODO fetch all!
     var backendProfiles =
-        await walletSource.walletService.fetchCompanyProfiles();
+        await walletSource.walletService.fetchCompanyProfiles(pageSize: 100);
     if (backendProfiles.items.isNotEmpty) {
       var profileList = <ProfileEntity>[];
       for (final backendProfile in backendProfiles.items) {
@@ -349,7 +352,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
       }
@@ -375,7 +378,7 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
-        return Left(HTTPFailure(e.statusCode));
+        return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
       }
