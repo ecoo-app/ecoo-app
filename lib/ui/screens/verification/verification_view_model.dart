@@ -27,7 +27,7 @@ class VerificationViewModel extends BaseViewModel {
 
   bool get isShop => _walletService.getSelected()?.isShop ?? false;
 
-  Future<void> onVerify(String successText) async {
+  Future<void> onVerify(String successText, {String errorText}) async {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
@@ -39,10 +39,7 @@ class VerificationViewModel extends BaseViewModel {
 
         if (result != null) {
           if (result.verificationStage == VerificationStage.notMatched) {
-            // TODO Show Error Message
-            print('view model no good');
-            setViewState(Error(MessageFailure(
-                'Deine Angaben konnten nicht verifiziert werden. Bitte trete mit der Gemeinde in Kontakt.')));
+            setViewState(Error(MessageFailure(errorText ?? '')));
             return;
           }
 

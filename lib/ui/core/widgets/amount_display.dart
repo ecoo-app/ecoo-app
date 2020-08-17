@@ -22,12 +22,17 @@ class AmountDisplay extends StatelessWidget {
       alignment: AlignmentDirectional.centerEnd,
       children: <Widget>[
         Container(
+          color: ColorStyles.white,
           child: isShopColor
-              ? SvgPicture.asset(Assets.shop_header_svg)
-              : SvgPicture.asset(Assets.private_header_svg),
+              ? SvgPicture.asset(
+                  Assets.shop_header_svg,
+                )
+              : SvgPicture.asset(
+                  Assets.private_header_svg,
+                ),
         ),
         Container(
-          margin: EdgeInsets.only(right: 25),
+          margin: const EdgeInsets.only(right: 25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -56,66 +61,5 @@ class AmountDisplay extends StatelessWidget {
         ),
       ],
     );
-    // return Stack(
-    //   alignment: AlignmentDirectional.center,
-    //   children: <Widget>[
-    //     ClipRect(
-    //       child: Align(
-    //         alignment: Alignment.topRight,
-    //         child: Transform.rotate(
-    //           angle: -13.0,
-    //           child: Container(
-    //             decoration: BoxDecoration(
-    //                 borderRadius: BorderRadius.all(Radius.circular(40.0)),
-    //                 gradient: GradientStyles.privateWalletBackgroundGradient),
-    //             child: SizedBox(
-    //               height: 280,
-    //               width: 280,
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //     Container(
-    //       height: 180,
-    //       child: Align(
-    //         alignment: Alignment.center,
-    //         child: Text(
-    //           '$amount $symbol',
-    //           style: Theme.of(context).textTheme.headline2,
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // );
-    // return isLoading
-    //     ? Row(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         children: <Widget>[
-    //           ECProgressIndicator(),
-    //           Text(
-    //             '$amount $symbol',
-    //             style: Theme.of(context).textTheme.headline2,
-    //           )
-    //         ],
-    //       )
-    //     : Center(
-    //         child: Transform.rotate(
-    //           angle: -13.0,
-    //           child: Container(
-    //             height: 180,
-    //             decoration: BoxDecoration(
-    //                 borderRadius: BorderRadius.all(Radius.circular(40.0)),
-    //                 gradient: GradientStyles.privateWalletBackgroundGradient),
-    //             child: Align(
-    //               alignment: Alignment.center,
-    //               child: Text(
-    //                 '$amount $symbol',
-    //                 style: Theme.of(context).textTheme.headline2,
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //       );
   }
 }

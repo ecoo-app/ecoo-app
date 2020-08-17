@@ -55,6 +55,13 @@ class WalletViewModel extends BaseViewModel {
     _walletState = Loading();
     setViewState(Update());
 
+    _walletService.currentWalletStream.listen((event) {
+      if (event != null) {
+        _wallet = event;
+        setViewState(Update());
+      }
+    });
+
     _wallet = _walletService.getSelected();
 
     _walletState = Loaded();
@@ -140,7 +147,7 @@ class WalletViewModel extends BaseViewModel {
     await _router.pushNamed(QRScanRoute);
   }
 
-//
+  //
   void makePaymentRequest() async {
     await _router.pushNamed(RequestPaymentRoute);
   }

@@ -110,8 +110,8 @@ class I18n implements WidgetsLocalizations {
   String get buttonRedeem => "Umsatz einlösen";
   /// "Der Betrag wird übermittelt an:"
   String get redeemTransferTo => "Der Betrag wird übermittelt an:";
-  /// "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwieden."
-  String get redeemInfo => "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwieden.";
+  /// "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwiesen."
+  String get redeemInfo => "Nach der Überprüfung wird Ihnen das Geld auf das angegebende Konto überwiesen.";
   /// "Name der Bank"
   String get redeemFieldNameBank => "Name der Bank";
   /// "IBAN Nummer"
@@ -140,12 +140,12 @@ class I18n implements WidgetsLocalizations {
   String walletRequestScreen(String walletId) => "Wallet ${walletId}";
   /// "CHF ${amount}"
   String amountRequestScreen(String amount) => "CHF ${amount}";
-  /// "eCoupon"
-  String get titleSplashScreen => "eCoupon";
+  /// "ecoo"
+  String get titleSplashScreen => "ecoo";
   /// "Registrieren"
   String get titleRegisterScreen => "Registrieren";
-  /// "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet"
-  String get descriptionRegisterScreen => "Um eCoupon zu nutzen muss du dich registrieren, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet";
+  /// "Um das ecoo App zu benutzten, müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf ihre Daten im App selbst."
+  String get descriptionRegisterScreen => "Um das ecoo App zu benutzten, müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf ihre Daten im App selbst.";
   /// "Mit Apple fortfahren"
   String get signinwithappleRegisterScreen => "Mit Apple fortfahren";
   /// "Mit Google fortfahren"
@@ -184,24 +184,24 @@ class I18n implements WidgetsLocalizations {
   String get paymentFailedInfo => "Überprüfe deine Internetverbindung und probiere es noch einmal oder lasse dein gegenüber den QR-Code scannen.";
   /// "Ich zahle den offenen Betrag an:"
   String get iPay => "Ich zahle den offenen Betrag an:";
-  /// "eCoupon"
-  String get page1TitleOnboardingScreen => "eCoupon";
+  /// "ecoo"
+  String get page1TitleOnboardingScreen => "ecoo";
   /// "Registrierung und verifizierung"
   String get page1HeadlineOnboardingScreen => "Registrierung und verifizierung";
-  /// "Um eCoupon zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet."
-  String get page1DescriptionOnboardingScreen => "Um eCoupon zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.";
+  /// "Um ecoo zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet."
+  String get page1DescriptionOnboardingScreen => "Um ecoo zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Gemeinde, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.";
   /// "Privat wallet"
   String get page2TitleOnboardingScreen => "Privat wallet";
   /// "Zahlen, Senden & Geld anfordern"
   String get page2HeadlineOnboardingScreen => "Zahlen, Senden & Geld anfordern";
-  /// "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit eCoupon zu bezahlen.\n\nSie können andern eCoupon Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern."
-  String get page2DescriptionOnboardingScreen => "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit eCoupon zu bezahlen.\n\nSie können andern eCoupon Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.";
+  /// "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können andern ecoo Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern."
+  String get page2DescriptionOnboardingScreen => "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können andern ecoo Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.";
   /// "Shop wallet"
   String get page3TitleOnboardingScreen => "Shop wallet";
   /// "Einkassieren & senden"
   String get page3HeadlineOnboardingScreen => "Einkassieren & senden";
-  /// "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die eCoupon App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen eCoupon Benutzern zu senden."
-  String get page3DescriptionOnboardingScreen => "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die eCoupon App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen eCoupon Benutzern zu senden.";
+  /// "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen ecoo Benutzern zu senden."
+  String get page3DescriptionOnboardingScreen => "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen ecoo Benutzern zu senden.";
   /// "Shop wallet"
   String get page4TitleOnboardingScreen => "Shop wallet";
   /// "Umsatz einlösen"
@@ -212,18 +212,18 @@ class I18n implements WidgetsLocalizations {
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
   /// "Jetzt verifizieren"
   String get buttonTextNexOnboardingScreen => "Jetzt verifizieren";
-  /// "Wallet typ"
-  String get titleRegisterWalletTypeScreen => "Wallet typ";
-  /// "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet."
-  String get descriptionRegisterWalletTypeScreen => "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.";
+  /// "Wallet Typ"
+  String get titleRegisterWalletTypeScreen => "Wallet Typ";
+  /// "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für ihr Geschäft zusätzlich ein Firmen Wallet aus."
+  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für ihr Geschäft zusätzlich ein Firmen Wallet aus.";
   /// "Privat"
   String get privateRegisterWalletTypeScreen => "Privat";
   /// "Firma"
   String get shopRegisterWalletTypeScreen => "Firma";
   /// "Verifizieren"
   String get titleRegisterVerifyScreen => "Verifizieren";
-  /// "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet."
-  String get descriptionRegisterVerifyScreen => "Eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam  Lorem ipsum dolor sit amet.";
+  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein Pin per SMS geschickt, mit dem Sie diesen Prozess abschliessen können."
+  String get descriptionRegisterVerifyScreen => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein Pin per SMS geschickt, mit dem Sie diesen Prozess abschliessen können.";
   /// "Jetzt verifizieren"
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Später verifizieren"
@@ -248,6 +248,14 @@ class I18n implements WidgetsLocalizations {
   String get transactionSuccessful => "Transaktion erfolgreich";
   /// "Paper Wallet scannen"
   String get scanPaperWalletButton => "Paper Wallet scannen";
+  /// "Deine Angaben konnten nicht verifiziert werden. Bitte trete mit der Gemeinde in Kontakt."
+  String get verifyFormErrorVerification => "Deine Angaben konnten nicht verifiziert werden. Bitte trete mit der Gemeinde in Kontakt.";
+  /// "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal."
+  String get walletSelectionScreenError => "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal.";
+  /// "https://payecoo.ch/datenschutz.html"
+  String get dataPolicyUrl => "https://payecoo.ch/datenschutz.html";
+  /// "https://tezos.foundation/"
+  String get tezosFoundationUrl => "https://tezos.foundation/";
 }
 
 class _I18n_de_CH extends I18n {

@@ -17,32 +17,21 @@ class WalletsViewModel extends BaseViewModel {
   WalletsViewModel(this._walletService, this._router, this._networkInfo);
 
   Either<Failure, List<WalletEntity>> get wallets =>
-      Right(_walletService.wallets); //_wallets;
+      Right(_walletService.wallets);
+
   Future<Either<Failure, List<WalletEntity>>> get futureWallets =>
       _walletService.fetchAndUpdateWallets();
+
   Future<bool> get isConnected => _networkInfo.isConnected;
 
-  // Future<void> loadWallets() async {
-  //   setViewState(Loading());
-
-  //   var failureOrWallets = await _walletService.allWallets;
-  //   failureOrWallets.fold((failure) => setViewState(Error(failure)),
-  //       (result) => _wallets = result);
-
-  //   setViewState(Loaded());
-  // }
-
-  void setSelected(WalletEntity wallet) async {
-    await _walletService.setSelected(wallet);
-    await _router.pushNamed(WalletDetailRoute, arguments: wallet);
+  WalletEntity getSelected() {
+    return _walletService.getSelected();
   }
 
-  // Future<void> onPullToRefresh() async {
-  //   setViewState(Loading());
-
-  //   var failureOrWallets = await _walletService.fetchAndUpdateWallets();
-  //   failureOrWallets.fold((failure) => setViewState(Error(failure)),
-  //       (result) => _wallets = result);
+  void setSelected(WalletEntity wallet) async {
+    await _router.pop();
+    await _walletService.setSelected(wallet);
+  }
 
   void select(WalletEntity wallet) {
     _walletService.setSelected(wallet);

@@ -13,7 +13,7 @@ class VerificationFormUid extends StatelessWidget {
     return SizedBox.fromSize(
       child: TextFormField(
         onChanged: onChanged,
-        maxLength: 2,
+        maxLength: 3,
         enableInteractiveSelection: false,
         maxLengthEnforced: true,
         enabled: !model.hasUid,
@@ -31,7 +31,7 @@ class VerificationFormUid extends StatelessWidget {
 
   Widget _numberDotText(BuildContext context) {
     return Text(
-      '-',
+      '.',
       style: Theme.of(context)
           .textTheme
           .bodyText1
@@ -54,7 +54,7 @@ class VerificationFormUid extends StatelessWidget {
                 'CHE-',
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText1
+                    .headline4
                     .merge(TextStyle(color: ColorStyles.black)),
               ),
               Expanded(
@@ -66,8 +66,6 @@ class VerificationFormUid extends StatelessWidget {
                     _numberInput(context, model.part2Changed),
                     _numberDotText(context),
                     _numberInput(context, model.part3Changed),
-                    _numberDotText(context),
-                    _numberInput(context, model.part4Changed),
                   ],
                 ),
               )

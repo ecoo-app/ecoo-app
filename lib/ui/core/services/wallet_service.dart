@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
@@ -18,6 +20,8 @@ abstract class IWalletService {
   Future<Either<Failure, ListResponse<Transaction>>>
       fetchAndUpdateSelectedTransactions(ListCursor cursor);
   List<WalletEntity> get wallets;
+
+  Stream<WalletEntity> get currentWalletStream;
 }
 
 @LazySingleton(as: IWalletService)
@@ -27,6 +31,8 @@ class WalletService implements IWalletService {
   List<WalletEntity> _wallets = [];
   WalletEntity _selected;
   ListResponse<Transaction> _selectedTransactions = ListResponse([], null);
+  StreamController _currentWalletStreamController =
+      StreamController<WalletEntity>.broadcast();
 
   WalletService(this._walletRepo, this._settingsService);
 
@@ -77,6 +83,7 @@ class WalletService implements IWalletService {
         await fetchAndUpdateSelected();
       }
     }
+    _currentWalletStreamController.add(this._selected);
   }
 
   @override
@@ -117,4 +124,8 @@ class WalletService implements IWalletService {
 
     return transactionsOrFailure;
   }
+
+  @override
+  Stream<WalletEntity> get currentWalletStream =>
+      _currentWalletStreamController.stream;
 }

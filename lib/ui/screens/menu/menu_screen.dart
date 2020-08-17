@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:injectable/injectable.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @injectable
 class MenuScreen extends StatelessWidget {
@@ -19,6 +20,12 @@ class MenuScreen extends StatelessWidget {
       color: ColorStyles.bg_gray, fontSize: 12.0, letterSpacing: 0.0);
 
   MenuScreen(this.viewModel);
+
+  Future<void> launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +58,9 @@ class MenuScreen extends StatelessWidget {
               ),
               MenuItemWidget(
                 text: I18n.of(context).privacyPolicyMenuScreen,
-                onTap: () => print('privacy policy'),
+                onTap: () async {
+                  await launchUrl(I18n.of(context).dataPolicyUrl);
+                },
               ),
               Container(
                 padding:
@@ -72,23 +81,28 @@ class MenuScreen extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      textBaseline: TextBaseline.alphabetic,
-                      children: <Widget>[
-                        Text('Powered by', style: lightGrayTextStyle),
-                        SizedBox(width: 5),
-                        Text('Tezos', style: grayTextStyle),
-                        SizedBox(
-                          width: 2,
-                        ),
-                        SvgPicture.asset(
-                          Assets.tezos_svg,
-                          fit: BoxFit.scaleDown,
-                          height: 20,
-                        ),
-                      ],
+                    GestureDetector(
+                      onTap: () async {
+                        await launchUrl(I18n.of(context).tezosFoundationUrl);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: <Widget>[
+                          Text('Powered by', style: lightGrayTextStyle),
+                          SizedBox(width: 5),
+                          Text('Tezos', style: grayTextStyle),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          SvgPicture.asset(
+                            Assets.tezos_svg,
+                            fit: BoxFit.scaleDown,
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),

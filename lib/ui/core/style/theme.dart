@@ -7,8 +7,8 @@ const FontWeight fontWeightRegular = FontWeight.w400;
 const String fontFamiliyPanam = 'NewPanam';
 
 ThemeData generalTheme = ThemeData(
-  accentColor: Colors.amber,
-  primaryColor: Colors.cyan,
+  accentColor: ColorStyles.black,
+  primaryColor: ColorStyles.blue,
   scaffoldBackgroundColor: ColorStyles.white,
   backgroundColor: ColorStyles.white,
   textTheme: TextTheme(
@@ -79,7 +79,7 @@ class ColorStyles {
   static const Color bg_white_9 = Color(0xE6FFFFFF);
 
   static const Color blue = Color(0xFF3979FF);
-  static const Color green = Color(0xFF3979FF);
+  static const Color green = Color(0xFF45DEA3);
   static const Color purple = Color(0xFF9774FF);
   static const Color red = Color(0xFFFF5F5F);
   static const Color pink = Color(0xFFFF96E3);
@@ -127,6 +127,9 @@ class Assets {
 
   static const private_header_svg = 'assets/images/private_header_bg.svg';
   static const shop_header_svg = 'assets/images/shop_header_bg.svg';
+
+  static const wallet_rectangle_green_svg = 'assets/images/wallet_rectangle_green.svg';
+  static const wallet_rectangle_blue_svg = 'assets/images/wallet_rectangle_blue.svg';
 
   // Splashscreen
   static const splash_wallet_graphic_svg =

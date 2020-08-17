@@ -5,9 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Flutter",
+            "name": "ecoo Dev",
             "request": "launch",
+            "program": "./lib/main_dev.dart",
             "type": "dart",
         },
+        {
+            "name": "ecoo Prod",
+            "request": "launch",
+            "program": "./lib/main_prod.dart",
+            "type": "dart",
+        },
+        {
+            "name": "ecoo Profile",
+            "request": "launch",
+            "program": "./lib/main_dev.dart",
+            "type": "dart"
+        }
     ]
 }

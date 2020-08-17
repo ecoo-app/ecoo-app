@@ -29,7 +29,7 @@ dependencies:
   ecoupon_lib:
     git:
       url: https://github.com/dudagroup/ecoupon-library.git
-      ref: 569f865a49e3bc00aee1d54aa68af2d8bffdbe72
+      ref: af3b6f5adce58a6ca187a0083993d98e965bba92
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -47,6 +47,7 @@ dependencies:
   flushbar: ^1.10.4
   provider: ^4.1.3
   device_info: ^0.4.2+4
+  url_launcher: ^5.5.0
 
   # injection provider arount get it
   injectable: ^1.0.0
@@ -64,7 +65,7 @@ dependencies:
   # Dart Linting Rules
   pedantic: ^1.9.0
   # SVG
-  flutter_svg: ^0.17.4
+  flutter_svg: ^0.18.0
   # Package Info
   package_info: ^0.4.1
   # qr scan

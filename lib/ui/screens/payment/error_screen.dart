@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class ErrorScreen extends StatelessWidget {
-  ErrorScreen();
 
   @override
   Widget build(BuildContext context) {

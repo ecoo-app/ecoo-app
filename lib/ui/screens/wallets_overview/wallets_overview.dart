@@ -14,12 +14,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 class WalletsOverviewScreen extends StatelessWidget {
-  List<Widget> createItems(vmodel, wallets) {
+  List<Widget> createItems(
+      WalletsViewModel vmodel, List<WalletEntity> wallets) {
     List<Widget> widgets = [];
     for (final wallet in wallets) {
       widgets.add(WalletCard(
           wallet: wallet,
-          isActive: false,
+          isActive: wallet.id == vmodel.getSelected().id ? true : false,
           onPressed: () async {
             await vmodel.setSelected(wallet);
           }));
@@ -31,14 +32,7 @@ class WalletsOverviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<WalletsViewModel>(
         model: getIt<WalletsViewModel>(),
-        // onModelReady: (vmodel) => vmodel.loadWallets(),
         builder: (context, vmodel, child) {
-          // if (vmodel.viewState is Error) {
-          //   Error error = vmodel.viewState;
-          //   SchedulerBinding.instance.addPostFrameCallback((_) {
-          //     ErrorToast(failure: error.failure).create(context)..show(context);
-          //   });
-          // }
           return Container(
             height: 500,
             child: FutureBuilder<Either<Failure, List<WalletEntity>>>(
@@ -79,7 +73,6 @@ class WalletsOverviewScreen extends StatelessWidget {
                                     )
                                   ]));
                       return view;
-                    // return Center(child: ECProgressIndicator());
                     case ConnectionState.active:
                     case ConnectionState.done:
                       var view;
@@ -132,38 +125,6 @@ class WalletsOverviewScreen extends StatelessWidget {
                   }
                 }),
           );
-          // return ListView(
-          //   shrinkWrap: true,
-          //   padding: const EdgeInsets.symmetric(vertical: 30),
-          //   children: <Widget>[
-          //     vmodel.viewState is Loading
-          //         ? Center(child: ECProgressIndicator())
-          //         : Container(),
-          //     // ...[
-          //     // for (final wallet in vmodel.wallets) ...[
-          //     //   WalletCard(
-          //     //       wallet: wallet,
-          //     //       isActive: false,
-          //     //       onPressed: () async {
-          //     //         await vmodel.setSelected(wallet);
-          //     //         await Navigator.pushNamed(context, WalletDetailRoute,
-          //     //             arguments: wallet);
-          //     //       })
-          //     // ],
-          //     Container(
-          //       padding: const EdgeInsets.symmetric(vertical: 10),
-          //       alignment: Alignment.center,
-          //       child: FlatButton.icon(
-          //         onPressed: () {
-          //           Navigator.pushNamed(context, RegisterWalletTypeRoute);
-          //         },
-          //         icon: Icon(Icons.add_circle_outline),
-          //         label: Text(I18n.of(context).addWallet),
-          //       ),
-          //     )
-          //   ],
-          //   // ],
-          // );
         });
   }
 }

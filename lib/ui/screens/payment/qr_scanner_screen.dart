@@ -16,8 +16,6 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRScannerScreen extends StatelessWidget {
   final double _qrRectSize = 230;
-  final double _headerSize = 120;
-  final double _qrIconPadding = 30;
   final bool showButton;
 
   QRScannerScreen({this.showButton = true});
@@ -61,39 +59,25 @@ class QRScannerScreen extends StatelessWidget {
                     ? GradientStyles.shopWalletAppbarGradient
                     : GradientStyles.privateWalletAppbarGradient,
               ),
-              SafeArea(
-                child: Center(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: (MediaQuery.of(context).size.height -
-                                _headerSize -
-                                _qrRectSize +
-                                _qrIconPadding) /
-                            2,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: _qrRectSize,
+                    width: _qrRectSize,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SvgPicture.asset(
+                        Assets.qr_code_svg,
                       ),
-                      Stack(
-                        children: <Widget>[
-                          SizedBox(
-                            height: _qrRectSize,
-                            width: _qrRectSize,
-                            child: Container(
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Center(
-                                  child: SvgPicture.asset(Assets.qr_code_svg),
-                                ),
-                              ),
-                            ),
-                          ),
-                          vmodel.viewState is Loading
-                              ? ECProgressIndicator()
-                              : Container()
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  vmodel.viewState is Loading
+                      ? ECProgressIndicator()
+                      : Container(),
+                ],
               ),
               SafeArea(
                 child: Align(
@@ -104,7 +88,7 @@ class QRScannerScreen extends StatelessWidget {
                     child: showButton
                         ? OutlinedSecondaryButton(
                             textColor: Colors.white,
-                            text: 'manuell eingeben',
+                            text: I18n.of(context).cancelScan,
                             onPressed: () => vmodel.next(),
                           )
                         : Container(),

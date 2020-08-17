@@ -35,7 +35,7 @@ class PinVerificationViewModel extends BaseViewModel {
                 isShop: wallet.isShop,
                 text: successText,
                 iconAssetPath: Assets.check_double_svg,
-                nextRoute: HomeRoute));
+                nextRoute: WalletDetailRoute));
 
         setViewState(Loaded());
       }

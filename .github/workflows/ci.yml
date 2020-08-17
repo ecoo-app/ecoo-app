@@ -19,7 +19,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.5"
+          flutter-version: "1.20.2"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -42,7 +42,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.5"
+          flutter-version: "1.20.2"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -65,7 +65,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.5"
+          flutter-version: "1.20.2"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -79,7 +79,7 @@ jobs:
       - name: Build Android
         run: |
           echo "$KEYSTORE" | base64 --decode > ./android/assets/ecoupon.keystore.jks
-          flutter build appbundle
+          flutter build appbundle -t ./lib/main_dev.dart
         env:
           KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -96,7 +96,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.5"
+          flutter-version: "1.20.2"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -108,4 +108,4 @@ jobs:
           make generate_code
 
       - name: Build iOS
-        run: flutter build ios --release --no-codesign
+        run: flutter build ios -t ./lib/main_dev.dart --release --no-codesign

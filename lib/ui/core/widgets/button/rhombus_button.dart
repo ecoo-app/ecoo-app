@@ -7,12 +7,12 @@ class RhombusButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool private;
 
-  const RhombusButton({
-    Key key,
-    @required this.private,
-    @required this.onTap,
-    @required this.text,
-  }) : super(key: key);
+  const RhombusButton(
+      {Key key,
+      @required this.private,
+      @required this.onTap,
+      @required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -163,12 +163,6 @@ class WalletScreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(16.0),
                           ),
-                          // PrimaryButton(
-                          //   text: 'login',
-                          //   onPressed: () {
-                          //     vmodel.testLogin();
-                          //   },
-                          // ),
                           ..._createButtons(
                               vmodel.wallet.isShop, context, vmodel),
                           SizedBox(

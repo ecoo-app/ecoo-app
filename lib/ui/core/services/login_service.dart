@@ -192,17 +192,22 @@ class LoginService implements ILoginService {
         .readSecureString(Constants.appleAuthorizationCode);
 
     if (authCode != null) {
-      var token = await walletSource
-          .session()
-          .convertToken(authCode, clientInfo, AuthProvider.apple);
+      try {
+        var token = await walletSource
+            .session()
+            .convertToken(authCode, clientInfo, AuthProvider.apple);
 
-      if (token != null) {
-        await _settingsService.saveIdentityToken(jsonEncode(token.toJson()));
-        await _settingsService.writeSecureString(
-            Constants.identityTokenProvider, AuthProvider.apple.value);
-        await _notificationService.registerDevice();
-        return true;
-      } else {
+        if (token != null) {
+          await _settingsService.saveIdentityToken(jsonEncode(token.toJson()));
+          await _settingsService.writeSecureString(
+              Constants.identityTokenProvider, AuthProvider.apple.value);
+          await _notificationService.registerDevice();
+          return true;
+        } else {
+          return false;
+        }
+      } catch (e) {
+        print(e.toString());
         return false;
       }
     }

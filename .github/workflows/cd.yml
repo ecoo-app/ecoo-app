@@ -27,7 +27,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.5"
+          flutter-version: "1.20.2"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -53,7 +53,7 @@ jobs:
       - name: Build Android
         run: |
           echo "$KEYSTORE" | base64 --decode > ./android/assets/ecoupon.keystore.jks
-          flutter build appbundle --release --build-name ${{ env.VersionMajorMinorPatchBuild }} --build-number ${{ env.VersionAndroidFullNumeric }}
+          flutter build appbundle -t ./lib/main_prod.dart --release --build-name ${{ env.VersionMajorMinorPatchBuild }} --build-number ${{ env.VersionAndroidFullNumeric }}
           cd android
           gem install bundler
           bundle install
@@ -85,7 +85,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.17.5"
+          flutter-version: "1.20.2"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -111,7 +111,7 @@ jobs:
           p12-password: ${{ secrets.IOS_CERTIFICATES_P12_PASSWORD }}
       - name: Build iOS
         run: |
-          flutter build ios --release --no-codesign --build-name ${{ env.VersionMajorMinorPatch }} --build-number ${{ env.VersionMajorMinorPatchBuild }}
+          flutter build ios -t ./lib/main_prod.dart --release --no-codesign --build-name ${{ env.VersionMajorMinorPatch }} --build-number ${{ env.VersionMajorMinorPatchBuild }}
           cd ios
           gem install bundler
           bundle install

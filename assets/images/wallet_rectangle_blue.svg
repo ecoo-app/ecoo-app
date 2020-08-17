@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="170.304" height="170.304" viewBox="0 0 170.304 170.304">
+    <defs>
+        <linearGradient id="linear-gradient" x1=".142" x2="1" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#00eaea"/>
+            <stop offset=".5" stop-color="#39c1ff"/>
+            <stop offset="1" stop-color="#3979ff"/>
+        </linearGradient>
+    </defs>
+    <rect id="Flavour_Rectangle" width="142" height="142" fill="url(#linear-gradient)" data-name="Flavour Rectangle" rx="20" transform="rotate(-13 140.18 15.971)"/>
+</svg>

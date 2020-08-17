@@ -17,6 +17,6 @@ class RegisterVerifyScreenViewModel {
   }
 
   Future<void> verifyLater() async {
-    await _router.pushAndRemoveUntil(HomeRoute, '');
+    await _router.pushAndRemoveUntil(WalletDetailRoute, '');
   }
 }

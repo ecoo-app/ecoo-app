@@ -20,7 +20,7 @@ class WalletCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(4.0),
         border: isActive
             ? Border.all(
-                width: 1,
+                width: 1.5,
                 color: wallet.isShop ? ColorStyles.blue : ColorStyles.green)
             : null);
 
@@ -35,29 +35,52 @@ class WalletCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-                padding: const EdgeInsets.only(left: 8, top: 8),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text(wallet.id,
-                              style: Theme.of(context).textTheme.headline3),
-                          Text(I18n.of(context).walletMenuScreen,
-                              style: Theme.of(context).textTheme.bodyText2)
-                        ],
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 8, top: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(wallet.id,
+                                style: Theme.of(context).textTheme.headline3),
+                            Text(I18n.of(context).walletMenuScreen,
+                                style: Theme.of(context).textTheme.bodyText2)
+                          ],
+                        ),
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(right: 30, top: 12),
-                      child: SvgPicture.asset(
-                          wallet.isShop
-                              ? Assets.wallet_shop_svg
-                              : Assets.wallet_private_svg,
-                          color: ColorStyles.black),
+                      height: 73,
+                      width: 95,
+                      child: Stack(
+                        children: [
+                          Positioned.fill(
+                            top: -100,
+                            right: -75,
+                            child: SvgPicture.asset(
+                              wallet.isShop
+                                  ? Assets.wallet_rectangle_blue_svg
+                                  : Assets.wallet_rectangle_green_svg,
+                              fit: BoxFit.none,
+                              allowDrawingOutsideViewBox: false,
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.topRight,
+                            padding: const EdgeInsets.only(right: 18, top: 20),
+                            child: SvgPicture.asset(
+                                wallet.isShop
+                                    ? Assets.wallet_shop_svg
+                                    : Assets.wallet_private_svg,
+                                color: ColorStyles.white),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),

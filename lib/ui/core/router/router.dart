@@ -9,7 +9,7 @@ import 'package:e_coupon/ui/screens/payment/request_screen.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:e_coupon/ui/screens/register/register_screen.dart';
 import 'package:e_coupon/ui/screens/register/register_verifiy_screen.dart';
-import 'package:e_coupon/ui/screens/register/register_wallet_type_screen.dart';
+import 'package:e_coupon/ui/screens/register/wallet_selection_screen.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
 import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/qr_overlay.dart';
@@ -20,8 +20,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-// unfortunately routesetting does not allow enums
-const HomeRoute = 'home';
 const SplashRoute = '/splash';
 const OnboardingRoute = '/onboarding';
 const RegisterRoute = '/register';
@@ -74,11 +72,9 @@ class Router implements IRouter {
       case RegisterRoute:
         return _createRoute(settings, getIt<RegisterScreen>(), false);
       case RegisterWalletTypeRoute:
-        return _createRoute(settings, getIt<RegisterWalletTypeScreen>(), false);
+        return _createRoute(settings, getIt<WalletSelectionScreen>(), false);
       case RegisterVerifyRoute:
         return _createRoute(settings, getIt<RegisterVerifyScreen>(), false);
-      // TODO fix home route
-      case HomeRoute:
       case WalletDetailRoute:
         return _createRoute(settings, getIt<WalletScreen>(), false);
       case WalletsOverviewRoute:
