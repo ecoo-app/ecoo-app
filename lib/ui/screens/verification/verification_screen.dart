@@ -35,6 +35,14 @@ class VerificationScreen extends StatelessWidget {
           model: value.lastName,
           label: I18n.of(context).verifyFormFieldLastName,
         ),
+        DateFormField(
+          labelText: I18n.of(context).verifyFormFieldBirthday,
+          suffixIcon: Icon(Icons.calendar_today),
+          initialDate: DateTime.now(),
+          firstDate: DateTime.utc(1870),
+          lastDate: DateTime.now(),
+          onDateChanged: value.dateOfBirth.setValue,
+        ),
         VerificationFormField(
             model: value.phoneNumber,
             label: I18n.of(context).verifyFormFieldPhoneNumber,
@@ -43,13 +51,14 @@ class VerificationScreen extends StatelessWidget {
           model: value.address,
           label: I18n.of(context).verifyFormFieldAddress,
         ),
-        DateFormField(
-          labelText: I18n.of(context).verifyFormFieldBirthday,
-          suffixIcon: Icon(Icons.calendar_today),
-          initialDate: DateTime.now(),
-          firstDate: DateTime.utc(1870),
-          lastDate: DateTime.now(),
-          onDateChanged: value.dateOfBirth.setValue,
+        VerificationFormField(
+          model: value.postcode,
+          label: I18n.of(context).verifyFormFieldPostcode,
+          keyboardType: TextInputType.number,
+        ),
+        VerificationFormField(
+          model: value.city,
+          label: I18n.of(context).verifyFormFieldCity,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -83,6 +92,7 @@ class VerificationScreen extends StatelessWidget {
         VerificationFormField(
           model: value.postcode,
           label: I18n.of(context).verifyFormFieldPostcode,
+          keyboardType: TextInputType.number,
         ),
         VerificationFormField(
           model: value.city,

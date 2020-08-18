@@ -48,7 +48,7 @@ class VerificationInputData extends ChangeNotifier {
       dateOfBirth.input,
       address.value,
       '',
-      '',
+      postcode.value,
       VerificationStage.notMatched);
 
   CompanyProfileEntity toCompanyEntity() => CompanyProfileEntity(
