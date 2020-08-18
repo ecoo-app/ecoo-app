@@ -48,7 +48,7 @@ class PrimaryButton extends StatelessWidget {
         decoration: decoration,
         child: OutlineButton(
           padding: const EdgeInsets.symmetric(vertical: 15),
-          onPressed: (isLoading || isEnabled) ? null : onPressed,
+          onPressed: (isLoading || !isEnabled) ? null : onPressed,
           shape: border,
           borderSide: BorderSide.none,
           child: Row(

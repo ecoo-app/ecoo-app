@@ -154,7 +154,7 @@ class VerificationScreen extends StatelessWidget {
                     return PrimaryButton(
                       isLoading: viewModel.viewState is Loading,
                       text: I18n.of(context).buttonFormClaimVerification,
-                      isEnabled: isError,
+                      isEnabled: !isError,
                       onPressed: () async {
                         await viewModel.onVerify(
                             I18n.of(context).successTextVerification,
