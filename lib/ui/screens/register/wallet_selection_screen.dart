@@ -24,11 +24,8 @@ class WalletSelectionScreen extends StatelessWidget {
       builder: (context, model, child) {
         if (model.viewState is Error) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            ErrorToast(
-                    failure: MessageFailure(
-                        I18n.of(context).walletSelectionScreenError))
-                .create(context)
-                  ..show(context);
+            Error error = model.viewState;
+            ErrorToast(failure: error.failure).create(context)..show(context);
           });
           // return Container();
         }

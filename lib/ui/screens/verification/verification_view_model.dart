@@ -47,8 +47,6 @@ class VerificationViewModel extends BaseViewModel {
           setViewState(Loaded());
         }
       } catch (failure) {
-        print('view model error $failure');
-        // setViewState(failure);
         setViewState(Error((failure as Failure)));
       }
     }
