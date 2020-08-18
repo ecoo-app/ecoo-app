@@ -7,10 +7,12 @@ class PrimaryButton extends StatelessWidget {
   final String text;
   final bool isLoading;
   final EdgeInsets margin;
+  final bool isEnabled;
 
   PrimaryButton(
       {this.onPressed,
       @required this.text,
+      this.isEnabled = true,
       this.isLoading = false,
       this.margin});
 
@@ -39,13 +41,14 @@ class PrimaryButton extends StatelessWidget {
     var border =
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0));
 
+    var textColor = isEnabled ? ColorStyles.bg_light_gray : ColorStyles.white;
     return Container(
       margin: margin ?? EdgeInsets.all(0),
       child: DecoratedBox(
         decoration: decoration,
         child: OutlineButton(
           padding: const EdgeInsets.symmetric(vertical: 15),
-          onPressed: isLoading ? () {} : onPressed,
+          onPressed: (isLoading || isEnabled) ? null : onPressed,
           shape: border,
           borderSide: BorderSide.none,
           child: Row(
@@ -63,7 +66,7 @@ class PrimaryButton extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline3
-                    .merge(TextStyle(color: ColorStyles.white)),
+                    .merge(TextStyle(color: textColor)),
               ),
             ],
           ),

@@ -2,8 +2,9 @@ import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
-import 'package:e_coupon/ui/core/widgets/date_form_field.dart';
+import 'package:e_coupon/ui/core/widgets/form/date_form_field.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
+import 'package:e_coupon/ui/core/widgets/form/verification_form_checkbox.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_field.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_title.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_uid.dart';
@@ -22,7 +23,7 @@ class VerificationScreen extends StatelessWidget {
   Widget _generatePrivateWalletVerificationForm(
       VerificationInputData value, BuildContext context) {
     return ListView(
-      padding: EdgeInsets.only(top: 25),
+      padding: const EdgeInsets.only(top: 25),
       children: <Widget>[
         VerificationFormTitle(
             text: I18n.of(context).verificationPrivateFormTitle),
@@ -49,6 +50,14 @@ class VerificationScreen extends StatelessWidget {
           firstDate: DateTime.utc(1870),
           lastDate: DateTime.now(),
           onDateChanged: value.dateOfBirth.setValue,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: VerificationFormCheckBox(
+            text: I18n.of(context).verificationFilledTruthfully,
+            onChanged: value.onIsThruthChanged,
+            value: value.isTruth,
+          ),
         ),
       ],
     );
@@ -79,6 +88,14 @@ class VerificationScreen extends StatelessWidget {
           model: value.city,
           label: I18n.of(context).verifyFormFieldCity,
         ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: VerificationFormCheckBox(
+            text: I18n.of(context).verificationFilledTruthfully,
+            onChanged: value.onIsThruthChanged,
+            value: value.isTruth,
+          ),
+        ),
       ],
     );
   }
@@ -88,22 +105,22 @@ class VerificationScreen extends StatelessWidget {
     return BaseView<VerificationViewModel>(
         model: getIt<VerificationViewModel>(),
         builder: (context, viewModel, child) {
-          return MainLayout(
-            isShop: viewModel.isShop,
-            title: I18n.of(context).titleFormClaimVerification,
-            leadingType: BackButtonType.Close,
-            insets: EdgeInsets.symmetric(horizontal: 24),
-            body: (() {
-              if (viewModel.viewState is Error) {
-                Error error = viewModel.viewState;
-                SchedulerBinding.instance.addPostFrameCallback((_) {
-                  ErrorToast(failure: error.failure).create(context)
-                    ..show(context);
-                });
-              }
-              return ChangeNotifierProvider<VerificationInputData>.value(
-                value: viewModel.inputData,
-                child: Form(
+          return ChangeNotifierProvider<VerificationInputData>.value(
+            value: viewModel.inputData,
+            child: MainLayout(
+              isShop: viewModel.isShop,
+              title: I18n.of(context).titleFormClaimVerification,
+              leadingType: BackButtonType.Close,
+              insets: EdgeInsets.symmetric(horizontal: 24),
+              body: (() {
+                if (viewModel.viewState is Error) {
+                  Error error = viewModel.viewState;
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    ErrorToast(failure: error.failure).create(context)
+                      ..show(context);
+                  });
+                }
+                return Form(
                     key: viewModel.formKey,
                     child: Consumer<VerificationInputData>(
                       builder: (context, value, child) {
@@ -113,24 +130,30 @@ class VerificationScreen extends StatelessWidget {
                             : _generatePrivateWalletVerificationForm(
                                 value, context);
                       },
-                    )),
-              );
-            }()),
-            bottom: Container(
-              margin: const EdgeInsets.only(
-                  top: 5, bottom: 25, left: 25, right: 25),
-              child: PrimaryButton(
-                isLoading: viewModel.viewState is Loading,
-                text: I18n.of(context).buttonFormClaimVerification,
-                onPressed: viewModel.viewState is Loading ||
-                        viewModel.viewState is Error
-                    ? () {}
-                    : () async {
+                    ));
+              }()),
+              bottom: Container(
+                margin: const EdgeInsets.only(
+                    top: 5, bottom: 25, left: 25, right: 25),
+                child: Consumer<VerificationInputData>(
+                  builder: (context, value, child) {
+                    var isError = viewModel.viewState is Loading ||
+                        viewModel.viewState is Error ||
+                        !value.isTruth;
+
+                    return PrimaryButton(
+                      isLoading: viewModel.viewState is Loading,
+                      text: I18n.of(context).buttonFormClaimVerification,
+                      isEnabled: isError,
+                      onPressed: () async {
                         await viewModel.onVerify(
                             I18n.of(context).successTextVerification,
                             errorText:
                                 I18n.of(context).verifyFormErrorVerification);
                       },
+                    );
+                  },
+                ),
               ),
             ),
           );

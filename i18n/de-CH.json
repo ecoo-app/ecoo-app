@@ -108,5 +108,6 @@
   "verifyFormErrorVerification": "Deine Angaben konnten nicht verifiziert werden. Bitte trete mit der Gemeinde in Kontakt.",
   "walletSelectionScreenError": "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal.",
   "dataPolicyUrl": "https://payecoo.ch/datenschutz.html",
-  "tezosFoundationUrl": "https://tezos.foundation/"
+  "tezosFoundationUrl": "https://tezos.foundation/",
+  "truthfullyEnteredFormCheck": "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind."
 }

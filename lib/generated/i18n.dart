@@ -42,8 +42,8 @@ class I18n implements WidgetsLocalizations {
   String get privateWalletSend => "Senden";
   /// "Anfordern"
   String get privateWalletRecieve => "Anfordern";
-  /// "Gutschrift anfordern"
-  String get privateWalletClaim => "Gutschrift anfordern";
+  /// "Gutschrift aufladen"
+  String get privateWalletClaim => "Gutschrift aufladen";
   /// "Einlösen"
   String get walletRedeem => "Einlösen";
   /// "Kassieren"
@@ -62,10 +62,6 @@ class I18n implements WidgetsLocalizations {
   String get addWallet => "Wallet hinzufügen";
   /// "Diese Feld muss ausgefüllt werden."
   String get formErrorRequired => "Diese Feld muss ausgefüllt werden.";
-  /// "Wallet typ"
-  String get titleWalletCreation => "Wallet typ";
-  /// "Polaroid raw denim fingerstache lumbersexual street art kale chips cornhole before they sold out. Wolf VHS shabby chic asymmetrical intelligentsia blue bottle scenester edison bulb 8-bit. Typewriter neutra prism, raclette glossier chartreuse adaptogen food truck jianbing blog craft beer waistcoat paleo. Scenester iceland butcher brunch put a bird on it raw denim taiyaki selfies squid. Seitan bicycle rights man braid fixie truffaut chicharrones cray, vaporware gochujang."
-  String get textWalletCreation => "Polaroid raw denim fingerstache lumbersexual street art kale chips cornhole before they sold out. Wolf VHS shabby chic asymmetrical intelligentsia blue bottle scenester edison bulb 8-bit. Typewriter neutra prism, raclette glossier chartreuse adaptogen food truck jianbing blog craft beer waistcoat paleo. Scenester iceland butcher brunch put a bird on it raw denim taiyaki selfies squid. Seitan bicycle rights man braid fixie truffaut chicharrones cray, vaporware gochujang.";
   /// "Verifizieren"
   String get titleClaimVerification => "Verifizieren";
   /// "Jetzt verifizieren"
@@ -256,6 +252,8 @@ class I18n implements WidgetsLocalizations {
   String get dataPolicyUrl => "https://payecoo.ch/datenschutz.html";
   /// "https://tezos.foundation/"
   String get tezosFoundationUrl => "https://tezos.foundation/";
+  /// "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind."
+  String get truthfullyEnteredFormCheck => "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.";
 }
 
 class _I18n_de_CH extends I18n {

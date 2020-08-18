@@ -15,6 +15,8 @@ class VerificationInputData extends ChangeNotifier {
   TextVerificationInput name = TextVerificationInput();
   UidVerificationInput uid = UidVerificationInput();
 
+  bool _isTruth = false;
+
   VerificationInputData() {
     firstName.addListener(onChanged);
     lastName.addListener(onChanged);
@@ -26,7 +28,14 @@ class VerificationInputData extends ChangeNotifier {
     uid.addListener(onChanged);
   }
 
+  bool get isTruth => _isTruth;
+
   void onChanged() {
+    notifyListeners();
+  }
+
+  void onIsThruthChanged(bool value) {
+    _isTruth = value;
     notifyListeners();
   }
 
