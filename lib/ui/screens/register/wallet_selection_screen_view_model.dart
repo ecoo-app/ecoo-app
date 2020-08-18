@@ -32,16 +32,16 @@ class WalletSelectionScreenViewModel extends BaseViewModel {
     unawaited(Future.delayed(Duration(milliseconds: 1000)).then((value) {
       setViewState(Loaded());
     }));
-    
+
     var walletOrFailure =
         await _walletRepo.createWallet(null, isShop: isTypeShop);
-    walletOrFailure.fold((failure) {
+    await walletOrFailure.fold((failure) {
       setViewState(Error(failure));
-    }, (wallet) {
-      _onWalletCreated(WalletEntity(wallet));
+    }, (wallet) async {
+      await _onWalletCreated(WalletEntity(wallet));
       setViewState(Success(''));
     });
-    setViewState(Loaded());
+    // setViewState(Loaded());
   }
 
   Future<void> _onWalletCreated(WalletEntity wallet) async {

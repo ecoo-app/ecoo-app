@@ -30,7 +30,7 @@ class WalletSelectionScreen extends StatelessWidget {
                 .create(context)
                   ..show(context);
           });
-          return Container();
+          // return Container();
         }
 
         var isLoading = (model.viewState is Loading);
