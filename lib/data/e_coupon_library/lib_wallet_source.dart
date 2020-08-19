@@ -7,8 +7,7 @@ abstract class IWalletSource {
 
 @LazySingleton(as: IWalletSource)
 class WalletSource extends IWalletSource {
-  final WalletService service =
-      WalletService('https://ecoupon-backend.dev.gke.papers.tech');
+  final WalletService service = WalletService();
 
   WalletService get walletService => service;
 }
