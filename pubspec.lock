@@ -243,8 +243,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: af3b6f5adce58a6ca187a0083993d98e965bba92
-      resolved-ref: af3b6f5adce58a6ca187a0083993d98e965bba92
+      ref: b4a697c443683fec1f120b2f87f2fe31ef703ad8
+      resolved-ref: b4a697c443683fec1f120b2f87f2fe31ef703ad8
       url: "https://github.com/dudagroup/ecoupon-library.git"
     source: git
     version: "0.0.1"

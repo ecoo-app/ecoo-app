@@ -29,7 +29,7 @@ dependencies:
   ecoupon_lib:
     git:
       url: https://github.com/dudagroup/ecoupon-library.git
-      ref: af3b6f5adce58a6ca187a0083993d98e965bba92
+      ref: b4a697c443683fec1f120b2f87f2fe31ef703ad8
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -37,7 +37,7 @@ dependencies:
   state_notifier: ^0.5.0
   localstorage: ^3.0.2+5
   http: ^0.12.2
-
+  
   gradient_app_bar: ^0.1.3
   # not needed?
   barcode_scan: any

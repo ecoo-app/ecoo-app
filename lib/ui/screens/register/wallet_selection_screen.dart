@@ -1,4 +1,3 @@
-import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';

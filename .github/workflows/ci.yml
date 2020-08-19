@@ -7,7 +7,9 @@ on:
   push:
     branches:
       - "**"
-      - "!master"
+      - "!releases/**"
+    tags-ignore:
+      - "**"
 
 jobs:
   lint:
