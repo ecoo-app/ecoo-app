@@ -5,6 +5,7 @@ abstract class IWalletSource {
   WalletService get walletService;
 }
 
+// test
 @LazySingleton(as: IWalletSource)
 class WalletSource extends IWalletSource {
   final WalletService service = WalletService();
