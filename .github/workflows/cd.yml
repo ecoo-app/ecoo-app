@@ -6,7 +6,9 @@ name: CD
 on:
   push:
     branches:
-      - "master"
+      - "releases/**"
+    tags:
+      - '**'
 
 jobs:
   build-android:
