@@ -6,6 +6,8 @@ import 'package:e_coupon/ui/core/widgets/form/date_form_field.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_checkbox.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_field.dart';
+import 'package:e_coupon/ui/core/widgets/form/verification_form_number.dart';
+import 'package:e_coupon/ui/core/widgets/form/verification_form_phone.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_title.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_uid.dart';
 import 'package:e_coupon/ui/core/widgets/layout/main_layout.dart';
@@ -43,15 +45,16 @@ class VerificationScreen extends StatelessWidget {
           lastDate: DateTime.now(),
           onDateChanged: value.dateOfBirth.setValue,
         ),
-        VerificationFormField(
-            model: value.phoneNumber,
-            label: I18n.of(context).verifyFormFieldPhoneNumber,
-            keyboardType: TextInputType.phone),
+        VerificationFormPhoneField(
+          model: value.phoneNumber,
+          label: I18n.of(context).verifyFormFieldPhoneNumber,
+        ),
         VerificationFormField(
           model: value.address,
           label: I18n.of(context).verifyFormFieldAddress,
         ),
-        VerificationFormField(
+        VerificationFormNumberField(
+          maxLength: 4,
           model: value.postcode,
           label: I18n.of(context).verifyFormFieldPostcode,
           keyboardType: TextInputType.number,
@@ -89,7 +92,8 @@ class VerificationScreen extends StatelessWidget {
           model: value.address,
           label: I18n.of(context).verifyFormFieldAddress,
         ),
-        VerificationFormField(
+        VerificationFormNumberField(
+          maxLength: 4,
           model: value.postcode,
           label: I18n.of(context).verifyFormFieldPostcode,
           keyboardType: TextInputType.number,
@@ -144,12 +148,11 @@ class VerificationScreen extends StatelessWidget {
               }()),
               bottom: Container(
                 margin: const EdgeInsets.only(
-                    top: 5, bottom: 25, left: 25, right: 25),
+                    top: 0, bottom: 25, left: 25, right: 25),
                 child: Consumer<VerificationInputData>(
                   builder: (context, value, child) {
-                    var isError = viewModel.viewState is Loading ||
-                        viewModel.viewState is Error ||
-                        !value.isTruth;
+                    var isError =
+                        viewModel.viewState is Loading || !value.isTruth;
 
                     return PrimaryButton(
                       isLoading: viewModel.viewState is Loading,

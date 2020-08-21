@@ -18,6 +18,10 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double opacity = 1.0;
+    if (!isEnabled || onPressed == null) {
+      opacity = 0.6;
+    }
     var decoration = BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.centerLeft,
@@ -29,10 +33,10 @@ class PrimaryButton extends StatelessWidget {
             1.0,
           ],
           colors: [
-            ColorStyles.pink,
-            Color(0xFFC971FF),
-            ColorStyles.purple,
-            ColorStyles.purple
+            ColorStyles.pink.withOpacity(opacity),
+            Color(0xFFC971FF).withOpacity(opacity),
+            ColorStyles.purple.withOpacity(opacity),
+            ColorStyles.purple.withOpacity(opacity)
           ],
         ),
         color: Colors.black,

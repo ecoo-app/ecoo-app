@@ -42,8 +42,8 @@ class I18n implements WidgetsLocalizations {
   String get privateWalletSend => "Senden";
   /// "Anfordern"
   String get privateWalletRecieve => "Anfordern";
-  /// "Gutschrift aufladen"
-  String get privateWalletClaim => "Gutschrift aufladen";
+  /// "Guthaben aufladen"
+  String get privateWalletClaim => "Guthaben aufladen";
   /// "Einlösen"
   String get walletRedeem => "Einlösen";
   /// "Kassieren"
@@ -60,8 +60,8 @@ class I18n implements WidgetsLocalizations {
   String get showAllTransactions => "alle Bewegungen anzeigen";
   /// "Wallet hinzufügen"
   String get addWallet => "Wallet hinzufügen";
-  /// "Diese Feld muss ausgefüllt werden."
-  String get formErrorRequired => "Diese Feld muss ausgefüllt werden.";
+  /// "Dieses Feld muss ausgefüllt werden."
+  String get formErrorRequired => "Dieses Feld muss ausgefüllt werden.";
   /// "Verifizieren"
   String get titleClaimVerification => "Verifizieren";
   /// "Jetzt verifizieren"

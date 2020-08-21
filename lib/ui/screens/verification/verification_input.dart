@@ -54,22 +54,15 @@ class PhoneNumberVerificationInput extends TextVerificationInput {
 
   @override
   bool isValid() {
-    if (input != null && input.isNotEmpty && isNumeric(input)) {
+    if (input != null && input.isNotEmpty) {
       return true;
     }
 
     return false;
   }
 
-  bool isNumeric(String s) {
-    if (s == null) {
-      return false;
-    }
-    return double.tryParse(s) != null;
-  }
-
   @override
-  String get value => input;
+  String get value => '+41${input?.replaceAll(' ', '') ?? ''}';
 
   void setValue(String text) {
     input = text;
