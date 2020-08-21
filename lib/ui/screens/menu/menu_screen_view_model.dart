@@ -1,23 +1,82 @@
+import 'dart:async';
+
+import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/app_service.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
+import 'package:e_coupon/ui/core/services/wallet_service.dart';
+import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class MenuScreenViewModel extends BaseViewModel {
   final IAppService _appService;
-  final IRouter router;
+  final IWalletService _walletService;
+  final INetworkInfo _networkInfo;
+  final IRouter _router;
 
-  MenuScreenViewModel(this._appService, this.router);
+  MenuScreenViewModel(
+      this._appService, this._router, this._walletService, this._networkInfo);
 
   String get appVersion => _appService.appVersion;
 
+  Future<bool> get isConnected => _networkInfo.isConnected;
+
+  Stream<List<MenuItem>> get wallets => _walletService.walletsStream.transform(
+          StreamTransformer<List<WalletEntity>, List<MenuItem>>.fromHandlers(
+              handleData: (data, sink) async {
+        var menuItems = <MenuItem>[];
+        if (await isConnected) {
+          menuItems.addAll(data.map((e) => WalletMenuItem(e)));
+        } else {
+          menuItems.add(NetworkErrorMenuItem());
+        }
+
+        menuItems.add(AddWalletMenutItem());
+        menuItems.add(OnboardingMenuItem());
+        menuItems.add(FaqMenuItem());
+        menuItems.add(PrivacyPolicyMenuItem());
+
+        sink.add(menuItems);
+      }));
+
   Future<void> onboarding() async {
-    await router.pushNamed(OnboardingRoute);
+    await _router.pushNamed(OnboardingRoute,
+        arguments: OnboardingScreenArguments(true));
   }
 
   Future<void> close() {
-    router.pop();
+    _router.pop();
     return Future.value();
   }
+
+  WalletEntity get selected => _walletService.getSelected();
+
+  Future<void> init() async {
+    await _walletService.fetchAndUpdateWallets();
+  }
+
+  Future<void> select(WalletEntity walletEntity) async {
+    await _router.pop();
+    await _walletService.setSelected(walletEntity);
+  }
 }
+
+class MenuItem {}
+
+class WalletMenuItem implements MenuItem {
+  final WalletEntity walletEntity;
+
+  WalletMenuItem(this.walletEntity);
+}
+
+class OnboardingMenuItem implements MenuItem {}
+
+class FaqMenuItem implements MenuItem {}
+
+class PrivacyPolicyMenuItem implements MenuItem {}
+
+class AddWalletMenutItem implements MenuItem {}
+
+class NetworkErrorMenuItem implements MenuItem {}

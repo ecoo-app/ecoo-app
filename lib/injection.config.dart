@@ -58,7 +58,6 @@ import 'ui/screens/verification/verification_view_model.dart';
 import 'ui/screens/wallet/qr_overlay.dart';
 import 'ui/screens/wallet/wallet_screen.dart';
 import 'ui/screens/wallet/wallet_view_model.dart';
-import 'ui/screens/wallets_overview/wallets_view_model.dart';
 
 /// Environment names
 const _prod = 'prod';
@@ -106,8 +105,12 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       registerFor: {_prod, _dev});
   gh.lazySingleton<IWalletService>(
       () => WalletService(g<IWalletRepo>(), g<ISettingsService>()));
-  gh.factory<MenuScreenViewModel>(
-      () => MenuScreenViewModel(g<IAppService>(), g<IRouter>()));
+  gh.factory<MenuScreenViewModel>(() => MenuScreenViewModel(
+        g<IAppService>(),
+        g<IRouter>(),
+        g<IWalletService>(),
+        g<INetworkInfo>(),
+      ));
   gh.factory<OnboardingScreenViewModel>(
       () => OnboardingScreenViewModel(g<IRouter>(), g<ISettingsService>()));
   gh.factory<PaymentViewModel>(() => PaymentViewModel(
@@ -147,11 +150,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<MockLoginService>(),
         g<INetworkInfo>(),
         g<IWalletRepo>(),
-      ));
-  gh.factory<WalletsViewModel>(() => WalletsViewModel(
-        g<IWalletService>(),
-        g<IRouter>(),
-        g<INetworkInfo>(),
       ));
   gh.lazySingleton<INotificationService>(
       () => NotificationService(g<IWalletSource>(), g<ISettingsService>()));

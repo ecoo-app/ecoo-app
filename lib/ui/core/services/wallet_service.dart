@@ -9,6 +9,7 @@ import 'package:e_coupon/ui/core/services/settings_service.dart';
 import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/subjects.dart';
 
 abstract class IWalletService {
   Future<Either<Failure, List<WalletEntity>>> get allWallets;
@@ -21,7 +22,9 @@ abstract class IWalletService {
       fetchAndUpdateSelectedTransactions(ListCursor cursor);
   List<WalletEntity> get wallets;
 
-  Stream<WalletEntity> get currentWalletStream;
+  Stream<WalletEntity> get walletStream;
+
+  Stream<List<WalletEntity>> get walletsStream;
 }
 
 @LazySingleton(as: IWalletService)
@@ -31,8 +34,10 @@ class WalletService implements IWalletService {
   List<WalletEntity> _wallets = [];
   WalletEntity _selected;
   ListResponse<Transaction> _selectedTransactions = ListResponse([], null);
-  StreamController _currentWalletStreamController =
+  StreamController _walletStreamController =
       StreamController<WalletEntity>.broadcast();
+
+  BehaviorSubject<List<WalletEntity>> _walletsSubject = BehaviorSubject();
 
   WalletService(this._walletRepo, this._settingsService);
 
@@ -83,7 +88,7 @@ class WalletService implements IWalletService {
         await fetchAndUpdateSelected();
       }
     }
-    _currentWalletStreamController.add(this._selected);
+    _walletStreamController.add(this._selected);
   }
 
   @override
@@ -95,6 +100,7 @@ class WalletService implements IWalletService {
     }, (success) {
       if (success != null) {
         this._wallets = success;
+        _walletsSubject.add(success);
       }
       result = Right(this._wallets);
     });
@@ -126,6 +132,8 @@ class WalletService implements IWalletService {
   }
 
   @override
-  Stream<WalletEntity> get currentWalletStream =>
-      _currentWalletStreamController.stream;
+  Stream<WalletEntity> get walletStream => _walletStreamController.stream;
+
+  @override
+  Stream<List<WalletEntity>> get walletsStream => _walletsSubject.stream;
 }

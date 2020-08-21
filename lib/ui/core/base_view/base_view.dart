@@ -7,6 +7,7 @@ class BaseView<T extends BaseViewModel> extends StatefulWidget {
   final Widget Function(BuildContext context, T model, Widget child) builder;
   final T model;
   final Function(T) onModelReady;
+  final Function(T) onModelDispose;
   // final Function(Failure) onError;
 
   /// defualt: true. set true to create a new provider and dispose it each time the view comes up.
@@ -18,6 +19,7 @@ class BaseView<T extends BaseViewModel> extends StatefulWidget {
       this.builder,
       this.model,
       this.onModelReady,
+      this.onModelDispose,
       this.disposeState = true})
       : super(key: key);
 

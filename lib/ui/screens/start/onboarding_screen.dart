@@ -1,10 +1,17 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:injectable/injectable.dart';
+
+class OnboardingScreenArguments {
+  final bool canBack;
+
+  OnboardingScreenArguments(this.canBack);
+}
 
 @injectable
 class OnboardingScreen extends StatefulWidget {
@@ -38,6 +45,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    OnboardingScreenArguments arguments =
+        ModalRoute.of(context).settings.arguments as OnboardingScreenArguments;
+
+    bool canBack = false;
+    if (arguments != null) {
+      canBack = arguments.canBack;
+    }
+
     _pageList = [
       OnboardingPageWidget(
         title: I18n.of(context).page1TitleOnboardingScreen,
@@ -63,7 +78,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     var buttonText = I18n.of(context).buttonTextSkipOnboardingScreen;
     if (_isLastPage) {
-      buttonText = I18n.of(context).buttonTextNexOnboardingScreen;
+      buttonText = I18n.of(context).buttonTextNextOnboardingScreen;
     }
 
     return Scaffold(
@@ -83,39 +98,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 controller: _pageController,
                 children: _pageList,
               ),
+              canBack
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 45),
+                      child: CustomHeader(
+                        closeIcon: Assets.close_svg,
+                        closeIconColor: ColorStyles.white,
+                        onClose: () => Navigator.of(context).pop(),
+                      ),
+                    )
+                  : SizedBox.shrink(),
               Container(
-                margin: const EdgeInsets.only(bottom: 190),
+                margin: const EdgeInsets.only(bottom: 20),
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   height: 28,
                   child: _pageIndicator(),
                 ),
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                margin: const EdgeInsets.only(
-                    bottom: 58,
-                    left: LayoutStyles.spacing_m,
-                    right: LayoutStyles.spacing_m),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(minWidth: double.infinity),
-                  child: OutlineButton(
-                    padding: const EdgeInsets.symmetric(vertical: 23),
-                    borderSide: const BorderSide(color: ColorStyles.white),
-                    highlightedBorderColor: ColorStyles.bg_light_gray,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Text(
-                      buttonText,
-                      style: Theme.of(context).textTheme.bodyText1.merge(
-                          TextStyle(
-                              color: ColorStyles.white,
-                              fontWeight: fontWeightRegular)),
-                    ),
-                    onPressed: () => widget.viewModel.complete(),
-                  ),
-                ),
-              )
+              canBack
+                  ? SizedBox.shrink()
+                  : Container(
+                      alignment: Alignment.bottomCenter,
+                      margin: const EdgeInsets.only(
+                          bottom: 70,
+                          left: LayoutStyles.spacing_m,
+                          right: LayoutStyles.spacing_m),
+                      child: ConstrainedBox(
+                        constraints:
+                            const BoxConstraints(minWidth: double.infinity),
+                        child: OutlineButton(
+                          padding: const EdgeInsets.symmetric(vertical: 23),
+                          borderSide:
+                              const BorderSide(color: ColorStyles.white),
+                          highlightedBorderColor: ColorStyles.bg_light_gray,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Text(
+                            buttonText,
+                            style: Theme.of(context).textTheme.bodyText1.merge(
+                                TextStyle(
+                                    color: ColorStyles.white,
+                                    fontWeight: fontWeightRegular)),
+                          ),
+                          onPressed: () => widget.viewModel.complete(),
+                        ),
+                      ),
+                    )
             ],
           ),
         ),
@@ -178,7 +207,7 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 240),
+      padding: const EdgeInsets.only(bottom: 135),
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[

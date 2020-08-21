@@ -15,7 +15,6 @@ import 'package:e_coupon/ui/screens/start/splash_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/qr_overlay.dart';
 import 'package:e_coupon/ui/screens/verification/verification_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_screen.dart';
-import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -23,12 +22,11 @@ import 'package:injectable/injectable.dart';
 const SplashRoute = '/splash';
 const OnboardingRoute = '/onboarding';
 const RegisterRoute = '/register';
-const RegisterWalletTypeRoute = '/register/wallettype';
+const WalletSelectionRoute = '/register/wallettype';
 const RegisterVerifyRoute = '/register/verify';
 const VerifyPinRoute = '/verify/pin';
 const VerificationRoute = '/verify';
 const WalletDetailRoute = '/wallet';
-const WalletsOverviewRoute = 'walletsOverview';
 const TransactionOverviewRoute = 'transactionOverview';
 const PaymentRoute = 'payment';
 const SuccessRoute = 'success';
@@ -71,14 +69,12 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<OnboardingScreen>(), true);
       case RegisterRoute:
         return _createRoute(settings, getIt<RegisterScreen>(), false);
-      case RegisterWalletTypeRoute:
+      case WalletSelectionRoute:
         return _createRoute(settings, getIt<WalletSelectionScreen>(), false);
       case RegisterVerifyRoute:
         return _createRoute(settings, getIt<RegisterVerifyScreen>(), false);
       case WalletDetailRoute:
         return _createRoute(settings, getIt<WalletScreen>(), false);
-      case WalletsOverviewRoute:
-        return MaterialPageRoute(builder: (_) => WalletsOverviewScreen());
       case VerificationRoute:
         return _createRoute(settings, getIt<VerificationScreen>(), true);
       case PaymentRoute:

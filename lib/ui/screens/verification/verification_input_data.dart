@@ -26,6 +26,7 @@ class VerificationInputData extends ChangeNotifier {
     postcode.addListener(onChanged);
     name.addListener(onChanged);
     uid.addListener(onChanged);
+    city.addListener(onChanged);
   }
 
   bool get isTruth => _isTruth;
@@ -47,7 +48,7 @@ class VerificationInputData extends ChangeNotifier {
       phoneNumber.value,
       dateOfBirth.input,
       address.value,
-      '',
+      city.value,
       postcode.value,
       VerificationStage.notMatched);
 

@@ -127,6 +127,13 @@ class WalletRepo implements IWalletRepo {
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
+        if (e.statusCode == 404) {
+          var walletsOrFailure = await getWallets('');
+          Either<Failure, WalletEntity> result;
+          walletsOrFailure.fold((failure) => result = Left(failure),
+              (wallets) => result = Right(wallets.first));
+          return result;
+        }
         return Left(HTTPFailure.from(e));
       } catch (e) {
         return Left(UnknownFailure());
@@ -223,18 +230,23 @@ class WalletRepo implements IWalletRepo {
               profile.lastName,
               profile.phoneNumber,
               profile.dateOfBirth,
-              profile.addressStreet);
+              profile.addressStreet,
+              profile.addressTown,
+              profile.postcode);
           if (backendUser != null) {
             return Right(UserProfileEntity.from(backendUser));
           }
         }
         if (profile is CompanyProfileEntity) {
-          var backendCompany =
-              await walletSource.walletService.createCompanyProfile(
-            walletEntity.walletModel,
-            profile.name,
-            profile.uid,
-          );
+          // TODO check if address is empty, then dont use it
+          var backendCompany = await walletSource.walletService
+              .createCompanyProfile(
+                  walletEntity.walletModel,
+                  profile.name,
+                  profile.uid,
+                  profile.addressStreet,
+                  profile.addressTown,
+                  profile.addressPostalCode);
           if (backendCompany != null) {
             return Right(CompanyProfileEntity.from(backendCompany));
           }

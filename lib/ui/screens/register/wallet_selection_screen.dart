@@ -26,7 +26,6 @@ class WalletSelectionScreen extends StatelessWidget {
             Error error = model.viewState;
             ErrorToast(failure: error.failure).create(context)..show(context);
           });
-          // return Container();
         }
 
         var isLoading = (model.viewState is Loading);

@@ -15,7 +15,7 @@ class RegisterScreenViewModel extends BaseViewModel {
     var loggedIn = await _loginService.register(AuthProvider.apple.convert());
     if (loggedIn) {
       // TODO Wallet already available?
-      await _router.pushAndRemoveUntil(RegisterWalletTypeRoute, '');
+      await _router.pushAndRemoveUntil(WalletSelectionRoute, '');
     }
 
     return Future.value();
@@ -25,7 +25,7 @@ class RegisterScreenViewModel extends BaseViewModel {
     var result = await _loginService.register(AuthProvider.google.convert());
     if (result) {
       // TODO Wallet already available?
-      await _router.pushNamed(RegisterWalletTypeRoute);
+      await _router.pushNamed(WalletSelectionRoute);
     }
 
     return Future.value();

@@ -20,7 +20,6 @@ class RegisterScreen extends StatelessWidget {
     return RegisterScaffold(
         title: I18n.of(context).titleRegisterScreen,
         subhead: I18n.of(context).descriptionRegisterScreen,
-        header: Container(),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -54,7 +53,7 @@ class RegisterScreen extends StatelessWidget {
         ),
         footer: Container(
           alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.only(bottom: 70.0),
+          padding: const EdgeInsets.only(bottom: 25.0),
           child: FlatSecondaryButton(
             text: I18n.of(context).onboardingRegisterScreen,
             textColor: ColorStyles.purple,

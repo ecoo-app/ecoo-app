@@ -5,10 +5,16 @@ import 'package:flutter_svg/svg.dart';
 
 class CustomHeader extends StatelessWidget {
   final String closeIcon;
+  final Color closeIconColor;
   final VoidCallback onClose;
   final String headline;
 
-  const CustomHeader({Key key, this.headline, this.closeIcon, this.onClose})
+  const CustomHeader(
+      {Key key,
+      this.headline,
+      this.closeIcon,
+      this.closeIconColor,
+      this.onClose})
       : super(key: key);
 
   @override
@@ -25,7 +31,10 @@ class CustomHeader extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 15, right: 5),
                 child: IconButton(
                   key: Key('close_button'),
-                  icon: SvgPicture.asset(closeIcon),
+                  icon: SvgPicture.asset(
+                    closeIcon,
+                    color: closeIconColor,
+                  ),
                   iconSize: LayoutStyles.iconSize,
                   onPressed: onClose,
                 ),

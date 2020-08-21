@@ -55,7 +55,7 @@ class WalletViewModel extends BaseViewModel {
     _walletState = Loading();
     setViewState(Update());
 
-    _walletService.currentWalletStream.listen((event) {
+    _walletService.walletStream.listen((event) {
       if (event != null) {
         _wallet = event;
         setViewState(Update());

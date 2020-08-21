@@ -206,8 +206,8 @@ class I18n implements WidgetsLocalizations {
   String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei ihrer Gemeinde können Sie mit wenigen Klicks den erzielten Umsatz bei der Gemeinde einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben.";
   /// "Einführung überspringen"
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
-  /// "Jetzt verifizieren"
-  String get buttonTextNexOnboardingScreen => "Jetzt verifizieren";
+  /// "Weiter zur Registrierung"
+  String get buttonTextNextOnboardingScreen => "Weiter zur Registrierung";
   /// "Wallet Typ"
   String get titleRegisterWalletTypeScreen => "Wallet Typ";
   /// "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für ihr Geschäft zusätzlich ein Firmen Wallet aus."

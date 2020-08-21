@@ -1,8 +1,11 @@
 import 'package:e_coupon/generated/i18n.dart';
+import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/add_wallet_card.dart';
+import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
 import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
+import 'package:e_coupon/ui/core/widgets/wallet_card.dart';
 import 'package:e_coupon/ui/screens/menu/menu_screen_view_model.dart';
-import 'package:e_coupon/ui/screens/wallets_overview/wallets_overview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,22 +49,82 @@ class MenuScreen extends StatelessWidget {
                 headline: I18n.of(context).titleMenuScreen,
               ),
               Expanded(
-                child: WalletsOverviewScreen(),
+                child: BaseView<MenuScreenViewModel>(
+                  model: viewModel,
+                  disposeState: false,
+                  onModelReady: (m) async => await m.init(),
+                  onModelDispose: (m) => m.dispose(),
+                  builder: (context, model, child) {
+                    return StreamBuilder<List<MenuItem>>(
+                      stream: viewModel.wallets,
+                      builder: (context, snapshot) {
+                        // Display Wallets
+
+                        if (snapshot.hasData && snapshot.data.isNotEmpty) {
+                          return ListView.builder(
+                            padding: const EdgeInsets.only(top: 25),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              var item = snapshot.data[index];
+                              if (item is WalletMenuItem) {
+                                return WalletCard(
+                                    wallet: item.walletEntity,
+                                    isActive: viewModel.selected != null &&
+                                            item.walletEntity.id ==
+                                                viewModel.selected.id
+                                        ? true
+                                        : false,
+                                    onPressed: () async {
+                                      await viewModel.select(item.walletEntity);
+                                    });
+                              }
+                              if (item is NetworkErrorMenuItem) {
+                                return Icon(Icons.signal_wifi_off);
+                              }
+                              if (item is AddWalletMenutItem) {
+                                return AddWalletCard();
+                              }
+                              if (item is OnboardingMenuItem) {
+                                return MenuItemWidget(
+                                  text: I18n.of(context).onboardingMenuScreen,
+                                  onTap: viewModel.onboarding,
+                                );
+                              }
+                              if (item is FaqMenuItem) {
+                                return MenuItemWidget(
+                                  text: I18n.of(context).faqhelpMenuScreen,
+                                  onTap: () => print('faq'),
+                                );
+                              }
+                              if (item is PrivacyPolicyMenuItem) {
+                                return MenuItemWidget(
+                                  text:
+                                      I18n.of(context).privacyPolicyMenuScreen,
+                                  onTap: () async {
+                                    await launchUrl(
+                                        I18n.of(context).dataPolicyUrl);
+                                  },
+                                );
+                              }
+                              // Empty List
+                              return Container();
+                            },
+                          );
+                        } else {
+                          // Empty State
+                          return Container(
+                            child: Center(
+                              child: ECProgressIndicator(),
+                            ),
+                          );
+                        }
+                      },
+                    );
+                  },
+                ),
               ),
-              MenuItemWidget(
-                text: I18n.of(context).onboardingMenuScreen,
-                onTap: viewModel.onboarding,
-              ),
-              MenuItemWidget(
-                text: I18n.of(context).faqhelpMenuScreen,
-                onTap: () => print('faq'),
-              ),
-              MenuItemWidget(
-                text: I18n.of(context).privacyPolicyMenuScreen,
-                onTap: () async {
-                  await launchUrl(I18n.of(context).dataPolicyUrl);
-                },
-              ),
+
+              // Footer
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 25),

@@ -20,15 +20,16 @@ class RegisterScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double topPadding = header != null ? 15 : 70;
     return Scaffold(
         body: SafeArea(
-            bottom: false,
+            bottom: true,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                header,
+                header == null ? SizedBox.shrink() : header,
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -38,8 +39,8 @@ class RegisterScaffold extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 40, right: 40, top: 90, bottom: 10),
+                            padding: EdgeInsets.only(
+                                left: 0, right: 0, top: topPadding, bottom: 10),
                             child: Text(title,
                                 style: Theme.of(context)
                                     .textTheme
@@ -49,7 +50,7 @@ class RegisterScaffold extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 40, right: 40, bottom: 20),
+                                left: 0, right: 0, bottom: 25),
                             child: Text(
                               subhead,
                               style: Theme.of(context).textTheme.bodyText2,
