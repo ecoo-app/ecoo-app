@@ -116,14 +116,14 @@ class WalletScreen extends StatelessWidget {
               return Column(
                 children: <Widget>[
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(left: 25),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25, top: 53),
                         child: IconButton(
                           key: Key('menu_button'),
                           icon: SvgPicture.asset(Assets.menu_svg),
-                          iconSize: LayoutStyles.iconSize,
                           onPressed: Scaffold.of(context).openDrawer,
                         ),
                       ),

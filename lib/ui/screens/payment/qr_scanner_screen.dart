@@ -87,7 +87,7 @@ class QRScannerScreen extends StatelessWidget {
                         vertical: 52, horizontal: 25),
                     child: showButton
                         ? OutlinedSecondaryButton(
-                            textColor: Colors.white,
+                            svgAsset: Assets.keyboard_purpe_svg,
                             text: I18n.of(context).cancelScan,
                             onPressed: () => vmodel.next(),
                           )

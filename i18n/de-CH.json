@@ -64,7 +64,7 @@
   "appversionMenuScreen": "App Version:",
   "walletMenuScreen": "Wallet",
   "titleScanScreen": "QR Code scannen",
-  "cancelScan": "Manuell eingeben",
+  "cancelScan": "Selber eintippen",
   "paymentSuccessful": "Bezahlung erfolgreich",
   "noServiceErrorTitle": "Keine Internetverbindung",
   "noServiceErrorText": "Es besteht keine Verbindung zum Internet.",
