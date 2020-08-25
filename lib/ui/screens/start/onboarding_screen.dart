@@ -1,5 +1,7 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/button/flat_secondary_button.dart';
+import 'package:e_coupon/ui/core/widgets/button/outlined_secondary_button.dart';
 import 'package:e_coupon/ui/core/widgets/header/custom_header.dart';
 import 'package:e_coupon/ui/screens/start/onboarding_screen_view_model.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   List<Widget> _pageList = [];
   double _currentPage = 0.0;
-  bool _isShopOnboardingPage = false;
   bool _isLastPage = false;
 
   @override
@@ -37,7 +38,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     _pageController.addListener(() {
       setState(() {
         _currentPage = _pageController.page;
-        _isShopOnboardingPage = _currentPage > 1.5;
         _isLastPage = _currentPage > 2.5;
       });
     });
@@ -58,21 +58,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         title: I18n.of(context).page1TitleOnboardingScreen,
         headline: I18n.of(context).page1HeadlineOnboardingScreen,
         description: I18n.of(context).page1DescriptionOnboardingScreen,
+        headerIconAsset: Assets.icon_arrow_right_svg,
+        headerIconBackgroundAsset:
+            Assets.onboarding_background_graphic_private_svg,
       ),
       OnboardingPageWidget(
         title: I18n.of(context).page2TitleOnboardingScreen,
         headline: I18n.of(context).page2HeadlineOnboardingScreen,
         description: I18n.of(context).page2DescriptionOnboardingScreen,
+        headerIconAsset: Assets.onboarding_icon_wallet_svg,
+        headerIconBackgroundAsset:
+            Assets.onboarding_background_graphic_private_svg,
       ),
       OnboardingPageWidget(
         title: I18n.of(context).page3TitleOnboardingScreen,
         headline: I18n.of(context).page3HeadlineOnboardingScreen,
         description: I18n.of(context).page3DescriptionOnboardingScreen,
+        headerIconAsset: Assets.onboarding_icon_shop_svg,
+        headerIconBackgroundAsset:
+            Assets.onboarding_background_graphic_shop_svg,
       ),
       OnboardingPageWidget(
         title: I18n.of(context).page4TitleOnboardingScreen,
         headline: I18n.of(context).page4HeadlineOnboardingScreen,
         description: I18n.of(context).page4DescriptionOnboardingScreen,
+        headerIconAsset: Assets.onboarding_icon_shop_arrows_svg,
+        headerIconBackgroundAsset:
+            Assets.onboarding_background_graphic_shop_svg,
       ),
     ];
 
@@ -86,10 +98,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         top: false,
         bottom: false,
         child: Container(
-          decoration: BoxDecoration(
-              gradient: _isShopOnboardingPage
-                  ? GradientStyles.shopWalletBackgroundGradient
-                  : GradientStyles.privateWalletBackgroundGradient),
           child: Stack(
             fit: StackFit.expand,
             alignment: AlignmentDirectional.topStart,
@@ -118,35 +126,49 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
               canBack
                   ? SizedBox.shrink()
-                  : Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: const EdgeInsets.only(
-                          bottom: 70,
-                          left: LayoutStyles.spacing_m,
-                          right: LayoutStyles.spacing_m),
-                      child: ConstrainedBox(
-                        constraints:
-                            const BoxConstraints(minWidth: double.infinity),
-                        child: OutlineButton(
-                          padding: const EdgeInsets.symmetric(vertical: 23),
-                          borderSide:
-                              const BorderSide(color: ColorStyles.white),
-                          highlightedBorderColor: ColorStyles.bg_light_gray,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Text(
-                            buttonText,
-                            style: Theme.of(context).textTheme.bodyText1.merge(
-                                TextStyle(
-                                    color: ColorStyles.white,
-                                    fontWeight: fontWeightRegular)),
-                          ),
-                          onPressed: () => widget.viewModel.complete(),
-                        ),
-                      ),
-                    )
+                  : _isLastPage
+                      ? _getRegistrationButton(buttonText)
+                      : _getSkipButton(buttonText)
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _getRegistrationButton(buttonText) {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      margin: const EdgeInsets.only(
+          bottom: 70,
+          left: LayoutStyles.spacing_m,
+          right: LayoutStyles.spacing_m),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: double.infinity),
+        child: OutlinedSecondaryButton(
+          svgAsset: Assets.icon_leaf_svg,
+          text: buttonText,
+          textColor: ColorStyles.black,
+          outlineColor: ColorStyles.bg_gray,
+          onPressed: widget.viewModel.complete,
+        ),
+      ),
+    );
+  }
+
+  Widget _getSkipButton(String buttonText) {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      margin: const EdgeInsets.only(
+          bottom: 70,
+          left: LayoutStyles.spacing_m,
+          right: LayoutStyles.spacing_m),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minWidth: double.infinity),
+        child: FlatSecondaryButton(
+          text: buttonText,
+          textColor: ColorStyles.purple,
+          onPressed: () => widget.viewModel.complete(),
         ),
       ),
     );
@@ -168,7 +190,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: _currentPage.round() == position
-              ? ColorStyles.white
+              ? ColorStyles.black
               : ColorStyles.bg_transparent),
     );
   }
@@ -178,14 +200,21 @@ class OnboardingPageWidget extends StatelessWidget {
   final String title;
   final String headline;
   final String description;
+  final String headerIconAsset;
+  final String headerIconBackgroundAsset;
 
-  const OnboardingPageWidget(
-      {Key key, this.title, this.headline, this.description})
-      : super(key: key);
+  const OnboardingPageWidget({
+    Key key,
+    this.title,
+    this.headline,
+    this.description,
+    this.headerIconAsset,
+    this.headerIconBackgroundAsset,
+  }) : super(key: key);
 
   TextStyle colorStylesTitleWhite(BuildContext context) {
     return Theme.of(context).textTheme.headline2.merge(TextStyle(
-          color: ColorStyles.white,
+          color: ColorStyles.black,
           fontWeight: fontWeightBold,
         ));
   }
@@ -194,14 +223,14 @@ class OnboardingPageWidget extends StatelessWidget {
     return Theme.of(context)
         .textTheme
         .headline3
-        .merge(TextStyle(color: ColorStyles.white, fontSize: 20.0));
+        .merge(TextStyle(color: ColorStyles.black, fontSize: 20.0));
   }
 
   TextStyle colorStylesDescriptionWhite(BuildContext context) {
     return Theme.of(context)
         .textTheme
         .bodyText2
-        .merge(TextStyle(color: ColorStyles.white));
+        .merge(TextStyle(color: ColorStyles.black));
   }
 
   @override
@@ -213,20 +242,17 @@ class OnboardingPageWidget extends StatelessWidget {
           children: <Widget>[
             Column(children: <Widget>[
               Container(
-                padding: const EdgeInsets.only(top: 80),
+                padding: const EdgeInsets.only(top: 60),
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: <Widget>[
                     SvgPicture.asset(
-                      Assets.onboarding_background_graphic_svg,
-                      color: ColorStyles.white,
+                      headerIconBackgroundAsset,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 38.0),
-                      child: SvgPicture.asset(
-                        Assets.onboarding_icon_background_svg,
-                        color: ColorStyles.white,
-                      ),
+                      padding: const EdgeInsets.only(top: 70.0),
+                      child: SvgPicture.asset(headerIconAsset,
+                          color: ColorStyles.white),
                     ),
                   ],
                 ),

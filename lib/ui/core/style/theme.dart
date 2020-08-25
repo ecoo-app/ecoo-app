@@ -28,7 +28,9 @@ ThemeData generalTheme = ThemeData(
           fontFamily: fontFamiliyPanam,
           color: ColorStyles.black),
       headline4: TextStyle(
-          fontSize: 25.0, fontWeight: fontWeightMedium, fontFamily: 'Roboto'),
+          fontSize: 25.0,
+          fontWeight: fontWeightMedium,
+          fontFamily: fontFamiliyPanam),
       button: TextStyle(
           fontSize: 25.0,
           fontWeight: fontWeightMedium,
@@ -38,22 +40,26 @@ ThemeData generalTheme = ThemeData(
           fontWeight: fontWeightMedium,
           fontFamily: fontFamiliyPanam),
       bodyText2: TextStyle(
-          fontSize: 15.0, fontWeight: fontWeightRegular, fontFamily: 'Roboto'),
+          fontSize: 15.0,
+          fontWeight: fontWeightRegular,
+          fontFamily: fontFamiliyPanam),
       caption: TextStyle(
-          fontSize: 12.0, fontWeight: fontWeightRegular, fontFamily: 'Roboto')),
+          fontSize: 12.0,
+          fontWeight: fontWeightRegular,
+          fontFamily: fontFamiliyPanam)),
 );
 
 class TextStyles {
   static const body_text_black = TextStyle(
       fontSize: 15.0,
       fontWeight: fontWeightRegular,
-      fontFamily: 'Roboto',
+      fontFamily: fontFamiliyPanam,
       color: Colors.black);
 
   static const body_text_white = TextStyle(
       fontSize: 15.0,
       fontWeight: fontWeightRegular,
-      fontFamily: 'Roboto',
+      fontFamily: fontFamiliyPanam,
       color: Colors.white);
 
   static const headline3_text_white = TextStyle(
@@ -109,7 +115,8 @@ class Assets {
   static const icon_button_svg = 'assets/images/icon_button.svg';
   static const icon_close_svg = 'assets/images/icon_close.svg';
   static const icon_arrow_right_svg = 'assets/images/icon_arrow_right.svg';
-  static const icon_qrcode_svg = 'assets/images/icons_qrcode.svg';
+  static const icon_qrcode_svg = 'assets/images/icon_qrcode.svg';
+  static const icon_leaf_svg = 'assets/images/icon_leaf.svg';
 
   static const wallet_icon_svg = 'assets/images/wallet_icon.svg';
   static const shop_envelope_open_dollar_svg =
@@ -128,8 +135,10 @@ class Assets {
   static const private_header_svg = 'assets/images/private_header_bg.svg';
   static const shop_header_svg = 'assets/images/shop_header_bg.svg';
 
-  static const wallet_rectangle_green_svg = 'assets/images/wallet_rectangle_green.svg';
-  static const wallet_rectangle_blue_svg = 'assets/images/wallet_rectangle_blue.svg';
+  static const wallet_rectangle_green_svg =
+      'assets/images/wallet_rectangle_green.svg';
+  static const wallet_rectangle_blue_svg =
+      'assets/images/wallet_rectangle_blue.svg';
 
   // Splashscreen
   static const splash_wallet_graphic_svg =
@@ -137,11 +146,16 @@ class Assets {
 
   // Onboarding
   static const onboarding_icon_wallet_svg =
-      'assets/images/onboarding_wallet_icon.svg';
-  static const onboarding_background_graphic_svg =
-      'assets/images/onboarding_background_graphic.svg';
-  static const onboarding_icon_background_svg =
-      'assets/images/onboarding_icon_background.svg';
+      'assets/images/onboarding_icon_wallet.svg';
+  static const onboarding_icon_shop_svg =
+      'assets/images/onboarding_icon_shop.svg';
+  static const onboarding_icon_shop_arrows_svg =
+      'assets/images/onboarding_icon_shop_arrows.svg';
+
+  static const onboarding_background_graphic_shop_svg =
+      'assets/images/onboarding_background_graphic_shop.svg';
+  static const onboarding_background_graphic_private_svg =
+      'assets/images/onboarding_background_graphic_private.svg';
 
   static const wallet_shop_svg = 'assets/images/wallet_shop.svg';
   static const wallet_private_svg = 'assets/images/wallet_private.svg';

@@ -7,10 +7,15 @@ class OutlinedSecondaryButton extends StatelessWidget {
   final GestureTapCallback onPressed;
   final String text;
   final Color textColor;
+  final Color outlineColor;
   final String svgAsset;
 
   OutlinedSecondaryButton(
-      {this.onPressed, @required this.text, this.textColor, this.svgAsset});
+      {this.onPressed,
+      @required this.text,
+      this.textColor,
+      this.outlineColor,
+      this.svgAsset});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,10 @@ class OutlinedSecondaryButton extends StatelessWidget {
       onPressed: onPressed,
       color: ColorStyles.bg_white_9,
       highlightedBorderColor: ColorStyles.bg_gray,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      borderSide: outlineColor != null ? BorderSide(color: outlineColor) : null,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
