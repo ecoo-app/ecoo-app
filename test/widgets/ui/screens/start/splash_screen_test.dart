@@ -26,15 +26,17 @@ void main() {
   IRouter _routerMock;
   ILoginService _loginService;
   INotificationService _notificationServiceMock;
+  ISettingsService _settingsServiceMock;
 
   setUp(() {
     _testApp = WidgetTestApp();
     _routerMock = RouterMock();
     _loginService = LoginServiceMock();
     _notificationServiceMock = NotificationServiceMock();
+    _settingsServiceMock = SettingsServiceMock();
 
-    var viewModel = SplashScreenViewModel(
-        _routerMock, _loginService, _notificationServiceMock);
+    var viewModel = SplashScreenViewModel(_routerMock, _loginService,
+        _notificationServiceMock, _settingsServiceMock);
 
     _view = _testApp.createTestApp(SplashScreen(viewModel));
   });

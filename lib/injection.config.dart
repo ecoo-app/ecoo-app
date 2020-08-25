@@ -187,6 +187,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IRouter>(),
         g<ILoginService>(),
         g<INotificationService>(),
+        g<ISettingsService>(),
       ));
   gh.factory<RegisterScreen>(
       () => RegisterScreen(g<RegisterScreenViewModel>()));

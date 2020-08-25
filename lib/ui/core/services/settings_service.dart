@@ -4,6 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ISettingsService {
+  Future<void> clearCredentialsOnFirstStart();
+
   Future setBool(String key, bool defaultValue);
   Future setStringValue(String key, String value);
 
@@ -63,5 +65,19 @@ class SettingsService implements ISettingsService {
   @override
   Future<void> writeSecureString(String key, String value) async {
     await _securePreferences.write(key: key, value: value);
+  }
+
+  @override
+  Future<void> clearCredentialsOnFirstStart() async {
+    var isNotFirstInstall =
+        await _sharedPreferences.getBool(Constants.notFirstInstallKey);
+    if (isNotFirstInstall != null && isNotFirstInstall) {
+      // Repeated Runs
+      await _sharedPreferences.setBool(Constants.notFirstInstallKey, true);
+    } else {
+      // First Time Run
+      await _sharedPreferences.setBool(Constants.notFirstInstallKey, true);
+      await _securePreferences.deleteAll();
+    }
   }
 }

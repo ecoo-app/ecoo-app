@@ -1,6 +1,7 @@
 class Constants {
   static const firstInstallCompleteSettingsKey = 'firstInstallComplete';
   static const lastWalletIDSettingsKey = 'lasWalletID';
+  static const notFirstInstallKey = 'notFirstInstall';
 
   static const userProfileUuid = 'userProfileUuid';
 
