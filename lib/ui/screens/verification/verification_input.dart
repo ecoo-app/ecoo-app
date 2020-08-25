@@ -71,14 +71,14 @@ class PhoneNumberVerificationInput extends TextVerificationInput {
 }
 
 class UidVerificationInput extends TextVerificationInput {
-  String part1;
-  String part2;
-  String part3;
+  String part1 = '';
+  String part2 = '';
+  String part3 = '';
 
-  bool hasUid = true;
+  bool hasNoUid = false;
 
   @override
-  String get value => 'CHE-${part1}.${part2}.${part3}';
+  String get value => isValid() ? 'CHE-${part1}.${part2}.${part3}' : '';
 
   @override
   void setValue(String text) {}
@@ -104,8 +104,8 @@ class UidVerificationInput extends TextVerificationInput {
     notifyListeners();
   }
 
-  void hasUidChanged(bool value) {
-    hasUid = value;
+  void hasNoUidChanged(bool value) {
+    hasNoUid = value;
     notifyListeners();
   }
 }

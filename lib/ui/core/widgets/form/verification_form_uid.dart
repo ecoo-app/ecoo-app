@@ -11,14 +11,16 @@ class VerificationFormUid extends StatelessWidget {
 
   const VerificationFormUid({Key key, this.model}) : super(key: key);
 
-  Widget _numberInput(BuildContext context, Function(String) onChanged) {
+  Widget _numberInput(
+      BuildContext context, Function(String) onChanged, Key numberKey) {
     return SizedBox.fromSize(
       child: TextFormField(
+        key: numberKey,
         onChanged: onChanged,
         maxLength: 3,
         enableInteractiveSelection: false,
         maxLengthEnforced: true,
-        enabled: !model.hasUid,
+        enabled: !model.hasNoUid,
         textAlign: TextAlign.end,
         style: Theme.of(context)
             .textTheme
@@ -69,11 +71,14 @@ class VerificationFormUid extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    _numberInput(context, model.part1Changed),
+                    _numberInput(
+                        context, model.part1Changed, Key('uid-part-1')),
                     _numberDotText(context),
-                    _numberInput(context, model.part2Changed),
+                    _numberInput(
+                        context, model.part2Changed, Key('uid-part-2')),
                     _numberDotText(context),
-                    _numberInput(context, model.part3Changed),
+                    _numberInput(
+                        context, model.part3Changed, Key('uid-part-3')),
                   ],
                 ),
               )
@@ -107,8 +112,8 @@ class VerificationFormUid extends StatelessWidget {
             Checkbox(
               visualDensity: VisualDensity(),
               activeColor: ColorStyles.bg_gray,
-              onChanged: model.hasUidChanged,
-              value: model.hasUid,
+              onChanged: model.hasNoUidChanged,
+              value: model.hasNoUid,
             ),
             Text(
               I18n.of(context).verificationShopFormUidNoUid,
