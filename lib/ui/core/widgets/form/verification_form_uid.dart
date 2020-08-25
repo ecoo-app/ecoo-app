@@ -1,8 +1,10 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/screens/verification/verification_input.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VerificationFormUid extends StatelessWidget {
   final UidVerificationInput model;
@@ -37,6 +39,12 @@ class VerificationFormUid extends StatelessWidget {
           .bodyText1
           .merge(TextStyle(color: ColorStyles.black)),
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
   }
 
   @override
@@ -83,6 +91,9 @@ class VerificationFormUid extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2),
             TextSpan(
                 text: I18n.of(context).verificationShopFormUidLink,
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () =>
+                      _launchUrl(I18n.of(context).verificationShopFormUidLink),
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
