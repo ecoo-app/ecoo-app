@@ -2,7 +2,7 @@ import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
-import 'package:e_coupon/ui/core/widgets/form/date_form_field.dart';
+import 'package:e_coupon/ui/core/widgets/form/verification_form_date.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_checkbox.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_field.dart';
@@ -37,11 +37,11 @@ class VerificationScreen extends StatelessWidget {
           model: value.lastName,
           label: I18n.of(context).verifyFormFieldLastName,
         ),
-        DateFormField(
+        VerificationFormDateField(
           labelText: I18n.of(context).verifyFormFieldBirthday,
           suffixIcon: Icon(Icons.calendar_today),
-          initialDate: DateTime.now(),
-          firstDate: DateTime.utc(1870),
+          initialDate: value.dateOfBirth.input ?? DateTime.parse('2000-01-01'),
+          firstDate: DateTime.utc(1900),
           lastDate: DateTime.now(),
           onDateChanged: value.dateOfBirth.setValue,
         ),

@@ -254,6 +254,8 @@ class I18n implements WidgetsLocalizations {
   String get tezosFoundationUrl => "https://tezos.foundation/";
   /// "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind."
   String get truthfullyEnteredFormCheck => "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.";
+  /// "Fertig"
+  String get cupertinoDatePickerDialogFinishButton => "Fertig";
 }
 
 class _I18n_de_CH extends I18n {

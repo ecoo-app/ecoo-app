@@ -35,7 +35,10 @@ class VerificationFormPhoneField extends StatelessWidget {
           labelText: label,
           fillColor: ColorStyles.bg_gray,
           focusColor: ColorStyles.black,
-          suffixIcon: const Icon(Icons.phone),
+          suffixIcon: const Icon(
+            Icons.phone,
+            color: ColorStyles.bg_gray,
+          ),
           counterText: '',
           prefixText: '+41 ',
           labelStyle: Theme.of(context)

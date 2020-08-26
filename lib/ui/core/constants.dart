@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 class Constants {
   static const firstInstallCompleteSettingsKey = 'firstInstallComplete';
   static const lastWalletIDSettingsKey = 'lasWalletID';
@@ -13,4 +15,8 @@ class Constants {
   static const qrDataAmount = 'amount';
   static const qrDataNonce = 'nonce';
   static const qrDataPublicKey = 'pk';
+
+  // static const defaultLocale = 'de-CH';
+
+  static Locale defaultLocale = Locale('de', 'CH');
 }

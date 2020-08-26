@@ -7,8 +7,8 @@ const FontWeight fontWeightRegular = FontWeight.w400;
 const String fontFamiliyPanam = 'NewPanam';
 
 ThemeData generalTheme = ThemeData(
-  accentColor: ColorStyles.black,
-  primaryColor: ColorStyles.blue,
+  accentColor: ColorStyles.bg_gray,
+  primaryColor: ColorStyles.black,
   scaffoldBackgroundColor: ColorStyles.white,
   backgroundColor: ColorStyles.white,
   textTheme: TextTheme(
@@ -29,6 +29,10 @@ ThemeData generalTheme = ThemeData(
           color: ColorStyles.black),
       headline4: TextStyle(
           fontSize: 25.0,
+          fontWeight: fontWeightMedium,
+          fontFamily: fontFamiliyPanam),
+      headline5: TextStyle(
+          fontSize: 20.0,
           fontWeight: fontWeightMedium,
           fontFamily: fontFamiliyPanam),
       button: TextStyle(

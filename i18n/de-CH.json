@@ -109,5 +109,6 @@
   "walletSelectionScreenError": "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal.",
   "dataPolicyUrl": "https://payecoo.ch/datenschutz.html",
   "tezosFoundationUrl": "https://tezos.foundation/",
-  "truthfullyEnteredFormCheck": "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind."
+  "truthfullyEnteredFormCheck": "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.",
+  "cupertinoDatePickerDialogFinishButton": "Fertig"
 }

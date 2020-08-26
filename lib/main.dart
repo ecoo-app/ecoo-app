@@ -1,4 +1,5 @@
 import 'package:e_coupon/generated/i18n.dart';
+import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 
@@ -8,7 +9,7 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class ECouponApp extends StatelessWidget {
-  final Locale _locale = Locale('de', 'CH');
+  final Locale _locale = Constants.defaultLocale;
 
   final IRouter router;
 
