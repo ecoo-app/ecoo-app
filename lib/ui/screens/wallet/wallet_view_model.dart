@@ -1,14 +1,14 @@
+import 'dart:async';
+
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
-import 'package:e_coupon/ui/core/services/mock_login_service.dart';
-import 'package:e_coupon/ui/core/services/utils.dart';
 import 'package:ecoupon_lib/common/verification_stage.dart';
 import 'package:ecoupon_lib/models/currency.dart';
 import 'package:ecoupon_lib/models/list_response.dart';
+import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:e_coupon/core/extensions.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
@@ -17,6 +17,7 @@ import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:e_coupon/ui/screens/wallet/transactions_list.dart';
 
 import 'package:ecoupon_lib/models/wallet.dart';
+import 'package:rxdart/subjects.dart';
 
 @lazySingleton
 class WalletViewModel extends BaseViewModel {
@@ -31,10 +32,12 @@ class WalletViewModel extends BaseViewModel {
 
   WalletEntity _wallet;
   ListCursor _transactionListCursor;
-  List<TransactionListEntry> _transactions = [];
 
-  WalletViewModel(this._router, this._walletService, this.mockLogin,
-      this._networkInfo, this._walletRepo);
+  PublishSubject<List<Transaction>> _transactionStreamController =
+      PublishSubject();
+
+  WalletViewModel(
+      this._router, this._walletService, this._networkInfo, this._walletRepo);
 
   ViewState get walletState => this._walletState;
   ViewState get amountState => this._amountState;
@@ -48,7 +51,7 @@ class WalletViewModel extends BaseViewModel {
           0,
           null))
       : this._wallet;
-  List<TransactionListEntry> get transactions => this._transactions;
+
   Future<bool> get isConnected => _networkInfo.isConnected;
 
   Future<void> init() async {
@@ -58,6 +61,7 @@ class WalletViewModel extends BaseViewModel {
     _walletService.walletStream.listen((event) {
       if (event != null) {
         _wallet = event;
+        loadTransactions();
         setViewState(Update());
       }
     });
@@ -90,20 +94,49 @@ class WalletViewModel extends BaseViewModel {
     setViewState(Update());
   }
 
+  Stream<List<TransactionListEntry>> get transactionStream =>
+      _transactionStreamController.stream.transform(StreamTransformer<
+              List<Transaction>, List<TransactionListEntry>>.fromHandlers(
+          handleData: (data, sink) async {
+        if (data.isNotEmpty) {
+          var list = <TransactionListEntry>[];
+          data.sort((a, b) => a.created.compareTo(b.created));
+          data.reversed
+              .fold(Map<DateTime, List<Transaction>>(),
+                  (Map<DateTime, List<Transaction>> a, b) {
+                var dateOnly =
+                    DateTime(b.created.year, b.created.month, b.created.day);
+                a.putIfAbsent(dateOnly, () => []).add(b);
+                return a;
+              })
+              .values
+              .where((element) => element.isNotEmpty)
+              .map((e) {
+                list.add(TransactionListHeaderEntry(e.first.created));
+
+                list.addAll(e
+                    .map((t) => TransactionListItemEntry(
+                        date: t.created,
+                        text: t.to,
+                        amount: t.amount,
+                        isNegative: _wallet.id == t.from))
+                    .toList());
+              })
+              .toList();
+          sink.add(list);
+        } else {
+          sink.add([]);
+        }
+      }));
+
   //
   Future<void> loadTransactions() async {
-    _transactions = [];
     await _loadTransactions(null);
   }
 
   Future<void> loadMore() async {
     // how to check if there is more to load?
     await _loadTransactions(_transactionListCursor);
-  }
-
-  final MockLoginService mockLogin;
-  Future<void> testLogin() async {
-    await mockLogin.registerWithGoogle();
   }
 
   Future<void> _loadTransactions(ListCursor cursor) async {
@@ -114,29 +147,8 @@ class WalletViewModel extends BaseViewModel {
       setViewState(Error(failure));
     }, (transactionResponse) {
       _transactionListCursor = transactionResponse.cursor;
-
-      DateTime lastShownDate;
-
-      transactionResponse.items.forEach((transaction) {
-        var isNegative = _wallet.id == transaction.from;
-
-        if (lastShownDate != null &&
-            lastShownDate.isSameDate(transaction.created)) {
-          _transactions.add(TransactionListEntry(
-              date: transaction.created,
-              text: isNegative ? transaction.to : transaction.from,
-              amount: Utils.moneyToString(transaction.amount),
-              isNegative: isNegative));
-        } else {
-          _transactions.add(TransactionListEntry(
-              date: transaction.created,
-              text: isNegative ? transaction.to : transaction.from,
-              amount: Utils.moneyToString(transaction.amount),
-              showDate: true,
-              isNegative: isNegative));
-          lastShownDate = transaction.created;
-        }
-      });
+      _transactionStreamController.add(transactionResponse.items);
+      
     });
     _transactionState = Loaded();
   }
@@ -192,7 +204,7 @@ class WalletViewModel extends BaseViewModel {
     await profileOrFailure.fold((failure) {
       setViewState(Error(failure));
     }, (profiles) async {
-      if (profiles != null) {
+      if (profiles != null && profiles.isNotEmpty) {
         var profile = profiles[0];
 
         switch (profile.verificationStage) {

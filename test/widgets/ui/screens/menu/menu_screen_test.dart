@@ -18,17 +18,8 @@ import 'package:mockito/mockito.dart';
 import 'package:ecoupon_lib/models/wallet.dart' as lib_wallet;
 import 'package:ecoupon_lib/models/currency.dart' as lib_currency;
 
+import '../../../../helper/mock_implementations.dart';
 import '../../../../helper/widget_test_app.dart';
-
-class AppServiceMock extends Mock implements IAppService {}
-
-class RouterMock extends Mock implements IRouter {}
-
-class WalletRepositoryMock extends Mock implements IWalletRepo {}
-
-class WalletServiceMock extends Mock implements IWalletService {}
-
-class NetworkInfoMock extends Mock implements INetworkInfo {}
 
 void main() {
   Widget _view;

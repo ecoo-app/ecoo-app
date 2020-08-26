@@ -10,7 +10,7 @@ class MockEncashmentTag extends TagAPI {
 }
 
 List<Transaction> MockTransactionWalletPrivate = [
-  Transaction('uuid', 'Wallet-ID ertl34u53', 'to', 1250, TransactionState.done,
+  Transaction('uuid', 'Wallet-ID ertl34u53', 'Pusteblume GmbH', 1250, TransactionState.done,
       DateTime.now(), 'some tag', 0, 'sig'),
   Transaction('uuid', 'Wallet-ID sdfsdfwet', 'to', -2000, TransactionState.done,
       DateTime.now().subtract(Duration(days: 5)), 'some tag', 0, 'sig'),

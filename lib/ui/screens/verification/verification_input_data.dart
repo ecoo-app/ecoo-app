@@ -40,9 +40,9 @@ class VerificationInputData extends ChangeNotifier {
     notifyListeners();
   }
 
-  UserProfileEntity toProfileEntity() => UserProfileEntity(
+  UserProfileEntity toProfileEntity(String walletId) => UserProfileEntity(
       '',
-      '',
+      walletId,
       firstName.value,
       lastName.value,
       phoneNumber.value,
@@ -52,9 +52,9 @@ class VerificationInputData extends ChangeNotifier {
       postcode.value,
       VerificationStage.notMatched);
 
-  CompanyProfileEntity toCompanyEntity() => CompanyProfileEntity(
+  CompanyProfileEntity toCompanyEntity(String walletId) => CompanyProfileEntity(
       '',
-      '',
+      walletId,
       name.value,
       uid.value,
       address.value,

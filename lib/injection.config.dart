@@ -145,7 +145,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<WalletViewModel>(() => WalletViewModel(
         g<IRouter>(),
         g<IWalletService>(),
-        g<MockLoginService>(),
         g<INetworkInfo>(),
         g<IWalletRepo>(),
       ));

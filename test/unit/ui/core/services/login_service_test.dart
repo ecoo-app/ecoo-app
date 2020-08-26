@@ -3,19 +3,10 @@ import 'package:e_coupon/ui/core/services/login_service.dart';
 import 'package:e_coupon/ui/core/services/notification_service.dart';
 import 'package:e_coupon/ui/core/services/profile_service.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
-import 'package:ecoupon_lib/services/wallet_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class WalletSourceMock extends Mock implements IWalletSource {}
-
-class SettingsMock extends Mock implements ISettingsService {}
-
-class WalletServiceMock extends Mock implements WalletService {}
-
-class ProfileServiceMock extends Mock implements IProfileService {}
-
-class NotificationServiceMock extends Mock implements INotificationService {}
+import '../../../../helper/mock_implementations.dart';
 
 void main() {
   ILoginService _loginService;

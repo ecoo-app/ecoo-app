@@ -33,38 +33,40 @@ class PinVerificationScreen extends StatelessWidget {
                   ..show(context);
               });
             }
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(I18n.of(context).pinRecieved,
-                    style: Theme.of(context).textTheme.caption),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  vmodel.wallet.currency.label,
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                SizedBox(
-                  height: 23,
-                ),
-                Text(I18n.of(context).enterPin),
-                SizedBox(
-                  height: 62,
-                ),
-                Form(
-                  child: ECTextFormField(
-                    label: I18n.of(context).pinInputLabel,
-                    onChanged: (value) => vmodel.pin = value,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return I18n.of(context).inputValidation;
-                      }
-                      return null;
-                    },
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(I18n.of(context).pinRecieved,
+                      style: Theme.of(context).textTheme.caption),
+                  SizedBox(
+                    height: 8,
                   ),
-                )
-              ],
+                  Text(
+                    vmodel.wallet.currency.label,
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  SizedBox(
+                    height: 23,
+                  ),
+                  Text(I18n.of(context).enterPin),
+                  SizedBox(
+                    height: 62,
+                  ),
+                  Form(
+                    child: ECTextFormField(
+                      label: I18n.of(context).pinInputLabel,
+                      onChanged: (value) => vmodel.pin = value,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return I18n.of(context).inputValidation;
+                        }
+                        return null;
+                      },
+                    ),
+                  )
+                ],
+              ),
             );
           }()),
           bottom: Container(

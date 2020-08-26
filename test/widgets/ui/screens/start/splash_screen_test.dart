@@ -7,17 +7,11 @@ import 'package:e_coupon/ui/screens/start/splash_screen_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
+import '../../../../helper/mock_implementations.dart';
 import '../../../../helper/widget_test_app.dart';
 
-class LoginServiceMock extends Mock implements ILoginService {}
 
-class SettingsServiceMock extends Mock implements ISettingsService {}
-
-class RouterMock extends Mock implements IRouter {}
-
-class NotificationServiceMock extends Mock implements INotificationService {}
 
 void main() {
   Widget _view;

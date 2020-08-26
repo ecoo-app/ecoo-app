@@ -5,9 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesMock extends Mock implements SharedPreferences {}
-
-class SecureStorageMock extends Mock implements FlutterSecureStorage {}
+import '../../../../helper/mock_implementations.dart';
 
 void main() {
   ISettingsService _settings;
@@ -27,7 +25,7 @@ void main() {
 
     await _settings.clearCredentialsOnFirstStart();
     verify(_sharedPrefsMock.getBool(Constants.notFirstInstallKey));
-    
+
     verifyNever(_secureStorageMock.deleteAll());
     verify(_sharedPrefsMock.setBool(Constants.notFirstInstallKey, true));
   });

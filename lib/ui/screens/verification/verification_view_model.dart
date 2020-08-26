@@ -31,9 +31,10 @@ class VerificationViewModel extends BaseViewModel {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
+      var walletId = _walletService.getSelected().id;
       var profile =
-          isShop ? inputData.toCompanyEntity() : inputData.toProfileEntity();
-
+          isShop ? inputData.toCompanyEntity(walletId) : inputData.toProfileEntity(walletId);
+      
       try {
         var result = await _profileService.create(profile);
 

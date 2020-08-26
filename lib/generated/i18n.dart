@@ -49,7 +49,7 @@ class I18n implements WidgetsLocalizations {
   /// "Kassieren"
   String get walletCashier => "Kassieren";
   /// "Verlauf"
-  String get walletTimline => "Verlauf";
+  String get walletTimeline => "Verlauf";
   /// "Betrag"
   String get titlePrivateRequest => "Betrag";
   /// "Geld anfordern"
@@ -58,6 +58,8 @@ class I18n implements WidgetsLocalizations {
   String get buttonShopRequest => "Rechnung erstellen";
   /// "alle Bewegungen anzeigen"
   String get showAllTransactions => "alle Bewegungen anzeigen";
+  /// "Keine Bewegungen"
+  String get emptyTransactions => "Keine Bewegungen";
   /// "Wallet hinzufügen"
   String get addWallet => "Wallet hinzufügen";
   /// "Dieses Feld muss ausgefüllt werden."
