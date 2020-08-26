@@ -17,13 +17,20 @@ class RegisterVerifyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var description = I18n.of(context).descriptionRegisterVerifyScreenPrivate;
+    var title = I18n.of(context).titleRegisterVerifyScreenPrivate;
+    if (viewModel.isShop) {
+      description = I18n.of(context).descriptionRegisterVerifyScreenShop;
+      title = I18n.of(context).titleRegisterVerifyScreenShop;
+    }
+
     return RegisterScaffold(
       header: CustomHeader(
         closeIcon: Assets.back_svg,
         onClose: viewModel.close,
       ),
-      title: I18n.of(context).titleRegisterVerifyScreen,
-      subhead: I18n.of(context).descriptionRegisterVerifyScreen,
+      title: title,
+      subhead: description,
       content: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -41,7 +48,7 @@ class RegisterVerifyScreen extends StatelessWidget {
           FlatSecondaryButton(
             textColor: ColorStyles.red,
             onPressed: viewModel.verifyLater,
-            text: I18n.of(context).buttonTextSkipOnboardingScreen,
+            text: I18n.of(context).verifyLaterButtonRegisterVerifyScreen,
           )
         ],
       ),

@@ -82,8 +82,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
   gh.factory<PackageInfo>(() => packageInfo);
   gh.factory<PaymentScreen>(() => PaymentScreen());
-  gh.factory<RegisterVerifyScreenViewModel>(
-      () => RegisterVerifyScreenViewModel(g<IRouter>()));
   gh.factory<RequestQRBillScreen>(() => RequestQRBillScreen());
   gh.factory<RequestScreen>(() => RequestScreen());
   final sharedPreferences = await thirdPartyLibraryModule.prefs;
@@ -130,8 +128,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IRouter>(),
         g<IWalletSource>(),
       ));
-  gh.factory<RegisterVerifyScreen>(
-      () => RegisterVerifyScreen(g<RegisterVerifyScreenViewModel>()));
+  gh.factory<RegisterVerifyScreenViewModel>(
+      () => RegisterVerifyScreenViewModel(g<IRouter>(), g<IWalletService>()));
   gh.factory<RequestViewModel>(() => RequestViewModel(
         g<ITransferService>(),
         g<IWalletService>(),
@@ -168,6 +166,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<INotificationService>(),
       ));
   gh.factory<RedeemScreen>(() => RedeemScreen(g<RedeemViewModel>()));
+  gh.factory<RegisterVerifyScreen>(
+      () => RegisterVerifyScreen(g<RegisterVerifyScreenViewModel>()));
   gh.factory<VerificationViewModel>(() => VerificationViewModel(
         g<IWalletService>(),
         g<IProfileService>(),

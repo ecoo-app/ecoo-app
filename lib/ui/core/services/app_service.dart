@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:package_info/package_info.dart';
+import 'dart:io' show Platform;
 
 abstract class IAppService {
   String get appVersion;
@@ -12,8 +13,18 @@ class AppService implements IAppService {
 
   AppService(this._packageInfo);
 
-  @override
-  String get appVersion => _packageInfo != null
-      ? '${_packageInfo.version}.${_packageInfo.buildNumber}'
-      : _appVersion;
+  String get appVersion {
+    if (_packageInfo == null) {
+      return _appVersion;
+    }
+
+    if (Platform.isAndroid) {
+      return _packageInfo.version;
+    }
+    if (Platform.isIOS) {
+      return _packageInfo.buildNumber;
+    }
+
+    return _appVersion;
+  }
 }

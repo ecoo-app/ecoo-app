@@ -42,6 +42,7 @@ class RegisterScaffold extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 left: 0, right: 0, top: topPadding, bottom: 10),
                             child: Text(title,
+                                textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline2
