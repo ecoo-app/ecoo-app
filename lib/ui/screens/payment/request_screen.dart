@@ -39,18 +39,19 @@ class RequestScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 25),
-                  child: PrimaryButton(
-                    text: vmodel.wallet.isShop
-                        ? I18n.of(context).buttonShopRequest
-                        : I18n.of(context).buttonPrivateRequest,
-                    onPressed: () {
-                      vmodel.next();
-                    },
-                  ),
+              ]))),
+              bottom: Container(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+                child: PrimaryButton(
+                  text: vmodel.wallet.isShop
+                      ? I18n.of(context).buttonShopRequest
+                      : I18n.of(context).buttonPrivateRequest,
+                  onPressed: () {
+                    vmodel.next();
+                  },
                 ),
-              ]))));
+              ));
         });
   }
 }

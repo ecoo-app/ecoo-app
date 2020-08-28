@@ -14,6 +14,7 @@ class AmountInputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           TextFormField(
+            autofocus: true,
             controller: controller,
             style: Theme.of(context).textTheme.headline1,
             textAlign: TextAlign.end,
