@@ -50,8 +50,8 @@ class SuccessScreen extends StatelessWidget {
                 child: Container(
               decoration: BoxDecoration(
                   gradient: args.isShop
-                      ? GradientStyles.shopWalletAppbarGradient
-                      : GradientStyles.privateWalletAppbarGradient),
+                      ? GradientStyles.shopWalletBackgroundGradient
+                      : GradientStyles.privateWalletBackgroundGradient),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
