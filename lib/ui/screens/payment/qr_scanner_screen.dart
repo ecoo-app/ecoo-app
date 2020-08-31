@@ -84,7 +84,7 @@ class QRScannerScreen extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     margin: const EdgeInsets.symmetric(
-                        vertical: 52, horizontal: 25),
+                        vertical: 48, horizontal: 25),
                     child: showButton
                         ? OutlinedSecondaryButton(
                             svgAsset: Assets.keyboard_purpe_svg,

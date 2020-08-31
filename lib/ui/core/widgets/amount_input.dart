@@ -1,3 +1,4 @@
+import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,8 +6,12 @@ import 'dart:math' as math;
 
 class AmountInputField extends StatelessWidget {
   final TextEditingController controller;
+  final Currency currency;
 
-  AmountInputField({this.controller});
+  AmountInputField({
+    @required this.controller,
+    @required this.currency,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +26,19 @@ class AmountInputField extends StatelessWidget {
             inputFormatters: [
               DecimalTextInputFormatter(decimalRange: 2),
             ],
-            decoration:
-                InputDecoration(border: InputBorder.none, hintText: 'Betrag'),
+            decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: '0.00',
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                suffixText: ' ' + currency.symbol,
+                suffixStyle: Theme.of(context).textTheme.bodyText2),
             keyboardType: TextInputType.numberWithOptions(decimal: true),
-            onEditingComplete: () => print('amount editing complete'),
             validator: (value) {
               if (value.isEmpty) {
                 return I18n.of(context).validationAmountInput;
               }
               return null;
             },
-          ),
-          Text(
-            'CHF',
-            textAlign: TextAlign.end,
           )
         ]);
   }

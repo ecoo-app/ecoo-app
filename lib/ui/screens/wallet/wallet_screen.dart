@@ -96,23 +96,27 @@ class WalletScreen extends StatelessWidget {
             } else {
               return Column(
                 children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Stack(
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25, top: 53),
-                        child: IconButton(
-                          key: Key('menu_button'),
-                          icon: SvgPicture.asset(Assets.menu_svg),
-                          onPressed: Scaffold.of(context).openDrawer,
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 25, top: 53),
+                          child: IconButton(
+                            key: Key('menu_button'),
+                            icon: SvgPicture.asset(Assets.menu_svg),
+                            onPressed: Scaffold.of(context).openDrawer,
+                          ),
                         ),
                       ),
-                      AmountDisplay(
-                        isShopColor: vmodel.wallet.isShop,
-                        isLoading: vmodel.amountState is Loading,
-                        amount: vmodel.wallet.amountLabel,
-                        symbol: vmodel.wallet.currency.symbol,
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: AmountDisplay(
+                          isShopColor: vmodel.wallet.isShop,
+                          isLoading: vmodel.amountState is Loading,
+                          amount: vmodel.wallet.amountLabel,
+                          symbol: vmodel.wallet.currency.symbol,
+                        ),
                       ),
                     ],
                   ),

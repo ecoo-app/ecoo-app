@@ -16,8 +16,6 @@ class WalletQROverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final bodyHeight = MediaQuery.of(context).size.height -
-    //     MediaQuery.of(context).viewInsets.bottom;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -25,7 +23,7 @@ class WalletQROverlay extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 30,
+            height: 25,
           ),
           CustomHeader(
             closeIcon: Assets.close_svg,

@@ -21,16 +21,13 @@ class AmountDisplay extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.centerEnd,
       children: <Widget>[
-        Container(
-          color: ColorStyles.white,
-          child: isShopColor
-              ? SvgPicture.asset(
-                  Assets.shop_header_svg,
-                )
-              : SvgPicture.asset(
-                  Assets.private_header_svg,
-                ),
-        ),
+        isShopColor
+            ? SvgPicture.asset(
+                Assets.shop_header_svg,
+              )
+            : SvgPicture.asset(
+                Assets.private_header_svg,
+              ),
         Container(
           margin: const EdgeInsets.only(right: 25),
           child: Column(
@@ -39,21 +36,18 @@ class AmountDisplay extends StatelessWidget {
             children: <Widget>[
               Text(
                 '$amount',
-                style: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: fontWeightBold,
-                    fontFamily: fontFamiliyPanam,
-                    color: ColorStyles.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2
+                    .merge(TextStyle(color: ColorStyles.white)),
                 textAlign: TextAlign.end,
               ),
               Text(
                 '$symbol',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.headline5.merge(TextStyle(
                     height: 0.6,
-                    fontSize: 20.0,
                     fontWeight: fontWeightRegular,
-                    fontFamily: fontFamiliyPanam,
-                    color: ColorStyles.white),
+                    color: ColorStyles.white)),
                 textAlign: TextAlign.end,
               )
             ],

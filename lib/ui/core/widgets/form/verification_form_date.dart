@@ -86,7 +86,11 @@ class _DateFormField extends State<VerificationFormDateField> {
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.suffixIcon,
             labelText: widget.labelText,
-            hintText: widget.hintText),
+            hintText: widget.hintText,
+            labelStyle: Theme.of(context)
+                .textTheme
+                .bodyText2
+                .merge(TextStyle(color: ColorStyles.bg_gray))),
         onTap: () => _selectDate(context),
         readOnly: true,
         validator: (value) {
@@ -141,6 +145,7 @@ class _DateFormField extends State<VerificationFormDateField> {
           data: generalTheme.copyWith(
             buttonTheme: ButtonThemeData(colorScheme: primaryColorTheme),
             colorScheme: primaryColorTheme,
+            textTheme: Theme.of(context).textTheme,
           ),
           child: child,
         );

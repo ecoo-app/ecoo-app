@@ -111,7 +111,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       padding: const EdgeInsets.only(top: 45),
                       child: CustomHeader(
                         closeIcon: Assets.close_svg,
-                        closeIconColor: ColorStyles.white,
+                        closeIconColor: ColorStyles.black,
                         onClose: () => Navigator.of(context).pop(),
                       ),
                     )

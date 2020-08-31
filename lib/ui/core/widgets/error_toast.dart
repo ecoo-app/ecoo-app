@@ -65,12 +65,18 @@ class ErrorToast {
       titleText: _failureTitle(context) != null
           ? Text(
               _failureTitle(context),
-              style: TextStyles.body_text_black,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .merge(TextStyle(color: ColorStyles.black)),
             )
           : Container(),
       messageText: Text(
         _failureMessage(context),
-        style: TextStyles.body_text_black,
+        style: Theme.of(context)
+            .textTheme
+            .bodyText2
+            .merge(TextStyle(color: ColorStyles.black)),
       ),
     );
   }

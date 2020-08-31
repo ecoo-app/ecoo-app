@@ -1,4 +1,5 @@
 import 'package:e_coupon/business/core/failure.dart';
+import 'package:e_coupon/business/entities/currency.dart';
 import 'package:e_coupon/business/entities/transaction.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
@@ -12,6 +13,7 @@ import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/screens/payment/success_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:e_coupon/core/extensions.dart';
 
 import 'package:injectable/injectable.dart';
 
@@ -48,7 +50,16 @@ class PaymentViewModel extends BaseViewModel {
         text: transfer.amountLabel,
       );
     }
+
+    amountInputController.addListener(() {
+      setViewState(null);
+    });
+    recieverInputController.addListener(() {
+      setViewState(null);
+    });
   }
+
+  Currency get currency => _walletService.getSelected().currency;
 
   void initiateTransaction(String successText) async {
     if (formKey.currentState.validate()) {
@@ -106,4 +117,8 @@ class PaymentViewModel extends BaseViewModel {
     recieverInputController.dispose();
     super.dispose();
   }
+
+  bool isValid() =>
+      !recieverInputController.text.isNullOrEmpty() &&
+      amountInputController.text.isNotNullAndDouble();
 }

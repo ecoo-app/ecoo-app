@@ -32,49 +32,63 @@ class PaymentScreen extends StatelessWidget {
             isShop: vmodel.isShop,
             onBackPressed: vmodel.onBack,
             title: I18n.of(context).titlePaymentScreen,
-            body: Center(
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Form(
-                        key: vmodel.formKey,
-                        child: Column(
-                          children: <Widget>[
-                            AmountInputField(
-                              controller: vmodel.amountInputController,
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            ECTextFormField(
-                              hint: I18n.of(context).labelRecieverInput,
-                              label: I18n.of(context).hintRecieverInput,
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return I18n.of(context)
-                                      .validationRecieverInput;
-                                }
-                                return null;
-                              },
-                              controller: vmodel.recieverInputController,
-                            ),
-                          ],
-                        )),
-                  ],
+            insets: null,
+            body: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 100),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25, right: 25),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Form(
+                              key: vmodel.formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  AmountInputField(
+                                    controller: vmodel.amountInputController,
+                                    currency: vmodel.currency,
+                                  ),
+                                  SizedBox(
+                                    height: 40,
+                                  ),
+                                  ECTextFormField(
+                                    hint: I18n.of(context).labelRecieverInput,
+                                    label: I18n.of(context).hintRecieverInput,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return I18n.of(context)
+                                            .validationRecieverInput;
+                                      }
+                                      return null;
+                                    },
+                                    controller: vmodel.recieverInputController,
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            bottom: Container(
-              margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-              child: PrimaryButton(
-                text: I18n.of(context).buttonPaymentOverview,
-                isLoading: vmodel.viewState is Loading,
-                onPressed: () async {
-                  vmodel
-                      .initiateTransaction(I18n.of(context).paymentSuccessful);
-                },
-              ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                  child: PrimaryButton(
+                    text: I18n.of(context).buttonPaymentOverview,
+                    isLoading: vmodel.viewState is Loading,
+                    isEnabled: vmodel.isValid(),
+                    onPressed: () {
+                      vmodel.initiateTransaction(
+                          I18n.of(context).paymentSuccessful);
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         });

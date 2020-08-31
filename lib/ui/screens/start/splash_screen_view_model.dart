@@ -18,7 +18,6 @@ class SplashScreenViewModel extends BaseViewModel {
   Future<void> startup() async {
     try {
       await _settingsService.clearCredentialsOnFirstStart();
-      
       var loginResult = await _loginService.login();
       switch (loginResult) {
         case LoginResult.Home:

@@ -77,31 +77,37 @@ class VerificationScreen extends StatelessWidget {
 
   Widget _generateShopWalletVerificationForm(
       VerificationInputData value, BuildContext context) {
+    List<Widget> formFields = value.uid.hasNoUid
+        ? [
+            VerificationFormTitle(
+                text: I18n.of(context).verificationShopFormCompanyTitle),
+            VerificationFormField(
+              model: value.name,
+              label: I18n.of(context).verifyFormFieldCompany,
+            ),
+            VerificationFormField(
+              model: value.address,
+              label: I18n.of(context).verifyFormFieldAddress,
+            ),
+            VerificationFormNumberField(
+              maxLength: 4,
+              model: value.postcode,
+              label: I18n.of(context).verifyFormFieldPostcode,
+              keyboardType: TextInputType.number,
+            ),
+            VerificationFormField(
+              model: value.city,
+              label: I18n.of(context).verifyFormFieldCity,
+            ),
+          ]
+        : [Container()];
+
     return ListView(
       padding: EdgeInsets.only(top: 25),
       children: <Widget>[
         VerificationFormTitle(text: I18n.of(context).verificationShopFormTitle),
         VerificationFormUid(model: value.uid),
-        VerificationFormTitle(
-            text: I18n.of(context).verificationShopFormCompanyTitle),
-        VerificationFormField(
-          model: value.name,
-          label: I18n.of(context).verifyFormFieldCompany,
-        ),
-        VerificationFormField(
-          model: value.address,
-          label: I18n.of(context).verifyFormFieldAddress,
-        ),
-        VerificationFormNumberField(
-          maxLength: 4,
-          model: value.postcode,
-          label: I18n.of(context).verifyFormFieldPostcode,
-          keyboardType: TextInputType.number,
-        ),
-        VerificationFormField(
-          model: value.city,
-          label: I18n.of(context).verifyFormFieldCity,
-        ),
+        ...formFields,
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: VerificationFormCheckBox(
@@ -134,40 +140,48 @@ class VerificationScreen extends StatelessWidget {
                       ..show(context);
                   });
                 }
-                return Form(
-                    key: viewModel.formKey,
-                    child: Consumer<VerificationInputData>(
-                      builder: (context, value, child) {
-                        return viewModel.isShop
-                            ? _generateShopWalletVerificationForm(
-                                value, context)
-                            : _generatePrivateWalletVerificationForm(
-                                value, context);
-                      },
-                    ));
-              }()),
-              bottom: Container(
-                margin: const EdgeInsets.only(
-                    top: 0, bottom: 25, left: 25, right: 25),
-                child: Consumer<VerificationInputData>(
-                  builder: (context, value, child) {
-                    var isError =
-                        viewModel.viewState is Loading || !value.isTruth;
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 88),
+                      child: Form(
+                        key: viewModel.formKey,
+                        child: Consumer<VerificationInputData>(
+                          builder: (context, value, child) {
+                            return viewModel.isShop
+                                ? _generateShopWalletVerificationForm(
+                                    value, context)
+                                : _generatePrivateWalletVerificationForm(
+                                    value, context);
+                          },
+                        ),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      margin: const EdgeInsets.only(top: 20, bottom: 25),
+                      child: Consumer<VerificationInputData>(
+                        builder: (context, value, child) {
+                          var isError =
+                              viewModel.viewState is Loading || !value.isTruth;
 
-                    return PrimaryButton(
-                      isLoading: viewModel.viewState is Loading,
-                      text: I18n.of(context).buttonFormClaimVerification,
-                      isEnabled: !isError,
-                      onPressed: () async {
-                        await viewModel.onVerify(
-                            I18n.of(context).successTextVerification,
-                            errorText:
-                                I18n.of(context).verifyFormErrorVerification);
-                      },
-                    );
-                  },
-                ),
-              ),
+                          return PrimaryButton(
+                            isLoading: viewModel.viewState is Loading,
+                            text: I18n.of(context).buttonFormClaimVerification,
+                            isEnabled: !isError,
+                            onPressed: () async {
+                              await viewModel.onVerify(
+                                  I18n.of(context).successTextVerification,
+                                  errorText: I18n.of(context)
+                                      .verifyFormErrorVerification);
+                            },
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                );
+              }()),
             ),
           );
         });

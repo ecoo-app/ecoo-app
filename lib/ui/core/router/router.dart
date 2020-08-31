@@ -1,7 +1,6 @@
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/redeem/redeem_screen.dart';
 import 'package:e_coupon/ui/screens/verification/pin_verification_screen.dart';
-import 'package:e_coupon/ui/screens/payment/error_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
 import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
 import 'package:e_coupon/ui/screens/payment/qrbill_screen.dart';
@@ -30,7 +29,6 @@ const WalletDetailRoute = '/wallet';
 const TransactionOverviewRoute = 'transactionOverview';
 const PaymentRoute = 'payment';
 const SuccessRoute = 'success';
-const ErrorRoute = 'paymentError';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
 const QRScanRoute = '/scan';
@@ -46,6 +44,8 @@ abstract class IRouter {
 
   Future<void> pushAndRemoveUntil(String route, String until,
       {dynamic arguments});
+
+  void popUntil(bool Function(Route<dynamic>) predicate);
 }
 
 @Singleton(as: IRouter)
@@ -60,9 +60,11 @@ class Router implements IRouter {
       case QRScanRoute:
         var showButton = settings.arguments as bool;
         return showButton == null
-            ? MaterialPageRoute(builder: (_) => QRScannerScreen())
+            ? MaterialPageRoute(
+                builder: (_) => QRScannerScreen(), fullscreenDialog: true)
             : MaterialPageRoute(
-                builder: (_) => QRScannerScreen(showButton: showButton));
+                builder: (_) => QRScannerScreen(showButton: showButton),
+                fullscreenDialog: true);
       case SplashRoute:
         return _createRoute(settings, getIt<SplashScreen>(), false);
       case OnboardingRoute:
@@ -78,16 +80,14 @@ class Router implements IRouter {
       case VerificationRoute:
         return _createRoute(settings, getIt<VerificationScreen>(), true);
       case PaymentRoute:
-        return _createRoute(settings, PaymentScreen(), false);
+        return _createRoute(settings, getIt<PaymentScreen>(), false);
       case SuccessRoute:
         final SuccessScreenArguments args =
             settings.arguments as SuccessScreenArguments;
         return MaterialPageRoute(
             builder: (_) => SuccessScreen(args), fullscreenDialog: true);
-      case ErrorRoute:
-        return _createRoute(settings, getIt<ErrorScreen>(), false);
       case RequestPaymentRoute:
-        return _createRoute(settings, getIt<RequestScreen>(), false);
+        return _createRoute(settings, getIt<RequestScreen>(), true);
       case RequestQRBillRoute:
         return _createRoute(settings, getIt<RequestQRBillScreen>(), false);
       case WalletQROverlayRoute:
@@ -129,5 +129,10 @@ class Router implements IRouter {
     return navigatorKey.currentState.pushNamedAndRemoveUntil(
         route, (route) => route.settings.name == until,
         arguments: arguments);
+  }
+
+  @override
+  void popUntil(bool Function(Route<dynamic>) predicate) {
+    navigatorKey.currentState.popUntil(predicate);
   }
 }

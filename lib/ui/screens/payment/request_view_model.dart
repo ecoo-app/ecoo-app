@@ -7,6 +7,7 @@ import 'package:e_coupon/ui/core/services/utils.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
+import 'package:e_coupon/core/extensions.dart';
 
 @injectable
 class RequestViewModel extends BaseViewModel {
@@ -21,6 +22,9 @@ class RequestViewModel extends BaseViewModel {
 
   void init() {
     this.wallet = _walletService.getSelected();
+    amountInputController.addListener(() {
+      setViewState(null);
+    });
   }
 
   void next() {
@@ -35,4 +39,6 @@ class RequestViewModel extends BaseViewModel {
   void onBack() {
     _transferService.reset();
   }
+
+  bool isInputValid() => amountInputController.text.isNotNullAndDouble();
 }

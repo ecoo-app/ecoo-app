@@ -15,42 +15,53 @@ class RequestScreen extends StatelessWidget {
     return BaseView<RequestViewModel>(
         model: getIt<RequestViewModel>(),
         onModelReady: (vmodel) => vmodel.init(),
-        builder: (_, vmodel, __) {
+        builder:
+            (BuildContext context, RequestViewModel vmodel, Widget widget) {
           return MainLayout(
               onBackPressed: vmodel.onBack,
               leadingType: BackButtonType.Close,
               isShop: vmodel.wallet.isShop,
               title: I18n.of(context).titlePrivateRequest,
-              body: Center(
-                  child: Container(
-                      child: Column(children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                ),
-                Form(
-                    key: vmodel.formKey,
-                    child: Column(
-                      children: <Widget>[
-                        AmountInputField(
-                          controller: vmodel.amountInputController,
-                        ),
-                      ],
-                    )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                ),
-              ]))),
-              bottom: Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-                child: PrimaryButton(
-                  text: vmodel.wallet.isShop
-                      ? I18n.of(context).buttonShopRequest
-                      : I18n.of(context).buttonPrivateRequest,
-                  onPressed: () {
-                    vmodel.next();
-                  },
-                ),
+              insets: null,
+              body: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 25, right: 25, top: 25),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Form(
+                              key: vmodel.formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  AmountInputField(
+                                      controller: vmodel.amountInputController,
+                                      currency: vmodel.wallet.currency),
+                                ],
+                              )),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 20),
+                    child: PrimaryButton(
+                      text: vmodel.wallet.isShop
+                          ? I18n.of(context).buttonShopRequest
+                          : I18n.of(context).buttonPrivateRequest,
+                      isEnabled: vmodel.isInputValid(),
+                      onPressed: () {
+                        vmodel.next();
+                      },
+                    ),
+                  )
+                ],
               ));
         });
   }

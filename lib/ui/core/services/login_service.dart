@@ -109,11 +109,13 @@ class LoginService implements ILoginService {
 
       return false;
     } on SignInWithAppleException catch (e) {
-      print('An Exception occured: ${e}');
+      print('An SignInWithAppleException occured: ${e}');
       return false;
     } on PlatformException catch (e) {
+      print('An PlatformException occured: ${e}');
+      return false;
+    } catch (e) {
       print('An Exception occured: ${e}');
-
       return false;
     }
   }

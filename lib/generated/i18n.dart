@@ -250,8 +250,8 @@ class I18n implements WidgetsLocalizations {
   String get transactionSuccessful => "Transaktion erfolgreich";
   /// "Paper Wallet scannen"
   String get scanPaperWalletButton => "Paper Wallet scannen";
-  /// "Deine Angaben konnten nicht verifiziert werden. Bitte trete mit der Stadt in Kontakt."
-  String get verifyFormErrorVerification => "Deine Angaben konnten nicht verifiziert werden. Bitte trete mit der Stadt in Kontakt.";
+  /// "Ihre Angaben konnten nicht verifizert werden. Die Stadt wird sich in Kürze bei Ihnen melden und die nächsten Schritte besprechen."
+  String get verifyFormErrorVerification => "Ihre Angaben konnten nicht verifizert werden. Die Stadt wird sich in Kürze bei Ihnen melden und die nächsten Schritte besprechen.";
   /// "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal."
   String get walletSelectionScreenError => "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal.";
   /// "https://payecoo.ch/datenschutz.html"

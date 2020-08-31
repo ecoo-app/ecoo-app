@@ -53,40 +53,14 @@ ThemeData generalTheme = ThemeData(
           fontFamily: fontFamiliyPanam)),
 );
 
-class TextStyles {
-  static const body_text_black = TextStyle(
-      fontSize: 15.0,
-      fontWeight: fontWeightRegular,
-      fontFamily: fontFamiliyPanam,
-      color: Colors.black);
-
-  static const body_text_white = TextStyle(
-      fontSize: 15.0,
-      fontWeight: fontWeightRegular,
-      fontFamily: fontFamiliyPanam,
-      color: Colors.white);
-
-  static const headline3_text_white = TextStyle(
-      fontSize: 25.0,
-      fontWeight: fontWeightMedium,
-      fontFamily: fontFamiliyPanam,
-      color: ColorStyles.white);
-
-  static const headline2_text_white = TextStyle(
-      fontSize: 50.0,
-      fontWeight: fontWeightBold,
-      fontFamily: fontFamiliyPanam,
-      color: ColorStyles.white);
-}
-
 class ColorStyles {
   static const Color white = Color(0xFFFFFFFF);
-  static const Color black = Color(0xFF373737);
+  static const Color bg_white_9 = Color(0xE6FFFFFF);
+  static const Color bg_light_gray = Color(0xFFF7F7F7);
   static const Color brown_gray = Color(0xFF979797);
   static const Color bg_gray = Color(0xFF575757);
-  static const Color bg_light_gray = Color(0xFFF7F7F7);
+  static const Color black = Color(0xFF373737);
   static const Color bg_transparent = Color(0x40000000);
-  static const Color bg_white_9 = Color(0xE6FFFFFF);
 
   static const Color blue = Color(0xFF3979FF);
   static const Color green = Color(0xFF45DEA3);
@@ -120,6 +94,7 @@ class Assets {
   static const icon_close_svg = 'assets/images/icon_close.svg';
   static const icon_arrow_right_svg = 'assets/images/icon_arrow_right.svg';
   static const icon_qrcode_svg = 'assets/images/icon_qrcode.svg';
+  static const icon_qrcode_color_svg = 'assets/images/icon_qrcode_color.svg';
   static const icon_leaf_svg = 'assets/images/icon_leaf.svg';
 
   static const wallet_icon_svg = 'assets/images/wallet_icon.svg';
@@ -171,23 +146,6 @@ class Assets {
 }
 
 class GradientStyles {
-  static final LinearGradient purpleGradient = LinearGradient(
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-    stops: [
-      0.0,
-      0.49,
-      1.0,
-      1.0,
-    ],
-    colors: [
-      ColorStyles.pink,
-      Color(0xFFC971FF),
-      ColorStyles.purple,
-      ColorStyles.purple
-    ],
-  );
-
   static final LinearGradient privateWalletBackgroundGradient = LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -247,13 +205,4 @@ class GradientStyles {
         0.54,
         1.0,
       ]);
-
-  static LinearGradient errorGradient = LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [
-      Color(0xfff1327f),
-      Color(0xff9774ff),
-    ],
-  );
 }

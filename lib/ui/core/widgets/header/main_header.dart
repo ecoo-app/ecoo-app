@@ -19,16 +19,18 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).padding.top - 20;
     return Container(
-      height: 120,
+      height: 120 + height,
       decoration:
           ShapeDecoration(shape: MainHeaderShapeBorder(), gradient: gradient),
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.only(left: 25, right: 25),
+          padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               IconButton(
                 key: Key('close_button'),
@@ -39,10 +41,16 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
                 iconSize: LayoutStyles.iconSize,
                 onPressed: onBack,
               ),
-              Text(
-                headline,
-                style: TextStyles.body_text_white,
-                textAlign: TextAlign.end,
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Text(
+                  headline,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .merge(TextStyle(color: ColorStyles.black)),
+                  textAlign: TextAlign.end,
+                ),
               )
             ],
           ),

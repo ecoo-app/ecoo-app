@@ -30,7 +30,6 @@ import 'ui/core/services/transfer_service.dart';
 import 'ui/core/services/wallet_service.dart';
 import 'ui/screens/menu/menu_screen.dart';
 import 'ui/screens/menu/menu_screen_view_model.dart';
-import 'ui/screens/payment/error_screen.dart';
 import 'ui/screens/payment/payment_screen.dart';
 import 'ui/screens/payment/payment_view_model.dart';
 import 'ui/screens/payment/qr_scanner_view_model.dart';
@@ -60,8 +59,8 @@ import 'ui/screens/wallet/wallet_screen.dart';
 import 'ui/screens/wallet/wallet_view_model.dart';
 
 /// Environment names
-const _prod = 'prod';
 const _dev = 'dev';
+const _prod = 'prod';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -69,14 +68,13 @@ const _dev = 'dev';
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final thirdPartyLibraryModule = _$ThirdPartyLibraryModule();
-  gh.factory<ErrorScreen>(() => ErrorScreen());
   gh.factory<FlutterSecureStorage>(() => thirdPartyLibraryModule.securePrefs);
   gh.lazySingleton<ILocalWalletSource>(() => LocalWalletSource());
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo());
   gh.lazySingleton<ITransferService>(() => TransferService());
+  gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
   gh.lazySingleton<IWalletSource>(() => WalletSourceProd(),
       registerFor: {_prod});
-  gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
   gh.lazySingleton<MockLoginService>(
       () => MockLoginService(g<IWalletSource>()));
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
@@ -86,7 +84,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<RequestScreen>(() => RequestScreen());
   final sharedPreferences = await thirdPartyLibraryModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
-  gh.factory<SuccessViewModel>(() => SuccessViewModel());
+  gh.factory<SuccessViewModel>(() => SuccessViewModel(g<IRouter>()));
   gh.factory<VerificationScreen>(() => VerificationScreen());
   gh.factory<WalletScreen>(() => WalletScreen());
   gh.factory<WalletSelectionScreen>(() => WalletSelectionScreen());
