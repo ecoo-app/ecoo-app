@@ -14,7 +14,8 @@ void main() {
 
     await tester.pumpWidget(MaterialWrapper.wrap(widget));
     expect(find.text('phonenumber'), findsNWidgets(2));
-    expect(model.value, '+41');
+    expect(find.text('+41 '), findsNWidgets(1));
+    expect(model.value, '');
   });
 
   Future<void> testInputFormats(WidgetTester tester, String input,
@@ -43,6 +44,6 @@ void main() {
 
   testWidgets('Input correct phone format with partial input',
       (WidgetTester tester) async {
-    await testInputFormats(tester, '781234', '78 123 4', '+41781234');
+    await testInputFormats(tester, '781234', '78 123 4', '');
   });
 }

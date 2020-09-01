@@ -2,6 +2,7 @@ import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/screens/verification/verification_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 typedef ValidationFunction = bool Function();
@@ -17,16 +18,23 @@ class VerificationFormNumberField extends StatelessWidget {
       @required this.model,
       this.label,
       this.maxLength,
-      this.keyboardType = TextInputType.text})
+      this.keyboardType = TextInputType.number})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: model.setValue,
+      onFieldSubmitted: (String value) => model.fieldFocusChange(context),
       keyboardType: keyboardType,
+      autocorrect: false,
       maxLength: maxLength,
+      focusNode: model.focusNode,
+      textInputAction: TextInputAction.next,
       maxLengthEnforced: maxLength != null,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       decoration: InputDecoration(
           hintText: label,
           labelText: label,
@@ -40,7 +48,7 @@ class VerificationFormNumberField extends StatelessWidget {
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.black))),
       validator: (value) {
-        var result = model.isValid();
+        var result = model.isValid;
         if (result) {
           return null;
         } else {

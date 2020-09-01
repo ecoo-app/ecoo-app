@@ -262,6 +262,8 @@ class I18n implements WidgetsLocalizations {
   String get truthfullyEnteredFormCheck => "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.";
   /// "Fertig"
   String get cupertinoDatePickerDialogFinishButton => "Fertig";
+  /// "Weiter"
+  String get verifyFormFieldNextButton => "Weiter";
 }
 
 class _I18n_de_CH extends I18n {

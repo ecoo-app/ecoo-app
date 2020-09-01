@@ -1,9 +1,14 @@
 import 'package:flutter/widgets.dart';
+import 'package:e_coupon/core/extensions.dart';
 
 abstract class VerificationInput {
+  FocusNode focusNode;
+
   String get value;
 
-  bool isValid();
+  bool get isValid;
+
+  void fieldFocusChange(BuildContext context);
 }
 
 class TextVerificationInput extends ChangeNotifier
@@ -12,13 +17,15 @@ class TextVerificationInput extends ChangeNotifier
 
   String input;
 
-  TextVerificationInput({this.optional = false});
+  TextVerificationInput({
+    this.optional = false,
+  });
 
   @override
   String get value => input;
 
   @override
-  bool isValid() {
+  bool get isValid {
     if (optional) {
       return true;
     }
@@ -28,6 +35,14 @@ class TextVerificationInput extends ChangeNotifier
   void setValue(String text) {
     input = text;
     notifyListeners();
+  }
+
+  @override
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void fieldFocusChange(BuildContext context) {
+    FocusScope.of(context).nextFocus();
   }
 }
 
@@ -39,7 +54,7 @@ class DateVerificationInput extends ChangeNotifier
   String get value => input.toString();
 
   @override
-  bool isValid() {
+  bool get isValid {
     return true;
   }
 
@@ -47,22 +62,29 @@ class DateVerificationInput extends ChangeNotifier
     input = date;
     notifyListeners();
   }
+
+  @override
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void fieldFocusChange(BuildContext context) {}
 }
 
 class PhoneNumberVerificationInput extends TextVerificationInput {
   String input;
 
   @override
-  bool isValid() {
-    if (input != null && input.isNotEmpty) {
-      return true;
+  bool get isValid {
+    if (input.isNullOrEmpty()) {
+      return false;
     }
 
-    return false;
+    var lengthOk = input.length == 12;
+    return lengthOk;
   }
 
   @override
-  String get value => '+41${input?.replaceAll(' ', '') ?? ''}';
+  String get value => isValid ? '+41${input?.replaceAll(' ', '') ?? ''}' : '';
 
   void setValue(String text) {
     input = text;
@@ -71,41 +93,53 @@ class PhoneNumberVerificationInput extends TextVerificationInput {
 }
 
 class UidVerificationInput extends TextVerificationInput {
-  String part1 = '';
-  String part2 = '';
-  String part3 = '';
-
   bool hasNoUid = false;
 
-  @override
-  String get value => isValid() ? 'CHE-${part1}.${part2}.${part3}' : '';
+  String text;
 
   @override
-  void setValue(String text) {}
-
-  @override
-  bool isValid() {
-    final partsOk = part1.length == 3 && part2.length == 3 && part3.length == 3;
-    return partsOk;
+  String get value {
+    if (hasNoUid) {
+      return '';
+    } else {
+      return isValid ? 'CHE-${input}' : '';
+    }
   }
 
-  void part1Changed(String text) {
-    part1 = text;
+  @override
+  void setValue(String text) {
+    input = text;
     notifyListeners();
   }
 
-  void part2Changed(String text) {
-    part2 = text;
-    notifyListeners();
+  @override
+  bool get isValid {
+    if (hasNoUid) {
+      return true;
+    }
+    if (input.isNullOrEmpty()) {
+      return false;
+    }
+
+    final lengthOk = input.length == 11;
+    var expression = RegExp(r'\b([0-9]{3,3})');
+    var matches = expression.allMatches(input);
+    final threeParts = matches.length == 3;
+    final containsDots = '.'.allMatches(input).length == 2;
+
+    return !hasNoUid && lengthOk && threeParts && containsDots;
   }
 
-  void part3Changed(String text) {
-    part3 = text;
-    notifyListeners();
-  }
-
+  String tempInput = '';
   void hasNoUidChanged(bool value) {
     hasNoUid = value;
+    if (hasNoUid) {
+      tempInput = input;
+      setValue('');
+    }
+    if (!hasNoUid) {
+      setValue(tempInput);
+    }
     notifyListeners();
   }
 }

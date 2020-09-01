@@ -13,26 +13,29 @@ class VerificationFormCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Checkbox(
-          visualDensity: VisualDensity(),
-          activeColor: ColorStyles.bg_gray,
-          onChanged: onChanged,
-          value: value,
-        ),
-        Expanded(
-          child: Text(
-            text,
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                .merge(TextStyle(color: ColorStyles.bg_gray)),
+    return GestureDetector(
+      onTap: () => onChanged(!value),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Checkbox(
+            visualDensity: VisualDensity(),
+            activeColor: ColorStyles.bg_gray,
+            onChanged: onChanged,
+            value: value,
           ),
-        ),
-      ],
+          Expanded(
+            child: Text(
+              text,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .merge(TextStyle(color: ColorStyles.bg_gray)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

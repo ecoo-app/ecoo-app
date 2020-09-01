@@ -32,9 +32,10 @@ class VerificationViewModel extends BaseViewModel {
       setViewState(Loading());
 
       var walletId = _walletService.getSelected().id;
-      var profile =
-          isShop ? inputData.toCompanyEntity(walletId) : inputData.toProfileEntity(walletId);
-      
+      var profile = isShop
+          ? inputData.toCompanyEntity(walletId)
+          : inputData.toProfileEntity(walletId);
+
       try {
         var result = await _profileService.create(profile);
 

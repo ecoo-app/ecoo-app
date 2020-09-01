@@ -10,21 +10,27 @@ class VerificationFormField extends StatelessWidget {
   final TextVerificationInput model;
   final String label;
   final TextInputType keyboardType;
+  final TextInputAction textInputAction;
 
   const VerificationFormField(
       {Key key,
       @required this.model,
       this.label,
-      this.keyboardType = TextInputType.text})
+      this.keyboardType = TextInputType.text,
+      this.textInputAction = TextInputAction.next})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: model.setValue,
+      onFieldSubmitted: (String value) => model.fieldFocusChange(context),
       keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      focusNode: model.focusNode,
+      autocorrect: false,
+      textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          hintText: label,
           labelText: label,
           fillColor: ColorStyles.bg_gray,
           focusColor: ColorStyles.black,
@@ -35,7 +41,7 @@ class VerificationFormField extends StatelessWidget {
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.black))),
       validator: (value) {
-        var result = model.isValid();
+        var result = model.isValid;
         if (result) {
           return null;
         } else {

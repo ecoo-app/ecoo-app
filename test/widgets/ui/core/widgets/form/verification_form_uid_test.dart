@@ -33,8 +33,8 @@ void main() {
     expect(model.hasNoUid, true);
   });
 
-  Future<void> testInputOfUidNumber(WidgetTester tester, String part1,
-      String part2, String part3, String expected) async {
+  Future<void> testInputOfUidNumber(
+      WidgetTester tester, String input, String expected) async {
     var model = UidVerificationInput();
     var widget = VerificationFormUid(
       model: model,
@@ -42,35 +42,29 @@ void main() {
 
     await tester.pumpWidget(MaterialWrapper.wrap(widget));
 
-    var part1Finder = find.byKey(Key('uid-part-1'));
-    var part2Finder = find.byKey(Key('uid-part-2'));
-    var part3Finder = find.byKey(Key('uid-part-3'));
+    var inputFinder = find.byKey(Key('uid-input'));
 
-    await tester.enterText(part1Finder, part1);
-    await tester.enterText(part2Finder, part2);
-    await tester.enterText(part3Finder, part3);
+    await tester.enterText(inputFinder, input);
 
     expect(model.value, expected);
   }
 
   group('Verify UID Inputs', () {
     testWidgets('Complete UID', (WidgetTester tester) async {
-      await testInputOfUidNumber(
-          tester, '123', '456', '789', 'CHE-123.456.789');
+      await testInputOfUidNumber(tester, '123.456.789', 'CHE-123.456.789');
     });
     testWidgets('Incomplete', (WidgetTester tester) async {
-      await testInputOfUidNumber(tester, '123', '56', '789', '');
+      await testInputOfUidNumber(tester, '12353789', '');
     });
     testWidgets('Missing One Part', (WidgetTester tester) async {
-      await testInputOfUidNumber(tester, '123', '456', '', '');
+      await testInputOfUidNumber(tester, '123456', '');
     });
     testWidgets('Allow only numeric', (WidgetTester tester) async {
-      await testInputOfUidNumber(tester, '12yadsf', '456', '', '');
+      await testInputOfUidNumber(tester, '12yadsf', '');
     });
 
     testWidgets('max length is three numbers', (WidgetTester tester) async {
-      await testInputOfUidNumber(
-          tester, '12312', '456', '789', 'CHE-123.456.789');
+      await testInputOfUidNumber(tester, '123.456.789', 'CHE-123.456.789');
     });
   });
 }

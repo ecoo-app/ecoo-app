@@ -23,8 +23,12 @@ class VerificationFormPhoneField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: model.setValue,
+      onFieldSubmitted: (String value) => model.fieldFocusChange(context),
+      focusNode: model.focusNode,
+      autocorrect: false,
       maxLength: 12,
       maxLengthEnforced: true,
+      textInputAction: TextInputAction.next,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         PhoneNumberInputFormatter()
@@ -48,7 +52,7 @@ class VerificationFormPhoneField extends StatelessWidget {
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: ColorStyles.black))),
       validator: (value) {
-        var result = model.isValid();
+        var result = model.isValid;
         if (result) {
           return null;
         } else {

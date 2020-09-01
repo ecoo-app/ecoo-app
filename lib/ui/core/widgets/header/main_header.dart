@@ -48,7 +48,7 @@ class MainHeader extends StatelessWidget implements PreferredSizeWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .merge(TextStyle(color: ColorStyles.black)),
+                      .merge(TextStyle(color: ColorStyles.white)),
                   textAlign: TextAlign.end,
                 ),
               )

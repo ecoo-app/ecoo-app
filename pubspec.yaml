@@ -49,6 +49,7 @@ dependencies:
   device_info: ^0.4.2+4
   url_launcher: ^5.5.0
   rxdart: ^0.24.1
+  keyboard_visibility: '0.5.6'
 
   # injection provider arount get it
   injectable: ^1.0.0

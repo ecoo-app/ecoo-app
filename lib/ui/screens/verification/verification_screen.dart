@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_date.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_checkbox.dart';
@@ -18,14 +21,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:injectable/injectable.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:provider/provider.dart';
 
 @injectable
-class VerificationScreen extends StatelessWidget {
+class VerificationScreen extends StatefulWidget {
+  @override
+  _VerificationScreenState createState() => _VerificationScreenState();
+}
+
+class _VerificationScreenState extends State<VerificationScreen> {
+  OverlayEntry overlayEntry;
+  bool isKeyBoardVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isIOS) {
+      KeyboardVisibilityNotification().addNewListener(
+        onChange: (bool visible) {
+          setState(() {
+            isKeyBoardVisible = visible;
+          });
+        },
+      );
+    }
+  }
+
   Widget _generatePrivateWalletVerificationForm(
       VerificationInputData value, BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.only(top: 25),
+      padding: const EdgeInsets.only(top: 25, bottom: 25, left: 25, right: 25),
       children: <Widget>[
         VerificationFormTitle(
             text: I18n.of(context).verificationPrivateFormTitle),
@@ -57,7 +83,6 @@ class VerificationScreen extends StatelessWidget {
           maxLength: 4,
           model: value.postcode,
           label: I18n.of(context).verifyFormFieldPostcode,
-          keyboardType: TextInputType.number,
         ),
         VerificationFormField(
           model: value.city,
@@ -77,37 +102,31 @@ class VerificationScreen extends StatelessWidget {
 
   Widget _generateShopWalletVerificationForm(
       VerificationInputData value, BuildContext context) {
-    List<Widget> formFields = value.uid.hasNoUid
-        ? [
-            VerificationFormTitle(
-                text: I18n.of(context).verificationShopFormCompanyTitle),
-            VerificationFormField(
-              model: value.name,
-              label: I18n.of(context).verifyFormFieldCompany,
-            ),
-            VerificationFormField(
-              model: value.address,
-              label: I18n.of(context).verifyFormFieldAddress,
-            ),
-            VerificationFormNumberField(
-              maxLength: 4,
-              model: value.postcode,
-              label: I18n.of(context).verifyFormFieldPostcode,
-              keyboardType: TextInputType.number,
-            ),
-            VerificationFormField(
-              model: value.city,
-              label: I18n.of(context).verifyFormFieldCity,
-            ),
-          ]
-        : [Container()];
-
     return ListView(
-      padding: EdgeInsets.only(top: 25),
+      padding: const EdgeInsets.only(top: 25, bottom: 25, left: 25, right: 25),
       children: <Widget>[
         VerificationFormTitle(text: I18n.of(context).verificationShopFormTitle),
         VerificationFormUid(model: value.uid),
-        ...formFields,
+        VerificationFormTitle(
+            text: I18n.of(context).verificationShopFormCompanyTitle),
+        VerificationFormField(
+          model: value.companyName,
+          label: I18n.of(context).verifyFormFieldCompany,
+        ),
+        VerificationFormField(
+          model: value.address,
+          label: I18n.of(context).verifyFormFieldAddress,
+        ),
+        VerificationFormNumberField(
+          maxLength: 4,
+          model: value.postcode,
+          label: I18n.of(context).verifyFormFieldPostcode,
+          keyboardType: TextInputType.number,
+        ),
+        VerificationFormField(
+          model: value.city,
+          label: I18n.of(context).verifyFormFieldCity,
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: VerificationFormCheckBox(
@@ -131,7 +150,7 @@ class VerificationScreen extends StatelessWidget {
               isShop: viewModel.isShop,
               title: I18n.of(context).titleFormClaimVerification,
               leadingType: BackButtonType.Close,
-              insets: EdgeInsets.symmetric(horizontal: 24),
+              insets: null,
               body: (() {
                 if (viewModel.viewState is Error) {
                   Error error = viewModel.viewState;
@@ -140,10 +159,14 @@ class VerificationScreen extends StatelessWidget {
                       ..show(context);
                   });
                 }
+                double bottomInset = 88;
+                if (Platform.isIOS) {
+                  bottomInset += 34;
+                }
                 return Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 88),
+                      padding: EdgeInsets.only(bottom: bottomInset),
                       child: Form(
                         key: viewModel.formKey,
                         child: Consumer<VerificationInputData>(
@@ -157,27 +180,41 @@ class VerificationScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      margin: const EdgeInsets.only(top: 20, bottom: 25),
-                      child: Consumer<VerificationInputData>(
-                        builder: (context, value, child) {
-                          var isError =
-                              viewModel.viewState is Loading || !value.isTruth;
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          alignment: Alignment.bottomCenter,
+                          margin: EdgeInsets.only(
+                              top: 20,
+                              bottom:
+                                  isKeyBoardVisible && Platform.isIOS ? 10 : 15,
+                              left: 25,
+                              right: 25),
+                          child: Consumer<VerificationInputData>(
+                            builder: (context, value, child) {
+                              var isError = viewModel.viewState is Loading ||
+                                  !value.isValid(viewModel.isShop);
 
-                          return PrimaryButton(
-                            isLoading: viewModel.viewState is Loading,
-                            text: I18n.of(context).buttonFormClaimVerification,
-                            isEnabled: !isError,
-                            onPressed: () async {
-                              await viewModel.onVerify(
-                                  I18n.of(context).successTextVerification,
-                                  errorText: I18n.of(context)
-                                      .verifyFormErrorVerification);
+                              return PrimaryButton(
+                                isLoading: viewModel.viewState is Loading,
+                                text: I18n.of(context)
+                                    .buttonFormClaimVerification,
+                                isEnabled: !isError,
+                                onPressed: () async {
+                                  await viewModel.onVerify(
+                                      I18n.of(context).successTextVerification,
+                                      errorText: I18n.of(context)
+                                          .verifyFormErrorVerification);
+                                },
+                              );
                             },
-                          );
-                        },
-                      ),
+                          ),
+                        ),
+                        isKeyBoardVisible && Platform.isIOS
+                            ? InputNextView()
+                            : Container(),
+                      ],
                     )
                   ],
                 );
@@ -185,5 +222,30 @@ class VerificationScreen extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class InputNextView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: ColorStyles.bg_light_gray,
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 2, bottom: 2),
+          child: CupertinoButton(
+            padding: EdgeInsets.only(right: 24.0, top: 4.0, bottom: 4.0),
+            onPressed: () {
+              FocusScope.of(context).nextFocus();
+            },
+            child: Text(I18n.of(context).verifyFormFieldNextButton,
+                style: TextStyle(
+                    color: ColorStyles.black, fontWeight: FontWeight.bold)),
+          ),
+        ),
+      ),
+    );
   }
 }
