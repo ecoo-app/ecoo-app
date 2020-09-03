@@ -35,10 +35,10 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Can I use the camera please?</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To access location data</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>The face id is used to ensure that only the phone owner can make transactions.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>The camera is used to scan the qr code.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
