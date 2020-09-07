@@ -37,11 +37,11 @@ class VerificationFormNumberField extends StatelessWidget {
       ],
       decoration: InputDecoration(
           hintText: label,
-          labelText: label,
+          helperText: label,
           counterText: '',
           fillColor: ColorStyles.bg_gray,
           focusColor: ColorStyles.black,
-          labelStyle: Theme.of(context)
+          helperStyle: Theme.of(context)
               .textTheme
               .bodyText2
               .merge(TextStyle(color: ColorStyles.bg_gray)),

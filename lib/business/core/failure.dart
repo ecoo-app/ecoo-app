@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:ecoupon_lib/common/errors.dart';
 import 'package:equatable/equatable.dart';
 
@@ -23,12 +21,12 @@ class NoService extends Failure {
 
 class HTTPFailure extends Failure {
   final int code;
-  final String response;
+  final Map<String, List<String>> response;
 
   HTTPFailure(this.code, this.response);
 
   factory HTTPFailure.from(HTTPError other) {
-    return HTTPFailure(other.statusCode, json.encode(other.details));
+    return HTTPFailure(other.statusCode, other.details);
   }
 
   @override
@@ -52,6 +50,16 @@ class CacheFailure extends Failure {
 }
 
 class UnknownFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class NoTransactionPossibleFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class NoPinSetFailure extends Failure {
   @override
   List<Object> get props => [];
 }

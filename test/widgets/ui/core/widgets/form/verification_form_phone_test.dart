@@ -13,7 +13,7 @@ void main() {
     );
 
     await tester.pumpWidget(MaterialWrapper.wrap(widget));
-    expect(find.text('phonenumber'), findsNWidgets(2));
+    expect(find.text('phonenumber'), findsNWidgets(1));
     expect(find.text('+41 '), findsNWidgets(1));
     expect(model.value, '');
   });

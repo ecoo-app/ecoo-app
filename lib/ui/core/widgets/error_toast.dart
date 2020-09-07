@@ -15,10 +15,16 @@ class ErrorToast {
       return I18n.of(context).noServiceErrorTitle;
     }
     if (failure is NotAuthenticatedFailure) {
-      return 'Login erforderlich';
+      return I18n.of(context).authFailureTitle;
     }
     if (failure is HTTPFailure) {
       return 'Server fehler ${(failure as HTTPFailure).code}';
+    }
+    if (failure is NoPinSetFailure) {
+      return I18n.of(context).noPinFailureTitle;
+    }
+    if (failure is NoTransactionPossibleFailure) {
+      return I18n.of(context).noTransactionFailureTitle;
     }
     return I18n.of(context).generalErrorTitle;
   }
@@ -28,19 +34,34 @@ class ErrorToast {
       return I18n.of(context).noServiceErrorText;
     }
     if (failure is NotAuthenticatedFailure) {
-      return 'Du bist nicht eingeloggt.';
+      return I18n.of(context).authFailureText;
     }
     if (failure is HTTPFailure) {
       var responseDetails = (failure as HTTPFailure).response;
-      print(responseDetails);
       if (responseDetails == null) {
         return '-';
       }
-      return responseDetails;
+
+      String text = '';
+      responseDetails.forEach((key, value) {
+        for (var i = 0; i < value.length; i++) {
+          if (i != 0) {
+            text += '\n';
+          }
+          text += '${value[i]}';
+        }
+      });
+      return text;
     }
     if (failure is MessageFailure) {
       MessageFailure fail = failure;
       return fail.message;
+    }
+    if (failure is NoPinSetFailure) {
+      return I18n.of(context).noPinFailureText;
+    }
+    if (failure is NoTransactionPossibleFailure) {
+      return I18n.of(context).noTransactionFailureText;
     }
     return I18n.of(context).generalErrorText;
   }

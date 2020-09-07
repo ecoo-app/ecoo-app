@@ -16,6 +16,7 @@ import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
+import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
 
@@ -50,6 +51,8 @@ class WalletRepo implements IWalletRepo {
         result = Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
         result = Left(HTTPFailure.from(e));
+      } on PlatformException catch (e) {
+        if (e.code == '-5') {}
       } catch (anyerror) {
         // TODO hand error handling for case: 'Secure lock screen must be enabled to create keys requiring user authentication'
         print('error $anyerror');
@@ -158,27 +161,7 @@ class WalletRepo implements IWalletRepo {
       try {
         if (!(await walletSource.walletService
             .canSignWithWallet(senderModel))) {
-          // TODO migration
-          return Left(MessageFailure(
-              'Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator.'));
-//           print('cannot sign with wallet');
-//           var walletMigration =
-//               await walletSource.walletService.migrateWallet(senderModel);
-// //
-//           if (walletMigration.state == TransactionState.done) {
-//             print('fetch new wallet');
-//             senderModel = await walletSource.walletService
-//                 .fetchWallet(walletMigration.walletID);
-//             // TODO update local wallet
-//             //
-//           } else if (walletMigration.state == TransactionState.open ||
-//               walletMigration.state == TransactionState.pending) {
-//             print('wallet migration state is open or pending');
-//             //
-//           } else {
-//             print('wallet migration has failed');
-//             return Left(UnknownFailure());
-//           }
+          return Left(NoTransactionPossibleFailure());
         }
         final transaction = await walletSource.walletService
             .transfer(senderModel, reciever.walletModel, amount);

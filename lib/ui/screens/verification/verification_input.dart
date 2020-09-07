@@ -143,3 +143,51 @@ class UidVerificationInput extends TextVerificationInput {
     notifyListeners();
   }
 }
+
+class Address {
+  String street;
+  String postalCode;
+  String city;
+
+  Address({this.street, this.postalCode, this.city});
+}
+
+class AddressVerificationInput extends ChangeNotifier
+    implements VerificationInput {
+  final bool optional;
+
+  Address input;
+
+  AddressVerificationInput({
+    this.optional = false,
+  });
+
+  @override
+  String get value =>
+      input == null ? '' : '${input.street}, ${input.postalCode} ${input.city}';
+
+  @override
+  bool get isValid {
+    if (optional) {
+      return true;
+    }
+    return value != null && value.isNotEmpty;
+  }
+
+  void setValue(Address address) {
+    input = address;
+  }
+
+  void notifyChangeListeners() {
+    print('on save');
+    notifyListeners();
+  }
+
+  @override
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void fieldFocusChange(BuildContext context) {
+    FocusScope.of(context).nextFocus();
+  }
+}

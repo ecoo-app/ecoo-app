@@ -16,6 +16,7 @@ import 'data/e_coupon_library/lib_wallet_source.dart';
 import 'data/local/local_wallet_source.dart';
 import 'data/network_info.dart';
 import 'data/repos/abstract_wallet_repo.dart';
+import 'data/repos/verification_repo.dart';
 import 'data/repos/wallet_repo.dart';
 import 'main.dart';
 import 'modules/third_party_library_module.dart';
@@ -59,8 +60,8 @@ import 'ui/screens/wallet/wallet_screen.dart';
 import 'ui/screens/wallet/wallet_view_model.dart';
 
 /// Environment names
-const _dev = 'dev';
 const _prod = 'prod';
+const _dev = 'dev';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -72,9 +73,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<ILocalWalletSource>(() => LocalWalletSource());
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo());
   gh.lazySingleton<ITransferService>(() => TransferService());
-  gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
   gh.lazySingleton<IWalletSource>(() => WalletSourceProd(),
       registerFor: {_prod});
+  gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
   gh.lazySingleton<MockLoginService>(
       () => MockLoginService(g<IWalletSource>()));
   final packageInfo = await thirdPartyLibraryModule.packageInfo;
@@ -92,6 +93,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<IAppService>(() => AppService(g<PackageInfo>()));
   gh.factory<ISettingsService>(
       () => SettingsService(g<SharedPreferences>(), g<FlutterSecureStorage>()));
+  gh.lazySingleton<IVerificationRepo>(
+      () => VerificationRepo(g<INetworkInfo>(), g<IWalletSource>()));
   gh.lazySingleton<IWalletRepo>(
       () => WalletRepo(
             localDataSource: g<ILocalWalletSource>(),
@@ -169,6 +172,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IWalletService>(),
         g<IProfileService>(),
         g<IRouter>(),
+        g<IVerificationRepo>(),
       ));
   gh.factory<ILoginService>(() => LoginService(
         g<IWalletSource>(),

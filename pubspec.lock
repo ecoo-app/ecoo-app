@@ -243,8 +243,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: b4a697c443683fec1f120b2f87f2fe31ef703ad8
-      resolved-ref: b4a697c443683fec1f120b2f87f2fe31ef703ad8
+      ref: d92b5285cc894a7b52137caa8172aadffeb7644e
+      resolved-ref: d92b5285cc894a7b52137caa8172aadffeb7644e
       url: "https://github.com/dudagroup/ecoupon-library.git"
     source: git
     version: "0.0.1"
@@ -302,6 +302,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_keyboard_visibility:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.2"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -333,6 +340,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_typeahead:
+    dependency: "direct main"
+    description:
+      name: flutter_typeahead
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.8.8"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

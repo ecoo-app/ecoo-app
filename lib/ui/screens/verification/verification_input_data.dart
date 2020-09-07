@@ -8,9 +8,7 @@ class VerificationInputData extends ChangeNotifier {
   TextVerificationInput lastName;
   PhoneNumberVerificationInput phoneNumber;
   DateVerificationInput dateOfBirth;
-  TextVerificationInput address;
-  TextVerificationInput postcode;
-  TextVerificationInput city;
+  AddressVerificationInput address;
 
   TextVerificationInput companyName;
   UidVerificationInput uid;
@@ -25,9 +23,7 @@ class VerificationInputData extends ChangeNotifier {
     firstName = TextVerificationInput();
 
     // Common Fields
-    city = TextVerificationInput(optional: true);
-    postcode = TextVerificationInput(optional: true);
-    address = TextVerificationInput(optional: true);
+    address = AddressVerificationInput();
 
     // Shop Wallet Fields
     companyName = TextVerificationInput();
@@ -38,8 +34,6 @@ class VerificationInputData extends ChangeNotifier {
     phoneNumber.addListener(onChanged);
     dateOfBirth.addListener(onChanged);
     address.addListener(onChanged);
-    postcode.addListener(onChanged);
-    city.addListener(onChanged);
     uid.addListener(onChanged);
     companyName.addListener(onChanged);
   }
@@ -63,10 +57,10 @@ class VerificationInputData extends ChangeNotifier {
   }
 
   List<VerificationInput> get _privateWalletMandatoryFields =>
-      [firstName, lastName, phoneNumber, dateOfBirth];
+      [firstName, lastName, phoneNumber, dateOfBirth, address];
 
   List<VerificationInput> get _shopWalletMandatoryFields =>
-      [companyName, address, city, postcode, uid];
+      [companyName, address, uid];
 
   void onChanged() {
     notifyListeners();
@@ -84,9 +78,9 @@ class VerificationInputData extends ChangeNotifier {
       lastName.value,
       phoneNumber.value,
       dateOfBirth.input,
-      address.value,
-      city.value,
-      postcode.value,
+      address.input.street,
+      address.input.city,
+      address.input.postalCode,
       VerificationStage.notMatched);
 
   CompanyProfileEntity toCompanyEntity(String walletId) => CompanyProfileEntity(
@@ -94,8 +88,8 @@ class VerificationInputData extends ChangeNotifier {
       walletId,
       companyName.value,
       uid.value,
-      address.value,
-      city.value,
-      postcode.value,
+      address.input.street,
+      address.input.city,
+      address.input.postalCode,
       VerificationStage.notMatched);
 }

@@ -31,10 +31,10 @@ class VerificationFormField extends StatelessWidget {
       autocorrect: false,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
-          labelText: label,
+          helperText: label,
           fillColor: ColorStyles.bg_gray,
           focusColor: ColorStyles.black,
-          labelStyle: Theme.of(context)
+          helperStyle: Theme.of(context)
               .textTheme
               .bodyText2
               .merge(TextStyle(color: ColorStyles.bg_gray)),

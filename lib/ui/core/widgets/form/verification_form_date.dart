@@ -85,9 +85,9 @@ class _DateFormField extends State<VerificationFormDateField> {
         decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.suffixIcon,
-            labelText: widget.labelText,
+            helperText: widget.labelText,
             hintText: widget.hintText,
-            labelStyle: Theme.of(context)
+            helperStyle: Theme.of(context)
                 .textTheme
                 .bodyText2
                 .merge(TextStyle(color: ColorStyles.bg_gray))),

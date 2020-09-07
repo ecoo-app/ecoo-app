@@ -238,8 +238,12 @@ class I18n implements WidgetsLocalizations {
   String get verifyFormFieldPhoneNumber => "Telefonnummer";
   /// "Geburtsdatum"
   String get verifyFormFieldBirthday => "Geburtsdatum";
+  /// "Adresse"
+  String get verifyFormFieldAddress => "Adresse";
+  /// "Strasse Hausnummer PLZ Ort"
+  String get verifyFormFieldAddressHint => "Strasse Hausnummer PLZ Ort";
   /// "Strasse & Hausnummer"
-  String get verifyFormFieldAddress => "Strasse & Hausnummer";
+  String get verifyFormFieldStreet => "Strasse & Hausnummer";
   /// "PLZ"
   String get verifyFormFieldPostcode => "PLZ";
   /// "Ort"
@@ -262,8 +266,22 @@ class I18n implements WidgetsLocalizations {
   String get truthfullyEnteredFormCheck => "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.";
   /// "Fertig"
   String get cupertinoDatePickerDialogFinishButton => "Fertig";
+  /// "Login erforderlich"
+  String get authFailureTitle => "Login erforderlich";
+  /// "Du bist nicht eingeloggt."
+  String get authFailureText => "Du bist nicht eingeloggt.";
+  /// "Schutz erforderlich"
+  String get noPinFailureTitle => "Schutz erforderlich";
+  /// "Diese App erfordert es, dass du ein Pin, einen Fingerprint oder eine Face ID zum Schutz einrichtest."
+  String get noPinFailureText => "Diese App erfordert es, dass du ein Pin, einen Fingerprint oder eine Face ID zum Schutz einrichtest.";
+  /// "Keine Transaktion möglich"
+  String get noTransactionFailureTitle => "Keine Transaktion möglich";
+  /// "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator."
+  String get noTransactionFailureText => "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator.";
   /// "Weiter"
   String get verifyFormFieldNextButton => "Weiter";
+  /// "Bitte geben Sie eine gültige Adresse ein."
+  String get noAddressSuggestions => "Bitte geben Sie eine gültige Adresse ein.";
 }
 
 class _I18n_de_CH extends I18n {

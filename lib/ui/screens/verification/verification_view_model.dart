@@ -1,4 +1,5 @@
 import 'package:e_coupon/business/core/failure.dart';
+import 'package:e_coupon/data/repos/verification_repo.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
@@ -6,6 +7,7 @@ import 'package:e_coupon/ui/core/services/profile_service.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:e_coupon/ui/screens/verification/verification_input_data.dart';
 import 'package:ecoupon_lib/common/verification_stage.dart';
+import 'package:ecoupon_lib/models/address_auto_completion_result.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,16 +18,33 @@ class VerificationViewModel extends BaseViewModel {
   final IWalletService _walletService;
   final IProfileService _profileService;
   final IRouter _router;
+  final IVerificationRepo _verificationRepo;
 
   VerificationInputData _inputData = VerificationInputData();
   final formKey = GlobalKey<FormState>();
 
-  VerificationViewModel(
-      this._walletService, this._profileService, this._router);
+  VerificationViewModel(this._walletService, this._profileService, this._router,
+      this._verificationRepo);
 
   VerificationInputData get inputData => _inputData;
 
   bool get isShop => _walletService.getSelected()?.isShop ?? false;
+
+  Future<List<AddressAutoCompletionResult>> fetchAutoCompletions(
+      String pattern) async {
+    List<AddressAutoCompletionResult> result;
+    var adres;
+    if (isShop) {
+      adres = await _verificationRepo.fetchAutoCompletions(
+          target: AddressAutoCompletionTarget.company, partialAddress: pattern);
+    } else {
+      adres = await _verificationRepo.fetchAutoCompletions(
+          target: AddressAutoCompletionTarget.user, partialAddress: pattern);
+    }
+
+    adres.fold((l) => result = [], (r) => result = r.items);
+    return result;
+  }
 
   Future<void> onVerify(String successText, {String errorText}) async {
     if (formKey.currentState.validate()) {

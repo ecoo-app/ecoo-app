@@ -102,7 +102,9 @@
   "verifyFormFieldLastName": "Nachname",
   "verifyFormFieldPhoneNumber": "Telefonnummer",
   "verifyFormFieldBirthday": "Geburtsdatum",
-  "verifyFormFieldAddress": "Strasse & Hausnummer",
+  "verifyFormFieldAddress": "Adresse",
+  "verifyFormFieldAddressHint": "Strasse Hausnummer PLZ Ort",
+  "verifyFormFieldStreet": "Strasse & Hausnummer",
   "verifyFormFieldPostcode": "PLZ",
   "verifyFormFieldCity": "Ort",
   "verifyFormFieldCompany": "Firmenname",
@@ -114,5 +116,12 @@
   "tezosFoundationUrl": "https://tezos.foundation/",
   "truthfullyEnteredFormCheck": "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.",
   "cupertinoDatePickerDialogFinishButton": "Fertig",
-  "verifyFormFieldNextButton": "Weiter"
+  "authFailureTitle": "Login erforderlich",
+  "authFailureText": "Du bist nicht eingeloggt.",
+  "noPinFailureTitle": "Schutz erforderlich",
+  "noPinFailureText": "Diese App erfordert es, dass du ein Pin, einen Fingerprint oder eine Face ID zum Schutz einrichtest.",
+  "noTransactionFailureTitle": "Keine Transaktion möglich",
+  "noTransactionFailureText": "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator.",
+  "verifyFormFieldNextButton": "Weiter",
+  "noAddressSuggestions": "Bitte geben Sie eine gültige Adresse ein."
 }

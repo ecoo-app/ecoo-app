@@ -35,8 +35,8 @@ class VerificationFormPhoneField extends StatelessWidget {
       ],
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
-          hintText: label,
-          labelText: label,
+          //hintText: label,
+          helperText: label,
           fillColor: ColorStyles.bg_gray,
           focusColor: ColorStyles.black,
           suffixIcon: const Icon(
@@ -45,7 +45,7 @@ class VerificationFormPhoneField extends StatelessWidget {
           ),
           counterText: '',
           prefixText: '+41 ',
-          labelStyle: Theme.of(context)
+          helperStyle: Theme.of(context)
               .textTheme
               .bodyText2
               .merge(TextStyle(color: ColorStyles.bg_gray)),

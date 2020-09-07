@@ -23,6 +23,7 @@ class PinVerificationScreen extends StatelessWidget {
       onModelReady: (vmodel) => vmodel.init(),
       builder: (context, vmodel, child) {
         return MainLayout(
+          insets: null,
           isShop: vmodel.wallet.isShop,
           title: I18n.of(context).pinVerificationTitle,
           body: (() {
@@ -33,51 +34,61 @@ class PinVerificationScreen extends StatelessWidget {
                   ..show(context);
               });
             }
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(I18n.of(context).pinRecieved,
-                      style: Theme.of(context).textTheme.caption),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    vmodel.wallet.currency.label,
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                  SizedBox(
-                    height: 23,
-                  ),
-                  Text(I18n.of(context).enterPin),
-                  SizedBox(
-                    height: 62,
-                  ),
-                  Form(
-                    child: ECTextFormField(
-                      label: I18n.of(context).pinInputLabel,
-                      onChanged: (value) => vmodel.pin = value,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return I18n.of(context).inputValidation;
-                        }
-                        return null;
-                      },
+            return Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 100, left: 25, right: 25, top: 25),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(I18n.of(context).pinRecieved,
+                            style: Theme.of(context).textTheme.caption),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          vmodel.wallet.currency.label,
+                          style: Theme.of(context).textTheme.headline3,
+                        ),
+                        SizedBox(
+                          height: 23,
+                        ),
+                        Text(I18n.of(context).enterPin),
+                        SizedBox(
+                          height: 62,
+                        ),
+                        Form(
+                          child: ECTextFormField(
+                            label: I18n.of(context).pinInputLabel,
+                            onChanged: (value) => vmodel.pin = value,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return I18n.of(context).inputValidation;
+                              }
+                              return null;
+                            },
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+                  alignment: Alignment.bottomCenter,
+                  child: PrimaryButton(
+                    isLoading: vmodel.viewState is Loading,
+                    text: I18n.of(context).verifyPinButton,
+                    onPressed: () => vmodel
+                        .onVerify(I18n.of(context).successTextVerification),
+                  ),
+                ),
+              ],
             );
           }()),
-          bottom: Container(
-            margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-            child: PrimaryButton(
-              isLoading: vmodel.viewState is Loading,
-              text: I18n.of(context).verifyPinButton,
-              onPressed: () =>
-                  vmodel.onVerify(I18n.of(context).successTextVerification),
-            ),
-          ),
         );
       },
     );
