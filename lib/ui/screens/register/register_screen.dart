@@ -30,6 +30,9 @@ class RegisterScreen extends StatelessWidget {
               future: viewModel.isAppleAvailable(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && !Platform.isAndroid) {
+                  if (!snapshot.data) {
+                    return Container();
+                  }
                   return RegisterButton(
                     text: I18n.of(context).signinwithappleRegisterScreen,
                     svgAsset: Assets.apple_icon_svg,
