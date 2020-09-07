@@ -16,6 +16,7 @@ import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:ecoupon_lib/models/wallet.dart';
+import 'package:ecoupon_lib/models/wallet_migration.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pedantic/pedantic.dart';
@@ -381,5 +382,94 @@ class WalletRepo implements IWalletRepo {
     }
 
     return Right(false);
+  }
+
+  @override
+  Future<Either<Failure, List<WalletMigration>>>
+      fetchAllWalletMigrations() async {
+    if (await networkInfo.isConnected) {
+      try {
+        // TODO use pagination
+        final fetchedMigrations = await walletSource.walletService
+            .fetchWalletMigrations(pageSize: 100);
+
+        if (fetchedMigrations != null) {
+          return Right(fetchedMigrations.items);
+        } else {
+          return Left(UnknownFailure());
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure.from(e));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    } else {
+      return Left(NoService());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<WalletMigration>>>
+      fetchAllWalletMigrationsForWallet(String walletID) async {
+    Either<Failure, List<WalletMigration>> result;
+
+    var migrationsOrFailure = await fetchAllWalletMigrations();
+
+    migrationsOrFailure.fold(
+        (failure) => result = Left(failure),
+        (migrations) => result = Right(migrations
+            .where((migration) => migration.walletID == walletID)
+            .toList()));
+
+    return result;
+  }
+
+  @override
+  Future<Either<Failure, WalletMigration>> migrateWallet(
+      WalletEntity wallet) async {
+    if (await networkInfo.isConnected) {
+      try {
+        var migration =
+            await walletSource.walletService.migrateWallet(wallet.walletModel);
+
+        if (migration != null) {
+          return Right(migration);
+        } else {
+          return Left(UnknownFailure());
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure.from(e));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    }
+    return Left(NoService());
+  }
+
+  @override
+  Future<Either<Failure, bool>> walletCanSign(WalletEntity wallet) async {
+    if (await networkInfo.isConnected) {
+      try {
+        var canSign = await walletSource.walletService
+            .canSignWithWallet(wallet.walletModel);
+
+        if (canSign != null) {
+          return Right(canSign);
+        } else {
+          return Left(UnknownFailure());
+        }
+      } on NotAuthenticatedError {
+        return Left(NotAuthenticatedFailure());
+      } on HTTPError catch (e) {
+        return Left(HTTPFailure.from(e));
+      } catch (e) {
+        return Left(UnknownFailure());
+      }
+    }
+    return Left(NoService());
   }
 }

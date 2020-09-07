@@ -5,6 +5,7 @@ import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/services/notification_service.dart';
 import 'package:e_coupon/ui/core/services/profile_service.dart';
+import 'package:e_coupon/ui/core/services/recovery_service.dart';
 import 'package:e_coupon/ui/core/services/settings_service.dart';
 import 'package:ecoupon_lib/models/client_info.dart';
 import 'package:ecoupon_lib/models/session_token.dart';
@@ -27,6 +28,7 @@ abstract class ILoginService {
 }
 
 enum LoginResult {
+  Migrations,
   Onboarding,
   Home,
 }
@@ -37,9 +39,10 @@ class LoginService implements ILoginService {
   final ISettingsService _settingsService;
   final IProfileService _profileService;
   final INotificationService _notificationService;
+  final IRecoveryService _recoveryService;
 
   LoginService(this._walletSource, this._settingsService, this._profileService,
-      this._notificationService);
+      this._notificationService, this._recoveryService);
 
   lib.WalletService get walletSource => _walletSource.walletService;
 
@@ -60,13 +63,23 @@ class LoginService implements ILoginService {
         // Test Wallet exists
         final wallets = await _walletSource.walletService.fetchWallets();
         if (wallets != null && wallets.items.isNotEmpty) {
-          return LoginResult.Home;
+          // Test migrations ongoing
+          var areMigrationsInProcess = false;
+          (await _recoveryService.migrationInProcess()).fold(
+              (l) => null,
+              (migrationsInProcess) =>
+                  areMigrationsInProcess = migrationsInProcess);
+
+          if (areMigrationsInProcess) {
+            return LoginResult.Migrations;
+          } else {
+            return LoginResult.Home;
+          }
         }
 
         return LoginResult.Onboarding;
       }
-    } on NotAuthenticatedFailure catch (e) {
-      print('Not authenticated ${e.toString()}');
+    } on NotAuthenticatedFailure {
       final clientInfo =
           await _walletSource.walletService.session().fetchClientInfo();
       var tokenProvider = await _settingsService

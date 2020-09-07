@@ -20,11 +20,17 @@ class SplashScreenViewModel extends BaseViewModel {
       await _settingsService.clearCredentialsOnFirstStart();
       var loginResult = await _loginService.login();
       switch (loginResult) {
+        case LoginResult.Migrations:
+          print('migration route');
+          await _router.pushAndRemoveUntil(MigrationRoute, '');
+          break;
         case LoginResult.Home:
+          print('home route');
           await _notificationService.registerDevice();
           await _router.pushAndRemoveUntil(WalletDetailRoute, '');
           break;
         case LoginResult.Onboarding:
+          print('onboarding route');
           await _router.pushAndRemoveUntil(OnboardingRoute, '');
           break;
         default:

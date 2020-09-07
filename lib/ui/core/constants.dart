@@ -16,6 +16,8 @@ class Constants {
   static const qrDataNonce = 'nonce';
   static const qrDataPublicKey = 'pk';
 
+  static const localStorageKey = 'ecooStorage';
+  static const localMigrationCheck = 'migrationChecks';
   // static const defaultLocale = 'de-CH';
 
   static Locale defaultLocale = Locale('de', 'CH');

@@ -264,6 +264,20 @@ class I18n implements WidgetsLocalizations {
   String get tezosFoundationUrl => "https://tezos.foundation/";
   /// "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind."
   String get truthfullyEnteredFormCheck => "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.";
+  /// "Einen Moment, bitte"
+  String get migrationTitle => "Einen Moment, bitte";
+  /// "Ihre Wallets müssen geprüft und eventuell migriert werden. Dies kann einige Minuten dauern, danach können Sie die App wie gewohnt verwenden."
+  String get migrationText => "Ihre Wallets müssen geprüft und eventuell migriert werden. Dies kann einige Minuten dauern, danach können Sie die App wie gewohnt verwenden.";
+  /// "Status offen"
+  String get migrationWaitingForCheck => "Status offen";
+  /// "Wallet wird geprüft"
+  String get migrationChecking => "Wallet wird geprüft";
+  /// "Ihr Wallet wird migriert. Dies kan 1-2 Minuten dauern."
+  String get migrationMigrating => "Ihr Wallet wird migriert. Dies kan 1-2 Minuten dauern.";
+  /// "Ihr Wallet wurde erfolgreich migriert."
+  String get migrationDone => "Ihr Wallet wurde erfolgreich migriert.";
+  /// "Ihre Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator."
+  String get migrationFail => "Ihre Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator.";
   /// "Fertig"
   String get cupertinoDatePickerDialogFinishButton => "Fertig";
   /// "Login erforderlich"

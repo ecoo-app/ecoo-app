@@ -20,7 +20,7 @@ abstract class ILocalWalletSource {
 class LocalWalletSource implements ILocalWalletSource {
   final LocalStorage _storage;
 
-  LocalWalletSource() : _storage = LocalStorage('storageKey');
+  LocalWalletSource(this._storage);
 
   @override
   Future<void> cacheWallet(String key, WalletEntity wallet) async {

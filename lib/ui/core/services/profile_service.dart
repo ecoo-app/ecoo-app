@@ -49,7 +49,6 @@ class ProfileService implements IProfileService {
 
     if (answer.isLeft()) {
       answer.fold((failure) {
-        print('profile service');
         throw failure;
       }, (r) => null);
     }
@@ -159,7 +158,6 @@ class ProfileService implements IProfileService {
 
   /// throws Failure
   Future<bool> verify(String pin, WalletEntity wallet) async {
-    print(wallet.id);
     ProfileEntity profileEntity = await currentProfileForWallet(wallet);
     // if (profileEntity is UserProfileEntity) {
     if (profileEntity != null) {

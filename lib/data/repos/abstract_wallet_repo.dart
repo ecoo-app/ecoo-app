@@ -8,6 +8,7 @@ import 'package:ecoupon_lib/models/paper_wallet.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
 
 import 'package:ecoupon_lib/models/wallet.dart';
+import 'package:ecoupon_lib/models/wallet_migration.dart';
 
 abstract class IWalletRepo {
   Future<Either<Failure, List<WalletEntity>>> getWallets(String userIdentifier);
@@ -36,4 +37,13 @@ abstract class IWalletRepo {
 
   Future<Either<Failure, List<ProfileEntity>>> companyProfiles(
       {String walletId});
+
+  Future<Either<Failure, List<WalletMigration>>> fetchAllWalletMigrations();
+
+  Future<Either<Failure, List<WalletMigration>>>
+      fetchAllWalletMigrationsForWallet(String walletID);
+
+  Future<Either<Failure, WalletMigration>> migrateWallet(WalletEntity wallet);
+
+  Future<Either<Failure, bool>> walletCanSign(WalletEntity wallet);
 }

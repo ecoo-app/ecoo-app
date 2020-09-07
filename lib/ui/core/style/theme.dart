@@ -105,6 +105,11 @@ class Assets {
       'assets/images/private_recieve_money.svg';
   static const private_claim_money_svg =
       'assets/images/private_claim_money.svg';
+  static const migration_done_svg =
+      'assets/images/success-wallet-migration.svg';
+  static const migration_fail_svg = 'assets/images/error-wallet-migration.svg';
+  static const migration_waiting_svg =
+      'assets/images/waiting--wallet-migration.svg';
 
   // Rectangles
   static const rectangle_blue_svg = 'assets/images/rectangle_blue.svg';
