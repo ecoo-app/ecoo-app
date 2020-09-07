@@ -28,7 +28,7 @@ class TransactionListItem extends StatelessWidget {
             amount != null
                 ? Text(
                     isNegative
-                        ? Utils.moneyToString(amount)
+                        ? '- ${Utils.moneyToString(amount)}'
                         : '+ ${Utils.moneyToString(amount)}',
                     style: Theme.of(context).textTheme.bodyText1.merge(
                         TextStyle(

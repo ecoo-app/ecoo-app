@@ -42,6 +42,7 @@ class WalletViewModel extends BaseViewModel {
   ViewState get walletState => this._walletState;
   ViewState get amountState => this._amountState;
   ViewState get transactionState => this._transactionState;
+  // TODO instead of showing an empty wallet open create wallet again
   WalletEntity get wallet => this._wallet == null
       ? WalletEntity(Wallet(
           '',
@@ -148,7 +149,6 @@ class WalletViewModel extends BaseViewModel {
     }, (transactionResponse) {
       _transactionListCursor = transactionResponse.cursor;
       _transactionStreamController.add(transactionResponse.items);
-      
     });
     _transactionState = Loaded();
   }
@@ -220,7 +220,7 @@ class WalletViewModel extends BaseViewModel {
             break;
         }
       } else {
-        setViewState(Error(UnknownFailure()));
+        await _router.pushNamed(VerificationRoute);
       }
     });
   }

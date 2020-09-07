@@ -52,9 +52,10 @@ class WalletRepo implements IWalletRepo {
       } on HTTPError catch (e) {
         result = Left(HTTPFailure.from(e));
       } on PlatformException catch (e) {
-        if (e.code == '-5') {}
+        if (e.code == '-5') {
+          result = Left(NoPinSetFailure());
+        }
       } catch (anyerror) {
-        // TODO hand error handling for case: 'Secure lock screen must be enabled to create keys requiring user authentication'
         print('error $anyerror');
         // TODO log/send error
         result = Left(UnknownFailure());

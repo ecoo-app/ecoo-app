@@ -95,7 +95,7 @@
   "titleRegisterVerifyScreenPrivate": "Guthaben aufladen",
   "titleRegisterVerifyScreenShop": "Eintauschen",
   "descriptionRegisterVerifyScreenPrivate": "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zu geschickt, mit dem Sie diesen Prozess abschliessen können.",
-  "descriptionRegisterVerifyScreenShop": "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen",
+  "descriptionRegisterVerifyScreenShop": "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.",
   "verifyButtonRegisterVerifyScreen": "Jetzt verifizieren",
   "verifyLaterButtonRegisterVerifyScreen": "Verifizierung überspringen",
   "verifyFormFieldFirstName": "Vorname",

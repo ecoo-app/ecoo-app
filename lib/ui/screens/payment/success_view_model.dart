@@ -1,7 +1,6 @@
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 class DurationEnd extends ViewState {}
@@ -18,8 +17,7 @@ class SuccessViewModel extends BaseViewModel {
   }
 
   Future<void> navigateNext(String route) {
-    _router.popUntil(ModalRoute.withName(route));
-
+    _router.pushAndRemoveUntil(route, '');
     return Future.value();
   }
 }
