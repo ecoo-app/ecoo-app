@@ -156,7 +156,8 @@ class RecoveryService implements IRecoveryService {
     var savedChecks = await _migrationCheckSource.getChecks();
 
     // if there are still checks to do
-    if (savedChecks != null || savedChecks.isNotEmpty) {
+    if (savedChecks != null && savedChecks.isNotEmpty) {
+      print(savedChecks);
       return Right(true);
     }
 

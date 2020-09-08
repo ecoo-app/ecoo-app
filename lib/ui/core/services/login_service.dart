@@ -72,9 +72,8 @@ class LoginService implements ILoginService {
 
           if (areMigrationsInProcess) {
             return LoginResult.Migrations;
-          } else {
-            return LoginResult.Home;
           }
+          return LoginResult.Home;
         }
 
         return LoginResult.Onboarding;
