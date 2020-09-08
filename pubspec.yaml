@@ -62,7 +62,7 @@ dependencies:
   # Functional programming thingies
   dartz: ^0.9.1
   # Remote API
-  connectivity: ^0.4.9
+  # connectivity: ^0.4.9
   # Local cache
   shared_preferences: ^0.5.8
   # Dart Linting Rules
