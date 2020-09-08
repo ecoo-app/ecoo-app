@@ -161,7 +161,8 @@ class RecoveryService implements IRecoveryService {
       return Right(true);
     }
 
-    Either<Failure, bool> result;
+    Either<Failure, bool> result = Right(false);
+
     final fetchedMigrationsOrFailure =
         await _walletRepo.fetchAllWalletMigrations();
     fetchedMigrationsOrFailure.fold((failure) => result = Left(failure),
