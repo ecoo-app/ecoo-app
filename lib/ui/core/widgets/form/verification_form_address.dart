@@ -16,17 +16,19 @@ class VerificationAddressField extends StatefulWidget {
   VerificationAddressField({this.model, this.label, this.suggestionsCallback});
 
   @override
-  _VerificationAddressField createState() =>
-      _VerificationAddressField(model, label, suggestionsCallback);
+  State<VerificationAddressField> createState() =>
+      _MaterialVerificationAddressField(model, label, suggestionsCallback);
 }
 
-class _VerificationAddressField extends State<VerificationAddressField> {
+class _MaterialVerificationAddressField
+    extends State<VerificationAddressField> {
   final AddressVerificationInput model;
   final String label;
   final Function suggestionsCallback;
   final TextEditingController _typeAheadController = TextEditingController();
 
-  _VerificationAddressField(this.model, this.label, this.suggestionsCallback);
+  _MaterialVerificationAddressField(
+      this.model, this.label, this.suggestionsCallback);
 
   Widget _createItem(
       BuildContext context, AddressAutoCompletionResult resultItem) {
@@ -59,13 +61,14 @@ class _VerificationAddressField extends State<VerificationAddressField> {
                 .bodyText2
                 .merge(TextStyle(color: ColorStyles.bg_gray)),
           )),
-      // noItemsFoundBuilder: (context) => Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: Text(
-      //     I18n.of(context).noAddressSuggestions,
-      //     style: Theme.of(context).textTheme.caption,
-      //   ),
-      // ),
+      getImmediateSuggestions: true,
+      noItemsFoundBuilder: (context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          I18n.of(context).noAddressSuggestions,
+          style: Theme.of(context).textTheme.caption,
+        ),
+      ),
       suggestionsCallback: (pattern) async {
         return suggestionsCallback != null
             ? await suggestionsCallback(pattern)
@@ -77,7 +80,7 @@ class _VerificationAddressField extends State<VerificationAddressField> {
       transitionBuilder: (context, suggestionsBox, controller) {
         return suggestionsBox;
       },
-      suggestionsBoxDecoration: SuggestionsBoxDecoration(),
+      suggestionsBoxVerticalOffset: -20,
       onSuggestionSelected: (suggestion) {
         model.setValue(Address(
             street: suggestion.street,
@@ -86,7 +89,6 @@ class _VerificationAddressField extends State<VerificationAddressField> {
         print(model.value);
         this._typeAheadController.text = model.value;
       },
-      hideOnEmpty: true,
       validator: (value) {
         var result = model.isValid;
         if (result) {

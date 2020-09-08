@@ -169,10 +169,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   });
                 }
 
+                double bottomInset = 30;
+                if (Platform.isIOS) {
+                  bottomInset += 34;
+                }
                 return Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 25),
+                      padding: EdgeInsets.only(bottom: bottomInset),
                       // padding: EdgeInsets.only(bottom: bottomInset),
                       child: Form(
                         key: viewModel.formKey,
