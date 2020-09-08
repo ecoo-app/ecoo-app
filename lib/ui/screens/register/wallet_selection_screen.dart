@@ -14,10 +14,23 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
+class WalletSelectionScreenArguments {
+  final bool canClose;
+
+  WalletSelectionScreenArguments({this.canClose = true});
+}
+
 @injectable
 class WalletSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var arguments = ModalRoute.of(context).settings.arguments
+        as WalletSelectionScreenArguments;
+    bool canClose = true;
+    if (arguments != null) {
+      canClose = arguments.canClose;
+    }
+
     return BaseView<WalletSelectionScreenViewModel>(
       model: getIt<WalletSelectionScreenViewModel>(),
       builder: (context, model, child) {
@@ -33,10 +46,14 @@ class WalletSelectionScreen extends StatelessWidget {
         return RegisterScaffold(
           title: I18n.of(context).titleRegisterWalletTypeScreen,
           subhead: I18n.of(context).descriptionRegisterWalletTypeScreen,
-          header: CustomHeader(
-            closeIcon: Assets.close_svg,
-            onClose: model.back,
-          ),
+          header: canClose
+              ? CustomHeader(
+                  closeIcon: Assets.close_svg,
+                  onClose: model.back,
+                )
+              : SizedBox.fromSize(
+                  size: Size(0, 55),
+                ),
           content: Stack(
             children: [
               isLoading

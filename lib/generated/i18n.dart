@@ -224,8 +224,8 @@ class I18n implements WidgetsLocalizations {
   String get titleRegisterVerifyScreenShop => "Eintauschen";
   /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zu geschickt, mit dem Sie diesen Prozess abschliessen können."
   String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zu geschickt, mit dem Sie diesen Prozess abschliessen können.";
-  /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen"
-  String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen";
+  /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen."
+  String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.";
   /// "Jetzt verifizieren"
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Verifizierung überspringen"
@@ -272,10 +272,10 @@ class I18n implements WidgetsLocalizations {
   String get migrationWaitingForCheck => "Status offen";
   /// "Wallet wird geprüft"
   String get migrationChecking => "Wallet wird geprüft";
-  /// "Ihr Wallet wird migriert. Dies kan 1-2 Minuten dauern."
-  String get migrationMigrating => "Ihr Wallet wird migriert. Dies kan 1-2 Minuten dauern.";
-  /// "Ihr Wallet wurde erfolgreich migriert."
-  String get migrationDone => "Ihr Wallet wurde erfolgreich migriert.";
+  /// "Ihr Wallet wird migriert. Dies kann 1-2 Minuten dauern."
+  String get migrationMigrating => "Ihr Wallet wird migriert. Dies kann 1-2 Minuten dauern.";
+  /// "Ihr Wallet ist voll einsatzfähig."
+  String get migrationDone => "Ihr Wallet ist voll einsatzfähig.";
   /// "Ihre Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator."
   String get migrationFail => "Ihre Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator.";
   /// "Fertig"

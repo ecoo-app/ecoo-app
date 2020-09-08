@@ -65,8 +65,8 @@ import 'ui/screens/wallet/wallet_screen.dart';
 import 'ui/screens/wallet/wallet_view_model.dart';
 
 /// Environment names
-const _dev = 'dev';
 const _prod = 'prod';
+const _dev = 'dev';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -77,9 +77,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<FlutterSecureStorage>(() => thirdPartyLibraryModule.securePrefs);
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo());
   gh.lazySingleton<ITransferService>(() => TransferService());
-  gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
   gh.lazySingleton<IWalletSource>(() => WalletSourceProd(),
       registerFor: {_prod});
+  gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
   gh.factory<LocalStorage>(() => thirdPartyLibraryModule.localStorage);
   gh.lazySingleton<MockLoginService>(
       () => MockLoginService(g<IWalletSource>()));

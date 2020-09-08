@@ -2,6 +2,7 @@ import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/services/login_service.dart';
 import 'package:e_coupon/ui/core/services/recovery_service.dart';
+import 'package:e_coupon/ui/screens/register/wallet_selection_screen.dart';
 import 'package:ecoupon_lib/services/session_service.dart';
 import 'package:injectable/injectable.dart';
 
@@ -40,7 +41,8 @@ class RegisterScreenViewModel extends BaseViewModel {
       if (hasWallets) {
         await _router.pushAndRemoveUntil(MigrationRoute, '');
       } else {
-        await _router.pushAndRemoveUntil(WalletSelectionRoute, '');
+        await _router.pushAndRemoveUntil(WalletSelectionRoute, '',
+            arguments: WalletSelectionScreenArguments(canClose: false));
       }
     });
   }
