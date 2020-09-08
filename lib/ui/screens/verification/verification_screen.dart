@@ -100,9 +100,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
           suggestionsCallback: viewModel.fetchAutoCompletions,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 25),
           child: VerificationFormCheckBox(
-            text: I18n.of(context).verificationFilledTruthfully,
+            textPartStart: I18n.of(context).verificationFilledTruthfullyPart1,
+            textUrlPart: I18n.of(context).verificationFilledTruthfullyPart2,
+            textPartEnd: I18n.of(context).verificationFilledTruthfullyPart3,
             onChanged: value.onIsThruthChanged,
             value: value.isTruth,
           ),
@@ -131,9 +133,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
           suggestionsCallback: viewModel.fetchAutoCompletions,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 25),
           child: VerificationFormCheckBox(
-            text: I18n.of(context).verificationFilledTruthfully,
+            textPartStart:
+                I18n.of(context).verificationFilledTruthfullyShopPart1,
+            textUrlPart: I18n.of(context).verificationFilledTruthfullyShopPart2,
+            textPartEnd: I18n.of(context).verificationFilledTruthfullyShopPart3,
             onChanged: value.onIsThruthChanged,
             value: value.isTruth,
           ),

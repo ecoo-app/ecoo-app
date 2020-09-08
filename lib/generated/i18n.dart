@@ -86,8 +86,20 @@ class I18n implements WidgetsLocalizations {
   String get verificationShopFormUidLink => "https://www.uid.admin.ch/";
   /// "Ich habe keine UID"
   String get verificationShopFormUidNoUid => "Ich habe keine UID";
-  /// "Ich bestätige alles wahrheitsgetreu ausgefüllt zu haben."
-  String get verificationFilledTruthfully => "Ich bestätige alles wahrheitsgetreu ausgefüllt zu haben.";
+  /// "Ich bestätige dass ich Anrecht auf dieses Guthaben haben, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
+  String get verificationFilledTruthfullyPart1 => "Ich bestätige dass ich Anrecht auf dieses Guthaben haben, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
+  /// " AGBs "
+  String get verificationFilledTruthfullyPart2 => " AGBs ";
+  /// "einverstanden bin."
+  String get verificationFilledTruthfullyPart3 => "einverstanden bin.";
+  /// "Ich bestätige dass ich das Recht auf dieses Gewerbe Wallet habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
+  String get verificationFilledTruthfullyShopPart1 => "Ich bestätige dass ich das Recht auf dieses Gewerbe Wallet habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
+  /// " AGBs "
+  String get verificationFilledTruthfullyShopPart2 => " AGBs ";
+  /// "einverstanden bin."
+  String get verificationFilledTruthfullyShopPart3 => "einverstanden bin.";
+  /// "https://ecoo.ch/datenschutz.html"
+  String get verificationFilledTruthfullyTosUrl => "https://ecoo.ch/datenschutz.html";
   /// "Anfrage gesendet."
   String get verificationSend => "Anfrage gesendet.";
   /// "PIN eingeben"
@@ -262,8 +274,6 @@ class I18n implements WidgetsLocalizations {
   String get dataPolicyUrl => "https://payecoo.ch/datenschutz.html";
   /// "https://tezos.foundation/"
   String get tezosFoundationUrl => "https://tezos.foundation/";
-  /// "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind."
-  String get truthfullyEnteredFormCheck => "Ich bestätige, dass meine Angaben vollständig und wahrheitsgetreu ausgefüllt sind.";
   /// "Einen Moment, bitte"
   String get migrationTitle => "Einen Moment, bitte";
   /// "Ihre Wallets müssen geprüft und eventuell migriert werden. Dies kann einige Minuten dauern, danach können Sie die App wie gewohnt verwenden."
