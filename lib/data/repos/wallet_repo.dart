@@ -76,7 +76,7 @@ class WalletRepo implements IWalletRepo {
     if (await networkInfo.isConnected) {
       try {
         var transactions = await walletSource.walletService
-            .fetchTransactions(walletID: id, cursor: cursor);
+            .fetchTransactions(walletID: id, pageSize: 100);
         result = Right(transactions);
         //
       } on NotAuthenticatedError {
