@@ -1,0 +1,6 @@
+/*
+  InfoPlist.strings
+*/
+
+"NSFaceIDUsageDescription" = "The face id is used to ensure that only the phone owner can make transactions.";
+"NSCameraUsageDescription" = "The camera is used to scan QR Codes to make transactions.";

@@ -54,7 +54,9 @@ class SettingsService implements ISettingsService {
   @override
   Future<void> saveIdentityToken(String token) async {
     await _securePreferences.write(
-        key: Constants.identityTokenKey, value: token);
+        key: Constants.identityTokenKey,
+        value: token,
+        iOptions: IOSOptions(accessibility: IOSAccessibility.passcode));
   }
 
   @override
@@ -64,7 +66,11 @@ class SettingsService implements ISettingsService {
 
   @override
   Future<void> writeSecureString(String key, String value) async {
-    await _securePreferences.write(key: key, value: value);
+    await _securePreferences.write(
+      key: key,
+      value: value,
+      iOptions: IOSOptions(accessibility: IOSAccessibility.passcode),
+    );
   }
 
   @override
