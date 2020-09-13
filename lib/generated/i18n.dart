@@ -86,8 +86,8 @@ class I18n implements WidgetsLocalizations {
   String get verificationShopFormUidLink => "https://www.uid.admin.ch/";
   /// "Ich habe keine UID"
   String get verificationShopFormUidNoUid => "Ich habe keine UID";
-  /// "Ich bestätige dass ich Anrecht auf dieses Guthaben haben, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
-  String get verificationFilledTruthfullyPart1 => "Ich bestätige dass ich Anrecht auf dieses Guthaben haben, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
+  /// "Ich bestätige dass ich Anrecht auf dieses Guthaben habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
+  String get verificationFilledTruthfullyPart1 => "Ich bestätige dass ich Anrecht auf dieses Guthaben habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
   /// " AGBs "
   String get verificationFilledTruthfullyPart2 => " AGBs ";
   /// "einverstanden bin."
@@ -200,32 +200,32 @@ class I18n implements WidgetsLocalizations {
   String get page1HeadlineOnboardingScreen => "Registrierung und verifizierung";
   /// "Um ecoo zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Stadt, danach erhalten Sie automatisch das Guthaben auf ihr Wallet."
   String get page1DescriptionOnboardingScreen => "Um ecoo zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Stadt, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.";
-  /// "Privat wallet"
-  String get page2TitleOnboardingScreen => "Privat wallet";
+  /// "Privat Wallet"
+  String get page2TitleOnboardingScreen => "Privat Wallet";
   /// "Zahlen, Senden & Geld anfordern"
   String get page2HeadlineOnboardingScreen => "Zahlen, Senden & Geld anfordern";
-  /// "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können andern ecoo Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern."
-  String get page2DescriptionOnboardingScreen => "Als privat Person haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können andern ecoo Benutzer Guthaben senden oder Guthaben von anderen Benutzer anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.";
-  /// "Shop wallet"
-  String get page3TitleOnboardingScreen => "Shop wallet";
+  /// "Als Privatperson haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo Benutzern Guthaben senden oder Guthaben von anderen Benutzern anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern."
+  String get page2DescriptionOnboardingScreen => "Als Privatperson haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo Benutzern Guthaben senden oder Guthaben von anderen Benutzern anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.";
+  /// "Shop Wallet"
+  String get page3TitleOnboardingScreen => "Shop Wallet";
   /// "Einkassieren & senden"
   String get page3HeadlineOnboardingScreen => "Einkassieren & senden";
-  /// "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen ecoo Benutzern zu senden."
-  String get page3DescriptionOnboardingScreen => "Mit einem Shop wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App zu kassieren.\n\nSie haben die Möglichkeit Beträge anderen ecoo Benutzern zu senden.";
-  /// "Shop wallet"
-  String get page4TitleOnboardingScreen => "Shop wallet";
+  /// "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App einzukassieren."
+  String get page3DescriptionOnboardingScreen => "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App einzukassieren.";
+  /// "Shop Wallet"
+  String get page4TitleOnboardingScreen => "Shop Wallet";
   /// "Umsatz einlösen"
   String get page4HeadlineOnboardingScreen => "Umsatz einlösen";
-  /// "Nach der Verifizierung bei ihrer Stadt können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben."
-  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei ihrer Stadt können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem Angegeben Konto gutgeschrieben.";
+  /// "Nach der Verifizierung bei ihrer Stadt können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegebenen Konto gutgeschrieben."
+  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei ihrer Stadt können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegebenen Konto gutgeschrieben.";
   /// "Einführung überspringen"
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
   /// "Jetzt registrieren"
   String get buttonTextNextOnboardingScreen => "Jetzt registrieren";
   /// "Wallet Typ"
   String get titleRegisterWalletTypeScreen => "Wallet Typ";
-  /// "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für ihr Geschäft zusätzlich ein Firmen Wallet aus."
-  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für ihr Geschäft zusätzlich ein Firmen Wallet aus.";
+  /// "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet aus."
+  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet aus.";
   /// "Privat"
   String get privateRegisterWalletTypeScreen => "Privat";
   /// "Firma"

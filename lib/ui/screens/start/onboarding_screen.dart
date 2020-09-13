@@ -52,6 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     if (arguments != null) {
       canBack = arguments.canBack;
     }
+    double bottomInset = canBack ? 50 : 135;
 
     _pageList = [
       OnboardingPageWidget(
@@ -61,6 +62,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         headerIconAsset: Assets.icon_arrow_right_svg,
         headerIconBackgroundAsset:
             Assets.onboarding_background_graphic_private_svg,
+        bottomInset: bottomInset,
       ),
       OnboardingPageWidget(
         title: I18n.of(context).page2TitleOnboardingScreen,
@@ -69,6 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         headerIconAsset: Assets.onboarding_icon_wallet_svg,
         headerIconBackgroundAsset:
             Assets.onboarding_background_graphic_private_svg,
+        bottomInset: bottomInset,
       ),
       OnboardingPageWidget(
         title: I18n.of(context).page3TitleOnboardingScreen,
@@ -77,6 +80,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         headerIconAsset: Assets.onboarding_icon_shop_svg,
         headerIconBackgroundAsset:
             Assets.onboarding_background_graphic_shop_svg,
+        bottomInset: bottomInset,
       ),
       OnboardingPageWidget(
         title: I18n.of(context).page4TitleOnboardingScreen,
@@ -85,6 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         headerIconAsset: Assets.onboarding_icon_shop_arrows_svg,
         headerIconBackgroundAsset:
             Assets.onboarding_background_graphic_shop_svg,
+        bottomInset: bottomInset,
       ),
     ];
 
@@ -202,6 +207,7 @@ class OnboardingPageWidget extends StatelessWidget {
   final String description;
   final String headerIconAsset;
   final String headerIconBackgroundAsset;
+  final double bottomInset;
 
   const OnboardingPageWidget({
     Key key,
@@ -210,6 +216,7 @@ class OnboardingPageWidget extends StatelessWidget {
     this.description,
     this.headerIconAsset,
     this.headerIconBackgroundAsset,
+    this.bottomInset,
   }) : super(key: key);
 
   TextStyle colorStylesTitleWhite(BuildContext context) {
@@ -236,7 +243,7 @@ class OnboardingPageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 135),
+      padding: EdgeInsets.only(bottom: bottomInset),
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
