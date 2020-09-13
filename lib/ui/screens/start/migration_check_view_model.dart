@@ -102,15 +102,17 @@ class MigrationCheckViewModel extends BaseViewModel {
           var migrationOrFailure =
               await _recoveryService.handleWalletMigration(wallet);
 
-          await migrationOrFailure.fold(
-              (failure) => setViewState(Error(failure)), (migration) async {
-            item.state = MigrationStateEnum.Migrating;
+          if (migrationOrFailure != null) {
+            await migrationOrFailure.fold(
+                (failure) => setViewState(Error(failure)), (migration) async {
+              item.state = MigrationStateEnum.Migrating;
 
-            await _migrationCheckSource.save(_migrationChecks);
-            _migrationItemsStreamController.add(_migrationChecks);
+              await _migrationCheckSource.save(_migrationChecks);
+              _migrationItemsStreamController.add(_migrationChecks);
 
-            _timedChecking(item, wallet);
-          });
+              _timedChecking(item, wallet);
+            });
+          }
         } else {
           await _onOneItemMigrated(item);
         }

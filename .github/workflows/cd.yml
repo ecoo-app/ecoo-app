@@ -8,7 +8,7 @@ on:
     branches:
       - "releases/**"
     tags:
-      - '**'
+      - "**"
 
 jobs:
   build-android:
@@ -29,7 +29,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
+          flutter-version: "1.20.3"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -55,6 +55,7 @@ jobs:
       - name: Build Android
         run: |
           echo "$KEYSTORE" | base64 --decode > ./android/assets/ecoupon.keystore.jks
+          dart tool/generate_config.dart
           flutter build appbundle -t ./lib/main_prod.dart --release --build-name ${{ env.VersionMajorMinorPatchBuild }} --build-number ${{ env.VersionAndroidFullNumeric }}
           cd android
           gem install bundler
@@ -66,6 +67,7 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_PLAY_API_SA: ${{ secrets.ANDROID_PLAY_API_SA }}
+          APP_PAPERWALLET_DECRYPTION_KEY: ${{ secrets.APP_PAPERWALLET_DECRYPTION_KEY }}
           LANG: en_US.UTF-8
           LC_ALL: en_US.UTF-8
 
@@ -87,7 +89,7 @@ jobs:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: "1.20.2"
+          flutter-version: "1.20.3"
           channel: "stable"
       - uses: fusion-engineering/setup-git-credentials@v2
         with:
@@ -113,6 +115,7 @@ jobs:
           p12-password: ${{ secrets.IOS_CERTIFICATES_P12_PASSWORD }}
       - name: Build iOS
         run: |
+          dart tool/generate_config.dart
           flutter build ios -t ./lib/main_prod.dart --release --no-codesign --build-name ${{ env.VersionMajorMinorPatch }} --build-number ${{ env.VersionMajorMinorPatchBuild }}
           cd ios
           gem install bundler
@@ -120,3 +123,4 @@ jobs:
           bundle exec fastlane deploy
         env:
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          APP_PAPERWALLET_DECRYPTION_KEY: ${{ secrets.APP_PAPERWALLET_DECRYPTION_KEY }}

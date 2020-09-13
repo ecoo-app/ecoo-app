@@ -74,7 +74,7 @@ class ErrorToast {
       borderRadius: 8,
       backgroundColor: Colors.white,
       isDismissible: true,
-      duration: Duration(seconds: 4),
+      duration: Duration(seconds: 10),
       icon: Icon(
         Icons.error_outline,
         color: Colors.redAccent,

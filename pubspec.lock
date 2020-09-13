@@ -162,6 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  country_code_picker:
+    dependency: "direct main"
+    description:
+      name: country_code_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.0"
   coverage:
     dependency: transitive
     description:
@@ -215,8 +222,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: d92b5285cc894a7b52137caa8172aadffeb7644e
-      resolved-ref: d92b5285cc894a7b52137caa8172aadffeb7644e
+      ref: dd1cd05b84b3d4567c2d3c86f1c21d224c7c2713
+      resolved-ref: dd1cd05b84b3d4567c2d3c86f1c21d224c7c2713
       url: "https://github.com/dudagroup/ecoupon-library.git"
     source: git
     version: "0.0.1"

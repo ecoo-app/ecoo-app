@@ -178,8 +178,65 @@ class AddressVerificationInput extends ChangeNotifier
     input = address;
   }
 
+  // check what is it for ?!
   void notifyChangeListeners() {
-    print('on save');
+    notifyListeners();
+  }
+
+  @override
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void fieldFocusChange(BuildContext context) {
+    FocusScope.of(context).nextFocus();
+  }
+}
+
+class OriginVerificationInput extends ChangeNotifier
+    implements VerificationInput {
+  bool isSwiss = true;
+
+  String cityOfOrigin;
+  String countryOfOrigin;
+
+  @override
+  String get value {
+    if (isSwiss) {
+      return isValid ? cityOfOrigin : '';
+    } else {
+      return isValid ? countryOfOrigin : '';
+    }
+  }
+
+  void setCity(String city) {
+    cityOfOrigin = city;
+    notifyListeners();
+  }
+
+  void setCountry(String country) {
+    countryOfOrigin = country;
+    notifyListeners();
+  }
+
+  @override
+  bool get isValid {
+    if ((cityOfOrigin == null || cityOfOrigin.isEmpty) &&
+        (countryOfOrigin == null || countryOfOrigin.isEmpty)) {
+      return false;
+    }
+
+    return isSwiss && cityOfOrigin.isNotEmpty ||
+        !isSwiss && countryOfOrigin.isNotEmpty;
+  }
+
+  void isSwissChanged(bool value) {
+    isSwiss = value;
+    if (isSwiss) {
+      // is this needed?
+      countryOfOrigin = null;
+    } else {
+      cityOfOrigin = '';
+    }
     notifyListeners();
   }
 

@@ -29,6 +29,10 @@ class VerificationFormPhoneField extends StatelessWidget {
       maxLength: 12,
       maxLengthEnforced: true,
       textInputAction: TextInputAction.next,
+      style: Theme.of(context)
+          .textTheme
+          .headline3
+          .merge(TextStyle(fontWeight: fontWeightRegular)),
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         PhoneNumberInputFormatter()

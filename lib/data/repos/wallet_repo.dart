@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/config.generated.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
@@ -187,8 +188,12 @@ class WalletRepo implements IWalletRepo {
       PaperWallet source, WalletEntity destination, int amount) async {
     if (await networkInfo.isConnected) {
       try {
-        final transaction = await walletSource.walletService
-            .paperTransfer(source, destination.walletModel, amount);
+        final transaction = await walletSource.walletService.paperTransfer(
+          source,
+          destination.walletModel,
+          amount,
+          Config.paperwallet_decryption_key,
+        );
         return Right(transaction);
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
@@ -210,20 +215,21 @@ class WalletRepo implements IWalletRepo {
       try {
         if (profile is UserProfileEntity) {
           var backendUser = await walletSource.walletService.createUserProfile(
-              walletEntity.walletModel,
-              profile.firstName,
-              profile.lastName,
-              profile.phoneNumber,
-              profile.dateOfBirth,
-              profile.addressStreet,
-              profile.addressTown,
-              profile.postcode);
+            walletEntity.walletModel,
+            profile.firstName,
+            profile.lastName,
+            profile.phoneNumber,
+            profile.dateOfBirth,
+            profile.addressStreet,
+            profile.addressTown,
+            profile.postcode,
+            profile.placeOfOrigin,
+          );
           if (backendUser != null) {
             return Right(UserProfileEntity.from(backendUser));
           }
         }
         if (profile is CompanyProfileEntity) {
-          // TODO check if address is empty, then dont use it
           var backendCompany = await walletSource.walletService
               .createCompanyProfile(
                   walletEntity.walletModel,
@@ -231,7 +237,8 @@ class WalletRepo implements IWalletRepo {
                   profile.uid,
                   profile.addressStreet,
                   profile.addressTown,
-                  profile.addressPostalCode);
+                  profile.addressPostalCode,
+                  profile.phoneNumber);
           if (backendCompany != null) {
             return Right(CompanyProfileEntity.from(backendCompany));
           }

@@ -15,8 +15,6 @@ abstract class IProfileService {
 
   Future<ProfileEntity> create(ProfileEntity profileEntity);
 
-  // Future<bool> verify(String pin);
-
   Future<bool> verify(String pin, WalletEntity wallet);
 
   Future<bool> testApi();
@@ -122,22 +120,6 @@ class ProfileService implements IProfileService {
     return _currentProfile;
   }
 
-  // Future<bool> verify(String pin) async {
-  //   ProfileEntity profileEntity = await currentProfile();
-  //   if (profileEntity is UserProfileEntity) {
-  //     var answer = await _walletRepo.verify(profileEntity, pin);
-  //     if (answer.isRight()) {
-  //       if (answer.getOrElse(() => false)) {
-  //         return true;
-  //       }
-  //     } else {
-  //       return false;
-  //     }
-  //   } // TODO verify CompanyProfile
-
-  //   return false;
-  // }
-
   @override
   Future<ProfileEntity> currentProfileForWallet(WalletEntity wallet) async {
     var profiles = await fetchProfilesForWallet(wallet);
@@ -154,9 +136,8 @@ class ProfileService implements IProfileService {
     return null;
   }
 
-  @override
-
   /// throws Failure
+  @override
   Future<bool> verify(String pin, WalletEntity wallet) async {
     ProfileEntity profileEntity = await currentProfileForWallet(wallet);
     // if (profileEntity is UserProfileEntity) {

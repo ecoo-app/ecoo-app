@@ -15,7 +15,7 @@ class VerificationFormField extends StatelessWidget {
   const VerificationFormField(
       {Key key,
       @required this.model,
-      this.label,
+      @required this.label,
       this.keyboardType = TextInputType.text,
       this.textInputAction = TextInputAction.next})
       : super(key: key);
@@ -23,6 +23,10 @@ class VerificationFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: Theme.of(context)
+          .textTheme
+          .headline3
+          .merge(TextStyle(fontWeight: fontWeightRegular)),
       onChanged: model.setValue,
       onFieldSubmitted: (String value) => model.fieldFocusChange(context),
       keyboardType: keyboardType,

@@ -10,6 +10,8 @@ class VerificationInputData extends ChangeNotifier {
   DateVerificationInput dateOfBirth;
   AddressVerificationInput address;
 
+  OriginVerificationInput origin;
+
   TextVerificationInput companyName;
   UidVerificationInput uid;
 
@@ -18,11 +20,12 @@ class VerificationInputData extends ChangeNotifier {
   VerificationInputData() {
     // Private Wallet Fields
     dateOfBirth = DateVerificationInput();
-    phoneNumber = PhoneNumberVerificationInput();
     lastName = TextVerificationInput();
     firstName = TextVerificationInput();
+    origin = OriginVerificationInput();
 
     // Common Fields
+    phoneNumber = PhoneNumberVerificationInput();
     address = AddressVerificationInput();
 
     // Shop Wallet Fields
@@ -36,6 +39,7 @@ class VerificationInputData extends ChangeNotifier {
     address.addListener(onChanged);
     uid.addListener(onChanged);
     companyName.addListener(onChanged);
+    origin.addListener(onChanged);
   }
 
   bool get isTruth => _isTruth;
@@ -57,7 +61,7 @@ class VerificationInputData extends ChangeNotifier {
   }
 
   List<VerificationInput> get _privateWalletMandatoryFields =>
-      [firstName, lastName, phoneNumber, dateOfBirth, address];
+      [firstName, lastName, phoneNumber, dateOfBirth, address, origin];
 
   List<VerificationInput> get _shopWalletMandatoryFields =>
       [companyName, address, uid];
@@ -81,6 +85,7 @@ class VerificationInputData extends ChangeNotifier {
       address.input.street,
       address.input.city,
       address.input.postalCode,
+      origin.value,
       VerificationStage.notMatched);
 
   CompanyProfileEntity toCompanyEntity(String walletId) => CompanyProfileEntity(
@@ -91,5 +96,6 @@ class VerificationInputData extends ChangeNotifier {
       address.input.street,
       address.input.city,
       address.input.postalCode,
+      phoneNumber.value,
       VerificationStage.notMatched);
 }

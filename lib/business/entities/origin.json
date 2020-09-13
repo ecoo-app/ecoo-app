@@ -1,0 +1,46 @@
+{
+  "nhits": 3,
+  "parameters": {
+    "dataset": "politische-gemeinden_v2",
+    "timezone": "UTC",
+    "q": "Aff",
+    "rows": 10,
+    "format": "json"
+  },
+  "records": [
+    {
+      "datasetid": "politische-gemeinden_v2",
+      "recordid": "9bcc1d2938be3e9c617185e9be6964e9b8fb57cd",
+      "fields": {
+        "bfsnr": 4711,
+        "gemeindename": "Affeltrangen",
+        "rec_art": "03",
+        "kanton": "TG"
+      },
+      "record_timestamp": "2020-08-28T23:00:07.854000+00:00"
+    },
+    {
+      "datasetid": "politische-gemeinden_v2",
+      "recordid": "880ccb3c78a9726b12842b9c73c52960a97ef208",
+      "fields": {
+        "bfsnr": 2,
+        "gemeindename": "Affoltern am Albis",
+        "rec_art": "03",
+        "kanton": "ZH",
+        "agglonr": 261
+      },
+      "record_timestamp": "2020-08-28T23:00:07.854000+00:00"
+    },
+    {
+      "datasetid": "politische-gemeinden_v2",
+      "recordid": "c32ac1eb52e6449cbdcf7d11f9222718dd0acafb",
+      "fields": {
+        "bfsnr": 951,
+        "gemeindename": "Affoltern im Emmental",
+        "rec_art": "03",
+        "kanton": "BE"
+      },
+      "record_timestamp": "2020-08-28T23:00:07.854000+00:00"
+    }
+  ]
+}

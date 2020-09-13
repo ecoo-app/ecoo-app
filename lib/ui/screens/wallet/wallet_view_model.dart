@@ -208,6 +208,9 @@ class WalletViewModel extends BaseViewModel {
         var profile = profiles[0];
 
         switch (profile.verificationStage) {
+          case VerificationStage.maxClaimsReached:
+            setViewState(Error(MessageFailure('Maximale Anzahl erreicht.')));
+            break;
           case VerificationStage.verified:
             await _router.pushNamed(RedeemRoute);
             break;

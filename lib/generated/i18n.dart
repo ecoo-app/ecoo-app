@@ -86,8 +86,8 @@ class I18n implements WidgetsLocalizations {
   String get verificationShopFormUidLink => "https://www.uid.admin.ch/";
   /// "Ich habe keine UID"
   String get verificationShopFormUidNoUid => "Ich habe keine UID";
-  /// "Ich bestätige dass ich Anrecht auf dieses Guthaben habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
-  String get verificationFilledTruthfullyPart1 => "Ich bestätige dass ich Anrecht auf dieses Guthaben habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
+  /// "Ich bestätige, dass ich Anrecht auf dieses Guthaben habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
+  String get verificationFilledTruthfullyPart1 => "Ich bestätige, dass ich Anrecht auf dieses Guthaben habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
   /// " AGBs "
   String get verificationFilledTruthfullyPart2 => " AGBs ";
   /// "einverstanden bin."
@@ -154,8 +154,8 @@ class I18n implements WidgetsLocalizations {
   String get titleSplashScreen => "ecoo";
   /// "Registrieren"
   String get titleRegisterScreen => "Registrieren";
-  /// "Um das ecoo App zu benutzten, müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf ihre Daten im App selbst."
-  String get descriptionRegisterScreen => "Um das ecoo App zu benutzten, müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf ihre Daten im App selbst.";
+  /// "Um das ecoo-App zu benutzen, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf Ihre Daten im App selbst."
+  String get descriptionRegisterScreen => "Um das ecoo-App zu benutzen, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf Ihre Daten im App selbst.";
   /// "Mit Apple fortfahren"
   String get signinwithappleRegisterScreen => "Mit Apple fortfahren";
   /// "Mit Google fortfahren"
@@ -196,28 +196,28 @@ class I18n implements WidgetsLocalizations {
   String get iPay => "Ich zahle den offenen Betrag an:";
   /// "ecoo"
   String get page1TitleOnboardingScreen => "ecoo";
-  /// "Registrierung und verifizierung"
-  String get page1HeadlineOnboardingScreen => "Registrierung und verifizierung";
-  /// "Um ecoo zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Stadt, danach erhalten Sie automatisch das Guthaben auf ihr Wallet."
-  String get page1DescriptionOnboardingScreen => "Um ecoo zu nutzen müssen Sie sich zuerst mit ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifiziern Sie sich mit ein paar wenigen Angaben bei ihrer Stadt, danach erhalten Sie automatisch das Guthaben auf ihr Wallet.";
+  /// "Registrierung und Verifizierung"
+  String get page1HeadlineOnboardingScreen => "Registrierung und Verifizierung";
+  /// "Um ecoo nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifizieren Sie sich mit den geforderten Angaben bei Ihrer Stadt. Danach erhalten Sie automatisch das Guthaben auf Ihr Wallet."
+  String get page1DescriptionOnboardingScreen => "Um ecoo nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifizieren Sie sich mit den geforderten Angaben bei Ihrer Stadt. Danach erhalten Sie automatisch das Guthaben auf Ihr Wallet.";
   /// "Privat Wallet"
   String get page2TitleOnboardingScreen => "Privat Wallet";
   /// "Zahlen, Senden & Geld anfordern"
   String get page2HeadlineOnboardingScreen => "Zahlen, Senden & Geld anfordern";
-  /// "Als Privatperson haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo Benutzern Guthaben senden oder Guthaben von anderen Benutzern anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern."
-  String get page2DescriptionOnboardingScreen => "Als Privatperson haben sie die Möglichkeit in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo Benutzern Guthaben senden oder Guthaben von anderen Benutzern anfordern.\n\nEs besteht die Möglichkeit alle erhalten Gutscheine ihrer Familie in einem Wallet zu speichern.";
+  /// "Als Privatperson haben Sie die Möglichkeit, in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo-Benutzer*innen Guthaben senden oder Guthaben von anderen anfordern.\n\nEs besteht die Möglichkeit, alle erhaltenen Gutscheine Ihrer Familie in einem Wallet zu speichern."
+  String get page2DescriptionOnboardingScreen => "Als Privatperson haben Sie die Möglichkeit, in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo-Benutzer*innen Guthaben senden oder Guthaben von anderen anfordern.\n\nEs besteht die Möglichkeit, alle erhaltenen Gutscheine Ihrer Familie in einem Wallet zu speichern.";
   /// "Shop Wallet"
   String get page3TitleOnboardingScreen => "Shop Wallet";
-  /// "Einkassieren & senden"
-  String get page3HeadlineOnboardingScreen => "Einkassieren & senden";
-  /// "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App einzukassieren."
-  String get page3DescriptionOnboardingScreen => "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit Einkäufe in ihrem Geschäft über die ecoo App einzukassieren.";
+  /// "Einkassieren & Senden"
+  String get page3HeadlineOnboardingScreen => "Einkassieren & Senden";
+  /// "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit, Einkäufe in Ihrem Geschäft über die ecoo-App zu kassieren.\n\nSie haben die Möglichkeit, Beträge anderen ecoo-Benutzern*innen zu senden."
+  String get page3DescriptionOnboardingScreen => "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit, Einkäufe in Ihrem Geschäft über die ecoo-App zu kassieren.\n\nSie haben die Möglichkeit, Beträge anderen ecoo-Benutzern*innen zu senden.";
   /// "Shop Wallet"
   String get page4TitleOnboardingScreen => "Shop Wallet";
   /// "Umsatz einlösen"
   String get page4HeadlineOnboardingScreen => "Umsatz einlösen";
-  /// "Nach der Verifizierung bei ihrer Stadt können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegebenen Konto gutgeschrieben."
-  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei ihrer Stadt können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegebenen Konto gutgeschrieben.";
+  /// "Nach der Verifizierung bei Ihrer Stadt, können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegeben Konto gutgeschrieben."
+  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei Ihrer Stadt, können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegeben Konto gutgeschrieben.";
   /// "Einführung überspringen"
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
   /// "Jetzt registrieren"
@@ -225,7 +225,7 @@ class I18n implements WidgetsLocalizations {
   /// "Wallet Typ"
   String get titleRegisterWalletTypeScreen => "Wallet Typ";
   /// "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet aus."
-  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet aus.";
+  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus, welchen Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Privat Wallet. Als Gewerbebesitzer*in machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet auf.";
   /// "Privat"
   String get privateRegisterWalletTypeScreen => "Privat";
   /// "Firma"
@@ -234,8 +234,8 @@ class I18n implements WidgetsLocalizations {
   String get titleRegisterVerifyScreenPrivate => "Guthaben aufladen";
   /// "Eintauschen"
   String get titleRegisterVerifyScreenShop => "Eintauschen";
-  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zu geschickt, mit dem Sie diesen Prozess abschliessen können."
-  String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zu geschickt, mit dem Sie diesen Prozess abschliessen können.";
+  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können."
+  String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.";
   /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen."
   String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.";
   /// "Jetzt verifizieren"
@@ -246,8 +246,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyFormFieldFirstName => "Vorname";
   /// "Nachname"
   String get verifyFormFieldLastName => "Nachname";
+  /// "Mobiltelefonnummer"
+  String get verifyFormFieldPhoneNumber => "Mobiltelefonnummer";
   /// "Telefonnummer"
-  String get verifyFormFieldPhoneNumber => "Telefonnummer";
+  String get verifyFormShopFieldPhoneNumber => "Telefonnummer";
   /// "Geburtsdatum"
   String get verifyFormFieldBirthday => "Geburtsdatum";
   /// "Adresse"
@@ -260,6 +262,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyFormFieldPostcode => "PLZ";
   /// "Ort"
   String get verifyFormFieldCity => "Ort";
+  /// "Heimatort (nur für Nationalität: Schweiz)"
+  String get verifyFormFieldHeimatort => "Heimatort (nur für Nationalität: Schweiz)";
+  /// "Nationalität"
+  String get verifyFormFieldNationality => "Nationalität";
   /// "Firmenname"
   String get verifyFormFieldCompany => "Firmenname";
   /// "Transaktion erfolgreich"
@@ -306,6 +312,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyFormFieldNextButton => "Weiter";
   /// "Bitte geben Sie eine gültige Adresse ein."
   String get noAddressSuggestions => "Bitte geben Sie eine gültige Adresse ein.";
+  /// "Bitte geben Sie einen gültigen Heimatort ein."
+  String get noOriginSuggestions => "Bitte geben Sie einen gültigen Heimatort ein.";
+  /// "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden."
+  String get verifyMaxClaimsReached => "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden.";
 }
 
 class _I18n_de_CH extends I18n {

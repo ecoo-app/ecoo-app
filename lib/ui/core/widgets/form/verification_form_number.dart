@@ -32,6 +32,10 @@ class VerificationFormNumberField extends StatelessWidget {
       focusNode: model.focusNode,
       textInputAction: TextInputAction.next,
       maxLengthEnforced: maxLength != null,
+      style: Theme.of(context)
+          .textTheme
+          .headline3
+          .merge(TextStyle(fontWeight: fontWeightRegular)),
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ],

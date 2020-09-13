@@ -27,6 +27,7 @@ import 'ui/core/services/app_service.dart';
 import 'ui/core/services/login_service.dart';
 import 'ui/core/services/mock_login_service.dart';
 import 'ui/core/services/notification_service.dart';
+import 'ui/core/services/origin_service.dart';
 import 'ui/core/services/profile_service.dart';
 import 'ui/core/services/recovery_service.dart';
 import 'ui/core/services/settings_service.dart';
@@ -76,6 +77,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final thirdPartyLibraryModule = _$ThirdPartyLibraryModule();
   gh.factory<FlutterSecureStorage>(() => thirdPartyLibraryModule.securePrefs);
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo());
+  gh.lazySingleton<IOriginService>(() => OriginService(g<INetworkInfo>()));
   gh.lazySingleton<ITransferService>(() => TransferService());
   gh.lazySingleton<IWalletSource>(() => WalletSourceProd(),
       registerFor: {_prod});
@@ -190,6 +192,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IProfileService>(),
         g<IRouter>(),
         g<IVerificationRepo>(),
+        g<IOriginService>(),
       ));
   gh.factory<ILoginService>(() => LoginService(
         g<IWalletSource>(),

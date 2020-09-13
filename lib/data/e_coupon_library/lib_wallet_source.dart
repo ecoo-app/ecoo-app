@@ -10,7 +10,7 @@ abstract class IWalletSource {
 @Environment(Env.dev)
 class WalletSourceDev extends IWalletSource {
   final WalletService service =
-      WalletService('https://ecoupon-backend.prod.gke.papers.tech');
+      WalletService('https://ecoupon-backend.dev.gke.papers.tech');
 
   WalletService get walletService => service;
 }

@@ -17,18 +17,14 @@ class VerificationAddressField extends StatefulWidget {
 
   @override
   State<VerificationAddressField> createState() =>
-      _MaterialVerificationAddressField(model, label, suggestionsCallback);
+      _MaterialVerificationAddressField();
 }
 
 class _MaterialVerificationAddressField
     extends State<VerificationAddressField> {
-  final AddressVerificationInput model;
-  final String label;
-  final Function suggestionsCallback;
   final TextEditingController _typeAheadController = TextEditingController();
 
-  _MaterialVerificationAddressField(
-      this.model, this.label, this.suggestionsCallback);
+  _MaterialVerificationAddressField();
 
   Widget _createItem(
       BuildContext context, AddressAutoCompletionResult resultItem) {
@@ -51,11 +47,15 @@ class _MaterialVerificationAddressField
   Widget build(BuildContext context) {
     return TypeAheadFormField<AddressAutoCompletionResult>(
       textFieldConfiguration: TextFieldConfiguration(
-          focusNode: model.focusNode,
-          onEditingComplete: () => model.fieldFocusChange(context),
+          focusNode: widget.model.focusNode,
+          onEditingComplete: () => widget.model.fieldFocusChange(context),
           controller: this._typeAheadController,
+          style: Theme.of(context)
+              .textTheme
+              .headline3
+              .merge(TextStyle(fontWeight: fontWeightRegular)),
           decoration: InputDecoration(
-            helperText: label,
+            helperText: widget.label,
             helperStyle: Theme.of(context)
                 .textTheme
                 .bodyText2
@@ -70,8 +70,8 @@ class _MaterialVerificationAddressField
         ),
       ),
       suggestionsCallback: (pattern) async {
-        return suggestionsCallback != null
-            ? await suggestionsCallback(pattern)
+        return widget.suggestionsCallback != null
+            ? await widget.suggestionsCallback(pattern)
             : [];
       },
       itemBuilder: (context, suggestion) {
@@ -82,15 +82,15 @@ class _MaterialVerificationAddressField
       },
       suggestionsBoxVerticalOffset: -20,
       onSuggestionSelected: (suggestion) {
-        model.setValue(Address(
+        widget.model.setValue(Address(
             street: suggestion.street,
             postalCode: suggestion.postalCode,
             city: suggestion.town));
-        print(model.value);
-        this._typeAheadController.text = model.value;
+
+        this._typeAheadController.text = widget.model.value;
       },
       validator: (value) {
-        var result = model.isValid;
+        var result = widget.model.isValid;
         if (result) {
           return null;
         } else {

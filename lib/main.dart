@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_localizations.dart';
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
@@ -23,6 +24,7 @@ class ECouponApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: [
         i18n,
+        CountryLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

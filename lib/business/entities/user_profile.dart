@@ -18,6 +18,7 @@ class CompanyProfileEntity implements ProfileEntity {
   final String addressStreet;
   final String addressTown;
   final String addressPostalCode;
+  final String phoneNumber;
   final VerificationStage _verificationState;
 
   CompanyProfileEntity(
@@ -28,6 +29,7 @@ class CompanyProfileEntity implements ProfileEntity {
     this.addressStreet,
     this.addressTown,
     this.addressPostalCode,
+    this.phoneNumber,
     this._verificationState,
   );
 
@@ -49,6 +51,7 @@ class CompanyProfileEntity implements ProfileEntity {
         other.addressStreet,
         other.addressTown,
         other.addressPostalCode,
+        other.telephoneNumber,
         other.verificationStage);
   }
 
@@ -61,6 +64,7 @@ class CompanyProfileEntity implements ProfileEntity {
       addressStreet,
       addressTown,
       addressPostalCode,
+      phoneNumber,
       verificationStage,
     );
   }
@@ -76,6 +80,7 @@ class UserProfileEntity implements ProfileEntity {
   final String addressStreet;
   final String addressTown;
   final String postcode;
+  final String placeOfOrigin;
   final VerificationStage _verificationState;
 
   UserProfileEntity(
@@ -88,6 +93,7 @@ class UserProfileEntity implements ProfileEntity {
     this.addressStreet,
     this.addressTown,
     this.postcode,
+    this.placeOfOrigin,
     this._verificationState,
   );
 
@@ -102,6 +108,7 @@ class UserProfileEntity implements ProfileEntity {
         other.addressStreet,
         other.addressTown,
         other.addressPostalCode,
+        other.placeOfOrigin,
         other.verificationStage);
   }
 
@@ -116,6 +123,7 @@ class UserProfileEntity implements ProfileEntity {
       postcode,
       phoneNumber,
       dateOfBirth,
+      placeOfOrigin,
       verificationStage,
     );
   }

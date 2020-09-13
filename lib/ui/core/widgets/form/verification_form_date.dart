@@ -82,6 +82,10 @@ class _DateFormField extends State<VerificationFormDateField> {
     return TextFormField(
         focusNode: widget.focusNode,
         controller: _controllerDate,
+        style: Theme.of(context)
+            .textTheme
+            .headline3
+            .merge(TextStyle(fontWeight: fontWeightRegular)),
         decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.suffixIcon,

@@ -61,6 +61,7 @@ class PinVerificationScreen extends StatelessWidget {
                         ),
                         Form(
                           child: ECTextFormField(
+                            keyboardType: TextInputType.number,
                             label: I18n.of(context).pinInputLabel,
                             onChanged: (value) => vmodel.pin = value,
                             validator: (value) {

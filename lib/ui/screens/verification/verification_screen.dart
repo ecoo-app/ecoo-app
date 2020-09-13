@@ -10,6 +10,7 @@ import 'package:e_coupon/ui/core/widgets/form/verification_form_date.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_checkbox.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_field.dart';
+import 'package:e_coupon/ui/core/widgets/form/verification_form_origin.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_phone.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_title.dart';
 import 'package:e_coupon/ui/core/widgets/form/verification_form_uid.dart';
@@ -34,10 +35,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
   OverlayEntry overlayEntry;
   bool isKeyBoardVisible = false;
 
+  double bottomInset = 25;
+
   @override
   void initState() {
     super.initState();
     if (Platform.isIOS) {
+      bottomInset += 34;
       KeyboardVisibilityNotification().addNewListener(
         onChange: (bool visible) {
           setState(() {
@@ -61,6 +65,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         isEnabled: !isError,
         onPressed: () async {
           await viewModel.onVerify(I18n.of(context).successTextVerification,
+              I18n.of(context).verifyMaxClaimsReached,
               errorText: I18n.of(context).verifyFormErrorVerification);
         },
       ),
@@ -69,82 +74,144 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   Widget _generatePrivateWalletVerificationForm(VerificationInputData value,
       BuildContext context, VerificationViewModel viewModel) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 25, bottom: 25, left: 25, right: 25),
-      children: <Widget>[
-        VerificationFormTitle(
-            text: I18n.of(context).verificationPrivateFormTitle),
-        VerificationFormField(
-          model: value.firstName,
-          label: I18n.of(context).verifyFormFieldFirstName,
-        ),
-        VerificationFormField(
-          model: value.lastName,
-          label: I18n.of(context).verifyFormFieldLastName,
-        ),
-        VerificationFormDateField(
-          labelText: I18n.of(context).verifyFormFieldBirthday,
-          suffixIcon: Icon(Icons.calendar_today),
-          initialDate: value.dateOfBirth.input ?? DateTime.parse('2000-01-01'),
-          firstDate: DateTime.utc(1900),
-          lastDate: DateTime.now(),
-          onDateChanged: value.dateOfBirth.setValue,
-        ),
-        VerificationFormPhoneField(
-          model: value.phoneNumber,
-          label: I18n.of(context).verifyFormFieldPhoneNumber,
-        ),
-        VerificationAddressField(
-          model: value.address,
-          label: I18n.of(context).verifyFormFieldAddress,
-          suggestionsCallback: viewModel.fetchAutoCompletions,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: VerificationFormCheckBox(
-            textPartStart: I18n.of(context).verificationFilledTruthfullyPart1,
-            textUrlPart: I18n.of(context).verificationFilledTruthfullyPart2,
-            textPartEnd: I18n.of(context).verificationFilledTruthfullyPart3,
-            onChanged: value.onIsThruthChanged,
-            value: value.isTruth,
+    return Padding(
+      padding:
+          EdgeInsets.only(top: 25, bottom: bottomInset, left: 25, right: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          VerificationFormTitle(
+              text: I18n.of(context).verificationPrivateFormTitle),
+          VerificationFormField(
+            model: value.firstName,
+            label: I18n.of(context).verifyFormFieldFirstName,
           ),
-        ),
-        _createVerifyButton(value, context, viewModel)
-      ],
+          SizedBox(
+            height: 32,
+          ),
+          VerificationFormField(
+            model: value.lastName,
+            label: I18n.of(context).verifyFormFieldLastName,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationFormDateField(
+            labelText: I18n.of(context).verifyFormFieldBirthday,
+            suffixIcon: Icon(Icons.calendar_today),
+            initialDate:
+                value.dateOfBirth.input ?? DateTime.parse('2000-01-01'),
+            firstDate: DateTime.utc(1900),
+            lastDate: DateTime.now(),
+            onDateChanged: value.dateOfBirth.setValue,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationFormPhoneField(
+            model: value.phoneNumber,
+            label: I18n.of(context).verifyFormFieldPhoneNumber,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationAddressField(
+            model: value.address,
+            label: I18n.of(context).verifyFormFieldAddress,
+            suggestionsCallback: viewModel.fetchAutoCompletions,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationFormOrigin(
+            model: value.origin,
+            label: I18n.of(context).verifyFormFieldHeimatort,
+            citySuggestionsCallback: viewModel.fetchCityOfOriginSuggestions,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: VerificationFormCheckBox(
+              textPartStart: I18n.of(context).verificationFilledTruthfullyPart1,
+              textUrlPart: I18n.of(context).verificationFilledTruthfullyPart2,
+              textPartEnd: I18n.of(context).verificationFilledTruthfullyPart3,
+              onChanged: value.onIsThruthChanged,
+              value: value.isTruth,
+            ),
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          _createVerifyButton(value, context, viewModel)
+        ],
+      ),
     );
   }
 
   Widget _generateShopWalletVerificationForm(VerificationInputData value,
       BuildContext context, VerificationViewModel viewModel) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 25, bottom: 25, left: 25, right: 25),
-      children: <Widget>[
-        VerificationFormTitle(text: I18n.of(context).verificationShopFormTitle),
-        VerificationFormUid(model: value.uid),
-        VerificationFormTitle(
-            text: I18n.of(context).verificationShopFormCompanyTitle),
-        VerificationFormField(
-          model: value.companyName,
-          label: I18n.of(context).verifyFormFieldCompany,
-        ),
-        VerificationAddressField(
-          model: value.address,
-          label: I18n.of(context).verifyFormFieldAddress,
-          suggestionsCallback: viewModel.fetchAutoCompletions,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 25),
-          child: VerificationFormCheckBox(
-            textPartStart:
-                I18n.of(context).verificationFilledTruthfullyShopPart1,
-            textUrlPart: I18n.of(context).verificationFilledTruthfullyShopPart2,
-            textPartEnd: I18n.of(context).verificationFilledTruthfullyShopPart3,
-            onChanged: value.onIsThruthChanged,
-            value: value.isTruth,
+    return Padding(
+      padding:
+          EdgeInsets.only(top: 25, bottom: bottomInset, left: 25, right: 25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          VerificationFormTitle(
+              text: I18n.of(context).verificationShopFormTitle),
+          VerificationFormUid(model: value.uid),
+          SizedBox(
+            height: 32,
           ),
-        ),
-        _createVerifyButton(value, context, viewModel)
-      ],
+          VerificationFormTitle(
+              text: I18n.of(context).verificationShopFormCompanyTitle),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationFormField(
+            model: value.companyName,
+            label: I18n.of(context).verifyFormFieldCompany,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationAddressField(
+            model: value.address,
+            label: I18n.of(context).verifyFormFieldAddress,
+            suggestionsCallback: viewModel.fetchAutoCompletions,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          VerificationFormPhoneField(
+            model: value.phoneNumber,
+            label: I18n.of(context).verifyFormShopFieldPhoneNumber,
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: VerificationFormCheckBox(
+              textPartStart:
+                  I18n.of(context).verificationFilledTruthfullyShopPart1,
+              textUrlPart:
+                  I18n.of(context).verificationFilledTruthfullyShopPart2,
+              textPartEnd:
+                  I18n.of(context).verificationFilledTruthfullyShopPart3,
+              onChanged: value.onIsThruthChanged,
+              value: value.isTruth,
+            ),
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          _createVerifyButton(value, context, viewModel)
+        ],
+      ),
     );
   }
 
@@ -166,18 +233,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   SchedulerBinding.instance.addPostFrameCallback((_) {
                     ErrorToast(failure: error.failure).create(context)
                       ..show(context);
+                    viewModel.resetViewState();
                   });
                 }
 
-                double bottomInset = 30;
-                if (Platform.isIOS) {
-                  bottomInset += 34;
-                }
                 return Stack(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: bottomInset),
-                      // padding: EdgeInsets.only(bottom: bottomInset),
+                    SingleChildScrollView(
                       child: Form(
                         key: viewModel.formKey,
                         child: Consumer<VerificationInputData>(

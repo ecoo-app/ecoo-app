@@ -103,6 +103,13 @@ class RecoveryService implements IRecoveryService {
         (isMigrating) async {
       if (!isMigrating) {
         result = await _walletRepo.migrateWallet(wallet);
+      } else {
+        // TODO what to do if it is migrating?
+        var walletMigrationsOrFailure = await getMigrationsFor(wallet);
+        walletMigrationsOrFailure.fold((failure) => result = Left(failure),
+            (walletMigrations) {
+          result = Right(walletMigrations.last);
+        });
       }
     });
 

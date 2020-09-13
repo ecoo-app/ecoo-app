@@ -31,6 +31,7 @@ void main() {
     data.phoneNumber.setValue('+41791234567');
     data.address.setValue(
         Address(street: 'Dorfstrasse 27', city: 'Zürich', postalCode: '8037'));
+    data.origin.setCity('Zürich');
     expect(data.isValid(false), isFalse);
     data.onIsThruthChanged(true);
 

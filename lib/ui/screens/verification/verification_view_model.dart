@@ -1,8 +1,10 @@
 import 'package:e_coupon/business/core/failure.dart';
+import 'package:e_coupon/business/entities/city_of_origin.dart';
 import 'package:e_coupon/data/repos/verification_repo.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
+import 'package:e_coupon/ui/core/services/origin_service.dart';
 import 'package:e_coupon/ui/core/services/profile_service.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
 import 'package:e_coupon/ui/screens/verification/verification_input_data.dart';
@@ -19,12 +21,13 @@ class VerificationViewModel extends BaseViewModel {
   final IProfileService _profileService;
   final IRouter _router;
   final IVerificationRepo _verificationRepo;
+  final IOriginService _originService;
 
   VerificationInputData _inputData = VerificationInputData();
   final formKey = GlobalKey<FormState>();
 
   VerificationViewModel(this._walletService, this._profileService, this._router,
-      this._verificationRepo);
+      this._verificationRepo, this._originService);
 
   VerificationInputData get inputData => _inputData;
 
@@ -46,7 +49,21 @@ class VerificationViewModel extends BaseViewModel {
     return result;
   }
 
-  Future<void> onVerify(String successText, {String errorText}) async {
+  Future<List<CityOfOrigin>> fetchCityOfOriginSuggestions(
+      String pattern) async {
+    List<CityOfOrigin> origins;
+
+    var originsOrFailure =
+        await this._originService.cityAutocompletions(pattern);
+
+    originsOrFailure.fold((failure) => setViewState(Error(failure)),
+        (success) => origins = success);
+
+    return origins;
+  }
+
+  Future<void> onVerify(String successText, String maxClaimsReachedText,
+      {String errorText}) async {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
@@ -60,10 +77,16 @@ class VerificationViewModel extends BaseViewModel {
 
         if (result != null) {
           if (result.verificationStage == VerificationStage.notMatched) {
-            setViewState(Error(MessageFailure(errorText ?? '')));
+            setViewState(Error(MessageFailure(maxClaimsReachedText)));
             return;
           }
 
+          if (result.verificationStage == VerificationStage.maxClaimsReached) {
+            setViewState(Error(MessageFailure(maxClaimsReachedText)));
+            return;
+          }
+
+          _originService.closeClient();
           await _router.pushNamed(VerifyPinRoute);
           setViewState(Loaded());
         }
@@ -71,5 +94,9 @@ class VerificationViewModel extends BaseViewModel {
         setViewState(Error((failure as Failure)));
       }
     }
+  }
+
+  void resetViewState() {
+    setViewState(Initial());
   }
 }
