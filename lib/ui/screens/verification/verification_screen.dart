@@ -36,6 +36,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   bool isKeyBoardVisible = false;
 
   double bottomInset = 25;
+  double formSpace = 28;
 
   @override
   void initState() {
@@ -62,7 +63,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       child: PrimaryButton(
         isLoading: viewModel.viewState is Loading,
         text: I18n.of(context).buttonFormClaimVerification,
-        isEnabled: !isError,
+        isEnabled: !(viewModel.viewState is Loading) && !isError,
         onPressed: () async {
           await viewModel.onVerify(I18n.of(context).successTextVerification,
               I18n.of(context).verifyMaxClaimsReached,
@@ -88,14 +89,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
             label: I18n.of(context).verifyFormFieldFirstName,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormField(
             model: value.lastName,
             label: I18n.of(context).verifyFormFieldLastName,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormDateField(
             labelText: I18n.of(context).verifyFormFieldBirthday,
@@ -107,14 +108,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
             onDateChanged: value.dateOfBirth.setValue,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormPhoneField(
             model: value.phoneNumber,
             label: I18n.of(context).verifyFormFieldPhoneNumber,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationAddressField(
             model: value.address,
@@ -122,7 +123,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             suggestionsCallback: viewModel.fetchAutoCompletions,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormOrigin(
             model: value.origin,
@@ -130,7 +131,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             citySuggestionsCallback: viewModel.fetchCityOfOriginSuggestions,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 25),
@@ -143,7 +144,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             ),
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           _createVerifyButton(value, context, viewModel)
         ],
@@ -164,19 +165,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
               text: I18n.of(context).verificationShopFormTitle),
           VerificationFormUid(model: value.uid),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormTitle(
               text: I18n.of(context).verificationShopFormCompanyTitle),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormField(
             model: value.companyName,
             label: I18n.of(context).verifyFormFieldCompany,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationAddressField(
             model: value.address,
@@ -184,14 +185,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
             suggestionsCallback: viewModel.fetchAutoCompletions,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           VerificationFormPhoneField(
             model: value.phoneNumber,
             label: I18n.of(context).verifyFormShopFieldPhoneNumber,
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 25),
@@ -207,7 +208,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             ),
           ),
           SizedBox(
-            height: 32,
+            height: formSpace,
           ),
           _createVerifyButton(value, context, viewModel)
         ],
@@ -239,17 +240,23 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
                 return Stack(
                   children: [
-                    SingleChildScrollView(
-                      child: Form(
-                        key: viewModel.formKey,
-                        child: Consumer<VerificationInputData>(
-                          builder: (context, value, child) {
-                            return viewModel.isShop
-                                ? _generateShopWalletVerificationForm(
-                                    value, context, viewModel)
-                                : _generatePrivateWalletVerificationForm(
-                                    value, context, viewModel);
-                          },
+                    Padding(
+                      // is needed so that on focus the autocomplete selection list is visible
+                      padding: isKeyBoardVisible
+                          ? EdgeInsets.only(bottom: bottomInset)
+                          : EdgeInsets.all(0),
+                      child: SingleChildScrollView(
+                        child: Form(
+                          key: viewModel.formKey,
+                          child: Consumer<VerificationInputData>(
+                            builder: (context, value, child) {
+                              return viewModel.isShop
+                                  ? _generateShopWalletVerificationForm(
+                                      value, context, viewModel)
+                                  : _generatePrivateWalletVerificationForm(
+                                      value, context, viewModel);
+                            },
+                          ),
                         ),
                       ),
                     ),
