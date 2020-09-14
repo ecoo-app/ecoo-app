@@ -93,7 +93,9 @@ class MenuScreen extends StatelessWidget {
                               if (item is FaqMenuItem) {
                                 return MenuItemWidget(
                                   text: I18n.of(context).faqhelpMenuScreen,
-                                  onTap: () => print('faq'),
+                                  onTap: () async {
+                                    await launchUrl(I18n.of(context).faqUrl);
+                                  },
                                 );
                               }
                               if (item is PrivacyPolicyMenuItem) {

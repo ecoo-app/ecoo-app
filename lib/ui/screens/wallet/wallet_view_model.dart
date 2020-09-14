@@ -205,7 +205,8 @@ class WalletViewModel extends BaseViewModel {
       setViewState(Error(failure));
     }, (profiles) async {
       if (profiles != null && profiles.isNotEmpty) {
-        var profile = profiles[0];
+        // TODO is this correct? TODO update backend logic to send only the current one
+        var profile = profiles.last;
 
         switch (profile.verificationStage) {
           case VerificationStage.maxClaimsReached:

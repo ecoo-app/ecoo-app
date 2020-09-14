@@ -26,6 +26,9 @@ class ErrorToast {
     if (failure is NoTransactionPossibleFailure) {
       return I18n.of(context).noTransactionFailureTitle;
     }
+    if (failure is Info) {
+      return '';
+    }
     return I18n.of(context).generalErrorTitle;
   }
 
@@ -63,6 +66,10 @@ class ErrorToast {
     if (failure is NoTransactionPossibleFailure) {
       return I18n.of(context).noTransactionFailureText;
     }
+    if (failure is Info) {
+      Info fail = failure;
+      return fail.message;
+    }
     return I18n.of(context).generalErrorText;
   }
 
@@ -77,7 +84,7 @@ class ErrorToast {
       duration: Duration(seconds: 10),
       icon: Icon(
         Icons.error_outline,
-        color: Colors.redAccent,
+        color: failure is Info ? Colors.black : Colors.redAccent,
       ),
       boxShadows: [
         BoxShadow(

@@ -98,8 +98,8 @@ class I18n implements WidgetsLocalizations {
   String get verificationFilledTruthfullyShopPart2 => " AGBs ";
   /// "einverstanden bin."
   String get verificationFilledTruthfullyShopPart3 => "einverstanden bin.";
-  /// "https://ecoo.ch/datenschutz.html"
-  String get verificationFilledTruthfullyTosUrl => "https://ecoo.ch/datenschutz.html";
+  /// "https://www.ecoo.ch/datenschutz/"
+  String get verificationFilledTruthfullyTosUrl => "https://www.ecoo.ch/datenschutz/";
   /// "Anfrage gesendet."
   String get verificationSend => "Anfrage gesendet.";
   /// "PIN eingeben"
@@ -224,8 +224,8 @@ class I18n implements WidgetsLocalizations {
   String get buttonTextNextOnboardingScreen => "Jetzt registrieren";
   /// "Wallet Typ"
   String get titleRegisterWalletTypeScreen => "Wallet Typ";
-  /// "Bitte wählen Sie hier aus welcher Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Private Wallet. Als Gewerbebesitzer machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet aus."
-  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus, welchen Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Privat Wallet. Als Gewerbebesitzer*in machen Sie für Ihr Geschäft zusätzlich ein Shop Wallet auf.";
+  /// "Bitte wählen Sie hier aus, welchen Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Privat Wallet. Als Gewerbebesitzer*in machen Sie für Ihr Geschäft zusätzlich ein Firmen Wallet auf."
+  String get descriptionRegisterWalletTypeScreen => "Bitte wählen Sie hier aus, welchen Typ Wallet Sie brauchen. Alle Privatpersonen mit Wohnsitz in Wetzikon per 1. September 2020 haben Anrecht auf ein Privat Wallet. Als Gewerbebesitzer*in machen Sie für Ihr Geschäft zusätzlich ein Firmen Wallet auf.";
   /// "Privat"
   String get privateRegisterWalletTypeScreen => "Privat";
   /// "Firma"
@@ -234,10 +234,12 @@ class I18n implements WidgetsLocalizations {
   String get titleRegisterVerifyScreenPrivate => "Guthaben aufladen";
   /// "Eintauschen"
   String get titleRegisterVerifyScreenShop => "Eintauschen";
-  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können."
-  String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.";
-  /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen."
-  String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.";
+  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.\n\nWeitere Fragen zur WetziKoin Kampagne\n"
+  String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.\n\nWeitere Fragen zur WetziKoin Kampagne\n";
+  /// "https://www.wetzikon.ch/ecoupon"
+  String get descriptionRegisterVerifyScreenLink => "https://www.wetzikon.ch/ecoupon";
+  /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.\n\nWeitere Fragen zur WetziKoin Kampagne\n"
+  String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.\n\nWeitere Fragen zur WetziKoin Kampagne\n";
   /// "Jetzt verifizieren"
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Verifizierung überspringen"
@@ -276,8 +278,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyFormErrorVerification => "Ihre Angaben konnten nicht verifizert werden. Die Stadt wird sich in Kürze bei Ihnen melden und die nächsten Schritte besprechen.";
   /// "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal."
   String get walletSelectionScreenError => "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal.";
-  /// "https://payecoo.ch/datenschutz.html"
-  String get dataPolicyUrl => "https://payecoo.ch/datenschutz.html";
+  /// "https://ecoo.ch/faq"
+  String get faqUrl => "https://ecoo.ch/faq";
+  /// "https://www.ecoo.ch/datenschutz/"
+  String get dataPolicyUrl => "https://www.ecoo.ch/datenschutz/";
   /// "https://tezos.foundation/"
   String get tezosFoundationUrl => "https://tezos.foundation/";
   /// "Einen Moment, bitte"
@@ -316,6 +320,8 @@ class I18n implements WidgetsLocalizations {
   String get noOriginSuggestions => "Bitte geben Sie einen gültigen Heimatort ein.";
   /// "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden."
   String get verifyMaxClaimsReached => "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden.";
+  /// "Ihre Angaben werden von der Stadt geprüft. Sie werden kontaktiert."
+  String get verifyNoUidInfo => "Ihre Angaben werden von der Stadt geprüft. Sie werden kontaktiert.";
 }
 
 class _I18n_de_CH extends I18n {

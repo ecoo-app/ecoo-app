@@ -67,7 +67,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
         onPressed: () async {
           await viewModel.onVerify(I18n.of(context).successTextVerification,
               I18n.of(context).verifyMaxClaimsReached,
-              errorText: I18n.of(context).verifyFormErrorVerification);
+              errorText: I18n.of(context).verifyFormErrorVerification,
+              infoText: I18n.of(context).verifyNoUidInfo);
         },
       ),
     );
@@ -152,6 +153,31 @@ class _VerificationScreenState extends State<VerificationScreen> {
     );
   }
 
+  // List<Widget> _generateShopAddressFields(VerificationInputData value,
+  //     BuildContext context, VerificationViewModel viewModel) {
+  //   return [
+  //     SizedBox(
+  //       height: formSpace,
+  //     ),
+  //     VerificationFormField(
+  //       model: value.noUidStreet,
+  //       label: I18n.of(context).verifyFormFieldStreet,
+  //     ),
+  //     SizedBox(
+  //       height: formSpace,
+  //     ),
+  //     VerificationFormField(
+  //       model: value.noUidPostalCode,
+  //       label: I18n.of(context).verifyFormFieldPostcode,
+  //     ),
+  //     SizedBox(
+  //       height: formSpace,
+  //     ),
+  //     VerificationFormField(
+  //         model: value.noUidCity, label: I18n.of(context).verifyFormFieldCity),
+  //   ];
+  // }
+
   Widget _generateShopWalletVerificationForm(VerificationInputData value,
       BuildContext context, VerificationViewModel viewModel) {
     return Padding(
@@ -179,11 +205,33 @@ class _VerificationScreenState extends State<VerificationScreen> {
           SizedBox(
             height: formSpace,
           ),
-          VerificationAddressField(
-            model: value.address,
-            label: I18n.of(context).verifyFormFieldAddress,
-            suggestionsCallback: viewModel.fetchAutoCompletions,
-          ),
+          ...value.hasUID
+              ? [
+                  VerificationAddressField(
+                    model: value.address,
+                    label: I18n.of(context).verifyFormFieldAddress,
+                    suggestionsCallback: viewModel.fetchAutoCompletions,
+                  )
+                ]
+              : [
+                  VerificationFormField(
+                    model: value.noUidStreet,
+                    label: I18n.of(context).verifyFormFieldStreet,
+                  ),
+                  SizedBox(
+                    height: formSpace,
+                  ),
+                  VerificationFormField(
+                    model: value.noUidPostalCode,
+                    label: I18n.of(context).verifyFormFieldPostcode,
+                  ),
+                  SizedBox(
+                    height: formSpace,
+                  ),
+                  VerificationFormField(
+                      model: value.noUidCity,
+                      label: I18n.of(context).verifyFormFieldCity),
+                ],
           SizedBox(
             height: formSpace,
           ),

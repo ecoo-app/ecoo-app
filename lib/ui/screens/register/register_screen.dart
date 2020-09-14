@@ -19,7 +19,11 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return RegisterScaffold(
         title: I18n.of(context).titleRegisterScreen,
-        subhead: I18n.of(context).descriptionRegisterScreen,
+        subhead: Text(
+          I18n.of(context).descriptionRegisterScreen,
+          style: Theme.of(context).textTheme.bodyText2,
+          textAlign: TextAlign.center,
+        ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

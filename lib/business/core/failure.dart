@@ -5,6 +5,15 @@ abstract class Failure extends Equatable {
   Failure([List properties = const <dynamic>[]]);
 }
 
+class Info extends Failure {
+  final message;
+
+  Info(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
 class MessageFailure extends Failure {
   final message;
 

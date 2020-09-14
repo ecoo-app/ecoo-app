@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 
 class RegisterScaffold extends StatelessWidget {
   final String title;
-  final String subhead;
+  final Widget subhead;
+  // final String subhead;
+  // final String link;
   final Widget header;
   final Widget content;
   final Widget footer;
@@ -50,14 +52,9 @@ class RegisterScaffold extends StatelessWidget {
                                         TextStyle(fontWeight: fontWeightBold))),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 0, right: 0, bottom: 25),
-                            child: Text(
-                              subhead,
-                              style: Theme.of(context).textTheme.bodyText2,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
+                              padding: const EdgeInsets.only(
+                                  left: 0, right: 0, bottom: 25),
+                              child: subhead),
                           content,
                         ],
                       ),

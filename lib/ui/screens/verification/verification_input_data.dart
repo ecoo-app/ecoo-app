@@ -10,6 +10,10 @@ class VerificationInputData extends ChangeNotifier {
   DateVerificationInput dateOfBirth;
   AddressVerificationInput address;
 
+  TextVerificationInput noUidStreet;
+  TextVerificationInput noUidPostalCode;
+  TextVerificationInput noUidCity;
+
   OriginVerificationInput origin;
 
   TextVerificationInput companyName;
@@ -32,6 +36,10 @@ class VerificationInputData extends ChangeNotifier {
     companyName = TextVerificationInput();
     uid = UidVerificationInput();
 
+    noUidStreet = TextVerificationInput();
+    noUidPostalCode = TextVerificationInput();
+    noUidCity = TextVerificationInput();
+
     firstName.addListener(onChanged);
     lastName.addListener(onChanged);
     phoneNumber.addListener(onChanged);
@@ -40,6 +48,9 @@ class VerificationInputData extends ChangeNotifier {
     uid.addListener(onChanged);
     companyName.addListener(onChanged);
     origin.addListener(onChanged);
+    noUidStreet.addListener(onChanged);
+    noUidPostalCode.addListener(onChanged);
+    noUidCity.addListener(onChanged);
   }
 
   bool get isTruth => _isTruth;
@@ -48,8 +59,12 @@ class VerificationInputData extends ChangeNotifier {
 
   bool isValid(bool isShop) {
     var validFormInput = false;
-    if (isShop) {
+    if (isShop && hasUID) {
       validFormInput = _shopWalletMandatoryFields
+          .where((element) => !element.isValid)
+          .isEmpty;
+    } else if (isShop && !hasUID) {
+      validFormInput = _shopWalletMandatoryFieldsNoUid
           .where((element) => !element.isValid)
           .isEmpty;
     } else {
@@ -65,6 +80,9 @@ class VerificationInputData extends ChangeNotifier {
 
   List<VerificationInput> get _shopWalletMandatoryFields =>
       [companyName, address, uid];
+
+  List<VerificationInput> get _shopWalletMandatoryFieldsNoUid =>
+      [companyName, uid, noUidStreet, noUidPostalCode, noUidCity];
 
   void onChanged() {
     notifyListeners();
@@ -88,14 +106,25 @@ class VerificationInputData extends ChangeNotifier {
       origin.value,
       VerificationStage.notMatched);
 
-  CompanyProfileEntity toCompanyEntity(String walletId) => CompanyProfileEntity(
-      '',
-      walletId,
-      companyName.value,
-      uid.value,
-      address.input.street,
-      address.input.city,
-      address.input.postalCode,
-      phoneNumber.value,
-      VerificationStage.notMatched);
+  CompanyProfileEntity toCompanyEntity(String walletId) => hasUID
+      ? CompanyProfileEntity(
+          '',
+          walletId,
+          companyName.value,
+          uid.value,
+          address.input.street,
+          address.input.city,
+          address.input.postalCode,
+          phoneNumber.value,
+          VerificationStage.notMatched)
+      : CompanyProfileEntity(
+          '',
+          walletId,
+          companyName.value,
+          uid.value,
+          noUidStreet.value,
+          noUidCity.value,
+          noUidPostalCode.value,
+          phoneNumber.value,
+          VerificationStage.notMatched);
 }

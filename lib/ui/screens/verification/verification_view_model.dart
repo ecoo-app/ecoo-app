@@ -63,7 +63,7 @@ class VerificationViewModel extends BaseViewModel {
   }
 
   Future<void> onVerify(String successText, String maxClaimsReachedText,
-      {String errorText}) async {
+      {String errorText, String infoText}) async {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
@@ -76,8 +76,14 @@ class VerificationViewModel extends BaseViewModel {
         var result = await _profileService.create(profile);
 
         if (result != null) {
+          if (result.verificationStage == VerificationStage.notMatched &&
+              !inputData.hasUID) {
+            setViewState(Error(Info(infoText)));
+            return;
+          }
+
           if (result.verificationStage == VerificationStage.notMatched) {
-            setViewState(Error(MessageFailure(maxClaimsReachedText)));
+            setViewState(Error(MessageFailure(errorText)));
             return;
           }
 

@@ -45,7 +45,11 @@ class WalletSelectionScreen extends StatelessWidget {
 
         return RegisterScaffold(
           title: I18n.of(context).titleRegisterWalletTypeScreen,
-          subhead: I18n.of(context).descriptionRegisterWalletTypeScreen,
+          subhead: Text(
+            I18n.of(context).descriptionRegisterWalletTypeScreen,
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.center,
+          ),
           header: canClose
               ? CustomHeader(
                   closeIcon: Assets.close_svg,

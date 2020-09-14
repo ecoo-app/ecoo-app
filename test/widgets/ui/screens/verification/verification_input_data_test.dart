@@ -58,8 +58,9 @@ void main() {
 
     expect(data.isValid(true), isFalse);
     data.companyName.setValue('fivenine');
-    data.address.setValue(
-        Address(street: 'Dorfstrasse 27', city: 'Zürich', postalCode: '8037'));
+    data.noUidStreet.setValue('Dorfstrasse 27');
+    data.noUidCity.setValue('Zürich');
+    data.noUidPostalCode.setValue('8037');
     data.uid.hasNoUidChanged(true);
 
     expect(data.isValid(true), isFalse);
