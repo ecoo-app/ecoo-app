@@ -246,10 +246,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Verifizierung überspringen"
   String get verifyLaterButtonRegisterVerifyScreen => "Verifizierung überspringen";
-  /// "Vorname/n (wie im Pass)"
-  String get verifyFormFieldFirstName => "Vorname/n (wie im Pass)";
-  /// "Nachname/n (wie im Pass)"
-  String get verifyFormFieldLastName => "Nachname/n (wie im Pass)";
+  /// "Vorname/n"
+  String get verifyFormFieldFirstName => "Vorname/n";
+  /// "Nachname/n"
+  String get verifyFormFieldLastName => "Nachname/n";
   /// "Mobiltelefonnummer"
   String get verifyFormFieldPhoneNumber => "Mobiltelefonnummer";
   /// "Telefonnummer"
