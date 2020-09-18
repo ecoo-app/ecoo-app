@@ -96,7 +96,9 @@ class _MaterialVerificationAddressField
             city: suggestion.town));
 
         this._typeAheadController.text = widget.model.value;
-        this.isEditable = false;
+        setState(() {
+          this.isEditable = false;
+        });
       },
       validator: (value) {
         var result = widget.model.isValid;
