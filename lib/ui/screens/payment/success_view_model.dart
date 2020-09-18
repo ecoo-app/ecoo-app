@@ -2,7 +2,6 @@ import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
-import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 class DurationEnd extends ViewState {}
