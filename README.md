@@ -43,23 +43,11 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 
 ### code organisation:
 
-build after clean code principles
+most of the code is in `ui`. `screens` for ui specific logic (views and view models). `core` for shared logic (services).
 
-- device: device specific layer
-- ui: ui/presentation layer (mvvm)
-- - screens: ui screens & view models
-- - shared: shared widgets & layouts
-- - core: shared abstract classes and router
-- business: business/domain layer
-- - entities: business logic entities
-- - use_cases: uses cases (each use case handles one business logic functionality)
-- - repo_definitions: abstract repo classes
-- - core: shared stuff
-- data: data layer
-- - repo_impl: repo implementations
-- - data_source
-- - model
-- core: shared things for all layers: failure and errors (maybe rename?)
+`business` contains entities.
+
+`data` contains repositories.
 
 ### dart specials
 

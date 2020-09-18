@@ -36,7 +36,8 @@ class RequestViewModel extends BaseViewModel {
     }
   }
 
-  void onBack() {
+  void onBack() async {
+    await _walletService.updateSelected();
     _transferService.reset();
   }
 

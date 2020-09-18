@@ -24,6 +24,10 @@ class PinVerificationViewModel extends BaseViewModel {
     wallet = _walletService.getSelected();
   }
 
+  void onSkip() {
+    _router.pushAndRemoveUntil(WalletDetailRoute, '');
+  }
+
   void onVerify(String successText) async {
     setViewState(Loading());
 

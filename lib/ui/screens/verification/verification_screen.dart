@@ -67,8 +67,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
         onPressed: () async {
           await viewModel.onVerify(I18n.of(context).successTextVerification,
               I18n.of(context).verifyMaxClaimsReached,
-              errorText: I18n.of(context).verifyFormErrorVerification,
-              infoText: I18n.of(context).verifyNoUidInfo);
+              errorText: I18n.of(context).verifyFormErrorVerification);
         },
       ),
     );

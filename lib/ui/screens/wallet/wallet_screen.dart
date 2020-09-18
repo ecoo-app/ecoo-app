@@ -4,6 +4,7 @@ import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/style/theme.dart';
 import 'package:e_coupon/ui/core/widgets/ec_progress_indicator.dart';
+import 'package:e_coupon/ui/core/widgets/error_toast.dart';
 import 'package:e_coupon/ui/screens/menu/menu_screen.dart';
 import 'package:e_coupon/ui/screens/wallet/wallet_view_model.dart';
 import 'package:e_coupon/ui/core/widgets/amount_display.dart';
@@ -11,6 +12,7 @@ import 'package:e_coupon/ui/core/widgets/button/circular_icon_button.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/screens/wallet/transactions_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:injectable/injectable.dart';
 
@@ -39,7 +41,8 @@ class WalletScreen extends StatelessWidget {
                 child: CircularIconButton(
                     iconAsset: Assets.shop_send_money_svg,
                     text: I18n.of(context).walletRedeem,
-                    onPressed: vmodel.onRedeem),
+                    onPressed: () => vmodel
+                        .onRedeem(I18n.of(context).waitForVerificationError)),
               )
             ]),
         Container(
@@ -94,6 +97,14 @@ class WalletScreen extends StatelessWidget {
             if (vmodel.wallet == null || vmodel.walletState is Loading) {
               return Center(child: ECProgressIndicator());
             } else {
+              if (vmodel.viewState is Error) {
+                Error error = vmodel.viewState;
+                SchedulerBinding.instance.addPostFrameCallback((_) {
+                  ErrorToast(failure: error.failure).create(context)
+                    ..show(context);
+                  vmodel.resetViewState();
+                });
+              }
               return Column(
                 children: <Widget>[
                   Stack(

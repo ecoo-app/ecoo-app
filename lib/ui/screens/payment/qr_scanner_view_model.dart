@@ -86,7 +86,7 @@ class QRScannerViewModel extends BaseViewModel {
     setViewState(Loaded());
   }
 
-  void onSuccess() {
+  void onSuccess() async {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       _router.pushNamed(SuccessRoute,
           arguments: SuccessScreenArguments(

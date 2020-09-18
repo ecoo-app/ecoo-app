@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:e_coupon/business/core/failure.dart';
+import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:ecoupon_lib/common/verification_stage.dart';
@@ -197,7 +198,7 @@ class WalletViewModel extends BaseViewModel {
   }
 
   //
-  void onRedeem() async {
+  void onRedeem(String waitForVerificationMessage) async {
     var profileOrFailure =
         await _walletRepo.companyProfiles(walletId: _wallet.id);
 
@@ -206,7 +207,8 @@ class WalletViewModel extends BaseViewModel {
     }, (profiles) async {
       if (profiles != null && profiles.isNotEmpty) {
         // TODO is this correct? TODO update backend logic to send only the current one
-        var profile = profiles.last;
+        // last one should be the most recent...
+        CompanyProfileEntity profile = profiles.last;
 
         switch (profile.verificationStage) {
           case VerificationStage.maxClaimsReached:
@@ -220,12 +222,20 @@ class WalletViewModel extends BaseViewModel {
             break;
           // TODO verification stage : no verification possible ?
           case VerificationStage.notMatched:
-            await _router.pushNamed(VerificationRoute);
+            if (profile.uid != null && profile.uid.isNotEmpty) {
+              await _router.pushNamed(VerificationRoute);
+            } else {
+              setViewState(Error(Info(waitForVerificationMessage)));
+            }
             break;
         }
       } else {
         await _router.pushNamed(VerificationRoute);
       }
     });
+  }
+
+  void resetViewState() {
+    setViewState(Loaded());
   }
 }

@@ -27,7 +27,7 @@ class ErrorToast {
       return I18n.of(context).noTransactionFailureTitle;
     }
     if (failure is Info) {
-      return '';
+      return null;
     }
     return I18n.of(context).generalErrorTitle;
   }

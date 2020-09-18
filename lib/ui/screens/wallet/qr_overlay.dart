@@ -27,7 +27,10 @@ class WalletQROverlay extends StatelessWidget {
           ),
           CustomHeader(
             closeIcon: Assets.close_svg,
-            onClose: () => Navigator.of(context).pop(),
+            onClose: () async {
+              await _walletService.updateSelected();
+              Navigator.of(context).pop();
+            },
           ),
           Expanded(
             child: Column(

@@ -63,7 +63,7 @@ class VerificationViewModel extends BaseViewModel {
   }
 
   Future<void> onVerify(String successText, String maxClaimsReachedText,
-      {String errorText, String infoText}) async {
+      {String errorText}) async {
     if (formKey.currentState.validate()) {
       setViewState(Loading());
 
@@ -78,7 +78,7 @@ class VerificationViewModel extends BaseViewModel {
         if (result != null) {
           if (result.verificationStage == VerificationStage.notMatched &&
               !inputData.hasUID) {
-            setViewState(Error(Info(infoText)));
+            await _router.pushNamed(InfoRoute);
             return;
           }
 

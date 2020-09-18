@@ -1,6 +1,8 @@
 import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/base_view/base_view.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
+import 'package:e_coupon/ui/core/style/theme.dart';
+import 'package:e_coupon/ui/core/widgets/button/flat_secondary_button.dart';
 import 'package:e_coupon/ui/core/widgets/button/primary_button.dart';
 import 'package:e_coupon/ui/core/widgets/ec_text_form_field.dart';
 import 'package:e_coupon/ui/core/widgets/error_toast.dart';
@@ -38,7 +40,7 @@ class PinVerificationScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                      bottom: 100, left: 25, right: 25, top: 25),
+                      bottom: 160, left: 25, right: 25, top: 25),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +57,9 @@ class PinVerificationScreen extends StatelessWidget {
                         SizedBox(
                           height: 23,
                         ),
-                        Text(I18n.of(context).enterPin),
+                        vmodel.wallet.isShop
+                            ? Text(I18n.of(context).enterPinShop)
+                            : Text(I18n.of(context).enterPinPrivate),
                         SizedBox(
                           height: 62,
                         ),
@@ -71,7 +75,7 @@ class PinVerificationScreen extends StatelessWidget {
                               return null;
                             },
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -80,11 +84,25 @@ class PinVerificationScreen extends StatelessWidget {
                   margin:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                   alignment: Alignment.bottomCenter,
-                  child: PrimaryButton(
-                    isLoading: vmodel.viewState is Loading,
-                    text: I18n.of(context).verifyPinButton,
-                    onPressed: () => vmodel
-                        .onVerify(I18n.of(context).successTextVerification),
+                  child: Container(
+                    height: 130,
+                    child: Column(
+                      children: [
+                        vmodel.wallet.isShop
+                            ? FlatSecondaryButton(
+                                textColor: ColorStyles.red,
+                                onPressed: vmodel.onSkip,
+                                text: I18n.of(context).verifyPinLater,
+                              )
+                            : SizedBox.shrink(),
+                        PrimaryButton(
+                          isLoading: vmodel.viewState is Loading,
+                          text: I18n.of(context).verifyPinButton,
+                          onPressed: () => vmodel.onVerify(
+                              I18n.of(context).successTextVerification),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

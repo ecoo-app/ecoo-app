@@ -11,6 +11,7 @@ import 'package:ecoupon_lib/models/transaction.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/subjects.dart';
 
+// TODO clean up
 abstract class IWalletService {
   Future<Either<Failure, List<WalletEntity>>> get allWallets;
   WalletEntity getSelected();
@@ -25,8 +26,11 @@ abstract class IWalletService {
   Stream<WalletEntity> get walletStream;
 
   Stream<List<WalletEntity>> get walletsStream;
+
+  Future<Either<Failure, void>> updateSelected();
 }
 
+// @prodEnv
 @LazySingleton(as: IWalletService)
 class WalletService implements IWalletService {
   final IWalletRepo _walletRepo;
@@ -75,17 +79,15 @@ class WalletService implements IWalletService {
         });
       }
 
-      // TODO wallet migration...
-
       if (this._selected != null) {
-        await fetchAndUpdateSelected();
+        await fetchAndUpdateSelected(); // hä? this does not do anything
       }
     } else if (this._selected != wallet) {
       await _settingsService.setStringValue(
           Constants.lastWalletIDSettingsKey, wallet.id);
       this._selected = wallet;
       if (this._selected != null) {
-        await fetchAndUpdateSelected();
+        await fetchAndUpdateSelected(); // hä? this does not do anything
       }
     }
     _walletStreamController.add(this._selected);
@@ -113,6 +115,18 @@ class WalletService implements IWalletService {
       await setSelected(null);
     }
     return await _walletRepo.getWalletData(this._selected.id);
+  }
+
+  @override
+  Future<Either<Failure, void>> updateSelected() async {
+    var walletOrFailure = await fetchAndUpdateSelected();
+    return walletOrFailure.fold((failure) {
+      return Left(failure);
+    }, (wallet) {
+      this._selected = wallet;
+      _walletStreamController.add(this._selected);
+      return Right(null);
+    });
   }
 
   @override

@@ -107,13 +107,15 @@ class I18n implements WidgetsLocalizations {
   /// "PIN erhalten von der Stadt"
   String get pinRecieved => "PIN erhalten von der Stadt";
   /// "Geben Sie den PIN ein, den sie von Ihrer Stadt erhalten haben."
-  String get enterPin => "Geben Sie den PIN ein, den sie von Ihrer Stadt erhalten haben.";
+  String get enterPinPrivate => "Geben Sie den PIN ein, den sie von Ihrer Stadt erhalten haben.";
+  /// "Geben Sie den PIN ein, den sie von Ihrer Stadt per Postkarte erhalten."
+  String get enterPinShop => "Geben Sie den PIN ein, den sie von Ihrer Stadt per Postkarte erhalten.";
   /// "PIN"
   String get pinInputLabel => "PIN";
   /// "Verifizierung erfolgreich"
   String get successTextVerification => "Verifizierung erfolgreich";
-  /// "Überprüfen"
-  String get verifyPinButton => "Überprüfen";
+  /// "Jetzt überprüfen"
+  String get verifyPinButton => "Jetzt überprüfen";
   /// "Umsatz einlösen"
   String get titleRedeem => "Umsatz einlösen";
   /// "Umsatz einlösen"
@@ -244,10 +246,10 @@ class I18n implements WidgetsLocalizations {
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Verifizierung überspringen"
   String get verifyLaterButtonRegisterVerifyScreen => "Verifizierung überspringen";
-  /// "Vorname"
-  String get verifyFormFieldFirstName => "Vorname";
-  /// "Nachname"
-  String get verifyFormFieldLastName => "Nachname";
+  /// "Vorname/n (wie im Pass)"
+  String get verifyFormFieldFirstName => "Vorname/n (wie im Pass)";
+  /// "Nachname/n (wie im Pass)"
+  String get verifyFormFieldLastName => "Nachname/n (wie im Pass)";
   /// "Mobiltelefonnummer"
   String get verifyFormFieldPhoneNumber => "Mobiltelefonnummer";
   /// "Telefonnummer"
@@ -320,8 +322,16 @@ class I18n implements WidgetsLocalizations {
   String get noOriginSuggestions => "Bitte geben Sie einen gültigen Heimatort ein.";
   /// "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden."
   String get verifyMaxClaimsReached => "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden.";
-  /// "Ihre Angaben werden von der Stadt geprüft. Sie werden kontaktiert."
-  String get verifyNoUidInfo => "Ihre Angaben werden von der Stadt geprüft. Sie werden kontaktiert.";
+  /// "Verifizierung übermittelt"
+  String get verifyNoUidTitle => "Verifizierung übermittelt";
+  /// "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie ihren Umsatz beim Anbieter in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen."
+  String get verifyNoUidInfo => "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie ihren Umsatz beim Anbieter in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen.";
+  /// "Weiter zum Homescreen"
+  String get verifyNoUidButton => "Weiter zum Homescreen";
+  /// "Ihre Anfrage wird noch geprüft."
+  String get waitForVerificationError => "Ihre Anfrage wird noch geprüft.";
+  /// "Später überprüfen"
+  String get verifyPinLater => "Später überprüfen";
 }
 
 class _I18n_de_CH extends I18n {

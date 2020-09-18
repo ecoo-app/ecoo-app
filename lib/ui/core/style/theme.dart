@@ -110,6 +110,7 @@ class Assets {
   static const migration_fail_svg = 'assets/images/error-wallet-migration.svg';
   static const migration_waiting_svg =
       'assets/images/waiting--wallet-migration.svg';
+  static const icon_home_svg = 'assets/images/home.svg';
 
   // Rectangles
   static const rectangle_blue_svg = 'assets/images/rectangle_blue.svg';

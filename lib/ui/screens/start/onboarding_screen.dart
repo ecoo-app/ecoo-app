@@ -201,6 +201,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
+// is also used in info screen
 class OnboardingPageWidget extends StatelessWidget {
   final String title;
   final String headline;

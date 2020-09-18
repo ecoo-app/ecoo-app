@@ -57,6 +57,7 @@ import 'ui/screens/start/onboarding_screen.dart';
 import 'ui/screens/start/onboarding_screen_view_model.dart';
 import 'ui/screens/start/splash_screen.dart';
 import 'ui/screens/start/splash_screen_view_model.dart';
+import 'ui/screens/verification/info_screen.dart';
 import 'ui/screens/verification/pin_verification_screen.dart';
 import 'ui/screens/verification/pin_verification_view_model.dart';
 import 'ui/screens/verification/verification_screen.dart';
@@ -82,6 +83,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<IWalletSource>(() => WalletSourceProd(),
       registerFor: {_prod});
   gh.lazySingleton<IWalletSource>(() => WalletSourceDev(), registerFor: {_dev});
+  gh.factory<InfoScreen>(() => InfoScreen(g<IRouter>()));
   gh.factory<LocalStorage>(() => thirdPartyLibraryModule.localStorage);
   gh.lazySingleton<MockLoginService>(
       () => MockLoginService(g<IWalletSource>()));
@@ -92,7 +94,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<RequestScreen>(() => RequestScreen());
   final sharedPreferences = await thirdPartyLibraryModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
-  gh.factory<SuccessViewModel>(() => SuccessViewModel(g<IRouter>()));
   gh.factory<VerificationScreen>(() => VerificationScreen());
   gh.factory<WalletScreen>(() => WalletScreen());
   gh.factory<WalletSelectionScreen>(() => WalletSelectionScreen());
@@ -147,6 +148,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IWalletService>(),
         g<IRouter>(),
       ));
+  gh.factory<SuccessViewModel>(
+      () => SuccessViewModel(g<IRouter>(), g<IWalletService>()));
   gh.factory<WalletQROverlay>(() => WalletQROverlay(g<IWalletService>()));
   gh.factory<WalletSelectionScreenViewModel>(
       () => WalletSelectionScreenViewModel(

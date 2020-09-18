@@ -1,6 +1,7 @@
 import 'package:e_coupon/injection.dart';
 import 'package:e_coupon/ui/screens/redeem/redeem_screen.dart';
 import 'package:e_coupon/ui/screens/start/migration_check_screen.dart';
+import 'package:e_coupon/ui/screens/verification/info_screen.dart';
 import 'package:e_coupon/ui/screens/verification/pin_verification_screen.dart';
 import 'package:e_coupon/ui/screens/payment/payment_screen.dart';
 import 'package:e_coupon/ui/screens/payment/qr_scanner_screen.dart';
@@ -30,6 +31,7 @@ const WalletDetailRoute = '/wallet';
 const TransactionOverviewRoute = 'transactionOverview';
 const PaymentRoute = 'payment';
 const SuccessRoute = 'success';
+const InfoRoute = '/info';
 const RequestPaymentRoute = 'requestPayment';
 const RequestQRBillRoute = 'requestQRBill';
 const QRScanRoute = '/scan';
@@ -100,6 +102,8 @@ class Router implements IRouter {
         return _createRoute(settings, getIt<RedeemScreen>(), false);
       case MigrationRoute:
         return _createRoute(settings, getIt<MigrationCheckScreen>(), false);
+      case InfoRoute:
+        return _createRoute(settings, getIt<InfoScreen>(), true);
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
