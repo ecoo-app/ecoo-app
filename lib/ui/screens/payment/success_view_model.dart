@@ -21,7 +21,8 @@ class SuccessViewModel extends BaseViewModel {
   }
 
   Future<void> navigateNext(String route) {
-    _router.popUntil(ModalRoute.withName(route));
+    // can only be used if the route already exists... how to test? _router.popUntil(ModalRoute.withName(route));
+    _router.pushAndRemoveUntil(route, '');
     return Future.value();
   }
 }
