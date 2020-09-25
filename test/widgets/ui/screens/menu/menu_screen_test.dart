@@ -47,16 +47,19 @@ void main() {
             'wetzicoin', 'wetzicoin', 'CHF', 0, 2, null, null, true, null, 10),
         lib_wallet.WalletCategory.consumer,
         1000,
-        lib_wallet.WalletState.verified));
+        lib_wallet.WalletState.verified,
+        1));
     when(_repositoryMock.getWallets(any))
         .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
     final testWallet = WalletEntity(Wallet(
-        PrivateWalletID,
-        PrivatePublicKey,
-        MockWetzikonCurrency(),
-        WalletCategory.consumer,
-        105,
-        WalletState.verified));
+      PrivateWalletID,
+      PrivatePublicKey,
+      MockWetzikonCurrency(),
+      WalletCategory.consumer,
+      105,
+      WalletState.verified,
+      1,
+    ));
     final stream = StreamController<List<WalletEntity>>(sync: true);
     stream.add([testWallet]);
 

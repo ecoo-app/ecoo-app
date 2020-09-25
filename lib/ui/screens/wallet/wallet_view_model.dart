@@ -51,7 +51,9 @@ class WalletViewModel extends BaseViewModel {
           Currency('', '', '', 0, 0, null, null, false, null, null),
           null,
           0,
-          null))
+          null,
+          0,
+        ))
       : this._wallet;
 
   Future<bool> get isConnected => _networkInfo.isConnected;

@@ -55,10 +55,7 @@ class QRScannerViewModel extends BaseViewModel {
 
     if (decodedValue.containsKey(Constants.qrDataPublicKey)) {
       await onPaperTransfer(
-        PaperWallet(
-            decodedValue[Constants.qrDataDestinationId],
-            decodedValue[Constants.qrDataNonce],
-            decodedValue[Constants.qrDataPublicKey]),
+        PaperWallet.fromJson(decodedValue),
         _transferService.transfer.amount,
       );
     } else {
@@ -76,14 +73,13 @@ class QRScannerViewModel extends BaseViewModel {
   }
 
   void onPaperTransfer(PaperWallet source, int amount) async {
-    setViewState(Loading());
     var transactionOrFailure = await _walletRepo.handlePaperTransfer(
         source, _walletService.getSelected(), amount);
 
     transactionOrFailure.fold((failure) {
+      controller.resumeCamera();
       setViewState(Error(failure));
     }, (success) => onSuccess());
-    setViewState(Loaded());
   }
 
   void onSuccess() async {
