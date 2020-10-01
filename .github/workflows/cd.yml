@@ -49,27 +49,27 @@ jobs:
           make generate_code
 
       # Build Android App
-      # - uses: actions/setup-ruby@v1
-      #   with:
-      #     ruby-version: "2.7"
-      # - name: Build Android
-      #   run: |
-      #     echo "$KEYSTORE" | base64 --decode > ./android/assets/ecoupon.keystore.jks
-      #     dart tool/generate_config.dart
-      #     flutter build appbundle -t ./lib/main_prod.dart --release --build-name ${{ env.VersionMajorMinorPatchBuild }} --build-number ${{ env.VersionAndroidFullNumeric }}
-      #     cd android
-      #     gem install bundler
-      #     bundle install
-      #     bundle exec fastlane deploy
-      #   env:
-      #     KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
-      #     ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-      #     ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-      #     ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-      #     ANDROID_PLAY_API_SA: ${{ secrets.ANDROID_PLAY_API_SA }}
-      #     APP_PAPERWALLET_DECRYPTION_KEY: ${{ secrets.APP_PAPERWALLET_DECRYPTION_KEY }}
-      #     LANG: en_US.UTF-8
-      #     LC_ALL: en_US.UTF-8
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+      - name: Build Android
+        run: |
+          echo "$KEYSTORE" | base64 --decode > ./android/assets/ecoupon.keystore.jks
+          dart tool/generate_config.dart
+          flutter build appbundle -t ./lib/main_prod.dart --release --build-name ${{ env.VersionMajorMinorPatchBuild }} --build-number ${{ env.VersionAndroidFullNumeric }}
+          cd android
+          gem install bundler
+          bundle install
+          bundle exec fastlane deploy
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_PLAY_API_SA: ${{ secrets.ANDROID_PLAY_API_SA }}
+          APP_PAPERWALLET_DECRYPTION_KEY: ${{ secrets.APP_PAPERWALLET_DECRYPTION_KEY }}
+          LANG: en_US.UTF-8
+          LC_ALL: en_US.UTF-8
 
   build-ios:
     runs-on: macos-latest

@@ -22,6 +22,10 @@ platform :android do
     upload_to_play_store(
       json_key_data: ENV["ANDROID_PLAY_API_SA"],
       track: 'internal',
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_changelogs: true,
       aab: '../build/app/outputs/bundle/release/app-release.aab',      
     )
   end
