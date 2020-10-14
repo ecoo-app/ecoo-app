@@ -1,4 +1,6 @@
-# e_coupon
+# ecoo
+
+https://www.ecoo.ch/de/
 
 ## Setup
 
@@ -37,34 +39,15 @@ see section **Run the app** for help: https://flutter.dev/docs/get-started/test-
 - add the translation to the translation files (i18n > [lang].json)
 - update the generated translations by opening the VSC command palette and use Flutter I18n Json: Update
 
-### more
-
-- gradient widgets https://github.com/bluemix/gradient-widgets
-
 ### code organisation:
 
-most of the code is in `ui`. `screens` for ui specific logic (views and view models). `core` for shared logic (services).
+- most of the code is in `ui`. `screens` for ui specific logic (views and view models). `core` for shared logic (services).
 
-`business` contains entities.
+- `business` contains entities.
 
-`data` contains repositories.
-
-### dart specials
-
-- `new` was made optional beginning with Dart 2.0. We will therfore omit `new`
-- Unlike Java, Dart doesn’t have the keywords `public`, `protected`, and `private`. If an identifier starts with an underscore (\_), it’s private to its library.
+- `data` contains repositories.
 
 ### Branching Strategy
 
 This repository uses the GitLab Flow branching strategy.
 All branches should be created from master. Create feature or release branches.
-
-<br/>
-<br/>
-
-## more stuff / interesting stuff
-
-automagically i18n https://github.com/esskar/vscode-flutter-i18n-json
-
-mvvm packages https://medium.com/free-code-camp/app-architecture-mvvm-in-flutter-using-dart-streams-26f6bd6ae4b6
-https://pub.dev/packages/fmvvm https://pub.dev/packages/mvvm
