@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/entities/wallet.dart';
+import 'package:e_coupon/core/logging/no_logger.dart';
 import 'package:e_coupon/data/e_coupon_library/mock_data.dart';
 import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
@@ -68,7 +69,7 @@ void main() {
     when(_walletServiceMock.walletsStream)
         .thenAnswer((realInvocation) => stream.stream);
 
-    var viewModel = MenuScreenViewModel(
+    var viewModel = MenuScreenViewModel(NoLogger(),
         _appService, _routerMock, _walletServiceMock, _networkInfoMock);
 
     _view = _testApp.createTestApp(MenuScreen(viewModel));

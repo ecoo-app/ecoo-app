@@ -148,5 +148,6 @@
   "verifyNoUidInfo": "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie ihren Umsatz beim Anbieter in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen.",
   "verifyNoUidButton": "Weiter zum Homescreen",
   "waitForVerificationError": "Ihre Anfrage wird noch geprüft.",
-  "verifyPinLater": "Später überprüfen"
+  "verifyPinLater": "Später überprüfen",
+  "testCrashButton": "Test Crash"
 }

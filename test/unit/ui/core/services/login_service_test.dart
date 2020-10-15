@@ -1,3 +1,4 @@
+import 'package:e_coupon/core/logging/no_logger.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 import 'package:e_coupon/ui/core/services/login_service.dart';
 import 'package:e_coupon/ui/core/services/notification_service.dart';
@@ -26,8 +27,13 @@ void main() {
     _notificationServiceMock = NotificationServiceMock();
     _recoveryServiceMock = RecoveryServiceMock();
 
-    _loginService = LoginService(_walletSourceMock, _settingsServiceMock,
-        _profileServiceMock, _notificationServiceMock, _recoveryServiceMock);
+    _loginService = LoginService(
+        NoLogger(),
+        _walletSourceMock,
+        _settingsServiceMock,
+        _profileServiceMock,
+        _notificationServiceMock,
+        _recoveryServiceMock);
   });
 
   test('login returns false if not token was saved previously', () async {

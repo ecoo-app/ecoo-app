@@ -13,6 +13,9 @@ import 'package:localstorage/localstorage.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/logging/debug_logger.dart';
+import 'core/logging/logger.dart';
+import 'core/logging/prod_logger.dart';
 import 'data/e_coupon_library/lib_wallet_source.dart';
 import 'data/local/local_wallet_source.dart';
 import 'data/local/migration_check_source.dart';
@@ -77,6 +80,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final thirdPartyLibraryModule = _$ThirdPartyLibraryModule();
   gh.factory<FlutterSecureStorage>(() => thirdPartyLibraryModule.securePrefs);
+  gh.factory<ILogger>(() => ProductionLogger(), registerFor: {_prod});
+  gh.factory<ILogger>(() => DebugLogger(), registerFor: {_dev});
   gh.lazySingleton<INetworkInfo>(() => NetworkInfo());
   gh.lazySingleton<IOriginService>(() => OriginService(g<INetworkInfo>()));
   gh.lazySingleton<ITransferService>(() => TransferService());
@@ -98,7 +103,10 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<WalletScreen>(() => WalletScreen());
   gh.factory<WalletSelectionScreen>(() => WalletSelectionScreen());
   gh.factory<ECouponApp>(() => ECouponApp(g<IRouter>()));
-  gh.factory<IAppService>(() => AppService(g<PackageInfo>()));
+  gh.factory<IAppService>(() => ProdAppSerivce(g<PackageInfo>()),
+      registerFor: {_prod});
+  gh.factory<IAppService>(() => DevAppService(g<PackageInfo>()),
+      registerFor: {_dev});
   gh.lazySingleton<ILocalWalletSource>(
       () => LocalWalletSource(g<LocalStorage>()));
   gh.lazySingleton<IMigrationCheckSource>(
@@ -117,6 +125,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<IWalletService>(
       () => WalletService(g<IWalletRepo>(), g<ISettingsService>()));
   gh.factory<MenuScreenViewModel>(() => MenuScreenViewModel(
+        g<ILogger>(),
         g<IAppService>(),
         g<IRouter>(),
         g<IWalletService>(),
@@ -198,6 +207,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<IOriginService>(),
       ));
   gh.factory<ILoginService>(() => LoginService(
+        g<ILogger>(),
         g<IWalletSource>(),
         g<ISettingsService>(),
         g<IProfileService>(),

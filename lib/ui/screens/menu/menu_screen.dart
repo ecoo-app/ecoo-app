@@ -108,6 +108,16 @@ class MenuScreen extends StatelessWidget {
                                   },
                                 );
                               }
+
+                              if (item is TestCrashMenuItem) {
+                                return MenuItemWidget(
+                                  text: I18n.of(context).testCrashButton,
+                                  onTap: () async {
+                                    await model.testException();
+                                  },
+                                );
+                              }
+
                               // Empty List
                               return Container();
                             },

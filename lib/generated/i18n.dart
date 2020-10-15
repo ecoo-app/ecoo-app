@@ -332,6 +332,8 @@ class I18n implements WidgetsLocalizations {
   String get waitForVerificationError => "Ihre Anfrage wird noch geprüft.";
   /// "Später überprüfen"
   String get verifyPinLater => "Später überprüfen";
+  /// "Test Crash"
+  String get testCrashButton => "Test Crash";
 }
 
 class _I18n_de_CH extends I18n {

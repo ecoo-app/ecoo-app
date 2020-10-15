@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:e_coupon/business/core/failure.dart';
+import 'package:e_coupon/core/logging/logger.dart';
 import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 import 'package:e_coupon/ui/core/constants.dart';
 import 'package:e_coupon/ui/core/services/notification_service.dart';
@@ -35,14 +36,15 @@ enum LoginResult {
 
 @Injectable(as: ILoginService)
 class LoginService implements ILoginService {
+  final ILogger _logger;
   final IWalletSource _walletSource;
   final ISettingsService _settingsService;
   final IProfileService _profileService;
   final INotificationService _notificationService;
   final IRecoveryService _recoveryService;
 
-  LoginService(this._walletSource, this._settingsService, this._profileService,
-      this._notificationService, this._recoveryService);
+  LoginService(this._logger, this._walletSource, this._settingsService,
+      this._profileService, this._notificationService, this._recoveryService);
 
   lib.WalletService get walletSource => _walletSource.walletService;
 
@@ -51,7 +53,7 @@ class LoginService implements ILoginService {
     try {
       var token = await _settingsService.identityToken();
       if (token == null || token == '') {
-        print('No existing Token found');
+        _logger.d('LoginService', 'No existing Token found');
         return LoginResult.Onboarding;
       } else {
         var newToken = SessionToken.fromJson(jsonDecode(token));
@@ -96,8 +98,8 @@ class LoginService implements ILoginService {
           break;
       }
       return result ? LoginResult.Home : LoginResult.Onboarding;
-    } catch (e) {
-      print('Unable to sign-in' + e.toString());
+    } catch (ex, stackTrace) {
+      _logger.error('LoginService', ex, stackTrace);
       return LoginResult.Onboarding;
     }
   }
@@ -121,13 +123,14 @@ class LoginService implements ILoginService {
 
       return false;
     } on SignInWithAppleException catch (e) {
-      print('An SignInWithAppleException occured: ${e}');
+      _logger.e('LoginService', 'SignInWithAppleException occured, $e');
       return false;
-    } on PlatformException catch (e) {
-      print('An PlatformException occured: ${e}');
+    } on PlatformException catch (e, stackTrace) {
+      _logger.e('LoginService', 'PlatformException occured, $e');
+      _logger.error('LoginService', e, stackTrace);
       return false;
-    } catch (e) {
-      print('An Exception occured: ${e}');
+    } catch (ex, stackTrace) {
+      _logger.error('LoginService', ex, stackTrace);
       return false;
     }
   }
