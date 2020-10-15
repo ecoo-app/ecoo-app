@@ -6,31 +6,14 @@ import 'package:e_coupon/ui/screens/start/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-class VerificationInfoScreenArguments {
-  final String headline;
-  final String description;
-
-  VerificationInfoScreenArguments(this.headline, this.description);
-}
-
 @injectable
-class VerificationInfoScreen extends StatelessWidget {
+class NoServiceInfoScreen extends StatelessWidget {
   final IRouter _router;
 
-  VerificationInfoScreen(this._router);
+  NoServiceInfoScreen(this._router);
 
   @override
   Widget build(BuildContext context) {
-    VerificationInfoScreenArguments arguments = ModalRoute.of(context)
-        .settings
-        .arguments as VerificationInfoScreenArguments;
-
-    assert(
-        arguments != null &&
-            arguments.description != null &&
-            arguments.headline != null,
-        'Set InfoScreenArguments');
-
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -42,10 +25,10 @@ class VerificationInfoScreen extends StatelessWidget {
             children: <Widget>[
               SingleChildScrollView(
                 child: OnboardingPageWidget(
-                  title: I18n.of(context).verifyNoUidTitle,
-                  headline: arguments.headline,
-                  description: arguments.description,
-                  headerIconAsset: Assets.shipping_fast_svg,
+                  title: '',
+                  headline: I18n.of(context).noServiceScreenTitle,
+                  description: I18n.of(context).noServiceScreenDescription,
+                  headerIconAsset: Assets.icon_arrow_right_svg,
                   headerIconBackgroundAsset:
                       Assets.onboarding_background_graphic_shop_svg,
                   bottomInset: 50,
@@ -60,14 +43,12 @@ class VerificationInfoScreen extends StatelessWidget {
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(minWidth: double.infinity),
                   child: OutlinedSecondaryButton(
-                    svgAsset: Assets.icon_home_svg,
-                    text: I18n.of(context).verifyNoUidButton,
+                    svgAsset: Assets.icon_leaf_svg,
+                    text: I18n.of(context).noServiceScreenButton,
                     textColor: ColorStyles.black,
                     outlineColor: ColorStyles.bg_gray,
                     onPressed: () async {
-                      // TODO how to check if popUntil(WalletDetailRoute) is possible and otherwise use pushAndRemoveUntil:
-                      // https://github.com/flutter/flutter/issues/48338
-                      await _router.pushAndRemoveUntil(WalletDetailRoute, '');
+                      await _router.pushAndRemoveUntil(SplashRoute, '');
                     },
                   ),
                 ),

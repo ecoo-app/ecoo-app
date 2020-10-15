@@ -44,6 +44,14 @@ class I18n implements WidgetsLocalizations {
   String get privateWalletRecieve => "Anfordern";
   /// "Guthaben aufladen"
   String get privateWalletClaim => "Guthaben aufladen";
+  /// "Verifizieren & Guthaben aufladen"
+  String get privateWalletVerify => "Verifizieren & Guthaben aufladen";
+  /// "Angaben werden überprüft..."
+  String get walletCityAnswerPending => "Angaben werden überprüft...";
+  /// "PIN eingeben"
+  String get walletEnterPin => "PIN eingeben";
+  /// "Verifizieren"
+  String get shopWalletVerify => "Verifizieren";
   /// "Einlösen"
   String get walletRedeem => "Einlösen";
   /// "Kassieren"
@@ -62,8 +70,10 @@ class I18n implements WidgetsLocalizations {
   String get emptyTransactions => "Keine Bewegungen";
   /// "Wallet hinzufügen"
   String get addWallet => "Wallet hinzufügen";
-  /// "Dieses Feld muss ausgefüllt werden."
-  String get formErrorRequired => "Dieses Feld muss ausgefüllt werden.";
+  /// "Dieses Feld muss ausgefüllt sein."
+  String get formErrorRequired => "Dieses Feld muss ausgefüllt sein.";
+  /// "Ein Vorschlag muss ausgewählt sein."
+  String get formErrorAddressSelectRequired => "Ein Vorschlag muss ausgewählt sein.";
   /// "Verifizieren"
   String get titleClaimVerification => "Verifizieren";
   /// "Jetzt verifizieren"
@@ -92,8 +102,8 @@ class I18n implements WidgetsLocalizations {
   String get verificationFilledTruthfullyPart2 => " AGBs ";
   /// "einverstanden bin."
   String get verificationFilledTruthfullyPart3 => "einverstanden bin.";
-  /// "Ich bestätige dass ich das Recht auf dieses Gewerbe Wallet habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
-  String get verificationFilledTruthfullyShopPart1 => "Ich bestätige dass ich das Recht auf dieses Gewerbe Wallet habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
+  /// "Ich bestätige, dass ich Anrecht auf dieses Gewerbe-Wallet habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den"
+  String get verificationFilledTruthfullyShopPart1 => "Ich bestätige, dass ich Anrecht auf dieses Gewerbe-Wallet habe, dass alle Angaben wahrheitsgetreu ausgefüllt sind, und dass ich mit der Nutzung meiner Daten nach den";
   /// " AGBs "
   String get verificationFilledTruthfullyShopPart2 => " AGBs ";
   /// "einverstanden bin."
@@ -104,12 +114,12 @@ class I18n implements WidgetsLocalizations {
   String get verificationSend => "Anfrage gesendet.";
   /// "PIN eingeben"
   String get pinVerificationTitle => "PIN eingeben";
-  /// "PIN erhalten von der Stadt"
-  String get pinRecieved => "PIN erhalten von der Stadt";
-  /// "Geben Sie den PIN ein, den sie von Ihrer Stadt erhalten haben."
-  String get enterPinPrivate => "Geben Sie den PIN ein, den sie von Ihrer Stadt erhalten haben.";
-  /// "Geben Sie den PIN ein, den sie von Ihrer Stadt per Postkarte erhalten."
-  String get enterPinShop => "Geben Sie den PIN ein, den sie von Ihrer Stadt per Postkarte erhalten.";
+  /// "PIN erhalten von Ihrer Stadt"
+  String get pinRecieved => "PIN erhalten von Ihrer Stadt";
+  /// "Geben Sie den PIN ein, den Sie von Ihrer Stadt erhalten haben."
+  String get enterPinPrivate => "Geben Sie den PIN ein, den Sie von Ihrer Stadt erhalten haben.";
+  /// "Geben Sie den PIN ein, den Sie von Ihrer Stadt per Postkarte erhalten haben."
+  String get enterPinShop => "Geben Sie den PIN ein, den Sie von Ihrer Stadt per Postkarte erhalten haben.";
   /// "PIN"
   String get pinInputLabel => "PIN";
   /// "Verifizierung erfolgreich"
@@ -146,8 +156,8 @@ class I18n implements WidgetsLocalizations {
   String get validationAmountInput => "Uups, der Betrag ist vergessen gegangen.";
   /// "Uups, der Empfänger ist vergessen gegangen."
   String get validationRecieverInput => "Uups, der Empfänger ist vergessen gegangen.";
-  /// "QR Rechnung"
-  String get titleRequestScreen => "QR Rechnung";
+  /// "QR-Rechnung"
+  String get titleRequestScreen => "QR-Rechnung";
   /// "Wallet ${walletId}"
   String walletRequestScreen(String walletId) => "Wallet ${walletId}";
   /// "CHF ${amount}"
@@ -156,8 +166,8 @@ class I18n implements WidgetsLocalizations {
   String get titleSplashScreen => "ecoo";
   /// "Registrieren"
   String get titleRegisterScreen => "Registrieren";
-  /// "Um das ecoo-App zu benutzen, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf Ihre Daten im App selbst."
-  String get descriptionRegisterScreen => "Um das ecoo-App zu benutzen, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple hat Zugriff auf Ihre Daten im App selbst.";
+  /// "Um die ecoo-App nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple haben Zugriff auf Ihre Daten in der App selbst."
+  String get descriptionRegisterScreen => "Um die ecoo-App nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. Dies dient zur Anmeldung und weder Google noch Apple haben Zugriff auf Ihre Daten in der App selbst.";
   /// "Mit Apple fortfahren"
   String get signinwithappleRegisterScreen => "Mit Apple fortfahren";
   /// "Mit Google fortfahren"
@@ -176,8 +186,8 @@ class I18n implements WidgetsLocalizations {
   String get appversionMenuScreen => "App Version:";
   /// "Wallet"
   String get walletMenuScreen => "Wallet";
-  /// "QR Code scannen"
-  String get titleScanScreen => "QR Code scannen";
+  /// "QR-Code scannen"
+  String get titleScanScreen => "QR-Code scannen";
   /// "Selber eintippen"
   String get cancelScan => "Selber eintippen";
   /// "Bezahlung erfolgreich"
@@ -192,34 +202,32 @@ class I18n implements WidgetsLocalizations {
   String get generalErrorText => "Es ist ein unbekannter Fehler aufgetreten.";
   /// "Zahlung fehlgeschlagen"
   String get paymentFailed => "Zahlung fehlgeschlagen";
-  /// "Überprüfe deine Internetverbindung und probiere es noch einmal oder lasse dein gegenüber den QR-Code scannen."
-  String get paymentFailedInfo => "Überprüfe deine Internetverbindung und probiere es noch einmal oder lasse dein gegenüber den QR-Code scannen.";
   /// "Ich zahle den offenen Betrag an:"
   String get iPay => "Ich zahle den offenen Betrag an:";
   /// "ecoo"
   String get page1TitleOnboardingScreen => "ecoo";
   /// "Registrierung und Verifizierung"
   String get page1HeadlineOnboardingScreen => "Registrierung und Verifizierung";
-  /// "Um ecoo nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifizieren Sie sich mit den geforderten Angaben bei Ihrer Stadt. Danach erhalten Sie automatisch das Guthaben auf Ihr Wallet."
-  String get page1DescriptionOnboardingScreen => "Um ecoo nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifizieren Sie sich mit den geforderten Angaben bei Ihrer Stadt. Danach erhalten Sie automatisch das Guthaben auf Ihr Wallet.";
+  /// "Um die ecoo-App nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifizieren Sie sich mit den geforderten Angaben bei Ihrer Stadt. Danach erhalten Sie automatisch das Guthaben auf Ihr Wallet."
+  String get page1DescriptionOnboardingScreen => "Um die ecoo-App nutzen zu können, müssen Sie sich zuerst mit Ihrer Apple ID oder Google ID registrieren. \n\nIm zweiten Schritt verifizieren Sie sich mit den geforderten Angaben bei Ihrer Stadt. Danach erhalten Sie automatisch das Guthaben auf Ihr Wallet.";
   /// "Privat Wallet"
   String get page2TitleOnboardingScreen => "Privat Wallet";
   /// "Zahlen, Senden & Geld anfordern"
   String get page2HeadlineOnboardingScreen => "Zahlen, Senden & Geld anfordern";
-  /// "Als Privatperson haben Sie die Möglichkeit, in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo-Benutzer*innen Guthaben senden oder Guthaben von anderen anfordern.\n\nEs besteht die Möglichkeit, alle erhaltenen Gutscheine Ihrer Familie in einem Wallet zu speichern."
-  String get page2DescriptionOnboardingScreen => "Als Privatperson haben Sie die Möglichkeit, in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo-Benutzer*innen Guthaben senden oder Guthaben von anderen anfordern.\n\nEs besteht die Möglichkeit, alle erhaltenen Gutscheine Ihrer Familie in einem Wallet zu speichern.";
+  /// "Als Privatperson haben Sie die Möglichkeit, in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo-Benutzerinnen und -Benutzern Guthaben senden oder Guthaben von anderen anfordern.\n\nEs besteht die Möglichkeit, alle erhaltenen Gutscheine Ihrer Familie in einem Wallet zu speichern."
+  String get page2DescriptionOnboardingScreen => "Als Privatperson haben Sie die Möglichkeit, in den verifizierten Geschäften mit ecoo zu bezahlen.\n\nSie können anderen ecoo-Benutzerinnen und -Benutzern Guthaben senden oder Guthaben von anderen anfordern.\n\nEs besteht die Möglichkeit, alle erhaltenen Gutscheine Ihrer Familie in einem Wallet zu speichern.";
   /// "Shop Wallet"
   String get page3TitleOnboardingScreen => "Shop Wallet";
   /// "Einkassieren & Senden"
   String get page3HeadlineOnboardingScreen => "Einkassieren & Senden";
-  /// "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit, Einkäufe in Ihrem Geschäft über die ecoo-App zu kassieren.\n\nSie haben die Möglichkeit, Beträge anderen ecoo-Benutzern*innen zu senden."
-  String get page3DescriptionOnboardingScreen => "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit, Einkäufe in Ihrem Geschäft über die ecoo-App zu kassieren.\n\nSie haben die Möglichkeit, Beträge anderen ecoo-Benutzern*innen zu senden.";
+  /// "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit, Einkäufe in Ihrem Geschäft über die ecoo-App zu kassieren.\n\nSie haben die Möglichkeit, Beträge anderen ecoo-Benutzerinnen und -Benutzern zu senden."
+  String get page3DescriptionOnboardingScreen => "Mit einem Shop Wallet sind Sie in wenigen Schritten bereit, Einkäufe in Ihrem Geschäft über die ecoo-App zu kassieren.\n\nSie haben die Möglichkeit, Beträge anderen ecoo-Benutzerinnen und -Benutzern zu senden.";
   /// "Shop Wallet"
   String get page4TitleOnboardingScreen => "Shop Wallet";
   /// "Umsatz einlösen"
   String get page4HeadlineOnboardingScreen => "Umsatz einlösen";
-  /// "Nach der Verifizierung bei Ihrer Stadt, können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegeben Konto gutgeschrieben."
-  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei Ihrer Stadt, können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegeben Konto gutgeschrieben.";
+  /// "Nach der Verifizierung bei Ihrer Stadt, können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegebenen Konto gutgeschrieben."
+  String get page4DescriptionOnboardingScreen => "Nach der Verifizierung bei Ihrer Stadt, können Sie mit wenigen Klicks den erzielten Umsatz bei der Stadt einlösen.\n\nNach der Überpüfung wird Ihnen der Betrag auf dem angegebenen Konto gutgeschrieben.";
   /// "Einführung überspringen"
   String get buttonTextSkipOnboardingScreen => "Einführung überspringen";
   /// "Jetzt registrieren"
@@ -236,20 +244,20 @@ class I18n implements WidgetsLocalizations {
   String get titleRegisterVerifyScreenPrivate => "Guthaben aufladen";
   /// "Eintauschen"
   String get titleRegisterVerifyScreenShop => "Eintauschen";
-  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.\n\nWeitere Fragen zur WetziKoin Kampagne\n"
-  String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.\n\nWeitere Fragen zur WetziKoin Kampagne\n";
+  /// "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.\n\nWeitere Fragen zur eCoupon-Kampagne\n"
+  String get descriptionRegisterVerifyScreenPrivate => "Um Guthaben auf das Wallet zu laden, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per SMS zugeschickt, mit dem Sie diesen Prozess abschliessen können.\n\nWeitere Fragen zur eCoupon-Kampagne\n";
   /// "https://www.wetzikon.ch/ecoupon"
   String get descriptionRegisterVerifyScreenLink => "https://www.wetzikon.ch/ecoupon";
-  /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.\n\nWeitere Fragen zur WetziKoin Kampagne\n"
-  String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen via App annehmen.\n\nWeitere Fragen zur WetziKoin Kampagne\n";
+  /// "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen über die App annehmen.\n\nWeitere Fragen zur eCoupon-Kampagne\n"
+  String get descriptionRegisterVerifyScreenShop => "Um Ihr Guthaben bei der Stadt gegen Schweizer Franken umzutauschen, müssen Sie sich verifizieren lassen.\n\nNach automatischer Überprüfung Ihrer Daten, wird Ihnen ein PIN per Post zu geschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen über die App annehmen.\n\nWeitere Fragen zur eCoupon-Kampagne\n";
   /// "Jetzt verifizieren"
   String get verifyButtonRegisterVerifyScreen => "Jetzt verifizieren";
   /// "Verifizierung überspringen"
   String get verifyLaterButtonRegisterVerifyScreen => "Verifizierung überspringen";
   /// "Vorname/n"
   String get verifyFormFieldFirstName => "Vorname/n";
-  /// "Nachname/n"
-  String get verifyFormFieldLastName => "Nachname/n";
+  /// "Nachname/n (analog Pass/ID)"
+  String get verifyFormFieldLastName => "Nachname/n (analog Pass/ID)";
   /// "Mobiltelefonnummer"
   String get verifyFormFieldPhoneNumber => "Mobiltelefonnummer";
   /// "Telefonnummer"
@@ -272,14 +280,34 @@ class I18n implements WidgetsLocalizations {
   String get verifyFormFieldNationality => "Nationalität";
   /// "Firmenname"
   String get verifyFormFieldCompany => "Firmenname";
+  /// "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird die Angaben überprüfen und sich bei Fragen bei Ihnen melden. Andernfalls erhalten Sie eine SMS mit dem Zugangscode, den Sie eingeben müssen, um die Verifizierung abzuschliessen"
+  String get verifyMaxClaimsReached => "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird die Angaben überprüfen und sich bei Fragen bei Ihnen melden. Andernfalls erhalten Sie eine SMS mit dem Zugangscode, den Sie eingeben müssen, um die Verifizierung abzuschliessen";
+  /// "Verifizierung übermittelt"
+  String get verifyNoUidTitle => "Verifizierung übermittelt";
+  /// "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie Ihren Umsatz bei der Stadt in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen."
+  String get verifyNoUidInfo => "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie Ihren Umsatz bei der Stadt in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen.";
+  /// "Weiter zum Homescreen"
+  String get verifyNoUidButton => "Weiter zum Homescreen";
+  /// "Ihre Anfrage wird noch geprüft."
+  String get waitForVerificationError => "Ihre Anfrage wird noch geprüft.";
+  /// "Später überprüfen"
+  String get verifyPinLater => "Später überprüfen";
+  /// "Angaben werden geprüft"
+  String get verifyNoUidSubTitle => "Angaben werden geprüft";
+  /// "Ihre Angaben konnten nicht automatisch verifiziert werden. Die Stadt wird die Angaben überprüfen und sich bei Fragen bei Ihnen melden. Andernfalls erhalten Sie eine SMS mit dem Zugangscode, den Sie eingeben müssen, um die Verifizierung abzuschliessen."
+  String get verifyFormErrorVerification => "Ihre Angaben konnten nicht automatisch verifiziert werden. Die Stadt wird die Angaben überprüfen und sich bei Fragen bei Ihnen melden. Andernfalls erhalten Sie eine SMS mit dem Zugangscode, den Sie eingeben müssen, um die Verifizierung abzuschliessen.";
+  /// "Heimatort API: Ihr Heimatort konnte nicht abgerufen werden. Bitte versuchen Sie es später nochmals."
+  String get verifyHeimatortFailure => "Heimatort API: Ihr Heimatort konnte nicht abgerufen werden. Bitte versuchen Sie es später nochmals.";
+  /// "Ihre Angaben wurden geprüft"
+  String get verifyShopSuccessHeadline => "Ihre Angaben wurden geprüft";
+  /// "Ihnen wird ein PIN per Post zugeschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen über die App annehmen."
+  String get verifyShopSuccessDescription => "Ihnen wird ein PIN per Post zugeschickt. Mit diesem PIN schliessen die den Verifizierungsprozess ab. In der Zwischenzeit können Sie trotzdem schon Zahlungen über die App annehmen.";
   /// "Transaktion erfolgreich"
   String get transactionSuccessful => "Transaktion erfolgreich";
   /// "Paper Wallet scannen"
   String get scanPaperWalletButton => "Paper Wallet scannen";
-  /// "Ihre Angaben konnten nicht verifizert werden. Die Stadt wird sich in Kürze bei Ihnen melden und die nächsten Schritte besprechen."
-  String get verifyFormErrorVerification => "Ihre Angaben konnten nicht verifizert werden. Die Stadt wird sich in Kürze bei Ihnen melden und die nächsten Schritte besprechen.";
-  /// "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal."
-  String get walletSelectionScreenError => "Das Wallet konnte nicht erstellt werden. Versuche es noch einmal.";
+  /// "Das Wallet konnte nicht erstellt werden. Versuchen Sie es nochmals."
+  String get walletSelectionScreenError => "Das Wallet konnte nicht erstellt werden. Versuchen Sie es nochmals.";
   /// "https://ecoo.ch/faq"
   String get faqUrl => "https://ecoo.ch/faq";
   /// "https://www.ecoo.ch/datenschutz/"
@@ -298,40 +326,34 @@ class I18n implements WidgetsLocalizations {
   String get migrationMigrating => "Ihr Wallet wird migriert. Dies kann 1-2 Minuten dauern.";
   /// "Ihr Wallet ist voll einsatzfähig."
   String get migrationDone => "Ihr Wallet ist voll einsatzfähig.";
-  /// "Ihre Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator."
-  String get migrationFail => "Ihre Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator.";
+  /// "Ihr Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator."
+  String get migrationFail => "Ihr Wallet konnte nicht migriert werden. Melden Sie sich beim Systemadministrator.";
   /// "Fertig"
   String get cupertinoDatePickerDialogFinishButton => "Fertig";
   /// "Login erforderlich"
   String get authFailureTitle => "Login erforderlich";
-  /// "Du bist nicht eingeloggt."
-  String get authFailureText => "Du bist nicht eingeloggt.";
+  /// "Sie sind nicht eingeloggt."
+  String get authFailureText => "Sie sind nicht eingeloggt.";
   /// "Schutz erforderlich"
   String get noPinFailureTitle => "Schutz erforderlich";
-  /// "Diese App erfordert es, dass du ein Pin, einen Fingerprint oder eine Face ID zum Schutz einrichtest."
-  String get noPinFailureText => "Diese App erfordert es, dass du ein Pin, einen Fingerprint oder eine Face ID zum Schutz einrichtest.";
+  /// "Diese App erfordert es, dass ein PIN, ein Fingerprint oder eine Face ID zum Schutz eingerichtet ist."
+  String get noPinFailureText => "Diese App erfordert es, dass ein PIN, ein Fingerprint oder eine Face ID zum Schutz eingerichtet ist.";
   /// "Keine Transaktion möglich"
   String get noTransactionFailureTitle => "Keine Transaktion möglich";
-  /// "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator."
-  String get noTransactionFailureText => "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte konatktiere den Systemadministrator.";
+  /// "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte kontaktieren Sie den Systemadministrator."
+  String get noTransactionFailureText => "Für dieses Wallet können keine Transaktionen auf diesem Gerät gemacht werden. Bitte kontaktieren Sie den Systemadministrator.";
   /// "Weiter"
   String get verifyFormFieldNextButton => "Weiter";
   /// "Bitte geben Sie eine gültige Adresse ein."
   String get noAddressSuggestions => "Bitte geben Sie eine gültige Adresse ein.";
   /// "Bitte geben Sie einen gültigen Heimatort ein."
   String get noOriginSuggestions => "Bitte geben Sie einen gültigen Heimatort ein.";
-  /// "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden."
-  String get verifyMaxClaimsReached => "Sie haben die maximale Anzahl der automatisch verifizierbaren Wallets erreicht. Die Stadt wird sich bei Ihnen melden.";
-  /// "Verifizierung übermittelt"
-  String get verifyNoUidTitle => "Verifizierung übermittelt";
-  /// "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie ihren Umsatz beim Anbieter in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen."
-  String get verifyNoUidInfo => "Ihre Anfrage wird geprüft. Sobald die Verifizierung abgeschlossen ist, können Sie ihren Umsatz beim Anbieter in CHF wechseln lassen.\n\nAuch ohne abgeschlossene Verifizierung können Sie die App ganz normal weiter benutzen.";
-  /// "Weiter zum Homescreen"
-  String get verifyNoUidButton => "Weiter zum Homescreen";
-  /// "Ihre Anfrage wird noch geprüft."
-  String get waitForVerificationError => "Ihre Anfrage wird noch geprüft.";
-  /// "Später überprüfen"
-  String get verifyPinLater => "Später überprüfen";
+  /// "Keine Internetverbindung"
+  String get noServiceScreenTitle => "Keine Internetverbindung";
+  /// "Diese App braucht eine Internetverbindung, um zu funktionieren. Bitte aktivieren Sie die Verbindung und laden Sie erneut."
+  String get noServiceScreenDescription => "Diese App braucht eine Internetverbindung, um zu funktionieren. Bitte aktivieren Sie die Verbindung und laden Sie erneut.";
+  /// "Erneut laden"
+  String get noServiceScreenButton => "Erneut laden";
   /// "Test Crash"
   String get testCrashButton => "Test Crash";
 }

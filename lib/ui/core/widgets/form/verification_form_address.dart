@@ -105,7 +105,7 @@ class _MaterialVerificationAddressField
         if (result) {
           return null;
         } else {
-          return I18n.of(context).formErrorRequired;
+          return I18n.of(context).formErrorAddressSelectRequired;
         }
       },
     );

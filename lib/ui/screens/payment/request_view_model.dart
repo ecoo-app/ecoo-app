@@ -16,7 +16,7 @@ class RequestViewModel extends BaseViewModel {
   final IRouter _router;
   final formKey = GlobalKey<FormState>();
   final amountInputController = TextEditingController();
-  WalletEntity wallet;
+  IWalletEntity wallet;
 
   RequestViewModel(this._transferService, this._walletService, this._router);
 

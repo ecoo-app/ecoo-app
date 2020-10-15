@@ -55,19 +55,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   Widget _createVerifyButton(VerificationInputData value, BuildContext context,
       VerificationViewModel viewModel) {
-    var isError =
-        viewModel.viewState is Loading || !value.isValid(viewModel.isShop);
-
     return Container(
       margin: EdgeInsets.only(top: 32),
       child: PrimaryButton(
         isLoading: viewModel.viewState is Loading,
         text: I18n.of(context).buttonFormClaimVerification,
-        isEnabled: !(viewModel.viewState is Loading) && !isError,
+        isEnabled: !(viewModel.viewState is Loading),
         onPressed: () async {
-          await viewModel.onVerify(I18n.of(context).successTextVerification,
-              I18n.of(context).verifyMaxClaimsReached,
-              errorText: I18n.of(context).verifyFormErrorVerification);
+          await viewModel.onVerify(value, context);
         },
       ),
     );

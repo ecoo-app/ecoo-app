@@ -59,6 +59,14 @@ class _VerificationFormUidState extends State<VerificationFormUid> {
             maxLengthEnforced: true,
             enabled: !widget.model.hasNoUid,
             enableSuggestions: false,
+            validator: (value) {
+              var result = widget.model.isValid;
+              if (result) {
+                return null;
+              } else {
+                return I18n.of(context).formErrorRequired;
+              }
+            },
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               UIDInputFormatter()

@@ -11,18 +11,19 @@ import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:ecoupon_lib/models/wallet_migration.dart';
 
 abstract class IWalletRepo {
-  Future<Either<Failure, List<WalletEntity>>> getWallets(String userIdentifier);
+  Future<Either<Failure, List<IWalletEntity>>> getWallets(
+      String userIdentifier);
 
-  Future<Either<Failure, WalletEntity>> getWalletData(String id);
+  Future<Either<Failure, IWalletEntity>> getWalletData(String id);
 
   Future<Either<Failure, ListResponse<Transaction>>> getWalletTransactions(
       String id, ListCursor cursor);
 
   Future<Either<Failure, Transaction>> handleTransaction(
-      WalletEntity sender, WalletEntity reciever, int amount);
+      IWalletEntity sender, IWalletEntity reciever, int amount);
 
   Future<Either<Failure, Transaction>> handlePaperTransfer(
-      PaperWallet source, WalletEntity destination, int amount);
+      PaperWallet source, IWalletEntity destination, int amount);
 
   Future<Either<Failure, Wallet>> createWallet(lib.Currency currency,
       {bool isShop = false});
@@ -30,7 +31,7 @@ abstract class IWalletRepo {
   Future<Either<Failure, bool>> verify(ProfileEntity profileEntity, String pin);
 
   Future<Either<Failure, ProfileEntity>> createProfile(
-      WalletEntity walletEntity, ProfileEntity profile);
+      IWalletEntity walletEntity, ProfileEntity profile);
 
   Future<Either<Failure, List<ProfileEntity>>> profiles(bool isCompany,
       {String forWalletId});
@@ -43,7 +44,7 @@ abstract class IWalletRepo {
   Future<Either<Failure, List<WalletMigration>>>
       fetchAllWalletMigrationsForWallet(String walletID);
 
-  Future<Either<Failure, WalletMigration>> migrateWallet(WalletEntity wallet);
+  Future<Either<Failure, WalletMigration>> migrateWallet(IWalletEntity wallet);
 
-  Future<Either<Failure, bool>> walletCanSign(WalletEntity wallet);
+  Future<Either<Failure, bool>> walletCanSign(IWalletEntity wallet);
 }

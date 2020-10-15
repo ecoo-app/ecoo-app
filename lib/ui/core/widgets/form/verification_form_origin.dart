@@ -103,7 +103,7 @@ class _VerificationFormOrigin extends State<VerificationFormOrigin> {
               if (result) {
                 return null;
               } else {
-                return I18n.of(context).formErrorRequired;
+                return I18n.of(context).formErrorAddressSelectRequired;
               }
             },
           ),

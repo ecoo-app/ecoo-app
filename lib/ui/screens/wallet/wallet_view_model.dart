@@ -4,10 +4,12 @@ import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/user_profile.dart';
 import 'package:e_coupon/data/network_info.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:ecoupon_lib/common/verification_stage.dart';
 import 'package:ecoupon_lib/models/currency.dart';
 import 'package:ecoupon_lib/models/list_response.dart';
 import 'package:ecoupon_lib/models/transaction.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:e_coupon/business/entities/wallet.dart';
@@ -31,7 +33,7 @@ class WalletViewModel extends BaseViewModel {
   ViewState _amountState = Initial();
   ViewState _transactionState = Initial();
 
-  WalletEntity _wallet;
+  IWalletEntity _wallet;
   ListCursor _transactionListCursor;
 
   PublishSubject<List<Transaction>> _transactionStreamController =
@@ -44,16 +46,16 @@ class WalletViewModel extends BaseViewModel {
   ViewState get amountState => this._amountState;
   ViewState get transactionState => this._transactionState;
   // TODO instead of showing an empty wallet open create wallet again
-  WalletEntity get wallet => this._wallet == null
-      ? WalletEntity(Wallet(
+  // TODO test everywhere for null not use this!
+  IWalletEntity get wallet => this._wallet == null
+      ? WetzikonWalletEntity.from(Wallet(
           '',
           '',
           Currency('', '', '', 0, 0, null, null, false, null, null),
           null,
           0,
           null,
-          0,
-        ))
+          0))
       : this._wallet;
 
   Future<bool> get isConnected => _networkInfo.isConnected;
@@ -78,6 +80,7 @@ class WalletViewModel extends BaseViewModel {
     try {
       await updateWallet();
     } catch (e) {
+      // TODO crash analytics
       print(e);
     }
   }
@@ -239,5 +242,36 @@ class WalletViewModel extends BaseViewModel {
 
   void resetViewState() {
     setViewState(Loaded());
+  }
+
+  String getDynamicButtonLabel(BuildContext context) {
+    //
+    switch (wallet.walletStage) {
+      //
+      case WalletStage.VerificationOpen:
+        return wallet.isShop
+            ? I18n.of(context).shopWalletVerify
+            : I18n.of(context).privateWalletVerify;
+
+      case WalletStage.PendingAnswer:
+        return I18n.of(context).walletCityAnswerPending;
+
+      case WalletStage.PendingPin:
+        return I18n.of(context).walletEnterPin;
+
+      case WalletStage.Verified:
+        return wallet.isShop
+            ? I18n.of(context).walletRedeem
+            : I18n.of(context).privateWalletClaim;
+
+      default:
+        wallet.isShop
+            ? I18n.of(context).walletRedeem
+            : I18n.of(context).privateWalletClaim;
+    }
+
+    return wallet.isShop
+        ? I18n.of(context).walletRedeem
+        : I18n.of(context).privateWalletClaim;
   }
 }

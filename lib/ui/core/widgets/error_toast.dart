@@ -11,7 +11,7 @@ class ErrorToast {
   ErrorToast({@required this.failure});
 
   String _failureTitle(BuildContext context) {
-    if (failure is NoService) {
+    if (failure is NoServiceFailure) {
       return I18n.of(context).noServiceErrorTitle;
     }
     if (failure is NotAuthenticatedFailure) {
@@ -33,7 +33,7 @@ class ErrorToast {
   }
 
   String _failureMessage(BuildContext context) {
-    if (failure is NoService) {
+    if (failure is NoServiceFailure) {
       return I18n.of(context).noServiceErrorText;
     }
     if (failure is NotAuthenticatedFailure) {
@@ -69,6 +69,9 @@ class ErrorToast {
     if (failure is Info) {
       Info fail = failure;
       return fail.message;
+    }
+    if (failure is UnknownHeimatortFailure) {
+      return I18n.of(context).verifyHeimatortFailure;
     }
     return I18n.of(context).generalErrorText;
   }

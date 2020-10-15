@@ -34,7 +34,7 @@ class RedeemScreen extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      vmodel.wallet.amountLabel,
+                      vmodel.wallet.balanceLabel,
                       style: Theme.of(context).textTheme.headline1,
                     ),
                   ),

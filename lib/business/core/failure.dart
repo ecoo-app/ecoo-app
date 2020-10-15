@@ -23,7 +23,7 @@ class MessageFailure extends Failure {
   List<Object> get props => [message];
 }
 
-class NoService extends Failure {
+class NoServiceFailure extends Failure {
   @override
   List<Object> get props => [];
 }
@@ -59,6 +59,11 @@ class CacheFailure extends Failure {
 }
 
 class UnknownFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class UnknownHeimatortFailure extends Failure {
   @override
   List<Object> get props => [];
 }

@@ -7,7 +7,7 @@ class Transfer {
   // Either<Empty, WalletEntity> sender;
   // Either<Empty, WalletEntity> reciever;
   // Either<Empty, int> amount;
-  WalletEntity sender;
+  IWalletEntity sender;
   String destWalletId;
   int amount;
 

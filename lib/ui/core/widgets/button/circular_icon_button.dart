@@ -27,7 +27,10 @@ class CircularIconButton extends StatelessWidget {
         shape: CircleBorder(),
       ),
       Padding(padding: const EdgeInsets.only(top: 8)),
-      Text(text)
+      Text(
+        text,
+        textAlign: TextAlign.center,
+      )
     ]);
   }
 }

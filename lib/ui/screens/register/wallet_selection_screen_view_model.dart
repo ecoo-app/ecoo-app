@@ -38,13 +38,13 @@ class WalletSelectionScreenViewModel extends BaseViewModel {
     await walletOrFailure.fold((failure) {
       setViewState(Error(failure));
     }, (wallet) async {
-      await _onWalletCreated(WalletEntity(wallet));
+      await _onWalletCreated(WetzikonWalletEntity.from(wallet));
       setViewState(Success(''));
     });
     // setViewState(Loaded());
   }
 
-  Future<void> _onWalletCreated(WalletEntity wallet) async {
+  Future<void> _onWalletCreated(IWalletEntity wallet) async {
     await _walletService.setSelected(wallet);
     await _router.pushNamed(RegisterVerifyRoute);
   }

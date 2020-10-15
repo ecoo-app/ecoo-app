@@ -13,19 +13,19 @@ import 'package:rxdart/subjects.dart';
 
 // TODO clean up
 abstract class IWalletService {
-  Future<Either<Failure, List<WalletEntity>>> get allWallets;
-  WalletEntity getSelected();
+  Future<Either<Failure, List<IWalletEntity>>> get allWallets;
+  IWalletEntity getSelected();
   ListResponse<Transaction> getSelectedTransactions();
-  Future<void> setSelected(WalletEntity wallet);
-  Future<Either<Failure, List<WalletEntity>>> fetchAndUpdateWallets();
-  Future<Either<Failure, WalletEntity>> fetchAndUpdateSelected();
+  Future<void> setSelected(IWalletEntity wallet);
+  Future<Either<Failure, List<IWalletEntity>>> fetchAndUpdateWallets();
+  Future<Either<Failure, IWalletEntity>> fetchAndUpdateSelected();
   Future<Either<Failure, ListResponse<Transaction>>>
       fetchAndUpdateSelectedTransactions(ListCursor cursor);
-  List<WalletEntity> get wallets;
+  List<IWalletEntity> get wallets;
 
-  Stream<WalletEntity> get walletStream;
+  Stream<IWalletEntity> get walletStream;
 
-  Stream<List<WalletEntity>> get walletsStream;
+  Stream<List<IWalletEntity>> get walletsStream;
 
   Future<Either<Failure, void>> updateSelected();
 }
@@ -35,25 +35,25 @@ abstract class IWalletService {
 class WalletService implements IWalletService {
   final IWalletRepo _walletRepo;
   final ISettingsService _settingsService;
-  List<WalletEntity> _wallets = [];
-  WalletEntity _selected;
+  List<IWalletEntity> _wallets = [];
+  IWalletEntity _selected;
   ListResponse<Transaction> _selectedTransactions = ListResponse([], null);
   StreamController _walletStreamController =
-      StreamController<WalletEntity>.broadcast();
+      StreamController<IWalletEntity>.broadcast();
 
-  BehaviorSubject<List<WalletEntity>> _walletsSubject = BehaviorSubject();
+  BehaviorSubject<List<IWalletEntity>> _walletsSubject = BehaviorSubject();
 
   WalletService(this._walletRepo, this._settingsService);
 
   @override
-  WalletEntity getSelected() {
+  IWalletEntity getSelected() {
     return this._selected;
   }
 
-  List<WalletEntity> get wallets => this._wallets;
+  List<IWalletEntity> get wallets => this._wallets;
 
   @override
-  Future<Either<Failure, List<WalletEntity>>> get allWallets async {
+  Future<Either<Failure, List<IWalletEntity>>> get allWallets async {
     if (_wallets == null || _wallets.isEmpty) {
       return fetchAndUpdateWallets();
     }
@@ -61,7 +61,7 @@ class WalletService implements IWalletService {
   }
 
   @override
-  Future<void> setSelected(WalletEntity wallet) async {
+  Future<void> setSelected(IWalletEntity wallet) async {
     if (this._selected == null || wallet == null) {
       String walletId =
           await _settingsService.getString(Constants.lastWalletIDSettingsKey);
@@ -94,8 +94,8 @@ class WalletService implements IWalletService {
   }
 
   @override
-  Future<Either<Failure, List<WalletEntity>>> fetchAndUpdateWallets() async {
-    Either<Failure, List<WalletEntity>> result;
+  Future<Either<Failure, List<IWalletEntity>>> fetchAndUpdateWallets() async {
+    Either<Failure, List<IWalletEntity>> result;
     var walletOrFail = await _walletRepo.getWallets('');
     walletOrFail.fold((failure) {
       result = Left(failure);
@@ -110,7 +110,7 @@ class WalletService implements IWalletService {
   }
 
   @override
-  Future<Either<Failure, WalletEntity>> fetchAndUpdateSelected() async {
+  Future<Either<Failure, IWalletEntity>> fetchAndUpdateSelected() async {
     if (this._selected == null) {
       await setSelected(null);
     }
@@ -146,8 +146,8 @@ class WalletService implements IWalletService {
   }
 
   @override
-  Stream<WalletEntity> get walletStream => _walletStreamController.stream;
+  Stream<IWalletEntity> get walletStream => _walletStreamController.stream;
 
   @override
-  Stream<List<WalletEntity>> get walletsStream => _walletsSubject.stream;
+  Stream<List<IWalletEntity>> get walletsStream => _walletsSubject.stream;
 }

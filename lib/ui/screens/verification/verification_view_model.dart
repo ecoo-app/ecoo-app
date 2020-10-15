@@ -1,12 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
 import 'package:e_coupon/business/entities/city_of_origin.dart';
 import 'package:e_coupon/data/repos/verification_repo.dart';
+import 'package:e_coupon/generated/i18n.dart';
 import 'package:e_coupon/ui/core/base_view/base_view_model.dart';
 import 'package:e_coupon/ui/core/base_view/viewstate.dart';
 import 'package:e_coupon/ui/core/router/router.dart';
 import 'package:e_coupon/ui/core/services/origin_service.dart';
 import 'package:e_coupon/ui/core/services/profile_service.dart';
 import 'package:e_coupon/ui/core/services/wallet_service.dart';
+import 'package:e_coupon/ui/screens/verification/info_screen.dart';
 import 'package:e_coupon/ui/screens/verification/verification_input_data.dart';
 import 'package:ecoupon_lib/common/verification_stage.dart';
 import 'package:ecoupon_lib/models/address_auto_completion_result.dart';
@@ -36,16 +39,20 @@ class VerificationViewModel extends BaseViewModel {
   Future<List<AddressAutoCompletionResult>> fetchAutoCompletions(
       String pattern) async {
     List<AddressAutoCompletionResult> result;
-    var adres;
+    Either<Failure, List<AddressAutoCompletionResult>> address;
+
     if (isShop) {
-      adres = await _verificationRepo.fetchAutoCompletions(
+      address = await _verificationRepo.fetchAutoCompletions(
           target: AddressAutoCompletionTarget.company, partialAddress: pattern);
     } else {
-      adres = await _verificationRepo.fetchAutoCompletions(
+      address = await _verificationRepo.fetchAutoCompletions(
           target: AddressAutoCompletionTarget.user, partialAddress: pattern);
     }
 
-    adres.fold((l) => result = [], (r) => result = r.items);
+    address.fold((failure) {
+      result = [];
+      setViewState(Error(failure));
+    }, (addressList) => result = addressList);
     return result;
   }
 
@@ -62,9 +69,9 @@ class VerificationViewModel extends BaseViewModel {
     return origins;
   }
 
-  Future<void> onVerify(String successText, String maxClaimsReachedText,
-      {String errorText}) async {
-    if (formKey.currentState.validate()) {
+  Future<void> onVerify(
+      VerificationInputData value, BuildContext context) async {
+    if (formKey.currentState.validate() && value.isValid(isShop)) {
       setViewState(Loading());
 
       var walletId = _walletService.getSelected().id;
@@ -76,30 +83,56 @@ class VerificationViewModel extends BaseViewModel {
         var result = await _profileService.create(profile);
 
         if (result != null) {
-          if (result.verificationStage == VerificationStage.notMatched &&
-              !inputData.hasUID) {
-            await _router.pushNamed(InfoRoute);
-            return;
+          setViewState(Loaded());
+
+          if (isShop) {
+            if (inputData.hasUID &&
+                result.verificationStage == VerificationStage.pendingPIN) {
+              await _toInfoScreen(VerificationInfoScreenArguments(
+                  I18n.of(context).verifyShopSuccessHeadline,
+                  I18n.of(context).verifyShopSuccessDescription));
+              return;
+            }
+
+            if (result.verificationStage == VerificationStage.notMatched &&
+                !inputData.hasUID) {
+              await _toInfoScreen(VerificationInfoScreenArguments(
+                  I18n.of(context).verifyNoUidSubTitle,
+                  I18n.of(context).verifyNoUidInfo));
+              return;
+            }
           }
 
           if (result.verificationStage == VerificationStage.notMatched) {
-            setViewState(Error(MessageFailure(errorText)));
+            await _toInfoScreen(VerificationInfoScreenArguments(
+                I18n.of(context).verifyNoUidSubTitle,
+                I18n.of(context).verifyFormErrorVerification));
             return;
           }
 
           if (result.verificationStage == VerificationStage.maxClaimsReached) {
-            setViewState(Error(MessageFailure(maxClaimsReachedText)));
+            await _toInfoScreen(VerificationInfoScreenArguments(
+                I18n.of(context).verifyNoUidSubTitle,
+                I18n.of(context).verifyMaxClaimsReached));
             return;
           }
 
-          _originService.closeClient();
-          await _router.pushNamed(VerifyPinRoute);
-          setViewState(Loaded());
+          await _toPinVerification();
         }
       } catch (failure) {
         setViewState(Error((failure as Failure)));
       }
     }
+  }
+
+  Future<void> _toPinVerification() async {
+    _originService.closeClient();
+    await _router.pushNamed(VerifyPinRoute);
+  }
+
+  void _toInfoScreen(VerificationInfoScreenArguments arguments) async {
+    _originService.closeClient();
+    await _router.pushNamed(InfoRoute, arguments: arguments);
   }
 
   void resetViewState() {

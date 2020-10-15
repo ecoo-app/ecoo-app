@@ -8,7 +8,6 @@ import 'package:e_coupon/data/e_coupon_library/lib_wallet_source.dart';
 import 'package:e_coupon/data/repos/abstract_wallet_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_coupon/business/core/failure.dart';
-import 'package:e_coupon/data/local/local_wallet_source.dart';
 import 'package:e_coupon/injection.dart';
 
 import 'package:ecoupon_lib/common/errors.dart';
@@ -20,7 +19,6 @@ import 'package:ecoupon_lib/models/wallet.dart';
 import 'package:ecoupon_lib/models/wallet_migration.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pedantic/pedantic.dart';
 
 import '../network_info.dart';
 
@@ -29,11 +27,10 @@ import '../network_info.dart';
 @LazySingleton(as: IWalletRepo)
 // @lazySingleton
 class WalletRepo implements IWalletRepo {
-  final ILocalWalletSource localDataSource;
   final INetworkInfo networkInfo;
   final IWalletSource walletSource;
 
-  WalletRepo({this.localDataSource, this.networkInfo, this.walletSource});
+  WalletRepo({this.networkInfo, this.walletSource});
 
   @override
   Future<Either<Failure, Wallet>> createWallet(lib.Currency currency,
@@ -57,13 +54,14 @@ class WalletRepo implements IWalletRepo {
         if (e.code == '-5') {
           result = Left(NoPinSetFailure());
         }
+        result = Left(UnknownFailure());
       } catch (anyerror) {
         print('error $anyerror');
         // TODO log/send error
         result = Left(UnknownFailure());
       }
     } else {
-      result = Left(NoService());
+      result = Left(NoServiceFailure());
     }
 
     return result;
@@ -86,22 +84,38 @@ class WalletRepo implements IWalletRepo {
         result = Left(HTTPFailure.from(e));
       }
     } else {
-      result = Left(NoService());
+      result = Left(NoServiceFailure());
     }
 
     return result;
   }
 
   @override
-  Future<Either<Failure, List<WalletEntity>>> getWallets(
+  Future<Either<Failure, List<IWalletEntity>>> getWallets(
       String userIdentifier) async {
     if (await networkInfo.isConnected) {
       try {
-        final wallets = await walletSource.walletService.fetchWallets();
-        final walletEntities =
-            wallets.items.map((wallet) => WalletEntity(wallet)).toList();
-        await localDataSource.cacheWallets(walletsKey, walletEntities);
+        final libWallets = await walletSource.walletService.fetchWallets();
+
+        // TODO for multi wallet -> check which is owner wallet to generate correct wallet entity (do this logic in factory?)
+        List<IWalletEntity> walletEntities =
+            await Future.wait(libWallets.items.map((libWallet) async {
+          //
+          if (libWallet.category == WalletCategory.company) {
+            var profileList =
+                await _fetchCompanyProfiles(forWalletId: libWallet.walletID);
+            return WetzikonWalletEntity.from(libWallet, profiles: profileList);
+            //
+          } else {
+            var profileList =
+                await _fetchUserProfiles(forWalletId: libWallet.walletID);
+            return WetzikonWalletEntity.from(libWallet, profiles: profileList);
+          }
+        }).toList());
+
+        // await localDataSource.cacheWallets(walletsKey, walletEntities);
         return Right(walletEntities);
+        //
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
@@ -110,32 +124,44 @@ class WalletRepo implements IWalletRepo {
         return Left(UnknownFailure());
       }
     } else {
-      try {
-        final wallets = await localDataSource.getWallets(walletsKey);
-        return Right(wallets);
-      } catch (e) {
-        // type '_InternalLinkedHashMap<String, dynamic>' is not a subtype of type 'FutureOr<List<WalletEntity>>'
-        //CacheException
-        print('$e');
-        return Left(CacheFailure());
-      }
+      return Left(NoServiceFailure());
+      // try {
+      //   final wallets = await localDataSource.getWallets(walletsKey);
+      //   return Right(wallets);
+      // } catch (e) {
+      //   //CacheException
+      //   print('$e');
+      //   return Left(CacheFailure());
+      // }
     }
   }
 
   @override
-  Future<Either<Failure, WalletEntity>> getWalletData(String walletID) async {
+  Future<Either<Failure, IWalletEntity>> getWalletData(String walletID) async {
     if (await networkInfo.isConnected) {
       try {
-        final wallet = await walletSource.walletService.fetchWallet(walletID);
-        final walletEntity = WalletEntity(wallet);
-        unawaited(localDataSource.cacheWallet(singleWalletKey, walletEntity));
-        return Right(walletEntity);
+        final libWallet =
+            await walletSource.walletService.fetchWallet(walletID);
+
+        if (libWallet.category == WalletCategory.company) {
+          var profileList =
+              await _fetchCompanyProfiles(forWalletId: libWallet.walletID);
+          return Right(
+              WetzikonWalletEntity.from(libWallet, profiles: profileList));
+          //
+        } else {
+          var profileList =
+              await _fetchUserProfiles(forWalletId: libWallet.walletID);
+          return Right(
+              WetzikonWalletEntity.from(libWallet, profiles: profileList));
+        }
+        //
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
         if (e.statusCode == 404) {
           var walletsOrFailure = await getWallets('');
-          Either<Failure, WalletEntity> result;
+          Either<Failure, IWalletEntity> result;
           walletsOrFailure.fold((failure) => result = Left(failure),
               (wallets) => result = Right(wallets.first));
           return result;
@@ -145,52 +171,59 @@ class WalletRepo implements IWalletRepo {
         return Left(UnknownFailure());
       }
     } else {
-      try {
-        final wallet = await localDataSource.getWallet(singleWalletKey);
-        return Right(wallet);
-      } catch (e) {
-        print('$e');
-        //CacheException
-        return Left(CacheFailure());
-      }
+      return Left(NoServiceFailure());
+      // try {
+      //   final wallet = await localDataSource.getWallet(singleWalletKey);
+      //   return Right(wallet);
+      // } catch (e) {
+      //   print('$e');
+      //   //CacheException
+      //   return Left(CacheFailure());
+      // }
     }
   }
 
   @override
   Future<Either<Failure, Transaction>> handleTransaction(
-      WalletEntity sender, WalletEntity reciever, int amount) async {
+      IWalletEntity sender, IWalletEntity reciever, int amount) async {
     if (await networkInfo.isConnected) {
-      Wallet senderModel = sender.walletModel;
+      Wallet senderModel = sender.libWallet;
       try {
         if (!(await walletSource.walletService
             .canSignWithWallet(senderModel))) {
           return Left(NoTransactionPossibleFailure());
         }
         final transaction = await walletSource.walletService
-            .transfer(senderModel, reciever.walletModel, amount);
+            .transfer(senderModel, reciever.libWallet, amount);
         return Right(transaction);
       } on NotAuthenticatedError {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
         return Left(HTTPFailure.from(e));
+      } on PlatformException catch (e) {
+        if (e.code == '-5') {
+          return Left(NoPinSetFailure());
+        }
+
+        return Left(UnknownFailure());
       } catch (e) {
         print(e);
         // return Left(MessageFailure(e.toString()));
         return Left(UnknownFailure());
       }
     } else {
-      return Left(NoService());
+      return Left(NoServiceFailure());
     }
   }
 
   @override
   Future<Either<Failure, Transaction>> handlePaperTransfer(
-      PaperWallet source, WalletEntity destination, int amount) async {
+      PaperWallet source, IWalletEntity destination, int amount) async {
     if (await networkInfo.isConnected) {
       try {
         final transaction = await walletSource.walletService.paperTransfer(
           source,
-          destination.walletModel,
+          destination.libWallet,
           amount,
           Config.paperwallet_decryption_key,
         );
@@ -199,23 +232,29 @@ class WalletRepo implements IWalletRepo {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
         return Left(HTTPFailure.from(e));
+      } on PlatformException catch (e) {
+        if (e.code == '-5') {
+          return Left(NoPinSetFailure());
+        }
+
+        return Left(UnknownFailure());
       } catch (e) {
         // return Left(MessageFailure(e.toString()));
         return Left(UnknownFailure());
       }
     } else {
-      return Left(NoService());
+      return Left(NoServiceFailure());
     }
   }
 
   @override
   Future<Either<Failure, ProfileEntity>> createProfile(
-      WalletEntity walletEntity, ProfileEntity profile) async {
+      IWalletEntity walletEntity, ProfileEntity profile) async {
     if (await networkInfo.isConnected) {
       try {
         if (profile is UserProfileEntity) {
           var backendUser = await walletSource.walletService.createUserProfile(
-            walletEntity.walletModel,
+            walletEntity.libWallet,
             profile.firstName,
             profile.lastName,
             profile.phoneNumber,
@@ -232,7 +271,7 @@ class WalletRepo implements IWalletRepo {
         if (profile is CompanyProfileEntity) {
           var backendCompany = await walletSource.walletService
               .createCompanyProfile(
-                  walletEntity.walletModel,
+                  walletEntity.libWallet,
                   profile.name,
                   profile.uid,
                   profile.addressStreet,
@@ -251,7 +290,7 @@ class WalletRepo implements IWalletRepo {
         return Left(UnknownFailure());
       }
     }
-    return Left(NoService());
+    return Left(NoServiceFailure());
   }
 
   @override
@@ -277,6 +316,8 @@ class WalletRepo implements IWalletRepo {
       } catch (e) {
         return Left(UnknownFailure());
       }
+    } else {
+      return Left(NoServiceFailure());
     }
     return Right(<ProfileEntity>[]);
   }
@@ -360,6 +401,8 @@ class WalletRepo implements IWalletRepo {
       } catch (e) {
         return Left(UnknownFailure());
       }
+    } else {
+      return Left(NoServiceFailure());
     }
     return Right(<ProfileEntity>[]);
   }
@@ -386,6 +429,8 @@ class WalletRepo implements IWalletRepo {
       } catch (e) {
         return Left(UnknownFailure());
       }
+    } else {
+      return Left(NoServiceFailure());
     }
 
     return Right(false);
@@ -413,7 +458,7 @@ class WalletRepo implements IWalletRepo {
         return Left(UnknownFailure());
       }
     } else {
-      return Left(NoService());
+      return Left(NoServiceFailure());
     }
   }
 
@@ -435,11 +480,11 @@ class WalletRepo implements IWalletRepo {
 
   @override
   Future<Either<Failure, WalletMigration>> migrateWallet(
-      WalletEntity wallet) async {
+      IWalletEntity wallet) async {
     if (await networkInfo.isConnected) {
       try {
         var migration =
-            await walletSource.walletService.migrateWallet(wallet.walletModel);
+            await walletSource.walletService.migrateWallet(wallet.libWallet);
 
         if (migration != null) {
           return Right(migration);
@@ -454,15 +499,15 @@ class WalletRepo implements IWalletRepo {
         return Left(UnknownFailure());
       }
     }
-    return Left(NoService());
+    return Left(NoServiceFailure());
   }
 
   @override
-  Future<Either<Failure, bool>> walletCanSign(WalletEntity wallet) async {
+  Future<Either<Failure, bool>> walletCanSign(IWalletEntity wallet) async {
     if (await networkInfo.isConnected) {
       try {
         var canSign = await walletSource.walletService
-            .canSignWithWallet(wallet.walletModel);
+            .canSignWithWallet(wallet.libWallet);
 
         if (canSign != null) {
           return Right(canSign);
@@ -473,10 +518,16 @@ class WalletRepo implements IWalletRepo {
         return Left(NotAuthenticatedFailure());
       } on HTTPError catch (e) {
         return Left(HTTPFailure.from(e));
+      } on PlatformException catch (e) {
+        if (e.code == '-5') {
+          return Left(NoPinSetFailure());
+        }
+
+        return Left(UnknownFailure());
       } catch (e) {
         return Left(UnknownFailure());
       }
     }
-    return Left(NoService());
+    return Left(NoServiceFailure());
   }
 }

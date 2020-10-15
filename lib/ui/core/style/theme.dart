@@ -149,6 +149,7 @@ class Assets {
 
   static const qr_code_svg = 'assets/images/qr_code.svg';
   static const cash_register_svg = 'assets/images/cash_register.svg';
+  static const shipping_fast_svg = 'assets/images/shipping_fast.svg';
 }
 
 class GradientStyles {

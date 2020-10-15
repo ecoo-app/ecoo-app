@@ -79,7 +79,7 @@ class PaymentViewModel extends BaseViewModel {
     }
   }
 
-  void transfer(String successText, WalletEntity destWallet) async {
+  void transfer(String successText, IWalletEntity destWallet) async {
     var transactionOrFailure = await _walletRepo.handleTransaction(
         _transferService.transfer.sender,
         destWallet,

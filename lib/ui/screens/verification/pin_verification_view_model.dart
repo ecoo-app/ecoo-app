@@ -14,7 +14,7 @@ class PinVerificationViewModel extends BaseViewModel {
   final IRouter _router;
   final IWalletService _walletService;
   final IProfileService _profileService;
-  WalletEntity wallet;
+  IWalletEntity wallet;
   String pin;
 
   PinVerificationViewModel(

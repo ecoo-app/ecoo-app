@@ -28,11 +28,7 @@ abstract class ILoginService {
   Future<bool> get isGoogleAvailable;
 }
 
-enum LoginResult {
-  Migrations,
-  Onboarding,
-  Home,
-}
+enum LoginResult { Migrations, Onboarding, Home, NoService }
 
 @Injectable(as: ILoginService)
 class LoginService implements ILoginService {
@@ -98,6 +94,8 @@ class LoginService implements ILoginService {
           break;
       }
       return result ? LoginResult.Home : LoginResult.Onboarding;
+    } on NoServiceFailure {
+      return LoginResult.NoService;
     } catch (ex, stackTrace) {
       _logger.error('LoginService', ex, stackTrace);
       return LoginResult.Onboarding;

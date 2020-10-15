@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class WalletCard extends StatelessWidget {
-  final WalletEntity wallet;
+  final IWalletEntity wallet;
   final bool isActive;
   final onPressed;
 
@@ -93,7 +93,7 @@ class WalletCard extends StatelessWidget {
                     Text(wallet.currency.label,
                         style: Theme.of(context).textTheme.bodyText2),
                     Text(
-                      wallet.toAmountCurrencyLabel(),
+                      wallet.toBalanceCurrencyLabel(),
                       style: Theme.of(context).textTheme.bodyText2,
                     )
                   ],

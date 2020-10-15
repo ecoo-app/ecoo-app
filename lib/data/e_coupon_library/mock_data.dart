@@ -10,10 +10,10 @@ class MockEncashmentTag extends TagAPI {
 }
 
 List<Transaction> MockTransactionWalletPrivate = [
-  Transaction('uuid', 'Wallet-ID ertl34u53', 'Pusteblume GmbH', 1250, TransactionState.done,
-      DateTime.now(), 'some tag', 0, 'sig', 'op_hash'),
+  Transaction('uuid', 'Wallet-ID ertl34u53', 'Pusteblume GmbH', 1250,
+      TransactionState.done, DateTime.now(), 'some tag', 0, 'sig', 'hash'),
   Transaction('uuid', 'Wallet-ID sdfsdfwet', 'to', -2000, TransactionState.done,
-      DateTime.now().subtract(Duration(days: 5)), 'some tag', 0, 'sig', 'op_hash'),
+      DateTime.now().subtract(Duration(days: 5)), 'some tag', 0, 'sig', 'hash'),
   Transaction(
       'uuid',
       'Wallet-ID 345fdget5',
@@ -23,9 +23,10 @@ List<Transaction> MockTransactionWalletPrivate = [
       DateTime.now().subtract(Duration(days: 5)),
       'some tag',
       0,
-      'sig', 'op_hash'),
+      'sig',
+      'hash'),
   Transaction('uuid', 'Wallet-ID erfgb4545', 'to', -450, TransactionState.open,
-      DateTime.now().subtract(Duration(days: 2)), 'some tag', 0, 'sig', 'op_hash'),
+      DateTime.now().subtract(Duration(days: 2)), 'some tag', 0, 'sig', 'hash'),
   Transaction(
       'uuid',
       'Wallet-ID 3w45g5467',
@@ -35,14 +36,15 @@ List<Transaction> MockTransactionWalletPrivate = [
       DateTime.now().subtract(Duration(days: 2)),
       'some tag',
       0,
-      'sig', 'op_hash'),
+      'sig',
+      'hash'),
 ];
 
 List<Transaction> MockTransactionWalletShop = [
   Transaction('uuid', 'Wallet-ID ertl34u53', 'to', 1250, TransactionState.done,
-      DateTime.now(), 'some tag', 0, 'sig', 'op_hash'),
+      DateTime.now(), 'some tag', 0, 'sig', 'hash'),
   Transaction('uuid', 'Wallet-ID sdfsdfwet', 'to', 2000, TransactionState.done,
-      DateTime.now(), 'some tag', 0, 'sig', 'op_hash'),
+      DateTime.now(), 'some tag', 0, 'sig', 'hash'),
   Transaction(
       'uuid',
       'Wallet-ID 345fdget5',
@@ -52,7 +54,8 @@ List<Transaction> MockTransactionWalletShop = [
       DateTime.now().subtract(Duration(days: 2)),
       'some tag',
       0,
-      'sig', 'op_hash'),
+      'sig',
+      'hash'),
   Transaction(
       'uuid',
       'Wallet-ID erfgb4545',
@@ -62,11 +65,21 @@ List<Transaction> MockTransactionWalletShop = [
       DateTime.now().subtract(Duration(days: 2)),
       'some tag',
       0,
-      'sig', 'op_hash'),
+      'sig',
+      'hash'),
   Transaction('uuid', 'Wallet-ID sdfrtert4', 'to', -450, TransactionState.open,
-      DateTime.now().subtract(Duration(days: 1)), 'some tag', 0, 'sig', 'op_hash'),
-  Transaction('uuid', 'Wallet-ID 3w45g5467', 'to', 1360, TransactionState.done,
-      DateTime.now().subtract(Duration(days: 5)), 'is encashment', 0, 'sig', 'op_hash'),
+      DateTime.now().subtract(Duration(days: 1)), 'some tag', 0, 'sig', 'hash'),
+  Transaction(
+      'uuid',
+      'Wallet-ID 3w45g5467',
+      'to',
+      1360,
+      TransactionState.done,
+      DateTime.now().subtract(Duration(days: 5)),
+      'is encashment',
+      0,
+      'sig',
+      'hash'),
 ];
 
 class MockWetzikonCurrency extends Currency {
@@ -97,7 +110,7 @@ lib.Wallet shopWalletMock = lib.Wallet(
     lib.WalletState.pending,
     1);
 
-List<WalletEntity> MockWallets = [
-  WalletEntity(privateWalletMock),
-  WalletEntity(shopWalletMock)
+List<WetzikonWalletEntity> MockWallets = [
+  WetzikonWalletEntity.from(privateWalletMock),
+  WetzikonWalletEntity.from(shopWalletMock)
 ];

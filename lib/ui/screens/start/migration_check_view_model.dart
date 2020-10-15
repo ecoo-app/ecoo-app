@@ -49,11 +49,12 @@ class MigrationCheckViewModel extends BaseViewModel {
     }
   }
 
-  void _timedChecking(MigrationCheckItem item, WalletEntity wallet) {
+  void _timedChecking(MigrationCheckItem item, IWalletEntity wallet) {
     Future.delayed(Duration(seconds: 15), () async {
       try {
         await _checkMigration(item, wallet);
-      } on Error catch (e) {
+      } catch (e) {
+        // TODO crash analytics
         print(e);
         setViewState(Error(UnknownFailure()));
       }
@@ -61,7 +62,7 @@ class MigrationCheckViewModel extends BaseViewModel {
     });
   }
 
-  void _checkMigration(MigrationCheckItem item, WalletEntity wallet) async {
+  void _checkMigration(MigrationCheckItem item, IWalletEntity wallet) async {
     var isMigratingOrFailure = await _recoveryService.isWalletMigrating(wallet);
 
     await isMigratingOrFailure.fold((failure) => setViewState(Error(failure)),
@@ -154,7 +155,7 @@ class MigrationCheckViewModel extends BaseViewModel {
     return null;
   }
 
-  void _onWallets(List<WalletEntity> wallets) async {
+  void _onWallets(List<IWalletEntity> wallets) async {
     if (wallets != null) {
       for (var wallet in wallets) {
         _migrationChecks.add(MigrationCheckItem(

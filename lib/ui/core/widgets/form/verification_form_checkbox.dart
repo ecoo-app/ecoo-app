@@ -43,47 +43,61 @@ class _VerificationFormCheckBoxState extends State<VerificationFormCheckBox> {
   @override
   Widget build(BuildContext context) {
     onTextTapped.onTap = () => _onChange(!widget.value);
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Checkbox(
-          visualDensity: VisualDensity(),
-          activeColor: ColorStyles.bg_gray,
-          onChanged: widget.onChanged,
-          value: widget.value,
-        ),
-        Expanded(
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: widget.textPartStart,
-                  recognizer: onTextTapped,
-                ),
-                TextSpan(
-                  text: widget.textUrlPart,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchUrl(
-                        I18n.of(context).verificationFilledTruthfullyTosUrl),
+    return FormField<bool>(validator: (value) {
+      if (!widget.value) {
+        return 'You need to accept terms';
+      } else {
+        return null;
+      }
+    }, builder: (state) {
+      return Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Checkbox(
+                visualDensity: VisualDensity(),
+                activeColor: ColorStyles.bg_gray,
+                onChanged: widget.onChanged,
+                value: widget.value,
+              ),
+              Expanded(
+                  child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: widget.textPartStart,
+                      recognizer: onTextTapped,
+                    ),
+                    TextSpan(
+                      text: widget.textUrlPart,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => _launchUrl(I18n.of(context)
+                            .verificationFilledTruthfullyTosUrl),
+                      style: Theme.of(context).textTheme.bodyText2.merge(
+                            TextStyle(color: ColorStyles.purple),
+                          ),
+                    ),
+                    TextSpan(
+                      text: widget.textPartEnd,
+                    ),
+                  ],
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .merge(TextStyle(color: ColorStyles.purple),),
+                      .merge(TextStyle(color: ColorStyles.bg_gray)),
                 ),
-                TextSpan(
-                  text: widget.textPartEnd,
-                ),
-              ],
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2
-                  .merge(TextStyle(color: ColorStyles.bg_gray)),
-            ),
+              )),
+            ],
           ),
-        ),
-      ],
-    );
+          Text(state.hasError ? I18n.of(context).formErrorRequired : '',
+              style: TextStyle(
+                color: Theme.of(context).errorColor,
+              ))
+        ],
+      );
+    });
   }
 }

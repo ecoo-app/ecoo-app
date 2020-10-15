@@ -11,11 +11,11 @@ import 'package:injectable/injectable.dart';
 abstract class IProfileService {
   Future<ProfileEntity> currentProfile();
 
-  Future<ProfileEntity> currentProfileForWallet(WalletEntity wallet);
+  Future<ProfileEntity> currentProfileForWallet(IWalletEntity wallet);
 
   Future<ProfileEntity> create(ProfileEntity profileEntity);
 
-  Future<bool> verify(String pin, WalletEntity wallet);
+  Future<bool> verify(String pin, IWalletEntity wallet);
 
   Future<bool> testApi();
 }
@@ -69,7 +69,7 @@ class ProfileService implements IProfileService {
   }
 
   Future<List<ProfileEntity>> fetchProfilesForWallet(
-      WalletEntity wallet) async {
+      IWalletEntity wallet) async {
     var answer =
         await _walletRepo.profiles(wallet.isShop, forWalletId: wallet.id);
     if (answer.isRight()) {
@@ -121,7 +121,7 @@ class ProfileService implements IProfileService {
   }
 
   @override
-  Future<ProfileEntity> currentProfileForWallet(WalletEntity wallet) async {
+  Future<ProfileEntity> currentProfileForWallet(IWalletEntity wallet) async {
     var profiles = await fetchProfilesForWallet(wallet);
     if (profiles.isNotEmpty) {
       var pendingProfiles = profiles
@@ -138,7 +138,7 @@ class ProfileService implements IProfileService {
 
   /// throws Failure
   @override
-  Future<bool> verify(String pin, WalletEntity wallet) async {
+  Future<bool> verify(String pin, IWalletEntity wallet) async {
     ProfileEntity profileEntity = await currentProfileForWallet(wallet);
     // if (profileEntity is UserProfileEntity) {
     if (profileEntity != null) {

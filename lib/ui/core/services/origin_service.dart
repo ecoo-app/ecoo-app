@@ -24,6 +24,8 @@ class OriginService implements IOriginService {
   void closeClient() {
     if (client != null) {
       client.close();
+      // dont know how else to check if the client was closed and open a new one if so in cityAutocompletions
+      client = null;
     }
   }
 
@@ -35,7 +37,7 @@ class OriginService implements IOriginService {
     }
 
     if (!await _networkInfo.isConnected) {
-      return Left(NoService());
+      return Left(NoServiceFailure());
     }
 
     try {
@@ -58,13 +60,13 @@ class OriginService implements IOriginService {
         var originalMsg = uriResponse.body;
 
         Map<String, List<String>> errormsg = Map();
-        errormsg['postAPI'] = ['postAPI: $originalMsg'];
+        errormsg['postAPI'] = ['Heimatort API: $originalMsg'];
 
         return Left(HTTPFailure(uriResponse.statusCode, errormsg));
       }
     } catch (e) {
       print(e);
-      return Left(UnknownFailure());
+      return Left(UnknownHeimatortFailure());
     }
   }
 }

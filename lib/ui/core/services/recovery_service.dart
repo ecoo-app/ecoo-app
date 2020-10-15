@@ -10,12 +10,12 @@ import 'package:ecoupon_lib/models/wallet_migration.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IRecoveryService {
-  Future<Either<Failure, bool>> walletCanSign(WalletEntity wallet);
+  Future<Either<Failure, bool>> walletCanSign(IWalletEntity wallet);
   Future<Either<Failure, WalletMigration>> handleWalletMigration(
-      WalletEntity wallet);
-  Future<Either<Failure, bool>> isWalletMigrating(WalletEntity walletentity);
+      IWalletEntity wallet);
+  Future<Either<Failure, bool>> isWalletMigrating(IWalletEntity walletentity);
   Future<Either<Failure, List<WalletMigration>>> getMigrationsFor(
-      WalletEntity walletentity);
+      IWalletEntity walletentity);
   Future<Either<Failure, bool>> userHasWallets();
   Future<Either<Failure, bool>> migrationInProcess();
 }
@@ -88,13 +88,13 @@ class RecoveryService implements IRecoveryService {
   RecoveryService(this._walletRepo, this._migrationCheckSource);
 
   @override
-  Future<Either<Failure, bool>> walletCanSign(WalletEntity wallet) async {
+  Future<Either<Failure, bool>> walletCanSign(IWalletEntity wallet) async {
     return _walletRepo.walletCanSign(wallet);
   }
 
   @override
   Future<Either<Failure, WalletMigration>> handleWalletMigration(
-      WalletEntity wallet) async {
+      IWalletEntity wallet) async {
     Either<Failure, WalletMigration> result;
 
     var isMigratingOrFailure = await isWalletMigrating(wallet);
@@ -118,7 +118,7 @@ class RecoveryService implements IRecoveryService {
 
   @override
   Future<Either<Failure, bool>> isWalletMigrating(
-      WalletEntity walletentity) async {
+      IWalletEntity walletentity) async {
     Either<Failure, bool> result;
     var walletMigrationsOrFailure = await getMigrationsFor(walletentity);
 
@@ -138,7 +138,7 @@ class RecoveryService implements IRecoveryService {
 
   @override
   Future<Either<Failure, List<WalletMigration>>> getMigrationsFor(
-      WalletEntity walletentity) async {
+      IWalletEntity walletentity) async {
     return _walletRepo.fetchAllWalletMigrationsForWallet(walletentity.id);
   }
 

@@ -41,7 +41,7 @@ void main() {
     _networkInfoMock = NetworkInfoMock();
     when(_networkInfoMock.isConnected)
         .thenAnswer((realInvocation) => Future.value(true));
-    var walletEntity = WalletEntity(lib_wallet.Wallet(
+    var walletEntity = WetzikonWalletEntity.from(lib_wallet.Wallet(
         'TestID',
         'TestKey',
         lib_currency.Currency(
@@ -52,16 +52,15 @@ void main() {
         1));
     when(_repositoryMock.getWallets(any))
         .thenAnswer((realInvocation) => Future.value(Right([walletEntity])));
-    final testWallet = WalletEntity(Wallet(
-      PrivateWalletID,
-      PrivatePublicKey,
-      MockWetzikonCurrency(),
-      WalletCategory.consumer,
-      105,
-      WalletState.verified,
-      1,
-    ));
-    final stream = StreamController<List<WalletEntity>>(sync: true);
+    final testWallet = WetzikonWalletEntity.from(Wallet(
+        PrivateWalletID,
+        PrivatePublicKey,
+        MockWetzikonCurrency(),
+        WalletCategory.consumer,
+        105,
+        WalletState.verified,
+        1));
+    final stream = StreamController<List<IWalletEntity>>(sync: true);
     stream.add([testWallet]);
 
     when(_walletServiceMock.getSelected()).thenReturn(testWallet);
@@ -69,8 +68,8 @@ void main() {
     when(_walletServiceMock.walletsStream)
         .thenAnswer((realInvocation) => stream.stream);
 
-    var viewModel = MenuScreenViewModel(NoLogger(),
-        _appService, _routerMock, _walletServiceMock, _networkInfoMock);
+    var viewModel = MenuScreenViewModel(NoLogger(), _appService, _routerMock,
+        _walletServiceMock, _networkInfoMock);
 
     _view = _testApp.createTestApp(MenuScreen(viewModel));
     when(_appService.appVersion).thenReturn('1.0.0.1');

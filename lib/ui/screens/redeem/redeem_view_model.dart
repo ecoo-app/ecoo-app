@@ -14,7 +14,7 @@ class RedeemViewModel extends BaseViewModel {
   final IWalletService _walletService;
   final IWalletSource _walletSource;
   final IRouter _router;
-  WalletEntity wallet;
+  IWalletEntity wallet;
   String nameOfBank;
   String iban;
   String owner;
@@ -30,9 +30,9 @@ class RedeemViewModel extends BaseViewModel {
 
     try {
       var transaction = await _walletSource.walletService.transfer(
-          wallet.walletModel,
+          wallet.libWallet,
           wallet.currency.currencyModel.owner,
-          wallet.amount);
+          wallet.balance);
       var cashOut =
           await _walletSource.walletService.cashOut(transaction, owner, iban);
 

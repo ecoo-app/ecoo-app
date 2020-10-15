@@ -47,7 +47,7 @@ void main() {
         (realInvocation) => Future.value(
             Right(ListResponse(transactions, ListCursor('', '')))));
     when(_walletService.getSelected())
-        .thenReturn(WalletEntity(privateWalletMock));
+        .thenReturn(WetzikonWalletEntity.from(privateWalletMock));
 
     await _viewModel.init();
 
@@ -64,7 +64,7 @@ void main() {
         (realInvocation) =>
             Future.value(Right(ListResponse([], ListCursor('', '')))));
     when(_walletService.getSelected())
-        .thenReturn(WalletEntity(privateWalletMock));
+        .thenReturn(WetzikonWalletEntity.from(privateWalletMock));
 
     await _viewModel.init();
 

@@ -6,13 +6,13 @@ enum MigrationStateEnum { WaitingForCheck, Checking, Migrating, Done, Fail }
 
 class MigrationCheckItem {
   MigrationStateEnum state;
-  WalletEntity wallet;
+  IWalletEntity wallet;
   final String walletID;
 
   MigrationCheckItem(this.state, this.walletID, {this.wallet});
 
   factory MigrationCheckItem.from(
-      WalletEntity other, MigrationStateEnum state) {
+      IWalletEntity other, MigrationStateEnum state) {
     return MigrationCheckItem(state, other.id);
   }
 

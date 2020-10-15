@@ -25,6 +25,7 @@ class WalletScreen extends StatelessWidget {
       return [
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Flexible(
@@ -40,7 +41,7 @@ class WalletScreen extends StatelessWidget {
                 fit: FlexFit.tight,
                 child: CircularIconButton(
                     iconAsset: Assets.shop_send_money_svg,
-                    text: I18n.of(context).walletRedeem,
+                    text: vmodel.getDynamicButtonLabel(context),
                     onPressed: () => vmodel
                         .onRedeem(I18n.of(context).waitForVerificationError)),
               )
@@ -56,6 +57,7 @@ class WalletScreen extends StatelessWidget {
       return [
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Flexible(
@@ -71,7 +73,7 @@ class WalletScreen extends StatelessWidget {
                 fit: FlexFit.tight,
                 child: CircularIconButton(
                     iconAsset: Assets.private_claim_money_svg,
-                    text: I18n.of(context).privateWalletClaim,
+                    text: vmodel.getDynamicButtonLabel(context),
                     onPressed: vmodel.onClaim),
               )
             ]),
@@ -125,7 +127,7 @@ class WalletScreen extends StatelessWidget {
                         child: AmountDisplay(
                           isShopColor: vmodel.wallet.isShop,
                           isLoading: vmodel.amountState is Loading,
-                          amount: vmodel.wallet.amountLabel,
+                          amount: vmodel.wallet.balanceLabel,
                           symbol: vmodel.wallet.currency.symbol,
                         ),
                       ),

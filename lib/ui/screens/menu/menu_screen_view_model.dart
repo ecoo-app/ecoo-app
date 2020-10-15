@@ -27,7 +27,7 @@ class MenuScreenViewModel extends BaseViewModel {
   Future<bool> get isConnected => _networkInfo.isConnected;
 
   Stream<List<MenuItem>> get wallets => _walletService.walletsStream.transform(
-          StreamTransformer<List<WalletEntity>, List<MenuItem>>.fromHandlers(
+          StreamTransformer<List<IWalletEntity>, List<MenuItem>>.fromHandlers(
               handleData: (data, sink) async {
         var menuItems = <MenuItem>[];
         if (await isConnected) {
@@ -58,13 +58,13 @@ class MenuScreenViewModel extends BaseViewModel {
     return Future.value();
   }
 
-  WalletEntity get selected => _walletService.getSelected();
+  IWalletEntity get selected => _walletService.getSelected();
 
   Future<void> init() async {
     await _walletService.fetchAndUpdateWallets();
   }
 
-  Future<void> select(WalletEntity walletEntity) async {
+  Future<void> select(IWalletEntity walletEntity) async {
     await _router.pop();
     await _walletService.setSelected(walletEntity);
   }
@@ -82,7 +82,7 @@ class MenuScreenViewModel extends BaseViewModel {
 class MenuItem {}
 
 class WalletMenuItem implements MenuItem {
-  final WalletEntity walletEntity;
+  final IWalletEntity walletEntity;
 
   WalletMenuItem(this.walletEntity);
 }
