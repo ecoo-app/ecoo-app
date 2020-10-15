@@ -81,6 +81,58 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056883972202:android:c86daf30b205ecb7639213",
+        "android_client_info": {
+          "package_name": "ch.ecoupon.mobile.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056883972202-033mq47ekml5mc987tc4m1p1vgjp7hk3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.ecoupon.mobile.android",
+            "certificate_hash": "450a75ed071ebc8286781d0be1421bb9eba2e4c2"
+          }
+        },
+        {
+          "client_id": "1056883972202-d7bbi3ed824l2s2g0keufacm1sm5uaba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ch.ecoupon.mobile.android",
+            "certificate_hash": "bd9e3c2759a6312f89a717ecb5ae2922e3fb37c1"
+          }
+        },
+        {
+          "client_id": "1056883972202-bih8okjiuf7gfk3otkq3qv9d6je5cqsn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVJzYwZg1gSH7UeOLpEk3ZdOhWkdROGU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056883972202-bih8okjiuf7gfk3otkq3qv9d6je5cqsn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1056883972202-ishmpd7flpmfal98ju8v36rdovbgvgkp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ch.ecoupon.mobile"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

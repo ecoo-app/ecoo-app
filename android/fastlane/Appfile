@@ -1,2 +1,2 @@
 
-package_name("ch.ecoupon.mobile") # e.g. com.krausefx.app
+package_name("ch.ecoupon.mobile.android") # e.g. com.krausefx.app
